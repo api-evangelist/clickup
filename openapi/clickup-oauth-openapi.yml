@@ -1,0 +1,156 @@
+openapi: 3.1.0
+info:
+  title: ClickUp OAuth API
+  description: >-
+    The ClickUp OAuth API implements the authorization code grant type,
+    allowing third-party applications to authenticate users and access
+    their ClickUp Workspaces. Workspace owners or admins can create OAuth
+    apps, and users authorize access by granting permissions to specific
+    Workspaces. The API provides endpoints for obtaining authorization
+    codes, exchanging them for access tokens, and retrieving the
+    authenticated user's information.
+  version: '2.0'
+  contact:
+    name: ClickUp Support
+    url: https://help.clickup.com
+  termsOfService: https://clickup.com/terms
+externalDocs:
+  description: ClickUp OAuth Documentation
+  url: https://developer.clickup.com/docs/authentication
+servers:
+  - url: https://api.clickup.com/api/v2
+    description: ClickUp API v2 Production Server
+tags:
+  - name: OAuth
+    description: >-
+      Operations for OAuth 2.0 authentication and token management.
+  - name: Authorization
+    description: >-
+      Operations for retrieving authenticated user information.
+security: []
+paths:
+  /oauth/token:
+    post:
+      operationId: getAccessToken
+      summary: Get access token
+      description: >-
+        Exchanges an authorization code for an access token. This is the
+        second step in the OAuth 2.0 authorization code flow. The client
+        ID, client secret, and authorization code must be provided.
+      tags:
+        - OAuth
+      parameters:
+        - name: client_id
+          in: query
+          required: true
+          description: >-
+            The OAuth app client ID.
+          schema:
+            type: string
+        - name: client_secret
+          in: query
+          required: true
+          description: >-
+            The OAuth app client secret.
+          schema:
+            type: string
+        - name: code
+          in: query
+          required: true
+          description: >-
+            The authorization code received from the authorization step.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Access token obtained successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  access_token:
+                    type: string
+                    description: >-
+                      The access token to use for API requests.
+        '400':
+          description: Bad request - invalid code or credentials
+        '401':
+          description: Unauthorized - invalid client credentials
+  /user:
+    get:
+      operationId: getAuthorizedUser
+      summary: Get authorized user
+      description: >-
+        Retrieves information about the currently authenticated user,
+        including their ID, username, email, and profile picture.
+        This endpoint requires a valid access token.
+      tags:
+        - Authorization
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Successfully retrieved user information
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  user:
+                    $ref: '#/components/schemas/AuthorizedUser'
+        '401':
+          description: Unauthorized - invalid or expired token
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: >-
+        ClickUp OAuth access token or personal API token. Include in
+        the Authorization header as Bearer {token}.
+  schemas:
+    AuthorizedUser:
+      type: object
+      description: >-
+        The authenticated user's profile information.
+      properties:
+        id:
+          type: integer
+          description: >-
+            The unique identifier of the user.
+        username:
+          type: string
+          description: >-
+            The username of the user.
+        email:
+          type: string
+          format: email
+          description: >-
+            The email address of the user.
+        color:
+          type: string
+          description: >-
+            The hex color code associated with the user.
+        profilePicture:
+          type: string
+          format: uri
+          nullable: true
+          description: >-
+            URL of the user's profile picture.
+        initials:
+          type: string
+          description: >-
+            The initials of the user.
+        week_start_day:
+          type: integer
+          description: >-
+            The day of the week that starts the user's week. 0 is Sunday.
+        global_font_support:
+          type: boolean
+          description: >-
+            Whether global font support is enabled.
+        timezone:
+          type: string
+          description: >-
+            The user's timezone.

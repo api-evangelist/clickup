@@ -1,0 +1,156 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://developer.clickup.com/schemas/clickup/webhook-payload.json",
+  "title": "ClickUp Webhook Payload",
+  "description": "The payload delivered by ClickUp when a webhook event is triggered. Each payload includes the event type, webhook identifier, and an array of history items describing the specific changes that occurred.",
+  "type": "object",
+  "required": ["event", "webhook_id"],
+  "properties": {
+    "event": {
+      "type": "string",
+      "description": "The name of the event that triggered the webhook.",
+      "enum": [
+        "taskCreated",
+        "taskUpdated",
+        "taskDeleted",
+        "taskPriorityUpdated",
+        "taskStatusUpdated",
+        "taskAssigneeUpdated",
+        "taskDueDateUpdated",
+        "taskTagUpdated",
+        "taskMoved",
+        "taskCommentPosted",
+        "taskCommentUpdated",
+        "taskTimeEstimateUpdated",
+        "taskTimeTrackedUpdated",
+        "listCreated",
+        "listUpdated",
+        "listDeleted",
+        "folderCreated",
+        "folderUpdated",
+        "folderDeleted",
+        "spaceCreated",
+        "spaceUpdated",
+        "spaceDeleted",
+        "goalCreated",
+        "goalUpdated",
+        "goalDeleted",
+        "keyResultCreated",
+        "keyResultUpdated",
+        "keyResultDeleted"
+      ]
+    },
+    "webhook_id": {
+      "type": "string",
+      "description": "The unique identifier of the webhook subscription that matched this event."
+    },
+    "task_id": {
+      "type": "string",
+      "description": "The ID of the task involved in the event. Present for task-related events."
+    },
+    "list_id": {
+      "type": "string",
+      "description": "The ID of the list involved in the event. Present for list-related events."
+    },
+    "folder_id": {
+      "type": "string",
+      "description": "The ID of the folder involved in the event. Present for folder-related events."
+    },
+    "space_id": {
+      "type": "string",
+      "description": "The ID of the space involved in the event. Present for space-related events."
+    },
+    "goal_id": {
+      "type": "string",
+      "description": "The ID of the goal involved in the event. Present for goal and key result events."
+    },
+    "history_items": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/HistoryItem"
+      },
+      "description": "Array of change records describing what was modified in this event."
+    }
+  },
+  "$defs": {
+    "HistoryItem": {
+      "type": "object",
+      "description": "A single change record within a webhook event payload.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The unique identifier of the history item."
+        },
+        "type": {
+          "type": "integer",
+          "description": "The type code of the history item."
+        },
+        "date": {
+          "type": "string",
+          "description": "Unix timestamp in milliseconds when the change occurred.",
+          "pattern": "^[0-9]+$"
+        },
+        "field": {
+          "type": "string",
+          "description": "The name of the field that was changed (e.g., status, priority, assignee, due_date, tag, comment, name, description, time_estimate, time_spent)."
+        },
+        "parent_id": {
+          "type": "string",
+          "description": "The parent resource ID."
+        },
+        "data": {
+          "type": "object",
+          "description": "Additional contextual data about the change."
+        },
+        "source": {
+          "type": ["string", "null"],
+          "description": "The source of the change. Null for changes made through the UI, 'api' for API changes."
+        },
+        "user": {
+          "$ref": "#/$defs/WebhookUser"
+        },
+        "before": {
+          "description": "The value of the field before the change. Type varies based on the field."
+        },
+        "after": {
+          "description": "The value of the field after the change. Type varies based on the field."
+        }
+      },
+      "required": ["id", "date", "field", "user"]
+    },
+    "WebhookUser": {
+      "type": "object",
+      "description": "The user who performed the action that triggered the webhook event.",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "description": "The unique identifier of the user."
+        },
+        "username": {
+          "type": "string",
+          "description": "The display name of the user."
+        },
+        "email": {
+          "type": "string",
+          "format": "email",
+          "description": "The email address of the user."
+        },
+        "color": {
+          "type": "string",
+          "description": "The hex color code associated with the user."
+        },
+        "profilePicture": {
+          "type": ["string", "null"],
+          "format": "uri",
+          "description": "URL of the user's profile picture."
+        },
+        "initials": {
+          "type": "string",
+          "description": "The initials of the user.",
+          "maxLength": 3
+        }
+      },
+      "required": ["id", "username"]
+    }
+  }
+}

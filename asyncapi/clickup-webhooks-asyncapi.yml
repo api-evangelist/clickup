@@ -1,0 +1,504 @@
+asyncapi: 2.6.0
+info:
+  title: ClickUp Webhooks Events
+  description: >-
+    The ClickUp Webhooks event system delivers real-time notifications when
+    changes occur within a ClickUp Workspace. When subscribed events happen,
+    ClickUp sends HTTP POST requests to a registered endpoint URL with a
+    JSON payload describing the event. Each payload is signed using
+    HMAC-SHA256 with a shared secret for verification. Events cover tasks,
+    lists, folders, spaces, goals, and key results.
+  version: '2.0'
+  contact:
+    name: ClickUp Support
+    url: https://help.clickup.com
+  license:
+    name: ClickUp API Terms
+    url: https://clickup.com/terms
+servers:
+  webhookEndpoint:
+    url: '{webhookUrl}'
+    protocol: https
+    description: >-
+      The HTTPS endpoint URL registered when creating a webhook subscription.
+      ClickUp sends event payloads as POST requests to this URL.
+    variables:
+      webhookUrl:
+        description: >-
+          The URL configured as the webhook endpoint during webhook creation.
+    security:
+      - hmacSignature: []
+channels:
+  /webhook:
+    description: >-
+      Channel for all ClickUp webhook events. Events are delivered as HTTP
+      POST requests with a JSON body. The X-Signature header contains the
+      HMAC-SHA256 signature for payload verification.
+    publish:
+      operationId: receiveWebhookEvent
+      summary: Receive a webhook event from ClickUp
+      description: >-
+        ClickUp publishes webhook events to the registered endpoint. Each
+        event includes the event type, webhook ID, and event-specific data
+        in the history_items array. The payload is signed with the shared
+        secret using HMAC-SHA256.
+      message:
+        oneOf:
+          - $ref: '#/components/messages/TaskCreated'
+          - $ref: '#/components/messages/TaskUpdated'
+          - $ref: '#/components/messages/TaskDeleted'
+          - $ref: '#/components/messages/TaskStatusUpdated'
+          - $ref: '#/components/messages/TaskAssigneeUpdated'
+          - $ref: '#/components/messages/TaskPriorityUpdated'
+          - $ref: '#/components/messages/TaskDueDateUpdated'
+          - $ref: '#/components/messages/TaskTagUpdated'
+          - $ref: '#/components/messages/TaskMoved'
+          - $ref: '#/components/messages/TaskCommentPosted'
+          - $ref: '#/components/messages/TaskCommentUpdated'
+          - $ref: '#/components/messages/TaskTimeEstimateUpdated'
+          - $ref: '#/components/messages/TaskTimeTrackedUpdated'
+          - $ref: '#/components/messages/ListCreated'
+          - $ref: '#/components/messages/ListUpdated'
+          - $ref: '#/components/messages/ListDeleted'
+          - $ref: '#/components/messages/FolderCreated'
+          - $ref: '#/components/messages/FolderUpdated'
+          - $ref: '#/components/messages/FolderDeleted'
+          - $ref: '#/components/messages/SpaceCreated'
+          - $ref: '#/components/messages/SpaceUpdated'
+          - $ref: '#/components/messages/SpaceDeleted'
+          - $ref: '#/components/messages/GoalCreated'
+          - $ref: '#/components/messages/GoalUpdated'
+          - $ref: '#/components/messages/GoalDeleted'
+          - $ref: '#/components/messages/KeyResultCreated'
+          - $ref: '#/components/messages/KeyResultUpdated'
+          - $ref: '#/components/messages/KeyResultDeleted'
+components:
+  securitySchemes:
+    hmacSignature:
+      type: httpApiKey
+      name: X-Signature
+      in: header
+      description: >-
+        HMAC-SHA256 signature of the request body, signed with the shared
+        secret returned when the webhook was created. Verify by computing
+        HMAC-SHA256 of the raw request body using the secret and comparing
+        with the X-Signature header value.
+  messages:
+    TaskCreated:
+      name: taskCreated
+      title: Task Created
+      summary: A new task was created
+      description: >-
+        Triggered when a new task is created within the subscribed scope.
+      payload:
+        $ref: '#/components/schemas/TaskWebhookPayload'
+    TaskUpdated:
+      name: taskUpdated
+      title: Task Updated
+      summary: A task was updated
+      description: >-
+        Triggered when a task field is modified. The history_items array
+        contains the specific field changes with before and after values.
+      payload:
+        $ref: '#/components/schemas/TaskWebhookPayload'
+    TaskDeleted:
+      name: taskDeleted
+      title: Task Deleted
+      summary: A task was deleted
+      description: >-
+        Triggered when a task is permanently deleted.
+      payload:
+        $ref: '#/components/schemas/TaskWebhookPayload'
+    TaskStatusUpdated:
+      name: taskStatusUpdated
+      title: Task Status Updated
+      summary: A task status was changed
+      description: >-
+        Triggered when a task's status changes. The history_items include
+        the previous and new status values.
+      payload:
+        $ref: '#/components/schemas/TaskWebhookPayload'
+    TaskAssigneeUpdated:
+      name: taskAssigneeUpdated
+      title: Task Assignee Updated
+      summary: A task assignee was added or removed
+      description: >-
+        Triggered when assignees are added to or removed from a task.
+      payload:
+        $ref: '#/components/schemas/TaskWebhookPayload'
+    TaskPriorityUpdated:
+      name: taskPriorityUpdated
+      title: Task Priority Updated
+      summary: A task priority was changed
+      description: >-
+        Triggered when a task's priority level is changed.
+      payload:
+        $ref: '#/components/schemas/TaskWebhookPayload'
+    TaskDueDateUpdated:
+      name: taskDueDateUpdated
+      title: Task Due Date Updated
+      summary: A task due date was changed
+      description: >-
+        Triggered when a task's due date is set, changed, or removed.
+      payload:
+        $ref: '#/components/schemas/TaskWebhookPayload'
+    TaskTagUpdated:
+      name: taskTagUpdated
+      title: Task Tag Updated
+      summary: A task tag was added or removed
+      description: >-
+        Triggered when tags are added to or removed from a task.
+      payload:
+        $ref: '#/components/schemas/TaskWebhookPayload'
+    TaskMoved:
+      name: taskMoved
+      title: Task Moved
+      summary: A task was moved to a different list
+      description: >-
+        Triggered when a task is moved from one list to another.
+      payload:
+        $ref: '#/components/schemas/TaskWebhookPayload'
+    TaskCommentPosted:
+      name: taskCommentPosted
+      title: Task Comment Posted
+      summary: A comment was posted on a task
+      description: >-
+        Triggered when a new comment is added to a task.
+      payload:
+        $ref: '#/components/schemas/TaskWebhookPayload'
+    TaskCommentUpdated:
+      name: taskCommentUpdated
+      title: Task Comment Updated
+      summary: A comment on a task was updated
+      description: >-
+        Triggered when an existing comment on a task is modified.
+      payload:
+        $ref: '#/components/schemas/TaskWebhookPayload'
+    TaskTimeEstimateUpdated:
+      name: taskTimeEstimateUpdated
+      title: Task Time Estimate Updated
+      summary: A task time estimate was changed
+      description: >-
+        Triggered when a task's time estimate is set or modified.
+      payload:
+        $ref: '#/components/schemas/TaskWebhookPayload'
+    TaskTimeTrackedUpdated:
+      name: taskTimeTrackedUpdated
+      title: Task Time Tracked Updated
+      summary: Time tracked on a task was updated
+      description: >-
+        Triggered when a time entry is added, modified, or deleted on a task.
+      payload:
+        $ref: '#/components/schemas/TaskWebhookPayload'
+    ListCreated:
+      name: listCreated
+      title: List Created
+      summary: A new list was created
+      description: >-
+        Triggered when a new list is created within the subscribed scope.
+      payload:
+        $ref: '#/components/schemas/ListWebhookPayload'
+    ListUpdated:
+      name: listUpdated
+      title: List Updated
+      summary: A list was updated
+      description: >-
+        Triggered when a list's properties are modified.
+      payload:
+        $ref: '#/components/schemas/ListWebhookPayload'
+    ListDeleted:
+      name: listDeleted
+      title: List Deleted
+      summary: A list was deleted
+      description: >-
+        Triggered when a list is permanently deleted.
+      payload:
+        $ref: '#/components/schemas/ListWebhookPayload'
+    FolderCreated:
+      name: folderCreated
+      title: Folder Created
+      summary: A new folder was created
+      description: >-
+        Triggered when a new folder is created within the subscribed scope.
+      payload:
+        $ref: '#/components/schemas/FolderWebhookPayload'
+    FolderUpdated:
+      name: folderUpdated
+      title: Folder Updated
+      summary: A folder was updated
+      description: >-
+        Triggered when a folder's properties are modified.
+      payload:
+        $ref: '#/components/schemas/FolderWebhookPayload'
+    FolderDeleted:
+      name: folderDeleted
+      title: Folder Deleted
+      summary: A folder was deleted
+      description: >-
+        Triggered when a folder is permanently deleted.
+      payload:
+        $ref: '#/components/schemas/FolderWebhookPayload'
+    SpaceCreated:
+      name: spaceCreated
+      title: Space Created
+      summary: A new space was created
+      description: >-
+        Triggered when a new space is created within the Workspace.
+      payload:
+        $ref: '#/components/schemas/SpaceWebhookPayload'
+    SpaceUpdated:
+      name: spaceUpdated
+      title: Space Updated
+      summary: A space was updated
+      description: >-
+        Triggered when a space's properties are modified.
+      payload:
+        $ref: '#/components/schemas/SpaceWebhookPayload'
+    SpaceDeleted:
+      name: spaceDeleted
+      title: Space Deleted
+      summary: A space was deleted
+      description: >-
+        Triggered when a space is permanently deleted.
+      payload:
+        $ref: '#/components/schemas/SpaceWebhookPayload'
+    GoalCreated:
+      name: goalCreated
+      title: Goal Created
+      summary: A new goal was created
+      description: >-
+        Triggered when a new goal is created within the Workspace.
+      payload:
+        $ref: '#/components/schemas/GoalWebhookPayload'
+    GoalUpdated:
+      name: goalUpdated
+      title: Goal Updated
+      summary: A goal was updated
+      description: >-
+        Triggered when a goal's properties are modified.
+      payload:
+        $ref: '#/components/schemas/GoalWebhookPayload'
+    GoalDeleted:
+      name: goalDeleted
+      title: Goal Deleted
+      summary: A goal was deleted
+      description: >-
+        Triggered when a goal is permanently deleted.
+      payload:
+        $ref: '#/components/schemas/GoalWebhookPayload'
+    KeyResultCreated:
+      name: keyResultCreated
+      title: Key Result Created
+      summary: A new key result was created
+      description: >-
+        Triggered when a new key result is added to a goal.
+      payload:
+        $ref: '#/components/schemas/GoalWebhookPayload'
+    KeyResultUpdated:
+      name: keyResultUpdated
+      title: Key Result Updated
+      summary: A key result was updated
+      description: >-
+        Triggered when a key result's progress or properties are modified.
+      payload:
+        $ref: '#/components/schemas/GoalWebhookPayload'
+    KeyResultDeleted:
+      name: keyResultDeleted
+      title: Key Result Deleted
+      summary: A key result was deleted
+      description: >-
+        Triggered when a key result is permanently deleted from a goal.
+      payload:
+        $ref: '#/components/schemas/GoalWebhookPayload'
+  schemas:
+    TaskWebhookPayload:
+      type: object
+      description: >-
+        Payload delivered for task-related webhook events.
+      properties:
+        event:
+          type: string
+          description: >-
+            The event name (e.g., taskCreated, taskUpdated, taskDeleted).
+        webhook_id:
+          type: string
+          description: >-
+            The ID of the webhook subscription that triggered this event.
+        task_id:
+          type: string
+          description: >-
+            The ID of the task that was affected.
+        history_items:
+          type: array
+          items:
+            $ref: '#/components/schemas/HistoryItem'
+          description: >-
+            Array of change records describing what was modified. Each item
+            contains the field name, the before and after values, the user
+            who made the change, and the timestamp.
+    ListWebhookPayload:
+      type: object
+      description: >-
+        Payload delivered for list-related webhook events.
+      properties:
+        event:
+          type: string
+          description: >-
+            The event name (e.g., listCreated, listUpdated, listDeleted).
+        webhook_id:
+          type: string
+          description: >-
+            The ID of the webhook subscription that triggered this event.
+        list_id:
+          type: string
+          description: >-
+            The ID of the list that was affected.
+        history_items:
+          type: array
+          items:
+            $ref: '#/components/schemas/HistoryItem'
+          description: >-
+            Array of change records.
+    FolderWebhookPayload:
+      type: object
+      description: >-
+        Payload delivered for folder-related webhook events.
+      properties:
+        event:
+          type: string
+          description: >-
+            The event name (e.g., folderCreated, folderUpdated, folderDeleted).
+        webhook_id:
+          type: string
+          description: >-
+            The ID of the webhook subscription that triggered this event.
+        folder_id:
+          type: string
+          description: >-
+            The ID of the folder that was affected.
+        history_items:
+          type: array
+          items:
+            $ref: '#/components/schemas/HistoryItem'
+          description: >-
+            Array of change records.
+    SpaceWebhookPayload:
+      type: object
+      description: >-
+        Payload delivered for space-related webhook events.
+      properties:
+        event:
+          type: string
+          description: >-
+            The event name (e.g., spaceCreated, spaceUpdated, spaceDeleted).
+        webhook_id:
+          type: string
+          description: >-
+            The ID of the webhook subscription that triggered this event.
+        space_id:
+          type: string
+          description: >-
+            The ID of the space that was affected.
+        history_items:
+          type: array
+          items:
+            $ref: '#/components/schemas/HistoryItem'
+          description: >-
+            Array of change records.
+    GoalWebhookPayload:
+      type: object
+      description: >-
+        Payload delivered for goal and key result-related webhook events.
+      properties:
+        event:
+          type: string
+          description: >-
+            The event name (e.g., goalCreated, goalUpdated, keyResultUpdated).
+        webhook_id:
+          type: string
+          description: >-
+            The ID of the webhook subscription that triggered this event.
+        goal_id:
+          type: string
+          description: >-
+            The ID of the goal that was affected.
+        history_items:
+          type: array
+          items:
+            $ref: '#/components/schemas/HistoryItem'
+          description: >-
+            Array of change records.
+    HistoryItem:
+      type: object
+      description: >-
+        A record of a single change within a webhook event. Describes what
+        field was changed, by whom, and the before and after values.
+      properties:
+        id:
+          type: string
+          description: >-
+            The unique identifier of the history item.
+        type:
+          type: integer
+          description: >-
+            The type code of the history item.
+        date:
+          type: string
+          description: >-
+            Unix timestamp in milliseconds when the change occurred.
+        field:
+          type: string
+          description: >-
+            The name of the field that was changed (e.g., status, priority,
+            assignee, due_date, tag, comment, name, description).
+        parent_id:
+          type: string
+          description: >-
+            The parent resource ID.
+        data:
+          type: object
+          description: >-
+            Additional data about the change.
+        source:
+          type: string
+          nullable: true
+          description: >-
+            The source of the change (e.g., null for UI, api for API).
+        user:
+          type: object
+          properties:
+            id:
+              type: integer
+              description: >-
+                The user ID who made the change.
+            username:
+              type: string
+              description: >-
+                The username.
+            email:
+              type: string
+              format: email
+              description: >-
+                The email address.
+            color:
+              type: string
+              description: >-
+                The user color.
+            profilePicture:
+              type: string
+              format: uri
+              nullable: true
+              description: >-
+                URL of the profile picture.
+            initials:
+              type: string
+              description: >-
+                The user initials.
+          description: >-
+            The user who made the change.
+        before:
+          description: >-
+            The value before the change. Type varies based on the field.
+        after:
+          description: >-
+            The value after the change. Type varies based on the field.

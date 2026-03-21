@@ -1,0 +1,641 @@
+openapi: 3.1.0
+info:
+  title: ClickUp Goals API
+  description: >-
+    The ClickUp Goals API allows developers to create and manage goals
+    within a Workspace. Goals can track progress toward objectives using
+    targets based on numbers, currency, percentages, or task completion.
+    The API supports creating goals, adding key results and targets,
+    updating progress, and retrieving goal details. This is useful for
+    building OKR tracking and reporting integrations.
+  version: '2.0'
+  contact:
+    name: ClickUp Support
+    url: https://help.clickup.com
+  termsOfService: https://clickup.com/terms
+externalDocs:
+  description: ClickUp Goals API Documentation
+  url: https://developer.clickup.com/reference/get-goals
+servers:
+  - url: https://api.clickup.com/api/v2
+    description: ClickUp API v2 Production Server
+tags:
+  - name: Goals
+    description: >-
+      Operations for managing Goals and Key Results within a ClickUp Workspace.
+security:
+  - bearerAuth: []
+paths:
+  /team/{team_id}/goal:
+    get:
+      operationId: getGoals
+      summary: Get goals
+      description: >-
+        Retrieves all Goals within a Workspace, including their key results
+        and progress information.
+      tags:
+        - Goals
+      parameters:
+        - $ref: '#/components/parameters/teamId'
+        - name: include_completed
+          in: query
+          description: >-
+            Include completed Goals in the response.
+          schema:
+            type: boolean
+            default: false
+      responses:
+        '200':
+          description: Successfully retrieved goals
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  goals:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Goal'
+                  folders:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/GoalFolder'
+        '401':
+          description: Unauthorized
+    post:
+      operationId: createGoal
+      summary: Create a goal
+      description: >-
+        Creates a new Goal within a Workspace. Goals can include a name,
+        due date, description, assignees, and color.
+      tags:
+        - Goals
+      parameters:
+        - $ref: '#/components/parameters/teamId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateGoalRequest'
+      responses:
+        '200':
+          description: Goal created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  goal:
+                    $ref: '#/components/schemas/Goal'
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+  /goal/{goal_id}:
+    get:
+      operationId: getGoal
+      summary: Get a goal
+      description: >-
+        Retrieves details of a specific Goal, including its key results,
+        targets, and progress.
+      tags:
+        - Goals
+      parameters:
+        - $ref: '#/components/parameters/goalId'
+      responses:
+        '200':
+          description: Successfully retrieved goal
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  goal:
+                    $ref: '#/components/schemas/Goal'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Goal not found
+    put:
+      operationId: updateGoal
+      summary: Update a goal
+      description: >-
+        Updates the properties of an existing Goal.
+      tags:
+        - Goals
+      parameters:
+        - $ref: '#/components/parameters/goalId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateGoalRequest'
+      responses:
+        '200':
+          description: Goal updated successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  goal:
+                    $ref: '#/components/schemas/Goal'
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Goal not found
+    delete:
+      operationId: deleteGoal
+      summary: Delete a goal
+      description: >-
+        Permanently deletes a Goal and all of its key results. This action
+        cannot be undone.
+      tags:
+        - Goals
+      parameters:
+        - $ref: '#/components/parameters/goalId'
+      responses:
+        '200':
+          description: Goal deleted successfully
+        '401':
+          description: Unauthorized
+        '404':
+          description: Goal not found
+  /goal/{goal_id}/key_result:
+    post:
+      operationId: createKeyResult
+      summary: Create a key result
+      description: >-
+        Creates a new Key Result (target) within a Goal. Key Results can
+        be of type number, currency, boolean, percentage, or automatic
+        (based on task completion).
+      tags:
+        - Goals
+      parameters:
+        - $ref: '#/components/parameters/goalId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateKeyResultRequest'
+      responses:
+        '200':
+          description: Key result created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  key_result:
+                    $ref: '#/components/schemas/KeyResult'
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Goal not found
+  /key_result/{key_result_id}:
+    put:
+      operationId: editKeyResult
+      summary: Edit a key result
+      description: >-
+        Updates the properties and progress of an existing Key Result.
+      tags:
+        - Goals
+      parameters:
+        - $ref: '#/components/parameters/keyResultId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateKeyResultRequest'
+      responses:
+        '200':
+          description: Key result updated successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  key_result:
+                    $ref: '#/components/schemas/KeyResult'
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Key result not found
+    delete:
+      operationId: deleteKeyResult
+      summary: Delete a key result
+      description: >-
+        Permanently deletes a Key Result from a Goal.
+      tags:
+        - Goals
+      parameters:
+        - $ref: '#/components/parameters/keyResultId'
+      responses:
+        '200':
+          description: Key result deleted successfully
+        '401':
+          description: Unauthorized
+        '404':
+          description: Key result not found
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: >-
+        ClickUp personal API token or OAuth access token.
+  parameters:
+    teamId:
+      name: team_id
+      in: path
+      required: true
+      description: >-
+        The unique identifier of the Workspace (team).
+      schema:
+        type: integer
+    goalId:
+      name: goal_id
+      in: path
+      required: true
+      description: >-
+        The unique identifier of the Goal.
+      schema:
+        type: string
+    keyResultId:
+      name: key_result_id
+      in: path
+      required: true
+      description: >-
+        The unique identifier of the Key Result.
+      schema:
+        type: string
+  schemas:
+    Goal:
+      type: object
+      description: >-
+        A Goal object representing an objective with trackable key results.
+      properties:
+        id:
+          type: string
+          description: >-
+            The unique identifier of the Goal.
+        name:
+          type: string
+          description: >-
+            The name of the Goal.
+        team_id:
+          type: string
+          description: >-
+            The Workspace ID.
+        date_created:
+          type: string
+          description: >-
+            Unix timestamp when the Goal was created.
+        start_date:
+          type: string
+          nullable: true
+          description: >-
+            Unix timestamp for the Goal start date.
+        due_date:
+          type: string
+          description: >-
+            Unix timestamp for the Goal due date.
+        description:
+          type: string
+          nullable: true
+          description: >-
+            The description of the Goal.
+        private:
+          type: boolean
+          description: >-
+            Whether the Goal is private.
+        archived:
+          type: boolean
+          description: >-
+            Whether the Goal is archived.
+        creator:
+          type: integer
+          description: >-
+            The user ID of the Goal creator.
+        color:
+          type: string
+          description: >-
+            The hex color code of the Goal.
+        pretty_id:
+          type: string
+          description: >-
+            The human-readable ID of the Goal.
+        multiple_owners:
+          type: boolean
+          description: >-
+            Whether the Goal has multiple owners.
+        folder_id:
+          type: string
+          nullable: true
+          description: >-
+            The Goal Folder ID, if the Goal is in a folder.
+        members:
+          type: array
+          items:
+            type: object
+          description: >-
+            Members associated with the Goal.
+        owners:
+          type: array
+          items:
+            type: object
+          description: >-
+            Owners of the Goal.
+        key_results:
+          type: array
+          items:
+            $ref: '#/components/schemas/KeyResult'
+          description: >-
+            Key Results (targets) associated with the Goal.
+        percent_completed:
+          type: integer
+          minimum: 0
+          maximum: 100
+          description: >-
+            The overall completion percentage of the Goal.
+        history:
+          type: array
+          items:
+            type: object
+          description: >-
+            History of changes to the Goal.
+        pretty_url:
+          type: string
+          format: uri
+          description: >-
+            The URL to the Goal in the ClickUp web application.
+    KeyResult:
+      type: object
+      description: >-
+        A Key Result (target) within a Goal.
+      properties:
+        id:
+          type: string
+          description: >-
+            The unique identifier of the Key Result.
+        goal_id:
+          type: string
+          description: >-
+            The Goal ID this Key Result belongs to.
+        name:
+          type: string
+          description: >-
+            The name of the Key Result.
+        creator:
+          type: integer
+          description: >-
+            The user ID of the Key Result creator.
+        type:
+          type: string
+          enum:
+            - number
+            - currency
+            - boolean
+            - percentage
+            - automatic
+          description: >-
+            The type of the Key Result target.
+        date_created:
+          type: string
+          description: >-
+            Unix timestamp when the Key Result was created.
+        goal_pretty_id:
+          type: string
+          description: >-
+            The human-readable ID of the parent Goal.
+        percent_completed:
+          type: integer
+          minimum: 0
+          maximum: 100
+          description: >-
+            The completion percentage of the Key Result.
+        completed:
+          type: boolean
+          description: >-
+            Whether the Key Result is completed.
+        task_ids:
+          type: array
+          items:
+            type: string
+          description: >-
+            Task IDs linked to this Key Result for automatic tracking.
+        list_ids:
+          type: array
+          items:
+            type: string
+          description: >-
+            List IDs linked to this Key Result for automatic tracking.
+        owners:
+          type: array
+          items:
+            type: object
+          description: >-
+            Owners of the Key Result.
+        steps_start:
+          type: number
+          description: >-
+            The starting value of the Key Result.
+        steps_end:
+          type: number
+          description: >-
+            The target end value of the Key Result.
+        steps_current:
+          type: number
+          description: >-
+            The current value of the Key Result.
+        unit:
+          type: string
+          description: >-
+            The unit of measurement for currency type Key Results.
+        last_action:
+          type: object
+          description: >-
+            Details of the last action performed on the Key Result.
+    GoalFolder:
+      type: object
+      description: >-
+        A folder for organizing Goals.
+      properties:
+        id:
+          type: string
+          description: >-
+            The folder ID.
+        name:
+          type: string
+          description: >-
+            The folder name.
+        team_id:
+          type: string
+          description: >-
+            The Workspace ID.
+        private:
+          type: boolean
+          description: >-
+            Whether the folder is private.
+        date_created:
+          type: string
+          description: >-
+            Unix timestamp when the folder was created.
+        creator:
+          type: integer
+          description: >-
+            The user ID of the folder creator.
+        goal_count:
+          type: integer
+          description: >-
+            The number of Goals in the folder.
+        goals:
+          type: array
+          items:
+            $ref: '#/components/schemas/Goal'
+          description: >-
+            Goals within the folder.
+    CreateGoalRequest:
+      type: object
+      required:
+        - name
+        - due_date
+      description: >-
+        Request body for creating a new Goal.
+      properties:
+        name:
+          type: string
+          description: >-
+            The name of the Goal.
+        due_date:
+          type: integer
+          format: int64
+          description: >-
+            Due date as Unix timestamp in milliseconds.
+        description:
+          type: string
+          description: >-
+            The description of the Goal.
+        multiple_owners:
+          type: boolean
+          description: >-
+            Whether the Goal has multiple owners.
+        owners:
+          type: array
+          items:
+            type: integer
+          description: >-
+            Array of user IDs to set as owners.
+        color:
+          type: string
+          description: >-
+            The hex color code of the Goal.
+    UpdateGoalRequest:
+      type: object
+      description: >-
+        Request body for updating an existing Goal.
+      properties:
+        name:
+          type: string
+          description: >-
+            The updated name of the Goal.
+        due_date:
+          type: integer
+          format: int64
+          description: >-
+            Updated due date as Unix timestamp in milliseconds.
+        description:
+          type: string
+          description: >-
+            The updated description.
+        rem_owners:
+          type: array
+          items:
+            type: integer
+          description: >-
+            User IDs to remove as owners.
+        add_owners:
+          type: array
+          items:
+            type: integer
+          description: >-
+            User IDs to add as owners.
+        color:
+          type: string
+          description: >-
+            The updated hex color code.
+    CreateKeyResultRequest:
+      type: object
+      required:
+        - name
+        - type
+      description: >-
+        Request body for creating a new Key Result.
+      properties:
+        name:
+          type: string
+          description: >-
+            The name of the Key Result.
+        owners:
+          type: array
+          items:
+            type: integer
+          description: >-
+            User IDs to set as owners.
+        type:
+          type: string
+          enum:
+            - number
+            - currency
+            - boolean
+            - percentage
+            - automatic
+          description: >-
+            The type of the Key Result target.
+        steps_start:
+          type: number
+          description: >-
+            The starting value.
+        steps_end:
+          type: number
+          description: >-
+            The target end value.
+        unit:
+          type: string
+          description: >-
+            The unit of measurement for currency type.
+        task_ids:
+          type: array
+          items:
+            type: string
+          description: >-
+            Task IDs to link for automatic tracking.
+        list_ids:
+          type: array
+          items:
+            type: string
+          description: >-
+            List IDs to link for automatic tracking.
+    UpdateKeyResultRequest:
+      type: object
+      description: >-
+        Request body for updating an existing Key Result.
+      properties:
+        steps_current:
+          type: number
+          description: >-
+            The current progress value.
+        note:
+          type: string
+          description: >-
+            A note to add with the update.

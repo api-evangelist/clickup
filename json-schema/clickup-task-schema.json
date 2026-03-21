@@ -1,0 +1,491 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://developer.clickup.com/schemas/clickup/task.json",
+  "title": "ClickUp Task",
+  "description": "A task object representing a unit of work in ClickUp. Tasks are the core entity in ClickUp and contain information about assignees, status, priority, due dates, custom fields, time tracking, and more.",
+  "type": "object",
+  "required": ["id", "name", "status"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "The unique identifier of the task."
+    },
+    "custom_id": {
+      "type": ["string", "null"],
+      "description": "The custom task ID if enabled for the Workspace."
+    },
+    "name": {
+      "type": "string",
+      "description": "The name of the task.",
+      "minLength": 1
+    },
+    "text_content": {
+      "type": ["string", "null"],
+      "description": "The plain text content of the task description."
+    },
+    "description": {
+      "type": ["string", "null"],
+      "description": "The task description in rich text format."
+    },
+    "markdown_description": {
+      "type": ["string", "null"],
+      "description": "The task description in Markdown format."
+    },
+    "status": {
+      "$ref": "#/$defs/Status"
+    },
+    "orderindex": {
+      "type": "string",
+      "description": "The order index of the task within its list."
+    },
+    "date_created": {
+      "type": "string",
+      "description": "Unix timestamp in milliseconds when the task was created.",
+      "pattern": "^[0-9]+$"
+    },
+    "date_updated": {
+      "type": "string",
+      "description": "Unix timestamp in milliseconds when the task was last updated.",
+      "pattern": "^[0-9]+$"
+    },
+    "date_closed": {
+      "type": ["string", "null"],
+      "description": "Unix timestamp in milliseconds when the task was closed."
+    },
+    "date_done": {
+      "type": ["string", "null"],
+      "description": "Unix timestamp in milliseconds when the task was marked done."
+    },
+    "archived": {
+      "type": "boolean",
+      "description": "Whether the task is archived."
+    },
+    "creator": {
+      "$ref": "#/$defs/User"
+    },
+    "assignees": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/User"
+      },
+      "description": "The users assigned to the task."
+    },
+    "watchers": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/User"
+      },
+      "description": "The users watching the task."
+    },
+    "checklists": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/Checklist"
+      },
+      "description": "Checklists attached to the task."
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/Tag"
+      },
+      "description": "Tags applied to the task."
+    },
+    "parent": {
+      "type": ["string", "null"],
+      "description": "The ID of the parent task if this is a subtask."
+    },
+    "priority": {
+      "$ref": "#/$defs/Priority"
+    },
+    "due_date": {
+      "type": ["string", "null"],
+      "description": "Unix timestamp in milliseconds for the due date."
+    },
+    "start_date": {
+      "type": ["string", "null"],
+      "description": "Unix timestamp in milliseconds for the start date."
+    },
+    "points": {
+      "type": ["number", "null"],
+      "description": "Sprint points assigned to the task.",
+      "minimum": 0
+    },
+    "time_estimate": {
+      "type": ["integer", "null"],
+      "description": "Time estimate in milliseconds.",
+      "minimum": 0
+    },
+    "time_spent": {
+      "type": "integer",
+      "description": "Total time tracked on the task in milliseconds.",
+      "minimum": 0
+    },
+    "custom_fields": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/CustomFieldValue"
+      },
+      "description": "Custom field values set on the task."
+    },
+    "dependencies": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/Dependency"
+      },
+      "description": "Task dependencies."
+    },
+    "linked_tasks": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/LinkedTask"
+      },
+      "description": "Tasks linked to this task."
+    },
+    "team_id": {
+      "type": "string",
+      "description": "The Workspace ID the task belongs to."
+    },
+    "url": {
+      "type": "string",
+      "format": "uri",
+      "description": "The URL to the task in the ClickUp web application."
+    },
+    "list": {
+      "$ref": "#/$defs/ListReference"
+    },
+    "project": {
+      "$ref": "#/$defs/FolderReference"
+    },
+    "folder": {
+      "$ref": "#/$defs/FolderReference"
+    },
+    "space": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The space ID."
+        }
+      },
+      "description": "The space the task belongs to."
+    }
+  },
+  "$defs": {
+    "Status": {
+      "type": "object",
+      "description": "A task status indicating the current state of work.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The status ID."
+        },
+        "status": {
+          "type": "string",
+          "description": "The status name."
+        },
+        "color": {
+          "type": "string",
+          "description": "The hex color code of the status.",
+          "pattern": "^#[0-9a-fA-F]{6}$"
+        },
+        "orderindex": {
+          "type": "integer",
+          "description": "The order index of the status.",
+          "minimum": 0
+        },
+        "type": {
+          "type": "string",
+          "enum": ["open", "custom", "closed", "done"],
+          "description": "The status type category."
+        }
+      },
+      "required": ["status", "type"]
+    },
+    "User": {
+      "type": "object",
+      "description": "A ClickUp user.",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "description": "The unique identifier of the user."
+        },
+        "username": {
+          "type": "string",
+          "description": "The display name of the user."
+        },
+        "email": {
+          "type": "string",
+          "format": "email",
+          "description": "The email address of the user."
+        },
+        "color": {
+          "type": "string",
+          "description": "The hex color code associated with the user."
+        },
+        "profilePicture": {
+          "type": ["string", "null"],
+          "format": "uri",
+          "description": "URL of the user's profile picture."
+        },
+        "initials": {
+          "type": "string",
+          "description": "The initials of the user.",
+          "maxLength": 3
+        }
+      },
+      "required": ["id", "username"]
+    },
+    "Tag": {
+      "type": "object",
+      "description": "A tag applied to a task.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the tag."
+        },
+        "tag_fg": {
+          "type": "string",
+          "description": "Foreground color of the tag."
+        },
+        "tag_bg": {
+          "type": "string",
+          "description": "Background color of the tag."
+        },
+        "creator": {
+          "type": "integer",
+          "description": "The user ID of the tag creator."
+        }
+      },
+      "required": ["name"]
+    },
+    "Priority": {
+      "type": ["object", "null"],
+      "description": "Task priority level.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The priority ID."
+        },
+        "priority": {
+          "type": "string",
+          "enum": ["urgent", "high", "normal", "low"],
+          "description": "The priority level name."
+        },
+        "color": {
+          "type": "string",
+          "description": "The hex color code of the priority level."
+        },
+        "orderindex": {
+          "type": "string",
+          "description": "The order index of the priority."
+        }
+      }
+    },
+    "CustomFieldValue": {
+      "type": "object",
+      "description": "A custom field value on a task.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The custom field ID."
+        },
+        "name": {
+          "type": "string",
+          "description": "The custom field name."
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "url", "drop_down", "email", "phone", "date", "text",
+            "checkbox", "number", "currency", "tasks", "users",
+            "emoji", "label", "automatic_progress", "manual_progress",
+            "short_text", "location"
+          ],
+          "description": "The type of the custom field."
+        },
+        "type_config": {
+          "type": "object",
+          "description": "Configuration specific to the custom field type."
+        },
+        "date_created": {
+          "type": "string",
+          "description": "Unix timestamp when the custom field was created."
+        },
+        "hide_from_guests": {
+          "type": "boolean",
+          "description": "Whether the field is hidden from guests."
+        },
+        "value": {
+          "description": "The current value of the custom field. Type varies by field type."
+        },
+        "required": {
+          "type": "boolean",
+          "description": "Whether the custom field is required."
+        }
+      },
+      "required": ["id", "name", "type"]
+    },
+    "Checklist": {
+      "type": "object",
+      "description": "A checklist attached to a task.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The checklist ID."
+        },
+        "task_id": {
+          "type": "string",
+          "description": "The task ID the checklist belongs to."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the checklist."
+        },
+        "orderindex": {
+          "type": "integer",
+          "description": "The order index."
+        },
+        "resolved": {
+          "type": "integer",
+          "description": "Number of resolved items.",
+          "minimum": 0
+        },
+        "unresolved": {
+          "type": "integer",
+          "description": "Number of unresolved items.",
+          "minimum": 0
+        },
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "The checklist item ID."
+              },
+              "name": {
+                "type": "string",
+                "description": "The item text."
+              },
+              "orderindex": {
+                "type": "integer",
+                "description": "The order index."
+              },
+              "assignee": {
+                "type": ["object", "null"],
+                "description": "The assigned user."
+              },
+              "resolved": {
+                "type": "boolean",
+                "description": "Whether the item is resolved."
+              },
+              "parent": {
+                "type": ["string", "null"],
+                "description": "The parent checklist item ID for nested items."
+              },
+              "date_created": {
+                "type": "string",
+                "description": "Unix timestamp when created."
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "type": "object"
+                },
+                "description": "Nested checklist items."
+              }
+            }
+          },
+          "description": "The items in the checklist."
+        }
+      },
+      "required": ["id", "name"]
+    },
+    "Dependency": {
+      "type": "object",
+      "description": "A dependency between two tasks.",
+      "properties": {
+        "task_id": {
+          "type": "string",
+          "description": "The dependent task ID."
+        },
+        "depends_on": {
+          "type": "string",
+          "description": "The task ID this task depends on."
+        },
+        "type": {
+          "type": "integer",
+          "description": "The dependency type code."
+        },
+        "date_created": {
+          "type": "string",
+          "description": "Unix timestamp when the dependency was created."
+        },
+        "userid": {
+          "type": "string",
+          "description": "The user ID who created the dependency."
+        }
+      }
+    },
+    "LinkedTask": {
+      "type": "object",
+      "description": "A task linked to another task.",
+      "properties": {
+        "task_id": {
+          "type": "string",
+          "description": "The linked task ID."
+        },
+        "link_id": {
+          "type": "string",
+          "description": "The link ID."
+        },
+        "date_created": {
+          "type": "string",
+          "description": "Unix timestamp when the link was created."
+        },
+        "userid": {
+          "type": "string",
+          "description": "The user ID who created the link."
+        }
+      }
+    },
+    "ListReference": {
+      "type": "object",
+      "description": "A reference to a list.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The list ID."
+        },
+        "name": {
+          "type": "string",
+          "description": "The list name."
+        },
+        "access": {
+          "type": "boolean",
+          "description": "Whether the user has access to the list."
+        }
+      }
+    },
+    "FolderReference": {
+      "type": "object",
+      "description": "A reference to a folder.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The folder ID."
+        },
+        "name": {
+          "type": "string",
+          "description": "The folder name."
+        },
+        "access": {
+          "type": "boolean",
+          "description": "Whether the user has access to the folder."
+        }
+      }
+    }
+  }
+}

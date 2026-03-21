@@ -1,0 +1,1192 @@
+openapi: 3.1.0
+info:
+  title: ClickUp Tasks API
+  description: >-
+    The ClickUp Tasks API allows developers to create, read, update, and
+    delete tasks within ClickUp workspaces. Tasks are the core unit of work
+    in ClickUp and can include custom fields, assignees, due dates, tags,
+    priorities, and attachments. The API supports filtering tasks by list,
+    space, or project, and enables bulk operations for managing large
+    numbers of tasks programmatically.
+  version: '2.0'
+  contact:
+    name: ClickUp Support
+    url: https://help.clickup.com
+  termsOfService: https://clickup.com/terms
+externalDocs:
+  description: ClickUp Tasks API Documentation
+  url: https://developer.clickup.com/docs/tasks
+servers:
+  - url: https://api.clickup.com/api/v2
+    description: ClickUp API v2 Production Server
+tags:
+  - name: Tasks
+    description: >-
+      Operations for creating, retrieving, updating, and deleting tasks
+      within ClickUp lists and workspaces.
+security:
+  - bearerAuth: []
+paths:
+  /list/{list_id}/task:
+    get:
+      operationId: getTasks
+      summary: Get tasks in a list
+      description: >-
+        Retrieves all tasks within a specified list. Supports filtering,
+        pagination, and inclusion of subtasks and closed tasks. Results
+        can be ordered by various fields including due date, date created,
+        and date updated.
+      tags:
+        - Tasks
+      parameters:
+        - $ref: '#/components/parameters/listId'
+        - name: archived
+          in: query
+          description: >-
+            Include archived tasks in the response.
+          schema:
+            type: boolean
+            default: false
+        - name: include_markdown_description
+          in: query
+          description: >-
+            Return task descriptions in Markdown format.
+          schema:
+            type: boolean
+            default: false
+        - name: page
+          in: query
+          description: >-
+            Page number for pagination. Starts at 0.
+          schema:
+            type: integer
+            minimum: 0
+        - name: order_by
+          in: query
+          description: >-
+            Field to order results by.
+          schema:
+            type: string
+            enum:
+              - id
+              - created
+              - updated
+              - due_date
+        - name: reverse
+          in: query
+          description: >-
+            Reverse the order of results.
+          schema:
+            type: boolean
+        - name: subtasks
+          in: query
+          description: >-
+            Include subtasks in the response.
+          schema:
+            type: boolean
+        - name: statuses[]
+          in: query
+          description: >-
+            Filter by task status.
+          schema:
+            type: array
+            items:
+              type: string
+        - name: include_closed
+          in: query
+          description: >-
+            Include closed tasks in the response.
+          schema:
+            type: boolean
+            default: false
+        - name: assignees[]
+          in: query
+          description: >-
+            Filter by assignee user IDs.
+          schema:
+            type: array
+            items:
+              type: integer
+        - name: tags[]
+          in: query
+          description: >-
+            Filter by tag names.
+          schema:
+            type: array
+            items:
+              type: string
+        - name: due_date_gt
+          in: query
+          description: >-
+            Filter for tasks with due date greater than this Unix timestamp
+            in milliseconds.
+          schema:
+            type: integer
+            format: int64
+        - name: due_date_lt
+          in: query
+          description: >-
+            Filter for tasks with due date less than this Unix timestamp
+            in milliseconds.
+          schema:
+            type: integer
+            format: int64
+        - name: date_created_gt
+          in: query
+          description: >-
+            Filter for tasks created after this Unix timestamp in milliseconds.
+          schema:
+            type: integer
+            format: int64
+        - name: date_created_lt
+          in: query
+          description: >-
+            Filter for tasks created before this Unix timestamp in milliseconds.
+          schema:
+            type: integer
+            format: int64
+        - name: date_updated_gt
+          in: query
+          description: >-
+            Filter for tasks updated after this Unix timestamp in milliseconds.
+          schema:
+            type: integer
+            format: int64
+        - name: date_updated_lt
+          in: query
+          description: >-
+            Filter for tasks updated before this Unix timestamp in milliseconds.
+          schema:
+            type: integer
+            format: int64
+        - name: custom_fields
+          in: query
+          description: >-
+            Filter by custom field values. Provided as a JSON array of objects.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successfully retrieved tasks
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  tasks:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Task'
+        '401':
+          description: Unauthorized
+        '404':
+          description: List not found
+    post:
+      operationId: createTask
+      summary: Create a task
+      description: >-
+        Creates a new task within a specified list. The task can include
+        a name, description, assignees, tags, priority, due date, start
+        date, time estimate, custom fields, and other attributes.
+      tags:
+        - Tasks
+      parameters:
+        - $ref: '#/components/parameters/listId'
+        - name: custom_task_ids
+          in: query
+          description: >-
+            If you want to reference a task by its custom task ID,
+            this value must be true.
+          schema:
+            type: boolean
+        - name: team_id
+          in: query
+          description: >-
+            Required when custom_task_ids is set to true. The Workspace ID.
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateTaskRequest'
+      responses:
+        '200':
+          description: Task created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Task'
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: List not found
+  /task/{task_id}:
+    get:
+      operationId: getTask
+      summary: Get a task
+      description: >-
+        Retrieves a single task by its ID, including all task details
+        such as status, assignees, tags, custom fields, and subtasks.
+      tags:
+        - Tasks
+      parameters:
+        - $ref: '#/components/parameters/taskId'
+        - name: custom_task_ids
+          in: query
+          description: >-
+            If you want to reference a task by its custom task ID,
+            this value must be true.
+          schema:
+            type: boolean
+        - name: team_id
+          in: query
+          description: >-
+            Required when custom_task_ids is set to true. The Workspace ID.
+          schema:
+            type: integer
+        - name: include_subtasks
+          in: query
+          description: >-
+            Include subtasks in the response.
+          schema:
+            type: boolean
+        - name: include_markdown_description
+          in: query
+          description: >-
+            Return the task description in Markdown format.
+          schema:
+            type: boolean
+      responses:
+        '200':
+          description: Successfully retrieved task
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Task'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Task not found
+    put:
+      operationId: updateTask
+      summary: Update a task
+      description: >-
+        Updates an existing task. Any fields included in the request body
+        will be updated. Fields not included will remain unchanged.
+      tags:
+        - Tasks
+      parameters:
+        - $ref: '#/components/parameters/taskId'
+        - name: custom_task_ids
+          in: query
+          description: >-
+            If you want to reference a task by its custom task ID,
+            this value must be true.
+          schema:
+            type: boolean
+        - name: team_id
+          in: query
+          description: >-
+            Required when custom_task_ids is set to true. The Workspace ID.
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateTaskRequest'
+      responses:
+        '200':
+          description: Task updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Task'
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Task not found
+    delete:
+      operationId: deleteTask
+      summary: Delete a task
+      description: >-
+        Permanently deletes a task by its ID. This action cannot be undone.
+      tags:
+        - Tasks
+      parameters:
+        - $ref: '#/components/parameters/taskId'
+        - name: custom_task_ids
+          in: query
+          description: >-
+            If you want to reference a task by its custom task ID,
+            this value must be true.
+          schema:
+            type: boolean
+        - name: team_id
+          in: query
+          description: >-
+            Required when custom_task_ids is set to true. The Workspace ID.
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Task deleted successfully
+        '401':
+          description: Unauthorized
+        '404':
+          description: Task not found
+  /team/{team_id}/task:
+    get:
+      operationId: getFilteredTeamTasks
+      summary: Get filtered team tasks
+      description: >-
+        Retrieves tasks across an entire Workspace (team), with support for
+        filtering by assignees, tags, statuses, due dates, and more. This
+        endpoint searches tasks across all lists, folders, and spaces in
+        the Workspace.
+      tags:
+        - Tasks
+      parameters:
+        - $ref: '#/components/parameters/teamId'
+        - name: page
+          in: query
+          description: >-
+            Page number for pagination. Starts at 0.
+          schema:
+            type: integer
+            minimum: 0
+        - name: order_by
+          in: query
+          description: >-
+            Field to order results by.
+          schema:
+            type: string
+            enum:
+              - id
+              - created
+              - updated
+              - due_date
+        - name: reverse
+          in: query
+          description: >-
+            Reverse the order of results.
+          schema:
+            type: boolean
+        - name: subtasks
+          in: query
+          description: >-
+            Include subtasks in the response.
+          schema:
+            type: boolean
+        - name: statuses[]
+          in: query
+          description: >-
+            Filter by task statuses.
+          schema:
+            type: array
+            items:
+              type: string
+        - name: include_closed
+          in: query
+          description: >-
+            Include closed tasks.
+          schema:
+            type: boolean
+        - name: assignees[]
+          in: query
+          description: >-
+            Filter by assignee user IDs.
+          schema:
+            type: array
+            items:
+              type: integer
+        - name: tags[]
+          in: query
+          description: >-
+            Filter by tag names.
+          schema:
+            type: array
+            items:
+              type: string
+        - name: due_date_gt
+          in: query
+          description: >-
+            Filter for tasks with due date after this Unix timestamp in milliseconds.
+          schema:
+            type: integer
+            format: int64
+        - name: due_date_lt
+          in: query
+          description: >-
+            Filter for tasks with due date before this Unix timestamp in milliseconds.
+          schema:
+            type: integer
+            format: int64
+        - name: date_created_gt
+          in: query
+          description: >-
+            Filter for tasks created after this Unix timestamp in milliseconds.
+          schema:
+            type: integer
+            format: int64
+        - name: date_created_lt
+          in: query
+          description: >-
+            Filter for tasks created before this Unix timestamp in milliseconds.
+          schema:
+            type: integer
+            format: int64
+        - name: date_updated_gt
+          in: query
+          description: >-
+            Filter for tasks updated after this Unix timestamp in milliseconds.
+          schema:
+            type: integer
+            format: int64
+        - name: date_updated_lt
+          in: query
+          description: >-
+            Filter for tasks updated before this Unix timestamp in milliseconds.
+          schema:
+            type: integer
+            format: int64
+        - name: list_ids[]
+          in: query
+          description: >-
+            Filter by list IDs.
+          schema:
+            type: array
+            items:
+              type: integer
+        - name: space_ids[]
+          in: query
+          description: >-
+            Filter by space IDs.
+          schema:
+            type: array
+            items:
+              type: integer
+        - name: project_ids[]
+          in: query
+          description: >-
+            Filter by folder (project) IDs.
+          schema:
+            type: array
+            items:
+              type: integer
+      responses:
+        '200':
+          description: Successfully retrieved filtered tasks
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  tasks:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Task'
+        '401':
+          description: Unauthorized
+  /task/{task_id}/time_in_status:
+    get:
+      operationId: getTaskTimeInStatus
+      summary: Get task time in status
+      description: >-
+        Retrieves how long a task has been in each status. Returns
+        time information for every status the task has been in.
+      tags:
+        - Tasks
+      parameters:
+        - $ref: '#/components/parameters/taskId'
+      responses:
+        '200':
+          description: Successfully retrieved time in status data
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  current_status:
+                    type: object
+                    description: >-
+                      Current status information with time data.
+                  status_history:
+                    type: array
+                    items:
+                      type: object
+                    description: >-
+                      Array of status history entries with time data.
+        '401':
+          description: Unauthorized
+        '404':
+          description: Task not found
+  /task/bulk_time_in_status/task_ids:
+    get:
+      operationId: getBulkTaskTimeInStatus
+      summary: Get bulk task time in status
+      description: >-
+        Retrieves time in status data for multiple tasks at once.
+        Accepts an array of task IDs as query parameters.
+      tags:
+        - Tasks
+      parameters:
+        - name: task_ids[]
+          in: query
+          required: true
+          description: >-
+            Array of task IDs to retrieve time in status data for.
+          schema:
+            type: array
+            items:
+              type: string
+      responses:
+        '200':
+          description: Successfully retrieved bulk time in status data
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: object
+        '401':
+          description: Unauthorized
+  /list/{list_id}/task/{task_id}/member:
+    get:
+      operationId: getTaskMembers
+      summary: Get task members
+      description: >-
+        Retrieves the members (assignees and watchers) of a specific task.
+      tags:
+        - Tasks
+      parameters:
+        - $ref: '#/components/parameters/listId'
+        - $ref: '#/components/parameters/taskId'
+      responses:
+        '200':
+          description: Successfully retrieved task members
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  members:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/User'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Task or list not found
+  /task/{task_id}/tag/{tag_name}:
+    post:
+      operationId: addTagToTask
+      summary: Add tag to task
+      description: >-
+        Adds a tag to a task. If the tag does not exist in the Space,
+        it will be created.
+      tags:
+        - Tasks
+      parameters:
+        - $ref: '#/components/parameters/taskId'
+        - name: tag_name
+          in: path
+          required: true
+          description: >-
+            The name of the tag to add.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Tag added successfully
+        '401':
+          description: Unauthorized
+        '404':
+          description: Task not found
+    delete:
+      operationId: removeTagFromTask
+      summary: Remove tag from task
+      description: >-
+        Removes a tag from a task.
+      tags:
+        - Tasks
+      parameters:
+        - $ref: '#/components/parameters/taskId'
+        - name: tag_name
+          in: path
+          required: true
+          description: >-
+            The name of the tag to remove.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Tag removed successfully
+        '401':
+          description: Unauthorized
+        '404':
+          description: Task not found
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: >-
+        ClickUp personal API token or OAuth access token. Include in
+        the Authorization header as Bearer {token}.
+  parameters:
+    taskId:
+      name: task_id
+      in: path
+      required: true
+      description: >-
+        The unique identifier of the task.
+      schema:
+        type: string
+    listId:
+      name: list_id
+      in: path
+      required: true
+      description: >-
+        The unique identifier of the list.
+      schema:
+        type: integer
+    teamId:
+      name: team_id
+      in: path
+      required: true
+      description: >-
+        The unique identifier of the Workspace (team).
+      schema:
+        type: integer
+  schemas:
+    Task:
+      type: object
+      description: >-
+        A task object representing a unit of work in ClickUp.
+      properties:
+        id:
+          type: string
+          description: >-
+            The unique identifier of the task.
+        custom_id:
+          type: string
+          nullable: true
+          description: >-
+            The custom task ID if enabled for the Workspace.
+        name:
+          type: string
+          description: >-
+            The name of the task.
+        text_content:
+          type: string
+          nullable: true
+          description: >-
+            The plain text content of the task description.
+        description:
+          type: string
+          nullable: true
+          description: >-
+            The task description in rich text format.
+        markdown_description:
+          type: string
+          nullable: true
+          description: >-
+            The task description in Markdown format.
+        status:
+          $ref: '#/components/schemas/Status'
+        orderindex:
+          type: string
+          description: >-
+            The order index of the task within its list.
+        date_created:
+          type: string
+          description: >-
+            Unix timestamp in milliseconds when the task was created.
+        date_updated:
+          type: string
+          description: >-
+            Unix timestamp in milliseconds when the task was last updated.
+        date_closed:
+          type: string
+          nullable: true
+          description: >-
+            Unix timestamp in milliseconds when the task was closed.
+        date_done:
+          type: string
+          nullable: true
+          description: >-
+            Unix timestamp in milliseconds when the task was marked done.
+        archived:
+          type: boolean
+          description: >-
+            Whether the task is archived.
+        creator:
+          $ref: '#/components/schemas/User'
+        assignees:
+          type: array
+          items:
+            $ref: '#/components/schemas/User'
+          description: >-
+            The users assigned to the task.
+        watchers:
+          type: array
+          items:
+            $ref: '#/components/schemas/User'
+          description: >-
+            The users watching the task.
+        checklists:
+          type: array
+          items:
+            type: object
+          description: >-
+            Checklists attached to the task.
+        tags:
+          type: array
+          items:
+            $ref: '#/components/schemas/Tag'
+          description: >-
+            Tags applied to the task.
+        parent:
+          type: string
+          nullable: true
+          description: >-
+            The ID of the parent task if this is a subtask.
+        priority:
+          $ref: '#/components/schemas/Priority'
+        due_date:
+          type: string
+          nullable: true
+          description: >-
+            Unix timestamp in milliseconds for the due date.
+        start_date:
+          type: string
+          nullable: true
+          description: >-
+            Unix timestamp in milliseconds for the start date.
+        points:
+          type: number
+          nullable: true
+          description: >-
+            Sprint points assigned to the task.
+        time_estimate:
+          type: integer
+          nullable: true
+          description: >-
+            Time estimate in milliseconds.
+        time_spent:
+          type: integer
+          description: >-
+            Total time tracked on the task in milliseconds.
+        custom_fields:
+          type: array
+          items:
+            $ref: '#/components/schemas/CustomField'
+          description: >-
+            Custom field values on the task.
+        dependencies:
+          type: array
+          items:
+            type: object
+          description: >-
+            Task dependencies.
+        linked_tasks:
+          type: array
+          items:
+            type: object
+          description: >-
+            Tasks linked to this task.
+        team_id:
+          type: string
+          description: >-
+            The Workspace ID the task belongs to.
+        url:
+          type: string
+          format: uri
+          description: >-
+            The URL to the task in the ClickUp web application.
+        list:
+          type: object
+          properties:
+            id:
+              type: string
+              description: >-
+                The list ID.
+            name:
+              type: string
+              description: >-
+                The list name.
+            access:
+              type: boolean
+              description: >-
+                Whether the user has access to the list.
+          description: >-
+            The list the task belongs to.
+        project:
+          type: object
+          properties:
+            id:
+              type: string
+              description: >-
+                The folder (project) ID.
+            name:
+              type: string
+              description: >-
+                The folder name.
+            access:
+              type: boolean
+              description: >-
+                Whether the user has access to the folder.
+          description: >-
+            The folder (project) the task belongs to.
+        folder:
+          type: object
+          properties:
+            id:
+              type: string
+              description: >-
+                The folder ID.
+            name:
+              type: string
+              description: >-
+                The folder name.
+            access:
+              type: boolean
+              description: >-
+                Whether the user has access to the folder.
+          description: >-
+            The folder the task belongs to.
+        space:
+          type: object
+          properties:
+            id:
+              type: string
+              description: >-
+                The space ID.
+          description: >-
+            The space the task belongs to.
+    CreateTaskRequest:
+      type: object
+      required:
+        - name
+      description: >-
+        Request body for creating a new task.
+      properties:
+        name:
+          type: string
+          description: >-
+            The name of the task.
+        description:
+          type: string
+          description: >-
+            The task description in rich text format.
+        markdown_description:
+          type: string
+          description: >-
+            The task description in Markdown format.
+        assignees:
+          type: array
+          items:
+            type: integer
+          description: >-
+            Array of user IDs to assign to the task.
+        tags:
+          type: array
+          items:
+            type: string
+          description: >-
+            Array of tag names to apply to the task.
+        status:
+          type: string
+          description: >-
+            The status of the task.
+        priority:
+          type: integer
+          minimum: 1
+          maximum: 4
+          nullable: true
+          description: >-
+            Task priority. 1 is Urgent, 2 is High, 3 is Normal, 4 is Low.
+        due_date:
+          type: integer
+          format: int64
+          description: >-
+            Due date as Unix timestamp in milliseconds.
+        due_date_time:
+          type: boolean
+          description: >-
+            Whether the due date includes a time component.
+        time_estimate:
+          type: integer
+          description: >-
+            Time estimate in milliseconds.
+        start_date:
+          type: integer
+          format: int64
+          description: >-
+            Start date as Unix timestamp in milliseconds.
+        start_date_time:
+          type: boolean
+          description: >-
+            Whether the start date includes a time component.
+        notify_all:
+          type: boolean
+          description: >-
+            Notify all assignees and watchers of task creation.
+        parent:
+          type: string
+          nullable: true
+          description: >-
+            The task ID of the parent task to create this as a subtask.
+        links_to:
+          type: string
+          nullable: true
+          description: >-
+            The task ID to link this task to.
+        check_required_custom_fields:
+          type: boolean
+          description: >-
+            Whether to validate required custom fields.
+        custom_fields:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+                description: >-
+                  The custom field ID.
+              value:
+                description: >-
+                  The value to set for the custom field.
+          description: >-
+            Custom field values to set on the task.
+    UpdateTaskRequest:
+      type: object
+      description: >-
+        Request body for updating an existing task. All fields are optional.
+      properties:
+        name:
+          type: string
+          description: >-
+            The updated name of the task.
+        description:
+          type: string
+          description: >-
+            The updated description in rich text format.
+        markdown_description:
+          type: string
+          description: >-
+            The updated description in Markdown format.
+        assignees:
+          type: object
+          properties:
+            add:
+              type: array
+              items:
+                type: integer
+              description: >-
+                Array of user IDs to add as assignees.
+            rem:
+              type: array
+              items:
+                type: integer
+              description: >-
+                Array of user IDs to remove from assignees.
+          description: >-
+            Assignee modifications.
+        status:
+          type: string
+          description: >-
+            The updated status of the task.
+        priority:
+          type: integer
+          minimum: 1
+          maximum: 4
+          nullable: true
+          description: >-
+            Updated task priority. 1 is Urgent, 2 is High, 3 is Normal, 4 is Low.
+        due_date:
+          type: integer
+          format: int64
+          description: >-
+            Updated due date as Unix timestamp in milliseconds.
+        due_date_time:
+          type: boolean
+          description: >-
+            Whether the due date includes a time component.
+        time_estimate:
+          type: integer
+          description: >-
+            Updated time estimate in milliseconds.
+        start_date:
+          type: integer
+          format: int64
+          description: >-
+            Updated start date as Unix timestamp in milliseconds.
+        start_date_time:
+          type: boolean
+          description: >-
+            Whether the start date includes a time component.
+        parent:
+          type: string
+          nullable: true
+          description: >-
+            The task ID of the parent task. Set to null to remove parent.
+        archived:
+          type: boolean
+          description: >-
+            Whether to archive or unarchive the task.
+    Status:
+      type: object
+      description: >-
+        A task status object.
+      properties:
+        id:
+          type: string
+          description: >-
+            The status ID.
+        status:
+          type: string
+          description: >-
+            The status name.
+        color:
+          type: string
+          description: >-
+            The hex color code of the status.
+        orderindex:
+          type: integer
+          description: >-
+            The order index of the status.
+        type:
+          type: string
+          enum:
+            - open
+            - custom
+            - closed
+            - done
+          description: >-
+            The status type.
+    User:
+      type: object
+      description: >-
+        A ClickUp user object.
+      properties:
+        id:
+          type: integer
+          description: >-
+            The unique identifier of the user.
+        username:
+          type: string
+          description: >-
+            The username of the user.
+        email:
+          type: string
+          format: email
+          description: >-
+            The email address of the user.
+        color:
+          type: string
+          description: >-
+            The hex color code associated with the user.
+        profilePicture:
+          type: string
+          format: uri
+          nullable: true
+          description: >-
+            URL of the user's profile picture.
+        initials:
+          type: string
+          description: >-
+            The initials of the user.
+    Tag:
+      type: object
+      description: >-
+        A task tag.
+      properties:
+        name:
+          type: string
+          description: >-
+            The name of the tag.
+        tag_fg:
+          type: string
+          description: >-
+            Foreground color of the tag.
+        tag_bg:
+          type: string
+          description: >-
+            Background color of the tag.
+        creator:
+          type: integer
+          description: >-
+            The user ID of the tag creator.
+    Priority:
+      type: object
+      nullable: true
+      description: >-
+        Task priority level.
+      properties:
+        id:
+          type: string
+          description: >-
+            The priority ID.
+        priority:
+          type: string
+          enum:
+            - urgent
+            - high
+            - normal
+            - low
+          description: >-
+            The priority level name.
+        color:
+          type: string
+          description: >-
+            The hex color code of the priority level.
+        orderindex:
+          type: string
+          description: >-
+            The order index of the priority.
+    CustomField:
+      type: object
+      description: >-
+        A custom field value on a task.
+      properties:
+        id:
+          type: string
+          description: >-
+            The custom field ID.
+        name:
+          type: string
+          description: >-
+            The custom field name.
+        type:
+          type: string
+          description: >-
+            The type of the custom field.
+        type_config:
+          type: object
+          description: >-
+            Configuration specific to the custom field type.
+        date_created:
+          type: string
+          description: >-
+            Unix timestamp when the custom field was created.
+        hide_from_guests:
+          type: boolean
+          description: >-
+            Whether the field is hidden from guests.
+        value:
+          description: >-
+            The current value of the custom field.
+        required:
+          type: boolean
+          description: >-
+            Whether the custom field is required.

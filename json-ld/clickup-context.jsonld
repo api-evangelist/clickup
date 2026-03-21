@@ -1,0 +1,374 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "clickup": "https://developer.clickup.com/schemas/",
+    "schema": "https://schema.org/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "dcterms": "http://purl.org/dc/terms/",
+
+    "Task": {
+      "@id": "clickup:Task",
+      "@context": {
+        "name": "schema:name",
+        "description": "schema:description",
+        "url": {
+          "@id": "schema:url",
+          "@type": "@id"
+        },
+        "dateCreated": {
+          "@id": "dcterms:created",
+          "@type": "xsd:dateTime"
+        },
+        "dateModified": {
+          "@id": "dcterms:modified",
+          "@type": "xsd:dateTime"
+        },
+        "dateClosed": {
+          "@id": "clickup:dateClosed",
+          "@type": "xsd:dateTime"
+        },
+        "dueDate": {
+          "@id": "clickup:dueDate",
+          "@type": "xsd:dateTime"
+        },
+        "startDate": {
+          "@id": "clickup:startDate",
+          "@type": "xsd:dateTime"
+        },
+        "status": "clickup:status",
+        "priority": "clickup:priority",
+        "creator": {
+          "@id": "dcterms:creator",
+          "@type": "@id"
+        },
+        "assignees": {
+          "@id": "clickup:assignees",
+          "@container": "@set"
+        },
+        "watchers": {
+          "@id": "clickup:watchers",
+          "@container": "@set"
+        },
+        "tags": {
+          "@id": "schema:keywords",
+          "@container": "@set"
+        },
+        "parent": {
+          "@id": "clickup:parentTask",
+          "@type": "@id"
+        },
+        "timeEstimate": {
+          "@id": "clickup:timeEstimate",
+          "@type": "xsd:integer"
+        },
+        "timeSpent": {
+          "@id": "clickup:timeSpent",
+          "@type": "xsd:integer"
+        },
+        "points": {
+          "@id": "clickup:sprintPoints",
+          "@type": "xsd:decimal"
+        },
+        "archived": {
+          "@id": "clickup:archived",
+          "@type": "xsd:boolean"
+        },
+        "list": {
+          "@id": "clickup:list",
+          "@type": "@id"
+        },
+        "folder": {
+          "@id": "clickup:folder",
+          "@type": "@id"
+        },
+        "space": {
+          "@id": "clickup:space",
+          "@type": "@id"
+        },
+        "customFields": {
+          "@id": "clickup:customFields",
+          "@container": "@set"
+        },
+        "dependencies": {
+          "@id": "clickup:dependencies",
+          "@container": "@set"
+        },
+        "linkedTasks": {
+          "@id": "clickup:linkedTasks",
+          "@container": "@set"
+        }
+      }
+    },
+
+    "Space": {
+      "@id": "clickup:Space",
+      "@context": {
+        "name": "schema:name",
+        "private": {
+          "@id": "clickup:private",
+          "@type": "xsd:boolean"
+        },
+        "archived": {
+          "@id": "clickup:archived",
+          "@type": "xsd:boolean"
+        },
+        "color": "clickup:color",
+        "members": {
+          "@id": "schema:member",
+          "@container": "@set"
+        },
+        "statuses": {
+          "@id": "clickup:statuses",
+          "@container": "@list"
+        },
+        "features": "clickup:features"
+      }
+    },
+
+    "List": {
+      "@id": "clickup:List",
+      "@context": {
+        "name": "schema:name",
+        "content": "schema:description",
+        "dueDate": {
+          "@id": "clickup:dueDate",
+          "@type": "xsd:dateTime"
+        },
+        "startDate": {
+          "@id": "clickup:startDate",
+          "@type": "xsd:dateTime"
+        },
+        "status": "clickup:status",
+        "priority": "clickup:priority",
+        "archived": {
+          "@id": "clickup:archived",
+          "@type": "xsd:boolean"
+        },
+        "taskCount": {
+          "@id": "clickup:taskCount",
+          "@type": "xsd:integer"
+        },
+        "folder": {
+          "@id": "clickup:folder",
+          "@type": "@id"
+        },
+        "space": {
+          "@id": "clickup:space",
+          "@type": "@id"
+        },
+        "statuses": {
+          "@id": "clickup:statuses",
+          "@container": "@list"
+        }
+      }
+    },
+
+    "Folder": {
+      "@id": "clickup:Folder",
+      "@context": {
+        "name": "schema:name",
+        "archived": {
+          "@id": "clickup:archived",
+          "@type": "xsd:boolean"
+        },
+        "hidden": {
+          "@id": "clickup:hidden",
+          "@type": "xsd:boolean"
+        },
+        "space": {
+          "@id": "clickup:space",
+          "@type": "@id"
+        },
+        "lists": {
+          "@id": "clickup:lists",
+          "@container": "@set"
+        },
+        "taskCount": {
+          "@id": "clickup:taskCount",
+          "@type": "xsd:integer"
+        },
+        "statuses": {
+          "@id": "clickup:statuses",
+          "@container": "@list"
+        }
+      }
+    },
+
+    "Goal": {
+      "@id": "clickup:Goal",
+      "@context": {
+        "name": "schema:name",
+        "description": "schema:description",
+        "dateCreated": {
+          "@id": "dcterms:created",
+          "@type": "xsd:dateTime"
+        },
+        "dueDate": {
+          "@id": "clickup:dueDate",
+          "@type": "xsd:dateTime"
+        },
+        "startDate": {
+          "@id": "clickup:startDate",
+          "@type": "xsd:dateTime"
+        },
+        "color": "clickup:color",
+        "private": {
+          "@id": "clickup:private",
+          "@type": "xsd:boolean"
+        },
+        "archived": {
+          "@id": "clickup:archived",
+          "@type": "xsd:boolean"
+        },
+        "percentCompleted": {
+          "@id": "clickup:percentCompleted",
+          "@type": "xsd:integer"
+        },
+        "keyResults": {
+          "@id": "clickup:keyResults",
+          "@container": "@set"
+        },
+        "owners": {
+          "@id": "clickup:owners",
+          "@container": "@set"
+        },
+        "prettyUrl": {
+          "@id": "schema:url",
+          "@type": "@id"
+        }
+      }
+    },
+
+    "Comment": {
+      "@id": "clickup:Comment",
+      "@context": {
+        "commentText": "schema:text",
+        "dateCreated": {
+          "@id": "dcterms:created",
+          "@type": "xsd:dateTime"
+        },
+        "user": {
+          "@id": "dcterms:creator",
+          "@type": "@id"
+        },
+        "resolved": {
+          "@id": "clickup:resolved",
+          "@type": "xsd:boolean"
+        },
+        "assignee": {
+          "@id": "clickup:assignee",
+          "@type": "@id"
+        },
+        "reactions": {
+          "@id": "clickup:reactions",
+          "@container": "@set"
+        }
+      }
+    },
+
+    "Workspace": {
+      "@id": "clickup:Workspace",
+      "@context": {
+        "name": "schema:name",
+        "color": "clickup:color",
+        "avatar": {
+          "@id": "schema:image",
+          "@type": "@id"
+        },
+        "members": {
+          "@id": "schema:member",
+          "@container": "@set"
+        }
+      }
+    },
+
+    "User": {
+      "@id": "clickup:User",
+      "@context": {
+        "username": "schema:name",
+        "email": "schema:email",
+        "profilePicture": {
+          "@id": "schema:image",
+          "@type": "@id"
+        },
+        "color": "clickup:color",
+        "initials": "clickup:initials"
+      }
+    },
+
+    "TimeEntry": {
+      "@id": "clickup:TimeEntry",
+      "@context": {
+        "description": "schema:description",
+        "start": {
+          "@id": "clickup:startTime",
+          "@type": "xsd:dateTime"
+        },
+        "end": {
+          "@id": "clickup:endTime",
+          "@type": "xsd:dateTime"
+        },
+        "duration": {
+          "@id": "clickup:duration",
+          "@type": "xsd:integer"
+        },
+        "billable": {
+          "@id": "clickup:billable",
+          "@type": "xsd:boolean"
+        },
+        "task": {
+          "@id": "clickup:task",
+          "@type": "@id"
+        },
+        "user": {
+          "@id": "dcterms:creator",
+          "@type": "@id"
+        },
+        "tags": {
+          "@id": "schema:keywords",
+          "@container": "@set"
+        }
+      }
+    },
+
+    "View": {
+      "@id": "clickup:View",
+      "@context": {
+        "name": "schema:name",
+        "type": "clickup:viewType",
+        "dateCreated": {
+          "@id": "dcterms:created",
+          "@type": "xsd:dateTime"
+        },
+        "creator": {
+          "@id": "dcterms:creator",
+          "@type": "@id"
+        },
+        "parent": {
+          "@id": "clickup:parent",
+          "@type": "@id"
+        },
+        "visibility": "clickup:visibility",
+        "protected": {
+          "@id": "clickup:protected",
+          "@type": "xsd:boolean"
+        }
+      }
+    },
+
+    "Webhook": {
+      "@id": "clickup:Webhook",
+      "@context": {
+        "endpoint": {
+          "@id": "clickup:endpoint",
+          "@type": "@id"
+        },
+        "events": {
+          "@id": "clickup:events",
+          "@container": "@set"
+        },
+        "status": "clickup:webhookStatus"
+      }
+    }
+  }
+}

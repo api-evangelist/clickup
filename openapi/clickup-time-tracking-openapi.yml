@@ -1,0 +1,714 @@
+openapi: 3.1.0
+info:
+  title: ClickUp Time Tracking API
+  description: >-
+    The ClickUp Time Tracking API provides endpoints for recording and
+    retrieving time entries associated with tasks. Developers can create
+    manual time entries, start and stop timers, and query time entries
+    within date ranges and across team members. This API supports building
+    time reporting dashboards, invoicing integrations, and productivity
+    analysis tools.
+  version: '2.0'
+  contact:
+    name: ClickUp Support
+    url: https://help.clickup.com
+  termsOfService: https://clickup.com/terms
+externalDocs:
+  description: ClickUp Time Tracking API Documentation
+  url: https://developer.clickup.com/reference/get-time-entries-within-a-date-range
+servers:
+  - url: https://api.clickup.com/api/v2
+    description: ClickUp API v2 Production Server
+tags:
+  - name: Time Tracking
+    description: >-
+      Operations for managing time entries and timers within a ClickUp
+      Workspace.
+security:
+  - bearerAuth: []
+paths:
+  /team/{team_id}/time_entries:
+    get:
+      operationId: getTimeEntries
+      summary: Get time entries within a date range
+      description: >-
+        Retrieves time entries within a specified date range for a Workspace.
+        Results can be filtered by assignees and task IDs. Returns time
+        entries with their duration, start time, end time, and associated
+        task information.
+      tags:
+        - Time Tracking
+      parameters:
+        - $ref: '#/components/parameters/teamId'
+        - name: start_date
+          in: query
+          description: >-
+            Unix timestamp in milliseconds for the start of the date range.
+          schema:
+            type: integer
+            format: int64
+        - name: end_date
+          in: query
+          description: >-
+            Unix timestamp in milliseconds for the end of the date range.
+          schema:
+            type: integer
+            format: int64
+        - name: assignee
+          in: query
+          description: >-
+            Comma-separated list of user IDs to filter by assignees.
+          schema:
+            type: string
+        - name: include_task_tags
+          in: query
+          description: >-
+            Include tags from the associated tasks.
+          schema:
+            type: boolean
+        - name: include_location_names
+          in: query
+          description: >-
+            Include names of the spaces, folders, and lists.
+          schema:
+            type: boolean
+        - name: space_id
+          in: query
+          description: >-
+            Filter by Space ID.
+          schema:
+            type: integer
+        - name: folder_id
+          in: query
+          description: >-
+            Filter by Folder ID.
+          schema:
+            type: integer
+        - name: list_id
+          in: query
+          description: >-
+            Filter by List ID.
+          schema:
+            type: integer
+        - name: task_id
+          in: query
+          description: >-
+            Filter by Task ID.
+          schema:
+            type: string
+        - name: custom_task_ids
+          in: query
+          description: >-
+            If true, the task_id parameter should be a custom task ID.
+          schema:
+            type: boolean
+      responses:
+        '200':
+          description: Successfully retrieved time entries
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/TimeEntry'
+        '401':
+          description: Unauthorized
+    post:
+      operationId: createTimeEntry
+      summary: Create a time entry
+      description: >-
+        Creates a manual time entry for a task in a Workspace. The time
+        entry requires a start timestamp and duration. Optionally, a
+        description, tags, and billable status can be included.
+      tags:
+        - Time Tracking
+      parameters:
+        - $ref: '#/components/parameters/teamId'
+        - name: custom_task_ids
+          in: query
+          description: >-
+            If true, the tid parameter should be a custom task ID.
+          schema:
+            type: boolean
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateTimeEntryRequest'
+      responses:
+        '200':
+          description: Time entry created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/TimeEntry'
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+  /team/{team_id}/time_entries/{timer_id}:
+    get:
+      operationId: getSingleTimeEntry
+      summary: Get a single time entry
+      description: >-
+        Retrieves details of a specific time entry by its ID.
+      tags:
+        - Time Tracking
+      parameters:
+        - $ref: '#/components/parameters/teamId'
+        - $ref: '#/components/parameters/timerId'
+      responses:
+        '200':
+          description: Successfully retrieved time entry
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/TimeEntry'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Time entry not found
+    put:
+      operationId: updateTimeEntry
+      summary: Update a time entry
+      description: >-
+        Updates an existing time entry. The start time, end time, duration,
+        description, tags, and billable status can be modified.
+      tags:
+        - Time Tracking
+      parameters:
+        - $ref: '#/components/parameters/teamId'
+        - $ref: '#/components/parameters/timerId'
+        - name: custom_task_ids
+          in: query
+          description: >-
+            If true, the tid parameter should be a custom task ID.
+          schema:
+            type: boolean
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateTimeEntryRequest'
+      responses:
+        '200':
+          description: Time entry updated successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/TimeEntry'
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Time entry not found
+    delete:
+      operationId: deleteTimeEntry
+      summary: Delete a time entry
+      description: >-
+        Permanently deletes a time entry. This action cannot be undone.
+      tags:
+        - Time Tracking
+      parameters:
+        - $ref: '#/components/parameters/teamId'
+        - $ref: '#/components/parameters/timerId'
+      responses:
+        '200':
+          description: Time entry deleted successfully
+        '401':
+          description: Unauthorized
+        '404':
+          description: Time entry not found
+  /team/{team_id}/time_entries/current:
+    get:
+      operationId: getCurrentTimeEntry
+      summary: Get running time entry
+      description: >-
+        Retrieves the currently running time entry (timer) for the
+        authenticated user within a Workspace.
+      tags:
+        - Time Tracking
+      parameters:
+        - $ref: '#/components/parameters/teamId'
+        - name: assignee
+          in: query
+          description: >-
+            User ID to get the running timer for. Defaults to the
+            authenticated user.
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Successfully retrieved current time entry
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/TimeEntry'
+        '401':
+          description: Unauthorized
+  /team/{team_id}/time_entries/start/{timer_id}:
+    post:
+      operationId: startTimeEntry
+      summary: Start a time entry
+      description: >-
+        Starts a timer for a specific time entry. If another timer is
+        already running, it will be stopped first.
+      tags:
+        - Time Tracking
+      parameters:
+        - $ref: '#/components/parameters/teamId'
+        - $ref: '#/components/parameters/timerId'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                tid:
+                  type: string
+                  description: >-
+                    The task ID to associate with the timer.
+                description:
+                  type: string
+                  description: >-
+                    Description for the time entry.
+                billable:
+                  type: boolean
+                  description: >-
+                    Whether the time entry is billable.
+      responses:
+        '200':
+          description: Timer started successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/TimeEntry'
+        '401':
+          description: Unauthorized
+  /team/{team_id}/time_entries/stop:
+    post:
+      operationId: stopTimeEntry
+      summary: Stop a time entry
+      description: >-
+        Stops the currently running timer for the authenticated user
+        within a Workspace.
+      tags:
+        - Time Tracking
+      parameters:
+        - $ref: '#/components/parameters/teamId'
+      responses:
+        '200':
+          description: Timer stopped successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/TimeEntry'
+        '401':
+          description: Unauthorized
+  /team/{team_id}/time_entries/tags:
+    get:
+      operationId: getTimeEntryTags
+      summary: Get all time entry tags
+      description: >-
+        Retrieves all tags that have been used on time entries within
+        a Workspace.
+      tags:
+        - Time Tracking
+      parameters:
+        - $ref: '#/components/parameters/teamId'
+      responses:
+        '200':
+          description: Successfully retrieved time entry tags
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                          description: >-
+                            The tag name.
+                        tag_bg:
+                          type: string
+                          description: >-
+                            Background color of the tag.
+                        tag_fg:
+                          type: string
+                          description: >-
+                            Foreground color of the tag.
+                        creator:
+                          type: integer
+                          description: >-
+                            The user ID of the tag creator.
+        '401':
+          description: Unauthorized
+    post:
+      operationId: addTagsToTimeEntries
+      summary: Add tags to time entries
+      description: >-
+        Adds tags to one or more time entries within a Workspace.
+      tags:
+        - Time Tracking
+      parameters:
+        - $ref: '#/components/parameters/teamId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - time_entry_ids
+                - tags
+              properties:
+                time_entry_ids:
+                  type: array
+                  items:
+                    type: string
+                  description: >-
+                    Array of time entry IDs to add tags to.
+                tags:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      name:
+                        type: string
+                        description: >-
+                          The tag name.
+                      tag_bg:
+                        type: string
+                        description: >-
+                          Background color.
+                      tag_fg:
+                        type: string
+                        description: >-
+                          Foreground color.
+                  description: >-
+                    Array of tag objects to add.
+      responses:
+        '200':
+          description: Tags added successfully
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: >-
+        ClickUp personal API token or OAuth access token.
+  parameters:
+    teamId:
+      name: team_id
+      in: path
+      required: true
+      description: >-
+        The unique identifier of the Workspace (team).
+      schema:
+        type: integer
+    timerId:
+      name: timer_id
+      in: path
+      required: true
+      description: >-
+        The unique identifier of the time entry.
+      schema:
+        type: string
+  schemas:
+    TimeEntry:
+      type: object
+      description: >-
+        A time entry recording tracked time on a task.
+      properties:
+        id:
+          type: string
+          description: >-
+            The unique identifier of the time entry.
+        task:
+          type: object
+          properties:
+            id:
+              type: string
+              description: >-
+                The task ID.
+            name:
+              type: string
+              description: >-
+                The task name.
+            status:
+              type: object
+              properties:
+                status:
+                  type: string
+                  description: >-
+                    The status name.
+                color:
+                  type: string
+                  description: >-
+                    The status color.
+                type:
+                  type: string
+                  description: >-
+                    The status type.
+              description: >-
+                The task status.
+            custom_type:
+              type: string
+              nullable: true
+              description: >-
+                Custom task type if applicable.
+          description: >-
+            The task this time entry is associated with.
+        wid:
+          type: string
+          description: >-
+            The Workspace ID.
+        user:
+          type: object
+          properties:
+            id:
+              type: integer
+              description: >-
+                The user ID.
+            username:
+              type: string
+              description: >-
+                The username.
+            email:
+              type: string
+              format: email
+              description: >-
+                The email address.
+            color:
+              type: string
+              description: >-
+                The user color.
+            profilePicture:
+              type: string
+              format: uri
+              nullable: true
+              description: >-
+                URL of the profile picture.
+            initials:
+              type: string
+              description: >-
+                The user initials.
+          description: >-
+            The user who logged the time entry.
+        billable:
+          type: boolean
+          description: >-
+            Whether the time entry is billable.
+        start:
+          type: string
+          description: >-
+            Unix timestamp in milliseconds when the time entry started.
+        end:
+          type: string
+          description: >-
+            Unix timestamp in milliseconds when the time entry ended.
+        duration:
+          type: string
+          description: >-
+            Duration of the time entry in milliseconds.
+        description:
+          type: string
+          description: >-
+            Description of the time entry.
+        tags:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+                description: >-
+                  The tag name.
+              tag_bg:
+                type: string
+                description: >-
+                  Background color.
+              tag_fg:
+                type: string
+                description: >-
+                  Foreground color.
+              creator:
+                type: integer
+                description: >-
+                  The tag creator user ID.
+          description: >-
+            Tags associated with the time entry.
+        source:
+          type: string
+          description: >-
+            The source of the time entry (e.g., clickup, api).
+        at:
+          type: string
+          description: >-
+            Unix timestamp when the time entry was last modified.
+        task_location:
+          type: object
+          properties:
+            list_id:
+              type: integer
+              description: >-
+                The list ID.
+            folder_id:
+              type: integer
+              description: >-
+                The folder ID.
+            space_id:
+              type: integer
+              description: >-
+                The space ID.
+            list_name:
+              type: string
+              description: >-
+                The list name.
+            folder_name:
+              type: string
+              description: >-
+                The folder name.
+            space_name:
+              type: string
+              description: >-
+                The space name.
+          description: >-
+            Location details of the associated task.
+        task_tags:
+          type: array
+          items:
+            type: object
+          description: >-
+            Tags from the associated task.
+    CreateTimeEntryRequest:
+      type: object
+      required:
+        - start
+        - duration
+      description: >-
+        Request body for creating a manual time entry.
+      properties:
+        tid:
+          type: string
+          description: >-
+            The task ID to associate with the time entry.
+        description:
+          type: string
+          description: >-
+            Description of the time entry.
+        start:
+          type: integer
+          format: int64
+          description: >-
+            Start time as Unix timestamp in milliseconds.
+        stop:
+          type: integer
+          format: int64
+          description: >-
+            Stop time as Unix timestamp in milliseconds. If omitted,
+            duration is used to calculate the end time.
+        duration:
+          type: integer
+          description: >-
+            Duration in milliseconds.
+        assignee:
+          type: integer
+          description: >-
+            User ID to assign the time entry to.
+        billable:
+          type: boolean
+          description: >-
+            Whether the time entry is billable.
+        tags:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+                description: >-
+                  The tag name.
+          description: >-
+            Tags to associate with the time entry.
+    UpdateTimeEntryRequest:
+      type: object
+      description: >-
+        Request body for updating an existing time entry.
+      properties:
+        tid:
+          type: string
+          description: >-
+            Updated task ID.
+        description:
+          type: string
+          description: >-
+            Updated description.
+        start:
+          type: integer
+          format: int64
+          description: >-
+            Updated start time.
+        end:
+          type: integer
+          format: int64
+          description: >-
+            Updated end time.
+        duration:
+          type: integer
+          description: >-
+            Updated duration in milliseconds.
+        billable:
+          type: boolean
+          description: >-
+            Updated billable status.
+        tag_action:
+          type: string
+          enum:
+            - add
+            - remove
+          description: >-
+            Whether to add or remove tags.
+        tags:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+                description: >-
+                  The tag name.
+          description: >-
+            Tags to add or remove.
