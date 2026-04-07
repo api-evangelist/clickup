@@ -21,12 +21,12 @@ servers:
   - url: https://api.clickup.com/api/v2
     description: ClickUp API v2 Production Server
 tags:
-  - name: OAuth
-    description: >-
-      Operations for OAuth 2.0 authentication and token management.
   - name: Authorization
     description: >-
       Operations for retrieving authenticated user information.
+  - name: OAuth
+    description: >-
+      Operations for OAuth 2.0 authentication and token management.
 security: []
 paths:
   /oauth/token:
