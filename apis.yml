@@ -1,5 +1,6 @@
 aid: clickup
-url: https://raw.githubusercontent.com/api-evangelist/clickup/refs/heads/main/apis.yml
+url: 
+  https://raw.githubusercontent.com/api-evangelist/clickup/refs/heads/main/apis.yml
 modified: '2026-03-20'
 apis:
   - aid: clickup:tasks-api
@@ -9,7 +10,8 @@ apis:
       - Tasks
       - Productivity
       - Collaboration
-    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: 
+      https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
     baseURL: https://api.clickup.com
     humanURL: https://developer.clickup.com/docs/tasks
     properties:
@@ -30,7 +32,8 @@ apis:
       - Project Management
       - Workspaces
       - Organization
-    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: 
+      https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
     baseURL: https://api.clickup.com
     humanURL: https://developer.clickup.com/reference/get-spaces
     properties:
@@ -51,7 +54,8 @@ apis:
       - Project Management
       - Lists
       - Task Organization
-    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: 
+      https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
     baseURL: https://api.clickup.com
     humanURL: https://developer.clickup.com/reference/get-lists
     properties:
@@ -72,7 +76,8 @@ apis:
       - Project Management
       - Folders
       - Organization
-    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: 
+      https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
     baseURL: https://api.clickup.com
     humanURL: https://developer.clickup.com/reference/get-folders
     properties:
@@ -94,7 +99,8 @@ apis:
       - Goals
       - Tracking
       - OKR
-    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: 
+      https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
     baseURL: https://api.clickup.com
     humanURL: https://developer.clickup.com/reference/get-goals
     properties:
@@ -115,7 +121,8 @@ apis:
       - Project Management
       - Comments
       - Collaboration
-    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: 
+      https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
     baseURL: https://api.clickup.com
     humanURL: https://developer.clickup.com/reference/get-task-comments
     properties:
@@ -137,7 +144,8 @@ apis:
       - Teams
       - Workspaces
       - Users
-    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: 
+      https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
     baseURL: https://api.clickup.com
     humanURL: https://developer.clickup.com/reference/get-teams
     properties:
@@ -159,7 +167,8 @@ apis:
       - Webhooks
       - Events
       - Real-Time
-    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: 
+      https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
     baseURL: https://api.clickup.com
     humanURL: https://developer.clickup.com/docs/webhooks
     properties:
@@ -182,11 +191,14 @@ apis:
       - Project Management
       - Custom Fields
       - Metadata
-    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: 
+      https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
     baseURL: https://api.clickup.com
-    humanURL: https://developer.clickup.com/reference/get-accessible-custom-fields
+    humanURL: 
+      https://developer.clickup.com/reference/get-accessible-custom-fields
     properties:
-      - url: https://developer.clickup.com/reference/get-accessible-custom-fields
+      - url: 
+          https://developer.clickup.com/reference/get-accessible-custom-fields
         type: Documentation
       - url: openapi/clickup-custom-fields-openapi.yml
         type: OpenAPI
@@ -204,11 +216,14 @@ apis:
       - Time Tracking
       - Productivity
       - Reporting
-    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: 
+      https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
     baseURL: https://api.clickup.com
-    humanURL: https://developer.clickup.com/reference/get-time-entries-within-a-date-range
+    humanURL: 
+      https://developer.clickup.com/reference/get-time-entries-within-a-date-range
     properties:
-      - url: https://developer.clickup.com/reference/get-time-entries-within-a-date-range
+      - url: 
+          https://developer.clickup.com/reference/get-time-entries-within-a-date-range
         type: Documentation
       - url: openapi/clickup-time-tracking-openapi.yml
         type: OpenAPI
@@ -225,7 +240,8 @@ apis:
       - Project Management
       - Views
       - Dashboards
-    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: 
+      https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
     baseURL: https://api.clickup.com
     humanURL: https://developer.clickup.com/reference/get-views
     properties:
@@ -246,7 +262,8 @@ apis:
       - Authentication
       - OAuth
       - Authorization
-    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: 
+      https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
     baseURL: https://api.clickup.com
     humanURL: https://developer.clickup.com/docs/authentication
     properties:
@@ -269,3 +286,5 @@ common:
     url: json-schema/clickup-task-schema.json
   - type: JSONSchema
     url: json-schema/clickup-webhook-payload-schema.json
+description: >-
+  Work with tasks using the ClickUp API.
