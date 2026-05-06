@@ -1,0 +1,366 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: ClickUp Comments API
+  description: The ClickUp Comments API provides endpoints for creating and retrieving comments on tasks, views, and lists.
+    Comments support rich text formatting, mentions, and attachments. Developers can use this API to build integrations that
+    synchronize discussions between ClickUp and other collaboration tools, or to programmatically add status updates and notes
+    to tasks.
+  tags:
+  - Clickup
+  - API
+  created: '2026-05-06'
+  modified: '2026-05-06'
+capability:
+  consumes:
+  - type: http
+    namespace: clickup
+    baseUri: https://api.clickup.com/api/v2
+    description: ClickUp Comments API HTTP API.
+    authentication:
+      type: bearer
+      token: '{{CLICKUP_TOKEN}}'
+    resources:
+    - name: task-task-id-comment
+      path: /task/{task_id}/comment
+      operations:
+      - name: gettaskcomments
+        method: GET
+        description: Get task comments
+        inputParameters:
+        - name: custom_task_ids
+          in: query
+          type: boolean
+          description: If you want to reference a task by its custom task ID, this value must be true.
+        - name: team_id
+          in: query
+          type: integer
+          description: Required when custom_task_ids is set to true. The Workspace ID.
+        - name: start
+          in: query
+          type: integer
+          description: Unix timestamp in milliseconds to start from for pagination.
+        - name: start_id
+          in: query
+          type: string
+          description: Comment ID to start from for pagination.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: createtaskcomment
+        method: POST
+        description: Create a task comment
+        inputParameters:
+        - name: custom_task_ids
+          in: query
+          type: boolean
+          description: If you want to reference a task by its custom task ID, this value must be true.
+        - name: team_id
+          in: query
+          type: integer
+          description: Required when custom_task_ids is set to true. The Workspace ID.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: view-view-id-comment
+      path: /view/{view_id}/comment
+      operations:
+      - name: getviewcomments
+        method: GET
+        description: Get view comments
+        inputParameters:
+        - name: start
+          in: query
+          type: integer
+          description: Unix timestamp in milliseconds to start from for pagination.
+        - name: start_id
+          in: query
+          type: string
+          description: Comment ID to start from for pagination.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: createviewcomment
+        method: POST
+        description: Create a view comment
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: list-list-id-comment
+      path: /list/{list_id}/comment
+      operations:
+      - name: getlistcomments
+        method: GET
+        description: Get list comments
+        inputParameters:
+        - name: start
+          in: query
+          type: integer
+          description: Unix timestamp in milliseconds to start from for pagination.
+        - name: start_id
+          in: query
+          type: string
+          description: Comment ID to start from for pagination.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: createlistcomment
+        method: POST
+        description: Create a list comment
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: comment-comment-id
+      path: /comment/{comment_id}
+      operations:
+      - name: updatecomment
+        method: PUT
+        description: Update a comment
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: deletecomment
+        method: DELETE
+        description: Delete a comment
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+  exposes:
+  - type: rest
+    port: 8080
+    namespace: clickup-rest
+    description: REST adapter for ClickUp Comments API.
+    resources:
+    - path: /task/{task_id}/comment
+      name: gettaskcomments
+      operations:
+      - method: GET
+        name: gettaskcomments
+        description: Get task comments
+        call: clickup.gettaskcomments
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /task/{task_id}/comment
+      name: createtaskcomment
+      operations:
+      - method: POST
+        name: createtaskcomment
+        description: Create a task comment
+        call: clickup.createtaskcomment
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /view/{view_id}/comment
+      name: getviewcomments
+      operations:
+      - method: GET
+        name: getviewcomments
+        description: Get view comments
+        call: clickup.getviewcomments
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /view/{view_id}/comment
+      name: createviewcomment
+      operations:
+      - method: POST
+        name: createviewcomment
+        description: Create a view comment
+        call: clickup.createviewcomment
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /list/{list_id}/comment
+      name: getlistcomments
+      operations:
+      - method: GET
+        name: getlistcomments
+        description: Get list comments
+        call: clickup.getlistcomments
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /list/{list_id}/comment
+      name: createlistcomment
+      operations:
+      - method: POST
+        name: createlistcomment
+        description: Create a list comment
+        call: clickup.createlistcomment
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /comment/{comment_id}
+      name: updatecomment
+      operations:
+      - method: PUT
+        name: updatecomment
+        description: Update a comment
+        call: clickup.updatecomment
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /comment/{comment_id}
+      name: deletecomment
+      operations:
+      - method: DELETE
+        name: deletecomment
+        description: Delete a comment
+        call: clickup.deletecomment
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    port: 9090
+    namespace: clickup-mcp
+    transport: http
+    description: MCP adapter for ClickUp Comments API for AI agent use.
+    tools:
+    - name: gettaskcomments
+      description: Get task comments
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: clickup.gettaskcomments
+      with:
+        custom_task_ids: tools.custom_task_ids
+        team_id: tools.team_id
+        start: tools.start
+        start_id: tools.start_id
+      inputParameters:
+      - name: custom_task_ids
+        type: boolean
+        description: If you want to reference a task by its custom task ID, this value must be true.
+      - name: team_id
+        type: integer
+        description: Required when custom_task_ids is set to true. The Workspace ID.
+      - name: start
+        type: integer
+        description: Unix timestamp in milliseconds to start from for pagination.
+      - name: start_id
+        type: string
+        description: Comment ID to start from for pagination.
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: createtaskcomment
+      description: Create a task comment
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: clickup.createtaskcomment
+      with:
+        custom_task_ids: tools.custom_task_ids
+        team_id: tools.team_id
+      inputParameters:
+      - name: custom_task_ids
+        type: boolean
+        description: If you want to reference a task by its custom task ID, this value must be true.
+      - name: team_id
+        type: integer
+        description: Required when custom_task_ids is set to true. The Workspace ID.
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: getviewcomments
+      description: Get view comments
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: clickup.getviewcomments
+      with:
+        start: tools.start
+        start_id: tools.start_id
+      inputParameters:
+      - name: start
+        type: integer
+        description: Unix timestamp in milliseconds to start from for pagination.
+      - name: start_id
+        type: string
+        description: Comment ID to start from for pagination.
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: createviewcomment
+      description: Create a view comment
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: clickup.createviewcomment
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: getlistcomments
+      description: Get list comments
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: clickup.getlistcomments
+      with:
+        start: tools.start
+        start_id: tools.start_id
+      inputParameters:
+      - name: start
+        type: integer
+        description: Unix timestamp in milliseconds to start from for pagination.
+      - name: start_id
+        type: string
+        description: Comment ID to start from for pagination.
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: createlistcomment
+      description: Create a list comment
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: clickup.createlistcomment
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: updatecomment
+      description: Update a comment
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: clickup.updatecomment
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: deletecomment
+      description: Delete a comment
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: clickup.deletecomment
+      outputParameters:
+      - type: object
+        mapping: $.
+binds:
+- namespace: env
+  keys:
+    CLICKUP_TOKEN: CLICKUP_TOKEN
