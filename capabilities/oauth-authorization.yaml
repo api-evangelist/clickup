@@ -1,0 +1,70 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: ClickUp OAuth API — Authorization
+  description: 'ClickUp OAuth API — Authorization. 1 operations. Lead operation: Get authorized user. Self-contained Naftiko
+    capability covering one Clickup business surface.'
+  tags:
+  - Clickup
+  - Authorization
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    CLICKUP_API_KEY: CLICKUP_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: oauth-authorization
+    baseUri: https://api.clickup.com/api/v2
+    description: ClickUp OAuth API — Authorization business capability. Self-contained, no shared references.
+    resources:
+    - name: user
+      path: /user
+      operations:
+      - name: getauthorizeduser
+        method: GET
+        description: Get authorized user
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.CLICKUP_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: oauth-authorization-rest
+    port: 8080
+    description: REST adapter for ClickUp OAuth API — Authorization. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/user
+      name: user
+      description: REST surface for user.
+      operations:
+      - method: GET
+        name: getauthorizeduser
+        description: Get authorized user
+        call: oauth-authorization.getauthorizeduser
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: oauth-authorization-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for ClickUp OAuth API — Authorization. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: get-authorized-user
+      description: Get authorized user
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: oauth-authorization.getauthorizeduser
+      outputParameters:
+      - type: object
+        mapping: $.

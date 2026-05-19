@@ -1,0 +1,164 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: ClickUp Custom Fields API — Custom Fields
+  description: 'ClickUp Custom Fields API — Custom Fields. 3 operations. Lead operation: Get accessible custom fields. Self-contained
+    Naftiko capability covering one Clickup business surface.'
+  tags:
+  - Clickup
+  - Custom Fields
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    CLICKUP_API_KEY: CLICKUP_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: custom-fields-custom-fields
+    baseUri: https://api.clickup.com/api/v2
+    description: ClickUp Custom Fields API — Custom Fields business capability. Self-contained, no shared references.
+    resources:
+    - name: list-list_id-field
+      path: /list/{list_id}/field
+      operations:
+      - name: getaccessiblecustomfields
+        method: GET
+        description: Get accessible custom fields
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: task-task_id-field-field_id
+      path: /task/{task_id}/field/{field_id}
+      operations:
+      - name: setcustomfieldvalue
+        method: POST
+        description: Set custom field value
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: custom_task_ids
+          in: query
+          type: boolean
+          description: If you want to reference a task by its custom task ID, this value must be true.
+        - name: team_id
+          in: query
+          type: integer
+          description: Required when custom_task_ids is set to true. The Workspace ID.
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: removecustomfieldvalue
+        method: DELETE
+        description: Remove custom field value
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: custom_task_ids
+          in: query
+          type: boolean
+          description: If you want to reference a task by its custom task ID, this value must be true.
+        - name: team_id
+          in: query
+          type: integer
+          description: Required when custom_task_ids is set to true. The Workspace ID.
+    authentication:
+      type: bearer
+      token: '{{env.CLICKUP_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: custom-fields-custom-fields-rest
+    port: 8080
+    description: REST adapter for ClickUp Custom Fields API — Custom Fields. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/list/{list-id}/field
+      name: list-list-id-field
+      description: REST surface for list-list_id-field.
+      operations:
+      - method: GET
+        name: getaccessiblecustomfields
+        description: Get accessible custom fields
+        call: custom-fields-custom-fields.getaccessiblecustomfields
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/task/{task-id}/field/{field-id}
+      name: task-task-id-field-field-id
+      description: REST surface for task-task_id-field-field_id.
+      operations:
+      - method: POST
+        name: setcustomfieldvalue
+        description: Set custom field value
+        call: custom-fields-custom-fields.setcustomfieldvalue
+        with:
+          custom_task_ids: rest.custom_task_ids
+          team_id: rest.team_id
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: removecustomfieldvalue
+        description: Remove custom field value
+        call: custom-fields-custom-fields.removecustomfieldvalue
+        with:
+          custom_task_ids: rest.custom_task_ids
+          team_id: rest.team_id
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: custom-fields-custom-fields-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for ClickUp Custom Fields API — Custom Fields. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: get-accessible-custom-fields
+      description: Get accessible custom fields
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: custom-fields-custom-fields.getaccessiblecustomfields
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: set-custom-field-value
+      description: Set custom field value
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: custom-fields-custom-fields.setcustomfieldvalue
+      with:
+        custom_task_ids: tools.custom_task_ids
+        team_id: tools.team_id
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: remove-custom-field-value
+      description: Remove custom field value
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: custom-fields-custom-fields.removecustomfieldvalue
+      with:
+        custom_task_ids: tools.custom_task_ids
+        team_id: tools.team_id
+      outputParameters:
+      - type: object
+        mapping: $.

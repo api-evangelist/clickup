@@ -1,0 +1,206 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: ClickUp Folders API — Folders
+  description: 'ClickUp Folders API — Folders. 5 operations. Lead operation: Get a folder. Self-contained Naftiko capability
+    covering one Clickup business surface.'
+  tags:
+  - Clickup
+  - Folders
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    CLICKUP_API_KEY: CLICKUP_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: folders-folders
+    baseUri: https://api.clickup.com/api/v2
+    description: ClickUp Folders API — Folders business capability. Self-contained, no shared references.
+    resources:
+    - name: folder-folder_id
+      path: /folder/{folder_id}
+      operations:
+      - name: getfolder
+        method: GET
+        description: Get a folder
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: updatefolder
+        method: PUT
+        description: Update a folder
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: deletefolder
+        method: DELETE
+        description: Delete a folder
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: space-space_id-folder
+      path: /space/{space_id}/folder
+      operations:
+      - name: getfolders
+        method: GET
+        description: Get folders
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: archived
+          in: query
+          type: boolean
+          description: Include archived Folders in the response.
+      - name: createfolder
+        method: POST
+        description: Create a folder
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.CLICKUP_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: folders-folders-rest
+    port: 8080
+    description: REST adapter for ClickUp Folders API — Folders. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/folder/{folder-id}
+      name: folder-folder-id
+      description: REST surface for folder-folder_id.
+      operations:
+      - method: GET
+        name: getfolder
+        description: Get a folder
+        call: folders-folders.getfolder
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: updatefolder
+        description: Update a folder
+        call: folders-folders.updatefolder
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deletefolder
+        description: Delete a folder
+        call: folders-folders.deletefolder
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/space/{space-id}/folder
+      name: space-space-id-folder
+      description: REST surface for space-space_id-folder.
+      operations:
+      - method: GET
+        name: getfolders
+        description: Get folders
+        call: folders-folders.getfolders
+        with:
+          archived: rest.archived
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createfolder
+        description: Create a folder
+        call: folders-folders.createfolder
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: folders-folders-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for ClickUp Folders API — Folders. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: get-folder
+      description: Get a folder
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: folders-folders.getfolder
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-folder
+      description: Update a folder
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: folders-folders.updatefolder
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-folder
+      description: Delete a folder
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: folders-folders.deletefolder
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-folders
+      description: Get folders
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: folders-folders.getfolders
+      with:
+        archived: tools.archived
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-folder
+      description: Create a folder
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: folders-folders.createfolder
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

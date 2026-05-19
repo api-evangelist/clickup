@@ -1,0 +1,299 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: ClickUp Views API — Views
+  description: 'ClickUp Views API — Views. 8 operations. Lead operation: Get folder views. Self-contained Naftiko capability
+    covering one Clickup business surface.'
+  tags:
+  - Clickup
+  - Views
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    CLICKUP_API_KEY: CLICKUP_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: views-views
+    baseUri: https://api.clickup.com/api/v2
+    description: ClickUp Views API — Views business capability. Self-contained, no shared references.
+    resources:
+    - name: folder-folder_id-view
+      path: /folder/{folder_id}/view
+      operations:
+      - name: getfolderviews
+        method: GET
+        description: Get folder views
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: list-list_id-view
+      path: /list/{list_id}/view
+      operations:
+      - name: getlistviews
+        method: GET
+        description: Get list views
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: space-space_id-view
+      path: /space/{space_id}/view
+      operations:
+      - name: getspaceviews
+        method: GET
+        description: Get space views
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: team-team_id-view
+      path: /team/{team_id}/view
+      operations:
+      - name: getteamviews
+        method: GET
+        description: Get team views
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: view-view_id
+      path: /view/{view_id}
+      operations:
+      - name: getview
+        method: GET
+        description: Get a view
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: updateview
+        method: PUT
+        description: Update a view
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: deleteview
+        method: DELETE
+        description: Delete a view
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: view-view_id-task
+      path: /view/{view_id}/task
+      operations:
+      - name: getviewtasks
+        method: GET
+        description: Get view tasks
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: page
+          in: query
+          type: integer
+          description: Page number for pagination. Starts at 0.
+    authentication:
+      type: bearer
+      token: '{{env.CLICKUP_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: views-views-rest
+    port: 8080
+    description: REST adapter for ClickUp Views API — Views. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/folder/{folder-id}/view
+      name: folder-folder-id-view
+      description: REST surface for folder-folder_id-view.
+      operations:
+      - method: GET
+        name: getfolderviews
+        description: Get folder views
+        call: views-views.getfolderviews
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/list/{list-id}/view
+      name: list-list-id-view
+      description: REST surface for list-list_id-view.
+      operations:
+      - method: GET
+        name: getlistviews
+        description: Get list views
+        call: views-views.getlistviews
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/space/{space-id}/view
+      name: space-space-id-view
+      description: REST surface for space-space_id-view.
+      operations:
+      - method: GET
+        name: getspaceviews
+        description: Get space views
+        call: views-views.getspaceviews
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/team/{team-id}/view
+      name: team-team-id-view
+      description: REST surface for team-team_id-view.
+      operations:
+      - method: GET
+        name: getteamviews
+        description: Get team views
+        call: views-views.getteamviews
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/view/{view-id}
+      name: view-view-id
+      description: REST surface for view-view_id.
+      operations:
+      - method: GET
+        name: getview
+        description: Get a view
+        call: views-views.getview
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: updateview
+        description: Update a view
+        call: views-views.updateview
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deleteview
+        description: Delete a view
+        call: views-views.deleteview
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/view/{view-id}/task
+      name: view-view-id-task
+      description: REST surface for view-view_id-task.
+      operations:
+      - method: GET
+        name: getviewtasks
+        description: Get view tasks
+        call: views-views.getviewtasks
+        with:
+          page: rest.page
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: views-views-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for ClickUp Views API — Views. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: get-folder-views
+      description: Get folder views
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: views-views.getfolderviews
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-list-views
+      description: Get list views
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: views-views.getlistviews
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-space-views
+      description: Get space views
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: views-views.getspaceviews
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-team-views
+      description: Get team views
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: views-views.getteamviews
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-view
+      description: Get a view
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: views-views.getview
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-view
+      description: Update a view
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: views-views.updateview
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-view
+      description: Delete a view
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: views-views.deleteview
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-view-tasks
+      description: Get view tasks
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: views-views.getviewtasks
+      with:
+        page: tools.page
+      outputParameters:
+      - type: object
+        mapping: $.

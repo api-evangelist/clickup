@@ -1,0 +1,688 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: ClickUp Tasks API — Tasks
+  description: 'ClickUp Tasks API — Tasks. 11 operations. Lead operation: Get tasks in a list. Self-contained Naftiko capability
+    covering one Clickup business surface.'
+  tags:
+  - Clickup
+  - Tasks
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    CLICKUP_API_KEY: CLICKUP_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: tasks-tasks
+    baseUri: https://api.clickup.com/api/v2
+    description: ClickUp Tasks API — Tasks business capability. Self-contained, no shared references.
+    resources:
+    - name: list-list_id-task
+      path: /list/{list_id}/task
+      operations:
+      - name: gettasks
+        method: GET
+        description: Get tasks in a list
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: archived
+          in: query
+          type: boolean
+          description: Include archived tasks in the response.
+        - name: include_markdown_description
+          in: query
+          type: boolean
+          description: Return task descriptions in Markdown format.
+        - name: page
+          in: query
+          type: integer
+          description: Page number for pagination. Starts at 0.
+        - name: order_by
+          in: query
+          type: string
+          description: Field to order results by.
+        - name: reverse
+          in: query
+          type: boolean
+          description: Reverse the order of results.
+        - name: subtasks
+          in: query
+          type: boolean
+          description: Include subtasks in the response.
+        - name: statuses[]
+          in: query
+          type: array
+          description: Filter by task status.
+        - name: include_closed
+          in: query
+          type: boolean
+          description: Include closed tasks in the response.
+        - name: assignees[]
+          in: query
+          type: array
+          description: Filter by assignee user IDs.
+        - name: tags[]
+          in: query
+          type: array
+          description: Filter by tag names.
+        - name: due_date_gt
+          in: query
+          type: integer
+          description: Filter for tasks with due date greater than this Unix timestamp in milliseconds.
+        - name: due_date_lt
+          in: query
+          type: integer
+          description: Filter for tasks with due date less than this Unix timestamp in milliseconds.
+        - name: date_created_gt
+          in: query
+          type: integer
+          description: Filter for tasks created after this Unix timestamp in milliseconds.
+        - name: date_created_lt
+          in: query
+          type: integer
+          description: Filter for tasks created before this Unix timestamp in milliseconds.
+        - name: date_updated_gt
+          in: query
+          type: integer
+          description: Filter for tasks updated after this Unix timestamp in milliseconds.
+        - name: date_updated_lt
+          in: query
+          type: integer
+          description: Filter for tasks updated before this Unix timestamp in milliseconds.
+        - name: custom_fields
+          in: query
+          type: string
+          description: Filter by custom field values. Provided as a JSON array of objects.
+      - name: createtask
+        method: POST
+        description: Create a task
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: custom_task_ids
+          in: query
+          type: boolean
+          description: If you want to reference a task by its custom task ID, this value must be true.
+        - name: team_id
+          in: query
+          type: integer
+          description: Required when custom_task_ids is set to true. The Workspace ID.
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: list-list_id-task-task_id-member
+      path: /list/{list_id}/task/{task_id}/member
+      operations:
+      - name: gettaskmembers
+        method: GET
+        description: Get task members
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: task-bulk_time_in_status-task_ids
+      path: /task/bulk_time_in_status/task_ids
+      operations:
+      - name: getbulktasktimeinstatus
+        method: GET
+        description: Get bulk task time in status
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: task_ids[]
+          in: query
+          type: array
+          description: Array of task IDs to retrieve time in status data for.
+          required: true
+    - name: task-task_id
+      path: /task/{task_id}
+      operations:
+      - name: gettask
+        method: GET
+        description: Get a task
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: custom_task_ids
+          in: query
+          type: boolean
+          description: If you want to reference a task by its custom task ID, this value must be true.
+        - name: team_id
+          in: query
+          type: integer
+          description: Required when custom_task_ids is set to true. The Workspace ID.
+        - name: include_subtasks
+          in: query
+          type: boolean
+          description: Include subtasks in the response.
+        - name: include_markdown_description
+          in: query
+          type: boolean
+          description: Return the task description in Markdown format.
+      - name: updatetask
+        method: PUT
+        description: Update a task
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: custom_task_ids
+          in: query
+          type: boolean
+          description: If you want to reference a task by its custom task ID, this value must be true.
+        - name: team_id
+          in: query
+          type: integer
+          description: Required when custom_task_ids is set to true. The Workspace ID.
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: deletetask
+        method: DELETE
+        description: Delete a task
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: custom_task_ids
+          in: query
+          type: boolean
+          description: If you want to reference a task by its custom task ID, this value must be true.
+        - name: team_id
+          in: query
+          type: integer
+          description: Required when custom_task_ids is set to true. The Workspace ID.
+    - name: task-task_id-tag-tag_name
+      path: /task/{task_id}/tag/{tag_name}
+      operations:
+      - name: addtagtotask
+        method: POST
+        description: Add tag to task
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: tag_name
+          in: path
+          type: string
+          description: The name of the tag to add.
+          required: true
+      - name: removetagfromtask
+        method: DELETE
+        description: Remove tag from task
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: tag_name
+          in: path
+          type: string
+          description: The name of the tag to remove.
+          required: true
+    - name: task-task_id-time_in_status
+      path: /task/{task_id}/time_in_status
+      operations:
+      - name: gettasktimeinstatus
+        method: GET
+        description: Get task time in status
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: team-team_id-task
+      path: /team/{team_id}/task
+      operations:
+      - name: getfilteredteamtasks
+        method: GET
+        description: Get filtered team tasks
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: page
+          in: query
+          type: integer
+          description: Page number for pagination. Starts at 0.
+        - name: order_by
+          in: query
+          type: string
+          description: Field to order results by.
+        - name: reverse
+          in: query
+          type: boolean
+          description: Reverse the order of results.
+        - name: subtasks
+          in: query
+          type: boolean
+          description: Include subtasks in the response.
+        - name: statuses[]
+          in: query
+          type: array
+          description: Filter by task statuses.
+        - name: include_closed
+          in: query
+          type: boolean
+          description: Include closed tasks.
+        - name: assignees[]
+          in: query
+          type: array
+          description: Filter by assignee user IDs.
+        - name: tags[]
+          in: query
+          type: array
+          description: Filter by tag names.
+        - name: due_date_gt
+          in: query
+          type: integer
+          description: Filter for tasks with due date after this Unix timestamp in milliseconds.
+        - name: due_date_lt
+          in: query
+          type: integer
+          description: Filter for tasks with due date before this Unix timestamp in milliseconds.
+        - name: date_created_gt
+          in: query
+          type: integer
+          description: Filter for tasks created after this Unix timestamp in milliseconds.
+        - name: date_created_lt
+          in: query
+          type: integer
+          description: Filter for tasks created before this Unix timestamp in milliseconds.
+        - name: date_updated_gt
+          in: query
+          type: integer
+          description: Filter for tasks updated after this Unix timestamp in milliseconds.
+        - name: date_updated_lt
+          in: query
+          type: integer
+          description: Filter for tasks updated before this Unix timestamp in milliseconds.
+        - name: list_ids[]
+          in: query
+          type: array
+          description: Filter by list IDs.
+        - name: space_ids[]
+          in: query
+          type: array
+          description: Filter by space IDs.
+        - name: project_ids[]
+          in: query
+          type: array
+          description: Filter by folder (project) IDs.
+    authentication:
+      type: bearer
+      token: '{{env.CLICKUP_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: tasks-tasks-rest
+    port: 8080
+    description: REST adapter for ClickUp Tasks API — Tasks. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/list/{list-id}/task
+      name: list-list-id-task
+      description: REST surface for list-list_id-task.
+      operations:
+      - method: GET
+        name: gettasks
+        description: Get tasks in a list
+        call: tasks-tasks.gettasks
+        with:
+          archived: rest.archived
+          include_markdown_description: rest.include_markdown_description
+          page: rest.page
+          order_by: rest.order_by
+          reverse: rest.reverse
+          subtasks: rest.subtasks
+          statuses[]: rest.statuses[]
+          include_closed: rest.include_closed
+          assignees[]: rest.assignees[]
+          tags[]: rest.tags[]
+          due_date_gt: rest.due_date_gt
+          due_date_lt: rest.due_date_lt
+          date_created_gt: rest.date_created_gt
+          date_created_lt: rest.date_created_lt
+          date_updated_gt: rest.date_updated_gt
+          date_updated_lt: rest.date_updated_lt
+          custom_fields: rest.custom_fields
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createtask
+        description: Create a task
+        call: tasks-tasks.createtask
+        with:
+          custom_task_ids: rest.custom_task_ids
+          team_id: rest.team_id
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/list/{list-id}/task/{task-id}/member
+      name: list-list-id-task-task-id-member
+      description: REST surface for list-list_id-task-task_id-member.
+      operations:
+      - method: GET
+        name: gettaskmembers
+        description: Get task members
+        call: tasks-tasks.gettaskmembers
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/task/bulk-time-in-status/task-ids
+      name: task-bulk-time-in-status-task-ids
+      description: REST surface for task-bulk_time_in_status-task_ids.
+      operations:
+      - method: GET
+        name: getbulktasktimeinstatus
+        description: Get bulk task time in status
+        call: tasks-tasks.getbulktasktimeinstatus
+        with:
+          task_ids[]: rest.task_ids[]
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/task/{task-id}
+      name: task-task-id
+      description: REST surface for task-task_id.
+      operations:
+      - method: GET
+        name: gettask
+        description: Get a task
+        call: tasks-tasks.gettask
+        with:
+          custom_task_ids: rest.custom_task_ids
+          team_id: rest.team_id
+          include_subtasks: rest.include_subtasks
+          include_markdown_description: rest.include_markdown_description
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: updatetask
+        description: Update a task
+        call: tasks-tasks.updatetask
+        with:
+          custom_task_ids: rest.custom_task_ids
+          team_id: rest.team_id
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deletetask
+        description: Delete a task
+        call: tasks-tasks.deletetask
+        with:
+          custom_task_ids: rest.custom_task_ids
+          team_id: rest.team_id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/task/{task-id}/tag/{tag-name}
+      name: task-task-id-tag-tag-name
+      description: REST surface for task-task_id-tag-tag_name.
+      operations:
+      - method: POST
+        name: addtagtotask
+        description: Add tag to task
+        call: tasks-tasks.addtagtotask
+        with:
+          tag_name: rest.tag_name
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: removetagfromtask
+        description: Remove tag from task
+        call: tasks-tasks.removetagfromtask
+        with:
+          tag_name: rest.tag_name
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/task/{task-id}/time-in-status
+      name: task-task-id-time-in-status
+      description: REST surface for task-task_id-time_in_status.
+      operations:
+      - method: GET
+        name: gettasktimeinstatus
+        description: Get task time in status
+        call: tasks-tasks.gettasktimeinstatus
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/team/{team-id}/task
+      name: team-team-id-task
+      description: REST surface for team-team_id-task.
+      operations:
+      - method: GET
+        name: getfilteredteamtasks
+        description: Get filtered team tasks
+        call: tasks-tasks.getfilteredteamtasks
+        with:
+          page: rest.page
+          order_by: rest.order_by
+          reverse: rest.reverse
+          subtasks: rest.subtasks
+          statuses[]: rest.statuses[]
+          include_closed: rest.include_closed
+          assignees[]: rest.assignees[]
+          tags[]: rest.tags[]
+          due_date_gt: rest.due_date_gt
+          due_date_lt: rest.due_date_lt
+          date_created_gt: rest.date_created_gt
+          date_created_lt: rest.date_created_lt
+          date_updated_gt: rest.date_updated_gt
+          date_updated_lt: rest.date_updated_lt
+          list_ids[]: rest.list_ids[]
+          space_ids[]: rest.space_ids[]
+          project_ids[]: rest.project_ids[]
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: tasks-tasks-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for ClickUp Tasks API — Tasks. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: get-tasks-list
+      description: Get tasks in a list
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: tasks-tasks.gettasks
+      with:
+        archived: tools.archived
+        include_markdown_description: tools.include_markdown_description
+        page: tools.page
+        order_by: tools.order_by
+        reverse: tools.reverse
+        subtasks: tools.subtasks
+        statuses[]: tools.statuses[]
+        include_closed: tools.include_closed
+        assignees[]: tools.assignees[]
+        tags[]: tools.tags[]
+        due_date_gt: tools.due_date_gt
+        due_date_lt: tools.due_date_lt
+        date_created_gt: tools.date_created_gt
+        date_created_lt: tools.date_created_lt
+        date_updated_gt: tools.date_updated_gt
+        date_updated_lt: tools.date_updated_lt
+        custom_fields: tools.custom_fields
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-task
+      description: Create a task
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: tasks-tasks.createtask
+      with:
+        custom_task_ids: tools.custom_task_ids
+        team_id: tools.team_id
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-task-members
+      description: Get task members
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: tasks-tasks.gettaskmembers
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-bulk-task-time-status
+      description: Get bulk task time in status
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: tasks-tasks.getbulktasktimeinstatus
+      with:
+        task_ids[]: tools.task_ids[]
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-task
+      description: Get a task
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: tasks-tasks.gettask
+      with:
+        custom_task_ids: tools.custom_task_ids
+        team_id: tools.team_id
+        include_subtasks: tools.include_subtasks
+        include_markdown_description: tools.include_markdown_description
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-task
+      description: Update a task
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: tasks-tasks.updatetask
+      with:
+        custom_task_ids: tools.custom_task_ids
+        team_id: tools.team_id
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-task
+      description: Delete a task
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: tasks-tasks.deletetask
+      with:
+        custom_task_ids: tools.custom_task_ids
+        team_id: tools.team_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: add-tag-task
+      description: Add tag to task
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: tasks-tasks.addtagtotask
+      with:
+        tag_name: tools.tag_name
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: remove-tag-task
+      description: Remove tag from task
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: tasks-tasks.removetagfromtask
+      with:
+        tag_name: tools.tag_name
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-task-time-status
+      description: Get task time in status
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: tasks-tasks.gettasktimeinstatus
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-filtered-team-tasks
+      description: Get filtered team tasks
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: tasks-tasks.getfilteredteamtasks
+      with:
+        page: tools.page
+        order_by: tools.order_by
+        reverse: tools.reverse
+        subtasks: tools.subtasks
+        statuses[]: tools.statuses[]
+        include_closed: tools.include_closed
+        assignees[]: tools.assignees[]
+        tags[]: tools.tags[]
+        due_date_gt: tools.due_date_gt
+        due_date_lt: tools.due_date_lt
+        date_created_gt: tools.date_created_gt
+        date_created_lt: tools.date_created_lt
+        date_updated_gt: tools.date_updated_gt
+        date_updated_lt: tools.date_updated_lt
+        list_ids[]: tools.list_ids[]
+        space_ids[]: tools.space_ids[]
+        project_ids[]: tools.project_ids[]
+      outputParameters:
+      - type: object
+        mapping: $.
