@@ -1,0 +1,62 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/UpdateViewRequest",
+  "title": "UpdateViewRequest",
+  "type": "object",
+  "description": "Request body for updating a view.",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "The updated name of the view."
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "list",
+        "board",
+        "calendar",
+        "gantt",
+        "table"
+      ],
+      "description": "The updated view type."
+    },
+    "parent": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The parent object ID."
+        },
+        "type": {
+          "type": "integer",
+          "description": "The parent type code."
+        }
+      },
+      "description": "The updated parent object."
+    },
+    "grouping": {
+      "type": "object",
+      "description": "Updated grouping configuration."
+    },
+    "divide": {
+      "type": "object",
+      "description": "Updated divide configuration."
+    },
+    "sorting": {
+      "type": "object",
+      "description": "Updated sorting configuration."
+    },
+    "filters": {
+      "type": "object",
+      "description": "Updated filter configuration."
+    },
+    "columns": {
+      "type": "object",
+      "description": "Updated column configuration."
+    },
+    "settings": {
+      "type": "object",
+      "description": "Updated display settings."
+    }
+  }
+}

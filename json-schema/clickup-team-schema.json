@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Team",
+  "title": "Team",
+  "type": "object",
+  "description": "A Workspace (team) object in ClickUp.",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "The unique identifier of the Workspace."
+    },
+    "name": {
+      "type": "string",
+      "description": "The name of the Workspace."
+    },
+    "color": {
+      "type": "string",
+      "description": "The hex color code of the Workspace."
+    },
+    "avatar": {
+      "type": "string",
+      "nullable": true,
+      "description": "The avatar URL of the Workspace."
+    },
+    "members": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/TeamMember"
+      },
+      "description": "Members of the Workspace."
+    }
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/GoalFolder",
+  "title": "GoalFolder",
+  "type": "object",
+  "description": "A folder for organizing Goals.",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "The folder ID."
+    },
+    "name": {
+      "type": "string",
+      "description": "The folder name."
+    },
+    "team_id": {
+      "type": "string",
+      "description": "The Workspace ID."
+    },
+    "private": {
+      "type": "boolean",
+      "description": "Whether the folder is private."
+    },
+    "date_created": {
+      "type": "string",
+      "description": "Unix timestamp when the folder was created."
+    },
+    "creator": {
+      "type": "integer",
+      "description": "The user ID of the folder creator."
+    },
+    "goal_count": {
+      "type": "integer",
+      "description": "The number of Goals in the folder."
+    },
+    "goals": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/Goal"
+      },
+      "description": "Goals within the folder."
+    }
+  }
+}

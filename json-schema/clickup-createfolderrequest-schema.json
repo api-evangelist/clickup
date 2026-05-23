@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/CreateFolderRequest",
+  "title": "CreateFolderRequest",
+  "type": "object",
+  "required": [
+    "name"
+  ],
+  "description": "Request body for creating a new Folder.",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "The name of the Folder."
+    }
+  }
+}

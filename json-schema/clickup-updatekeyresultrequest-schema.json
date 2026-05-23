@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/UpdateKeyResultRequest",
+  "title": "UpdateKeyResultRequest",
+  "type": "object",
+  "description": "Request body for updating an existing Key Result.",
+  "properties": {
+    "steps_current": {
+      "type": "number",
+      "description": "The current progress value."
+    },
+    "note": {
+      "type": "string",
+      "description": "A note to add with the update."
+    }
+  }
+}

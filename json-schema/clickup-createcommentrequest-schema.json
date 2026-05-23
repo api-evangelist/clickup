@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/CreateCommentRequest",
+  "title": "CreateCommentRequest",
+  "type": "object",
+  "required": [
+    "comment_text"
+  ],
+  "description": "Request body for creating a new comment.",
+  "properties": {
+    "comment_text": {
+      "type": "string",
+      "description": "The plain text content of the comment."
+    },
+    "assignee": {
+      "type": "integer",
+      "description": "User ID to assign for follow-up."
+    },
+    "notify_all": {
+      "type": "boolean",
+      "description": "Notify all members who have access to the resource."
+    }
+  }
+}

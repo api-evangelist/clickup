@@ -1,0 +1,92 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/TeamMember",
+  "title": "TeamMember",
+  "type": "object",
+  "description": "A member of a ClickUp Workspace.",
+  "properties": {
+    "user": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "description": "The user ID."
+        },
+        "username": {
+          "type": "string",
+          "description": "The username."
+        },
+        "email": {
+          "type": "string",
+          "format": "email",
+          "description": "The email address."
+        },
+        "color": {
+          "type": "string",
+          "description": "The user color."
+        },
+        "profilePicture": {
+          "type": "string",
+          "format": "uri",
+          "nullable": true,
+          "description": "URL of the profile picture."
+        },
+        "initials": {
+          "type": "string",
+          "description": "The user initials."
+        },
+        "role": {
+          "type": "integer",
+          "description": "The role code. 1 is owner, 2 is admin, 3 is member, 4 is guest."
+        },
+        "last_active": {
+          "type": "string",
+          "description": "Unix timestamp of last activity."
+        },
+        "date_joined": {
+          "type": "string",
+          "description": "Unix timestamp when the user joined."
+        },
+        "date_invited": {
+          "type": "string",
+          "description": "Unix timestamp when the user was invited."
+        }
+      },
+      "description": "The user details."
+    },
+    "invited_by": {
+      "type": "object",
+      "nullable": true,
+      "properties": {
+        "id": {
+          "type": "integer",
+          "description": "The inviter user ID."
+        },
+        "username": {
+          "type": "string",
+          "description": "The inviter username."
+        },
+        "email": {
+          "type": "string",
+          "format": "email",
+          "description": "The inviter email."
+        },
+        "color": {
+          "type": "string",
+          "description": "The inviter color."
+        },
+        "profilePicture": {
+          "type": "string",
+          "format": "uri",
+          "nullable": true,
+          "description": "URL of the inviter profile picture."
+        },
+        "initials": {
+          "type": "string",
+          "description": "The inviter initials."
+        }
+      },
+      "description": "The user who invited this member."
+    }
+  }
+}

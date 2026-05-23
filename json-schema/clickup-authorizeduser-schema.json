@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/AuthorizedUser",
+  "title": "AuthorizedUser",
+  "type": "object",
+  "description": "The authenticated user's profile information.",
+  "properties": {
+    "id": {
+      "type": "integer",
+      "description": "The unique identifier of the user."
+    },
+    "username": {
+      "type": "string",
+      "description": "The username of the user."
+    },
+    "email": {
+      "type": "string",
+      "format": "email",
+      "description": "The email address of the user."
+    },
+    "color": {
+      "type": "string",
+      "description": "The hex color code associated with the user."
+    },
+    "profilePicture": {
+      "type": "string",
+      "format": "uri",
+      "nullable": true,
+      "description": "URL of the user's profile picture."
+    },
+    "initials": {
+      "type": "string",
+      "description": "The initials of the user."
+    },
+    "week_start_day": {
+      "type": "integer",
+      "description": "The day of the week that starts the user's week. 0 is Sunday."
+    },
+    "global_font_support": {
+      "type": "boolean",
+      "description": "Whether global font support is enabled."
+    },
+    "timezone": {
+      "type": "string",
+      "description": "The user's timezone."
+    }
+  }
+}

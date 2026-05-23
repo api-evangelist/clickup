@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/CreateTimeEntryRequest",
+  "title": "CreateTimeEntryRequest",
+  "type": "object",
+  "required": [
+    "start",
+    "duration"
+  ],
+  "description": "Request body for creating a manual time entry.",
+  "properties": {
+    "tid": {
+      "type": "string",
+      "description": "The task ID to associate with the time entry."
+    },
+    "description": {
+      "type": "string",
+      "description": "Description of the time entry."
+    },
+    "start": {
+      "type": "integer",
+      "format": "int64",
+      "description": "Start time as Unix timestamp in milliseconds."
+    },
+    "stop": {
+      "type": "integer",
+      "format": "int64",
+      "description": "Stop time as Unix timestamp in milliseconds. If omitted, duration is used to calculate the end time."
+    },
+    "duration": {
+      "type": "integer",
+      "description": "Duration in milliseconds."
+    },
+    "assignee": {
+      "type": "integer",
+      "description": "User ID to assign the time entry to."
+    },
+    "billable": {
+      "type": "boolean",
+      "description": "Whether the time entry is billable."
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The tag name."
+          }
+        }
+      },
+      "description": "Tags to associate with the time entry."
+    }
+  }
+}

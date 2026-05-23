@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/UpdateTimeEntryRequest",
+  "title": "UpdateTimeEntryRequest",
+  "type": "object",
+  "description": "Request body for updating an existing time entry.",
+  "properties": {
+    "tid": {
+      "type": "string",
+      "description": "Updated task ID."
+    },
+    "description": {
+      "type": "string",
+      "description": "Updated description."
+    },
+    "start": {
+      "type": "integer",
+      "format": "int64",
+      "description": "Updated start time."
+    },
+    "end": {
+      "type": "integer",
+      "format": "int64",
+      "description": "Updated end time."
+    },
+    "duration": {
+      "type": "integer",
+      "description": "Updated duration in milliseconds."
+    },
+    "billable": {
+      "type": "boolean",
+      "description": "Updated billable status."
+    },
+    "tag_action": {
+      "type": "string",
+      "enum": [
+        "add",
+        "remove"
+      ],
+      "description": "Whether to add or remove tags."
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The tag name."
+          }
+        }
+      },
+      "description": "Tags to add or remove."
+    }
+  }
+}

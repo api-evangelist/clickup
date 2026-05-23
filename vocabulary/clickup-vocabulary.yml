@@ -1,0 +1,7 @@
+name: Clickup Domain Vocabulary
+provider: Clickup
+providerId: clickup
+description: Tag-derived vocabulary for the Clickup API surface; sourced from openapi/ tags.
+terms:
+- term: Tasks
+  description: Operations for creating, retrieving, updating, and deleting tasks within ClickUp lists and workspaces.

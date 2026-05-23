@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/CreateWebhookRequest",
+  "title": "CreateWebhookRequest",
+  "type": "object",
+  "required": [
+    "endpoint",
+    "events"
+  ],
+  "description": "Request body for creating a new webhook subscription.",
+  "properties": {
+    "endpoint": {
+      "type": "string",
+      "format": "uri",
+      "description": "The URL to send webhook event payloads to."
+    },
+    "events": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Array of event names to subscribe to. Use '*' to subscribe to all events."
+    },
+    "task_id": {
+      "type": "string",
+      "description": "Optional task ID to scope webhook events to a specific task."
+    },
+    "list_id": {
+      "type": "integer",
+      "description": "Optional list ID to scope webhook events to a specific list."
+    },
+    "folder_id": {
+      "type": "integer",
+      "description": "Optional folder ID to scope webhook events to a specific folder."
+    },
+    "space_id": {
+      "type": "integer",
+      "description": "Optional space ID to scope webhook events to a specific space."
+    }
+  }
+}

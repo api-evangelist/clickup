@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Priority",
+  "title": "Priority",
+  "type": "object",
+  "nullable": true,
+  "description": "Task priority level.",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "The priority ID."
+    },
+    "priority": {
+      "type": "string",
+      "enum": [
+        "urgent",
+        "high",
+        "normal",
+        "low"
+      ],
+      "description": "The priority level name."
+    },
+    "color": {
+      "type": "string",
+      "description": "The hex color code of the priority level."
+    },
+    "orderindex": {
+      "type": "string",
+      "description": "The order index of the priority."
+    }
+  }
+}

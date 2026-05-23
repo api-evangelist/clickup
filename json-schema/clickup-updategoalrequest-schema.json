@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/UpdateGoalRequest",
+  "title": "UpdateGoalRequest",
+  "type": "object",
+  "description": "Request body for updating an existing Goal.",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "The updated name of the Goal."
+    },
+    "due_date": {
+      "type": "integer",
+      "format": "int64",
+      "description": "Updated due date as Unix timestamp in milliseconds."
+    },
+    "description": {
+      "type": "string",
+      "description": "The updated description."
+    },
+    "rem_owners": {
+      "type": "array",
+      "items": {
+        "type": "integer"
+      },
+      "description": "User IDs to remove as owners."
+    },
+    "add_owners": {
+      "type": "array",
+      "items": {
+        "type": "integer"
+      },
+      "description": "User IDs to add as owners."
+    },
+    "color": {
+      "type": "string",
+      "description": "The updated hex color code."
+    }
+  }
+}

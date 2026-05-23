@@ -1,0 +1,161 @@
+{
+  "provider": "Clickup",
+  "providerId": "clickup",
+  "kind": "json-structure",
+  "description": "Structural overview of the Clickup API surface; extracted from openapi/.",
+  "schemaCount": 8,
+  "operationCount": 11,
+  "schemas": [
+    {
+      "name": "Task",
+      "type": "object",
+      "propertyCount": 34,
+      "required": []
+    },
+    {
+      "name": "CreateTaskRequest",
+      "type": "object",
+      "propertyCount": 17,
+      "required": [
+        "name"
+      ]
+    },
+    {
+      "name": "UpdateTaskRequest",
+      "type": "object",
+      "propertyCount": 13,
+      "required": []
+    },
+    {
+      "name": "Status",
+      "type": "object",
+      "propertyCount": 5,
+      "required": []
+    },
+    {
+      "name": "User",
+      "type": "object",
+      "propertyCount": 6,
+      "required": []
+    },
+    {
+      "name": "Tag",
+      "type": "object",
+      "propertyCount": 4,
+      "required": []
+    },
+    {
+      "name": "Priority",
+      "type": "object",
+      "propertyCount": 4,
+      "required": []
+    },
+    {
+      "name": "CustomField",
+      "type": "object",
+      "propertyCount": 8,
+      "required": []
+    }
+  ],
+  "operations": [
+    {
+      "method": "GET",
+      "path": "/list/{list_id}/task",
+      "operationId": "getTasks",
+      "summary": "Get tasks in a list",
+      "tags": [
+        "Tasks"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/list/{list_id}/task",
+      "operationId": "createTask",
+      "summary": "Create a task",
+      "tags": [
+        "Tasks"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/task/{task_id}",
+      "operationId": "getTask",
+      "summary": "Get a task",
+      "tags": [
+        "Tasks"
+      ]
+    },
+    {
+      "method": "PUT",
+      "path": "/task/{task_id}",
+      "operationId": "updateTask",
+      "summary": "Update a task",
+      "tags": [
+        "Tasks"
+      ]
+    },
+    {
+      "method": "DELETE",
+      "path": "/task/{task_id}",
+      "operationId": "deleteTask",
+      "summary": "Delete a task",
+      "tags": [
+        "Tasks"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/team/{team_id}/task",
+      "operationId": "getFilteredTeamTasks",
+      "summary": "Get filtered team tasks",
+      "tags": [
+        "Tasks"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/task/{task_id}/time_in_status",
+      "operationId": "getTaskTimeInStatus",
+      "summary": "Get task time in status",
+      "tags": [
+        "Tasks"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/task/bulk_time_in_status/task_ids",
+      "operationId": "getBulkTaskTimeInStatus",
+      "summary": "Get bulk task time in status",
+      "tags": [
+        "Tasks"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/list/{list_id}/task/{task_id}/member",
+      "operationId": "getTaskMembers",
+      "summary": "Get task members",
+      "tags": [
+        "Tasks"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/task/{task_id}/tag/{tag_name}",
+      "operationId": "addTagToTask",
+      "summary": "Add tag to task",
+      "tags": [
+        "Tasks"
+      ]
+    },
+    {
+      "method": "DELETE",
+      "path": "/task/{task_id}/tag/{tag_name}",
+      "operationId": "removeTagFromTask",
+      "summary": "Remove tag from task",
+      "tags": [
+        "Tasks"
+      ]
+    }
+  ]
+}

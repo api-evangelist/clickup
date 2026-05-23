@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/CreateGoalRequest",
+  "title": "CreateGoalRequest",
+  "type": "object",
+  "required": [
+    "name",
+    "due_date"
+  ],
+  "description": "Request body for creating a new Goal.",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "The name of the Goal."
+    },
+    "due_date": {
+      "type": "integer",
+      "format": "int64",
+      "description": "Due date as Unix timestamp in milliseconds."
+    },
+    "description": {
+      "type": "string",
+      "description": "The description of the Goal."
+    },
+    "multiple_owners": {
+      "type": "boolean",
+      "description": "Whether the Goal has multiple owners."
+    },
+    "owners": {
+      "type": "array",
+      "items": {
+        "type": "integer"
+      },
+      "description": "Array of user IDs to set as owners."
+    },
+    "color": {
+      "type": "string",
+      "description": "The hex color code of the Goal."
+    }
+  }
+}

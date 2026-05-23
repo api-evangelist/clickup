@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Status",
+  "title": "Status",
+  "type": "object",
+  "description": "A task status object.",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "The status ID."
+    },
+    "status": {
+      "type": "string",
+      "description": "The status name."
+    },
+    "color": {
+      "type": "string",
+      "description": "The hex color code of the status."
+    },
+    "orderindex": {
+      "type": "integer",
+      "description": "The order index of the status."
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "open",
+        "custom",
+        "closed",
+        "done"
+      ],
+      "description": "The status type."
+    }
+  }
+}

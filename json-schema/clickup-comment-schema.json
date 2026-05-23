@@ -1,0 +1,96 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Comment",
+  "title": "Comment",
+  "type": "object",
+  "description": "A comment on a task, view, or list.",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "The unique identifier of the comment."
+    },
+    "comment": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "text": {
+            "type": "string",
+            "description": "The text content of this comment segment."
+          },
+          "type": {
+            "type": "string",
+            "description": "The type of comment segment (text, mention, etc.)."
+          },
+          "attributes": {
+            "type": "object",
+            "description": "Formatting attributes for this segment."
+          }
+        }
+      },
+      "description": "The comment content as an array of rich text segments."
+    },
+    "comment_text": {
+      "type": "string",
+      "description": "The plain text content of the comment."
+    },
+    "user": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "description": "The user ID."
+        },
+        "username": {
+          "type": "string",
+          "description": "The username."
+        },
+        "email": {
+          "type": "string",
+          "format": "email",
+          "description": "The email address."
+        },
+        "color": {
+          "type": "string",
+          "description": "The user color."
+        },
+        "profilePicture": {
+          "type": "string",
+          "format": "uri",
+          "nullable": true,
+          "description": "URL of the profile picture."
+        },
+        "initials": {
+          "type": "string",
+          "description": "The user initials."
+        }
+      },
+      "description": "The user who created the comment."
+    },
+    "resolved": {
+      "type": "boolean",
+      "description": "Whether the comment has been resolved."
+    },
+    "assignee": {
+      "type": "object",
+      "nullable": true,
+      "description": "The user assigned to follow up on the comment."
+    },
+    "assigned_by": {
+      "type": "object",
+      "nullable": true,
+      "description": "The user who assigned the follow-up."
+    },
+    "reactions": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      },
+      "description": "Reactions on the comment."
+    },
+    "date": {
+      "type": "string",
+      "description": "Unix timestamp when the comment was created."
+    }
+  }
+}

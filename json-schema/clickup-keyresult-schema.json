@@ -1,0 +1,95 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/KeyResult",
+  "title": "KeyResult",
+  "type": "object",
+  "description": "A Key Result (target) within a Goal.",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "The unique identifier of the Key Result."
+    },
+    "goal_id": {
+      "type": "string",
+      "description": "The Goal ID this Key Result belongs to."
+    },
+    "name": {
+      "type": "string",
+      "description": "The name of the Key Result."
+    },
+    "creator": {
+      "type": "integer",
+      "description": "The user ID of the Key Result creator."
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "number",
+        "currency",
+        "boolean",
+        "percentage",
+        "automatic"
+      ],
+      "description": "The type of the Key Result target."
+    },
+    "date_created": {
+      "type": "string",
+      "description": "Unix timestamp when the Key Result was created."
+    },
+    "goal_pretty_id": {
+      "type": "string",
+      "description": "The human-readable ID of the parent Goal."
+    },
+    "percent_completed": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 100,
+      "description": "The completion percentage of the Key Result."
+    },
+    "completed": {
+      "type": "boolean",
+      "description": "Whether the Key Result is completed."
+    },
+    "task_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Task IDs linked to this Key Result for automatic tracking."
+    },
+    "list_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "List IDs linked to this Key Result for automatic tracking."
+    },
+    "owners": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      },
+      "description": "Owners of the Key Result."
+    },
+    "steps_start": {
+      "type": "number",
+      "description": "The starting value of the Key Result."
+    },
+    "steps_end": {
+      "type": "number",
+      "description": "The target end value of the Key Result."
+    },
+    "steps_current": {
+      "type": "number",
+      "description": "The current value of the Key Result."
+    },
+    "unit": {
+      "type": "string",
+      "description": "The unit of measurement for currency type Key Results."
+    },
+    "last_action": {
+      "type": "object",
+      "description": "Details of the last action performed on the Key Result."
+    }
+  }
+}

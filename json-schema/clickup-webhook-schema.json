@@ -1,0 +1,106 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Webhook",
+  "title": "Webhook",
+  "type": "object",
+  "description": "A webhook subscription object.",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "The unique identifier of the webhook."
+    },
+    "userid": {
+      "type": "integer",
+      "description": "The user ID who created the webhook."
+    },
+    "team_id": {
+      "type": "integer",
+      "description": "The Workspace ID the webhook belongs to."
+    },
+    "endpoint": {
+      "type": "string",
+      "format": "uri",
+      "description": "The URL that ClickUp sends event payloads to."
+    },
+    "client_id": {
+      "type": "string",
+      "nullable": true,
+      "description": "The OAuth client ID if the webhook was created via OAuth."
+    },
+    "events": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "taskCreated",
+          "taskUpdated",
+          "taskDeleted",
+          "taskPriorityUpdated",
+          "taskStatusUpdated",
+          "taskAssigneeUpdated",
+          "taskDueDateUpdated",
+          "taskTagUpdated",
+          "taskMoved",
+          "taskCommentPosted",
+          "taskCommentUpdated",
+          "taskTimeEstimateUpdated",
+          "taskTimeTrackedUpdated",
+          "listCreated",
+          "listUpdated",
+          "listDeleted",
+          "folderCreated",
+          "folderUpdated",
+          "folderDeleted",
+          "spaceCreated",
+          "spaceUpdated",
+          "spaceDeleted",
+          "goalCreated",
+          "goalUpdated",
+          "goalDeleted",
+          "keyResultCreated",
+          "keyResultUpdated",
+          "keyResultDeleted"
+        ]
+      },
+      "description": "The events the webhook is subscribed to."
+    },
+    "task_id": {
+      "type": "string",
+      "nullable": true,
+      "description": "Optional task ID to scope webhook events to a specific task."
+    },
+    "list_id": {
+      "type": "integer",
+      "nullable": true,
+      "description": "Optional list ID to scope webhook events to a specific list."
+    },
+    "folder_id": {
+      "type": "integer",
+      "nullable": true,
+      "description": "Optional folder ID to scope webhook events to a specific folder."
+    },
+    "space_id": {
+      "type": "integer",
+      "nullable": true,
+      "description": "Optional space ID to scope webhook events to a specific space."
+    },
+    "health": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "The health status of the webhook (active, failing, etc.)."
+        },
+        "fail_count": {
+          "type": "integer",
+          "description": "Number of consecutive failures."
+        }
+      },
+      "description": "Health status of the webhook."
+    },
+    "secret": {
+      "type": "string",
+      "description": "The shared secret for HMAC-SHA256 signature verification. Only returned when the webhook is first created."
+    }
+  }
+}

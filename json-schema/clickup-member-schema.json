@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Member",
+  "title": "Member",
+  "type": "object",
+  "description": "A member with access to a List.",
+  "properties": {
+    "id": {
+      "type": "integer",
+      "description": "The user ID."
+    },
+    "username": {
+      "type": "string",
+      "description": "The username."
+    },
+    "email": {
+      "type": "string",
+      "format": "email",
+      "description": "The email address."
+    },
+    "color": {
+      "type": "string",
+      "description": "The user color."
+    },
+    "profilePicture": {
+      "type": "string",
+      "format": "uri",
+      "nullable": true,
+      "description": "URL of the profile picture."
+    },
+    "initials": {
+      "type": "string",
+      "description": "The user initials."
+    }
+  }
+}

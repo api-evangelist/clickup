@@ -1,0 +1,161 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/List",
+  "title": "List",
+  "type": "object",
+  "description": "A List object representing a container for tasks within a Space or Folder.",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "The unique identifier of the List."
+    },
+    "name": {
+      "type": "string",
+      "description": "The name of the List."
+    },
+    "orderindex": {
+      "type": "integer",
+      "description": "The order index of the List."
+    },
+    "content": {
+      "type": "string",
+      "nullable": true,
+      "description": "The content description of the List."
+    },
+    "status": {
+      "type": "object",
+      "nullable": true,
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "The status name."
+        },
+        "color": {
+          "type": "string",
+          "description": "The hex color code."
+        },
+        "hide_label": {
+          "type": "boolean",
+          "description": "Whether to hide the status label."
+        }
+      },
+      "description": "The status of the List."
+    },
+    "priority": {
+      "type": "object",
+      "nullable": true,
+      "properties": {
+        "priority": {
+          "type": "string",
+          "description": "The priority level."
+        },
+        "color": {
+          "type": "string",
+          "description": "The hex color code."
+        }
+      },
+      "description": "The priority of the List."
+    },
+    "assignee": {
+      "type": "object",
+      "nullable": true,
+      "description": "The user assigned to the List."
+    },
+    "task_count": {
+      "type": "integer",
+      "nullable": true,
+      "description": "The number of tasks in the List."
+    },
+    "due_date": {
+      "type": "string",
+      "nullable": true,
+      "description": "The due date as a Unix timestamp in milliseconds."
+    },
+    "start_date": {
+      "type": "string",
+      "nullable": true,
+      "description": "The start date as a Unix timestamp in milliseconds."
+    },
+    "folder": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The Folder ID."
+        },
+        "name": {
+          "type": "string",
+          "description": "The Folder name."
+        },
+        "hidden": {
+          "type": "boolean",
+          "description": "Whether the Folder is hidden."
+        },
+        "access": {
+          "type": "boolean",
+          "description": "Whether the user has access."
+        }
+      },
+      "description": "The Folder this List belongs to."
+    },
+    "space": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The Space ID."
+        },
+        "name": {
+          "type": "string",
+          "description": "The Space name."
+        },
+        "access": {
+          "type": "boolean",
+          "description": "Whether the user has access."
+        }
+      },
+      "description": "The Space this List belongs to."
+    },
+    "archived": {
+      "type": "boolean",
+      "description": "Whether the List is archived."
+    },
+    "override_statuses": {
+      "type": "boolean",
+      "description": "Whether the List overrides the Space statuses."
+    },
+    "statuses": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The status ID."
+          },
+          "status": {
+            "type": "string",
+            "description": "The status name."
+          },
+          "orderindex": {
+            "type": "integer",
+            "description": "The order index."
+          },
+          "color": {
+            "type": "string",
+            "description": "The hex color code."
+          },
+          "type": {
+            "type": "string",
+            "description": "The status type."
+          }
+        }
+      },
+      "description": "Available statuses for the List."
+    },
+    "permission_level": {
+      "type": "string",
+      "description": "The permission level of the List."
+    }
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Tag",
+  "title": "Tag",
+  "type": "object",
+  "description": "A task tag.",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "The name of the tag."
+    },
+    "tag_fg": {
+      "type": "string",
+      "description": "Foreground color of the tag."
+    },
+    "tag_bg": {
+      "type": "string",
+      "description": "Background color of the tag."
+    },
+    "creator": {
+      "type": "integer",
+      "description": "The user ID of the tag creator."
+    }
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/UpdateFolderRequest",
+  "title": "UpdateFolderRequest",
+  "type": "object",
+  "description": "Request body for updating an existing Folder.",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "The updated name of the Folder."
+    }
+  }
+}

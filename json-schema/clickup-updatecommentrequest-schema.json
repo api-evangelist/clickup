@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/UpdateCommentRequest",
+  "title": "UpdateCommentRequest",
+  "type": "object",
+  "description": "Request body for updating an existing comment.",
+  "properties": {
+    "comment_text": {
+      "type": "string",
+      "description": "The updated plain text content of the comment."
+    },
+    "assignee": {
+      "type": "integer",
+      "description": "User ID to assign for follow-up."
+    },
+    "resolved": {
+      "type": "boolean",
+      "description": "Whether to mark the comment as resolved."
+    }
+  }
+}

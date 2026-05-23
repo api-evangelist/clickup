@@ -1,0 +1,155 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Folder",
+  "title": "Folder",
+  "type": "object",
+  "description": "A Folder object representing an organizational container within a Space.",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "The unique identifier of the Folder."
+    },
+    "name": {
+      "type": "string",
+      "description": "The name of the Folder."
+    },
+    "orderindex": {
+      "type": "integer",
+      "description": "The order index of the Folder."
+    },
+    "override_statuses": {
+      "type": "boolean",
+      "description": "Whether the Folder overrides Space statuses."
+    },
+    "hidden": {
+      "type": "boolean",
+      "description": "Whether the Folder is hidden."
+    },
+    "space": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The Space ID."
+        },
+        "name": {
+          "type": "string",
+          "description": "The Space name."
+        },
+        "access": {
+          "type": "boolean",
+          "description": "Whether the user has access."
+        }
+      },
+      "description": "The Space this Folder belongs to."
+    },
+    "task_count": {
+      "type": "string",
+      "description": "The total number of tasks in the Folder."
+    },
+    "archived": {
+      "type": "boolean",
+      "description": "Whether the Folder is archived."
+    },
+    "statuses": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The status ID."
+          },
+          "status": {
+            "type": "string",
+            "description": "The status name."
+          },
+          "orderindex": {
+            "type": "integer",
+            "description": "The order index."
+          },
+          "color": {
+            "type": "string",
+            "description": "The hex color code."
+          },
+          "type": {
+            "type": "string",
+            "description": "The status type."
+          }
+        }
+      },
+      "description": "Available statuses for the Folder."
+    },
+    "lists": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The List ID."
+          },
+          "name": {
+            "type": "string",
+            "description": "The List name."
+          },
+          "orderindex": {
+            "type": "integer",
+            "description": "The order index."
+          },
+          "status": {
+            "type": "object",
+            "nullable": true,
+            "description": "The List status."
+          },
+          "priority": {
+            "type": "object",
+            "nullable": true,
+            "description": "The List priority."
+          },
+          "assignee": {
+            "type": "object",
+            "nullable": true,
+            "description": "The List assignee."
+          },
+          "task_count": {
+            "type": "integer",
+            "description": "The number of tasks."
+          },
+          "due_date": {
+            "type": "string",
+            "nullable": true,
+            "description": "The due date as Unix timestamp."
+          },
+          "start_date": {
+            "type": "string",
+            "nullable": true,
+            "description": "The start date as Unix timestamp."
+          },
+          "space": {
+            "type": "object",
+            "description": "The Space reference."
+          },
+          "archived": {
+            "type": "boolean",
+            "description": "Whether the List is archived."
+          },
+          "override_statuses": {
+            "type": "boolean",
+            "nullable": true,
+            "description": "Whether statuses are overridden."
+          },
+          "permission_level": {
+            "type": "string",
+            "description": "The permission level."
+          }
+        }
+      },
+      "description": "Lists within the Folder."
+    },
+    "permission_level": {
+      "type": "string",
+      "description": "The permission level of the Folder."
+    }
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/UpdateListRequest",
+  "title": "UpdateListRequest",
+  "type": "object",
+  "description": "Request body for updating an existing List.",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "The updated name of the List."
+    },
+    "content": {
+      "type": "string",
+      "description": "The updated content description."
+    },
+    "due_date": {
+      "type": "integer",
+      "format": "int64",
+      "description": "Updated due date as Unix timestamp in milliseconds."
+    },
+    "due_date_time": {
+      "type": "boolean",
+      "description": "Whether the due date includes a time component."
+    },
+    "priority": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 4,
+      "description": "Updated priority level."
+    },
+    "assignee": {
+      "type": "integer",
+      "nullable": true,
+      "description": "User ID to assign, or null to unassign."
+    },
+    "unset_status": {
+      "type": "boolean",
+      "description": "Set to true to clear the List status."
+    }
+  }
+}

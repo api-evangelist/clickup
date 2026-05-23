@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/CreateListRequest",
+  "title": "CreateListRequest",
+  "type": "object",
+  "required": [
+    "name"
+  ],
+  "description": "Request body for creating a new List.",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "The name of the List."
+    },
+    "content": {
+      "type": "string",
+      "description": "The content description of the List."
+    },
+    "due_date": {
+      "type": "integer",
+      "format": "int64",
+      "description": "Due date as Unix timestamp in milliseconds."
+    },
+    "due_date_time": {
+      "type": "boolean",
+      "description": "Whether the due date includes a time component."
+    },
+    "priority": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 4,
+      "description": "Priority level. 1 is Urgent, 2 is High, 3 is Normal, 4 is Low."
+    },
+    "assignee": {
+      "type": "integer",
+      "description": "User ID to assign to the List."
+    },
+    "status": {
+      "type": "string",
+      "description": "The status to set on the List."
+    }
+  }
+}

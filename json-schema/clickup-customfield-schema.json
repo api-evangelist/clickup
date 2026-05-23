@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/CustomField",
+  "title": "CustomField",
+  "type": "object",
+  "description": "A custom field value on a task.",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "The custom field ID."
+    },
+    "name": {
+      "type": "string",
+      "description": "The custom field name."
+    },
+    "type": {
+      "type": "string",
+      "description": "The type of the custom field."
+    },
+    "type_config": {
+      "type": "object",
+      "description": "Configuration specific to the custom field type."
+    },
+    "date_created": {
+      "type": "string",
+      "description": "Unix timestamp when the custom field was created."
+    },
+    "hide_from_guests": {
+      "type": "boolean",
+      "description": "Whether the field is hidden from guests."
+    },
+    "value": {
+      "description": "The current value of the custom field."
+    },
+    "required": {
+      "type": "boolean",
+      "description": "Whether the custom field is required."
+    }
+  }
+}

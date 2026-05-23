@@ -1,0 +1,61 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/CreateKeyResultRequest",
+  "title": "CreateKeyResultRequest",
+  "type": "object",
+  "required": [
+    "name",
+    "type"
+  ],
+  "description": "Request body for creating a new Key Result.",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "The name of the Key Result."
+    },
+    "owners": {
+      "type": "array",
+      "items": {
+        "type": "integer"
+      },
+      "description": "User IDs to set as owners."
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "number",
+        "currency",
+        "boolean",
+        "percentage",
+        "automatic"
+      ],
+      "description": "The type of the Key Result target."
+    },
+    "steps_start": {
+      "type": "number",
+      "description": "The starting value."
+    },
+    "steps_end": {
+      "type": "number",
+      "description": "The target end value."
+    },
+    "unit": {
+      "type": "string",
+      "description": "The unit of measurement for currency type."
+    },
+    "task_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Task IDs to link for automatic tracking."
+    },
+    "list_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "List IDs to link for automatic tracking."
+    }
+  }
+}

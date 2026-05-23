@@ -1,0 +1,212 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Space",
+  "title": "Space",
+  "type": "object",
+  "description": "A Space object representing a top-level organizational container within a ClickUp Workspace.",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "The unique identifier of the Space."
+    },
+    "name": {
+      "type": "string",
+      "description": "The name of the Space."
+    },
+    "private": {
+      "type": "boolean",
+      "description": "Whether the Space is private."
+    },
+    "color": {
+      "type": "string",
+      "nullable": true,
+      "description": "The hex color code of the Space."
+    },
+    "avatar": {
+      "type": "string",
+      "nullable": true,
+      "description": "The avatar URL or emoji for the Space."
+    },
+    "admin_can_manage": {
+      "type": "boolean",
+      "description": "Whether admins can manage the Space."
+    },
+    "archived": {
+      "type": "boolean",
+      "description": "Whether the Space is archived."
+    },
+    "members": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "user": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "integer",
+                "description": "The user ID."
+              },
+              "username": {
+                "type": "string",
+                "description": "The username."
+              },
+              "email": {
+                "type": "string",
+                "format": "email",
+                "description": "The email address."
+              },
+              "color": {
+                "type": "string",
+                "description": "The user color."
+              },
+              "profilePicture": {
+                "type": "string",
+                "format": "uri",
+                "nullable": true,
+                "description": "URL of the profile picture."
+              },
+              "initials": {
+                "type": "string",
+                "description": "The user initials."
+              }
+            }
+          }
+        }
+      },
+      "description": "Members of the Space."
+    },
+    "statuses": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The status ID."
+          },
+          "status": {
+            "type": "string",
+            "description": "The status name."
+          },
+          "type": {
+            "type": "string",
+            "description": "The status type."
+          },
+          "orderindex": {
+            "type": "integer",
+            "description": "The order index."
+          },
+          "color": {
+            "type": "string",
+            "description": "The hex color code."
+          }
+        }
+      },
+      "description": "Available statuses in the Space."
+    },
+    "multiple_assignees": {
+      "type": "boolean",
+      "description": "Whether multiple assignees are enabled."
+    },
+    "features": {
+      "type": "object",
+      "description": "Enabled features for the Space.",
+      "properties": {
+        "due_dates": {
+          "type": "object",
+          "properties": {
+            "enabled": {
+              "type": "boolean",
+              "description": "Whether due dates are enabled."
+            },
+            "start_date": {
+              "type": "boolean",
+              "description": "Whether start dates are enabled."
+            },
+            "remap_due_dates": {
+              "type": "boolean",
+              "description": "Whether due date remapping is enabled."
+            },
+            "remap_closed_due_date": {
+              "type": "boolean",
+              "description": "Whether closed due date remapping is enabled."
+            }
+          }
+        },
+        "time_tracking": {
+          "type": "object",
+          "properties": {
+            "enabled": {
+              "type": "boolean",
+              "description": "Whether time tracking is enabled."
+            }
+          }
+        },
+        "tags": {
+          "type": "object",
+          "properties": {
+            "enabled": {
+              "type": "boolean",
+              "description": "Whether tags are enabled."
+            }
+          }
+        },
+        "time_estimates": {
+          "type": "object",
+          "properties": {
+            "enabled": {
+              "type": "boolean",
+              "description": "Whether time estimates are enabled."
+            }
+          }
+        },
+        "checklists": {
+          "type": "object",
+          "properties": {
+            "enabled": {
+              "type": "boolean",
+              "description": "Whether checklists are enabled."
+            }
+          }
+        },
+        "custom_fields": {
+          "type": "object",
+          "properties": {
+            "enabled": {
+              "type": "boolean",
+              "description": "Whether custom fields are enabled."
+            }
+          }
+        },
+        "remap_dependencies": {
+          "type": "object",
+          "properties": {
+            "enabled": {
+              "type": "boolean",
+              "description": "Whether dependency remapping is enabled."
+            }
+          }
+        },
+        "dependency_warning": {
+          "type": "object",
+          "properties": {
+            "enabled": {
+              "type": "boolean",
+              "description": "Whether dependency warnings are enabled."
+            }
+          }
+        },
+        "portfolios": {
+          "type": "object",
+          "properties": {
+            "enabled": {
+              "type": "boolean",
+              "description": "Whether portfolios are enabled."
+            }
+          }
+        }
+      }
+    }
+  }
+}

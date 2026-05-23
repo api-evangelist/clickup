@@ -1,0 +1,177 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/TimeEntry",
+  "title": "TimeEntry",
+  "type": "object",
+  "description": "A time entry recording tracked time on a task.",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "The unique identifier of the time entry."
+    },
+    "task": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The task ID."
+        },
+        "name": {
+          "type": "string",
+          "description": "The task name."
+        },
+        "status": {
+          "type": "object",
+          "properties": {
+            "status": {
+              "type": "string",
+              "description": "The status name."
+            },
+            "color": {
+              "type": "string",
+              "description": "The status color."
+            },
+            "type": {
+              "type": "string",
+              "description": "The status type."
+            }
+          },
+          "description": "The task status."
+        },
+        "custom_type": {
+          "type": "string",
+          "nullable": true,
+          "description": "Custom task type if applicable."
+        }
+      },
+      "description": "The task this time entry is associated with."
+    },
+    "wid": {
+      "type": "string",
+      "description": "The Workspace ID."
+    },
+    "user": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "description": "The user ID."
+        },
+        "username": {
+          "type": "string",
+          "description": "The username."
+        },
+        "email": {
+          "type": "string",
+          "format": "email",
+          "description": "The email address."
+        },
+        "color": {
+          "type": "string",
+          "description": "The user color."
+        },
+        "profilePicture": {
+          "type": "string",
+          "format": "uri",
+          "nullable": true,
+          "description": "URL of the profile picture."
+        },
+        "initials": {
+          "type": "string",
+          "description": "The user initials."
+        }
+      },
+      "description": "The user who logged the time entry."
+    },
+    "billable": {
+      "type": "boolean",
+      "description": "Whether the time entry is billable."
+    },
+    "start": {
+      "type": "string",
+      "description": "Unix timestamp in milliseconds when the time entry started."
+    },
+    "end": {
+      "type": "string",
+      "description": "Unix timestamp in milliseconds when the time entry ended."
+    },
+    "duration": {
+      "type": "string",
+      "description": "Duration of the time entry in milliseconds."
+    },
+    "description": {
+      "type": "string",
+      "description": "Description of the time entry."
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The tag name."
+          },
+          "tag_bg": {
+            "type": "string",
+            "description": "Background color."
+          },
+          "tag_fg": {
+            "type": "string",
+            "description": "Foreground color."
+          },
+          "creator": {
+            "type": "integer",
+            "description": "The tag creator user ID."
+          }
+        }
+      },
+      "description": "Tags associated with the time entry."
+    },
+    "source": {
+      "type": "string",
+      "description": "The source of the time entry (e.g., clickup, api)."
+    },
+    "at": {
+      "type": "string",
+      "description": "Unix timestamp when the time entry was last modified."
+    },
+    "task_location": {
+      "type": "object",
+      "properties": {
+        "list_id": {
+          "type": "integer",
+          "description": "The list ID."
+        },
+        "folder_id": {
+          "type": "integer",
+          "description": "The folder ID."
+        },
+        "space_id": {
+          "type": "integer",
+          "description": "The space ID."
+        },
+        "list_name": {
+          "type": "string",
+          "description": "The list name."
+        },
+        "folder_name": {
+          "type": "string",
+          "description": "The folder name."
+        },
+        "space_name": {
+          "type": "string",
+          "description": "The space name."
+        }
+      },
+      "description": "Location details of the associated task."
+    },
+    "task_tags": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      },
+      "description": "Tags from the associated task."
+    }
+  }
+}
