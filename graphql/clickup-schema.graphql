@@ -1,0 +1,1120 @@
+"""
+ClickUp Conceptual GraphQL Schema
+Derived from the ClickUp REST API v2 (https://developer.clickup.com/reference)
+No native GraphQL endpoint exists; this schema models the REST surface for tooling and catalog enrichment.
+"""
+
+# -----------------------------------------------------------------------
+# Scalars
+# -----------------------------------------------------------------------
+
+scalar DateTime
+scalar JSON
+scalar Upload
+
+# -----------------------------------------------------------------------
+# Enums
+# -----------------------------------------------------------------------
+
+enum TaskPriority {
+  URGENT
+  HIGH
+  NORMAL
+  LOW
+  NONE
+}
+
+enum TaskStatusType {
+  OPEN
+  CUSTOM
+  DONE
+  CLOSED
+}
+
+enum CustomFieldType {
+  TEXT
+  TEXTAREA
+  NUMBER
+  MONEY
+  PERCENT
+  DATE
+  CHECKBOX
+  DROPDOWN
+  LABEL
+  USERS
+  EMAIL
+  PHONE
+  URL
+  EMOJI
+  RATING
+  FORMULA
+  RELATIONSHIP
+  LOOKUP
+  CREATED_BY
+  CREATED_DATE
+  AUTO_PROGRESS
+  MANUAL_PROGRESS
+  COUNT
+  LOCATION
+  TASKS
+  ROLLUP
+}
+
+enum ViewType {
+  LIST
+  BOARD
+  CALENDAR
+  GANTT
+  TABLE
+  TIMELINE
+  WORKLOAD
+  MAP
+  CHAT
+  FORM
+  MIND_MAP
+  WHITEBOARD
+}
+
+enum CommentSource {
+  TASK
+  LIST
+  VIEW
+}
+
+enum WebhookEvent {
+  TASK_CREATED
+  TASK_UPDATED
+  TASK_DELETED
+  TASK_PRIORITY_UPDATED
+  TASK_STATUS_UPDATED
+  TASK_ASSIGNEE_UPDATED
+  TASK_DUE_DATE_UPDATED
+  TASK_TAG_UPDATED
+  TASK_MOVED
+  TASK_COMMENT_POSTED
+  TASK_COMMENT_UPDATED
+  TASK_TIME_ESTIMATE_UPDATED
+  TASK_TIME_TRACKED_UPDATED
+  LIST_CREATED
+  LIST_UPDATED
+  LIST_DELETED
+  FOLDER_CREATED
+  FOLDER_UPDATED
+  FOLDER_DELETED
+  SPACE_CREATED
+  SPACE_UPDATED
+  SPACE_DELETED
+  GOAL_CREATED
+  GOAL_UPDATED
+  GOAL_DELETED
+  KEY_RESULT_CREATED
+  KEY_RESULT_UPDATED
+  KEY_RESULT_DELETED
+}
+
+enum GoalTargetType {
+  NUMBER
+  CURRENCY
+  PERCENTAGE
+  BOOLEAN
+  TASK
+}
+
+enum MemberRole {
+  OWNER
+  ADMIN
+  MEMBER
+  GUEST
+}
+
+enum DependencyType {
+  WAITING_ON
+  BLOCKING
+}
+
+enum AutomationTrigger {
+  TASK_CREATED
+  TASK_STATUS_CHANGED
+  TASK_PRIORITY_CHANGED
+  TASK_ASSIGNEE_CHANGED
+  TASK_DUE_DATE_CHANGED
+  TASK_TAG_CHANGED
+  TASK_COMMENT_ADDED
+  DATE_TIME
+  FORM_SUBMITTED
+}
+
+enum AutomationAction {
+  CHANGE_STATUS
+  ASSIGN_USER
+  SET_PRIORITY
+  ADD_TAG
+  REMOVE_TAG
+  SET_DUE_DATE
+  MOVE_TASK
+  CREATE_TASK
+  SEND_EMAIL
+  POST_COMMENT
+  SEND_WEBHOOK
+}
+
+# -----------------------------------------------------------------------
+# Core Types
+# -----------------------------------------------------------------------
+
+type Workspace {
+  id: ID!
+  name: String!
+  color: String
+  avatar: String
+  members: [Member!]!
+  spaces: [Space!]
+  goals: [Goal!]
+  webhooks: [Webhook!]
+  features: WorkspaceFeatures
+}
+
+type WorkspaceFeatures {
+  dueDates: FeatureConfig
+  sprints: FeatureConfig
+  points: FeatureConfig
+  customFields: FeatureConfig
+  portals: FeatureConfig
+  zoom: FeatureConfig
+  milestones: FeatureConfig
+  emails: FeatureConfig
+}
+
+type FeatureConfig {
+  enabled: Boolean!
+}
+
+type Space {
+  id: ID!
+  name: String!
+  private: Boolean!
+  color: String
+  avatar: String
+  adminCanManage: Boolean
+  archived: Boolean!
+  members: [Member!]!
+  statuses: [Status!]!
+  features: SpaceFeatures
+  folders: [Folder!]
+  lists: [List!]
+  views: [View!]
+  workspace: Workspace
+}
+
+type SpaceFeatures {
+  dueDates: DueDateFeature
+  sprints: FeatureConfig
+  points: FeatureConfig
+  customFields: FeatureConfig
+  remap: FeatureConfig
+  continuesSprints: FeatureConfig
+  milestones: FeatureConfig
+  tags: FeatureConfig
+  timeTracking: FeatureConfig
+  timeEstimates: FeatureConfig
+  checkUnresolved: CheckUnresolvedFeature
+  zoom: FeatureConfig
+  multipleAssignees: FeatureConfig
+  emails: FeatureConfig
+  priorities: PrioritiesFeature
+}
+
+type DueDateFeature {
+  enabled: Boolean!
+  startDate: Boolean!
+  remaps: Boolean!
+  remapClosedDueDate: Boolean!
+}
+
+type CheckUnresolvedFeature {
+  enabled: Boolean!
+  subtasks: Boolean
+}
+
+type PrioritiesFeature {
+  enabled: Boolean!
+  priorities: [PriorityOption!]!
+}
+
+type PriorityOption {
+  id: String!
+  priority: String!
+  color: String!
+  orderIndex: String!
+}
+
+type Folder {
+  id: ID!
+  name: String!
+  orderIndex: Int!
+  override_statuses: Boolean
+  hidden: Boolean!
+  space: Space!
+  taskCount: Int
+  lists: [List!]!
+}
+
+type List {
+  id: ID!
+  name: String!
+  orderIndex: Int
+  content: String
+  status: ListStatus
+  priority: Priority
+  assignee: User
+  taskCount: Int
+  dueDate: String
+  startDate: String
+  space: Space!
+  folder: Folder
+  archived: Boolean!
+  overrideStatuses: Boolean
+  statuses: [Status!]
+  permissionLevel: String
+  tasks: [Task!]
+  views: [View!]
+  members: [Member!]
+}
+
+type ListStatus {
+  status: String!
+  color: String!
+  hideLabel: Boolean!
+}
+
+type Task {
+  id: ID!
+  name: String!
+  textContent: String
+  description: String
+  status: Status!
+  orderIndex: String
+  dateCreated: DateTime
+  dateUpdated: DateTime
+  dateClosed: DateTime
+  dateDone: DateTime
+  creator: User!
+  assignees: [User!]!
+  watchers: [User!]
+  checklists: [Checklist!]!
+  tags: [Tag!]!
+  parent: Task
+  priority: Priority
+  dueDate: DateTime
+  startDate: DateTime
+  estimatedTime: Int
+  timeSpent: Int
+  points: Float
+  customFields: [CustomFieldValue!]!
+  list: List!
+  folder: Folder
+  space: Space!
+  url: String
+  subtasks: [Task!]
+  dependencies: [Dependency!]
+  linkedTasks: [LinkedTask!]
+  attachments: [Attachment!]
+  comments: [Comment!]
+  timeEntries: [TimeEntry!]
+  teamId: ID
+  customId: String
+  customItemId: Int
+}
+
+type Status {
+  id: String
+  status: String!
+  color: String!
+  orderIndex: Int
+  type: TaskStatusType!
+}
+
+type Priority {
+  id: String
+  priority: TaskPriority
+  color: String
+  orderIndex: String
+}
+
+type User {
+  id: ID!
+  username: String!
+  email: String!
+  color: String
+  profilePicture: String
+  role: Int
+  customRole: String
+  lastActive: DateTime
+  dateJoined: DateTime
+  dateInvited: DateTime
+}
+
+type Member {
+  user: User!
+  role: MemberRole!
+  invitedBy: User
+}
+
+type Guest {
+  id: ID!
+  user: User!
+  invitedBy: User
+  canEditTags: Boolean!
+  canSeeTimeSpent: Boolean!
+  canSeeTimeEstimated: Boolean!
+  canCreateViews: Boolean!
+  customRoleId: Int
+}
+
+type Tag {
+  name: String!
+  tagFg: String
+  tagBg: String
+  creator: Int
+}
+
+type Checklist {
+  id: ID!
+  taskId: ID!
+  name: String!
+  orderIndex: Int!
+  resolved: Int!
+  unresolved: Int!
+  items: [ChecklistItem!]!
+}
+
+type ChecklistItem {
+  id: ID!
+  name: String!
+  orderIndex: Int!
+  assignee: User
+  resolved: Boolean!
+  parent: String
+  dateCreated: DateTime
+  children: [ChecklistItem!]
+}
+
+type Comment {
+  id: ID!
+  comment: [CommentBody!]!
+  commentText: String!
+  user: User!
+  resolved: Boolean!
+  assignee: User
+  assignedBy: User
+  reactions: [Reaction!]
+  date: DateTime!
+  source: CommentSource
+}
+
+type CommentBody {
+  text: String
+  attributes: JSON
+  type: String
+}
+
+type Reaction {
+  reaction: String!
+  user: User!
+  date: DateTime!
+}
+
+type Attachment {
+  id: ID!
+  version: Int!
+  date: DateTime!
+  title: String!
+  extensionType: String
+  thumbnailSmall: String
+  thumbnailMedium: String
+  thumbnailLarge: String
+  url: String!
+  urlWExpiry: String
+  parent: ID
+  parentType: String
+  emailData: JSON
+  source: Int
+  size: Int
+  mimeType: String
+  hidden: Boolean
+  user: User!
+}
+
+type Dependency {
+  taskId: ID!
+  dependsOn: ID!
+  type: DependencyType!
+  workspaceId: ID!
+  userid: ID
+  dateCreated: DateTime
+}
+
+type LinkedTask {
+  taskId: ID!
+  linkId: ID!
+  dateCreated: DateTime
+  userid: ID
+  workspaceId: ID
+}
+
+type TimeEntry {
+  id: ID!
+  task: Task
+  wid: ID
+  user: User!
+  billable: Boolean!
+  start: DateTime!
+  end: DateTime
+  duration: Int!
+  description: String
+  tags: [TimeTag!]!
+  source: String
+  at: DateTime
+  taskLocation: TaskLocation
+  intervalHistory: [IntervalHistory!]
+  isLocked: Boolean
+  task_url: String
+}
+
+type TimeTag {
+  name: String!
+  tagFg: String
+  tagBg: String
+  creator: Int
+}
+
+type TaskLocation {
+  listId: ID
+  folderId: ID
+  spaceId: ID
+  listName: String
+  folderName: String
+  spaceName: String
+}
+
+type IntervalHistory {
+  start: DateTime
+  end: DateTime
+  duration: Int
+  source: String
+  user: User
+}
+
+type CustomField {
+  id: ID!
+  name: String!
+  type: CustomFieldType!
+  typeConfig: JSON
+  dateCreated: DateTime
+  hideFromGuests: Boolean!
+  required: Boolean
+}
+
+type CustomFieldValue {
+  id: ID!
+  name: String!
+  type: CustomFieldType!
+  typeConfig: JSON
+  dateCreated: DateTime
+  hideFromGuests: Boolean!
+  required: Boolean
+  value: JSON
+}
+
+type Goal {
+  id: ID!
+  prettyId: String
+  name: String!
+  teamId: ID!
+  dateCreated: DateTime
+  startDate: DateTime
+  dueDate: DateTime
+  description: String
+  private: Boolean!
+  archived: Boolean!
+  creator: Int
+  color: String
+  prettyUrl: String
+  multipleOwners: Boolean
+  folders: [GoalFolder!]
+  members: [Member!]!
+  owners: [User!]!
+  keyResults: [GoalKeyResult!]!
+  percentCompleted: Float
+  historyCount: Int
+  linkedTasksCount: Int
+  workspace: Workspace
+}
+
+type GoalFolder {
+  id: ID!
+  name: String!
+  teamId: ID!
+  private: Boolean!
+  goals: [Goal!]
+}
+
+type GoalKeyResult {
+  id: ID!
+  goalId: ID!
+  name: String!
+  type: GoalTargetType!
+  unit: String
+  stepsStart: Float!
+  stepsEnd: Float!
+  stepsCurrent: Float!
+  percentCompleted: Float!
+  dateCreated: DateTime
+  goalPrettyId: String
+  creators: [Int!]!
+  assignees: [User!]!
+  orderId: String
+  taskIds: [ID!]
+  lastAction: JSON
+}
+
+type View {
+  id: ID!
+  name: String!
+  type: ViewType!
+  parent: ViewParent
+  grouping: JSON
+  divide: JSON
+  sorting: JSON
+  filters: ViewFilters
+  columns: JSON
+  teamSidebar: JSON
+  settings: JSON
+}
+
+type ViewParent {
+  id: ID!
+  type: String!
+}
+
+type ViewFilters {
+  op: String
+  fields: [JSON!]
+  showClosed: Boolean
+}
+
+type Webhook {
+  id: ID!
+  userid: ID!
+  teamId: ID!
+  endpoint: String!
+  clientId: String
+  events: [WebhookEvent!]!
+  taskId: ID
+  listId: ID
+  folderId: ID
+  spaceId: ID
+  health: WebhookHealth
+  secret: String
+}
+
+type WebhookHealth {
+  status: String!
+  failCount: Int!
+}
+
+type Automation {
+  id: ID!
+  teamId: ID!
+  spaceId: ID
+  listId: ID
+  name: String
+  enabled: Boolean!
+  trigger: AutomationTriggerConfig!
+  actions: [AutomationActionConfig!]!
+  runCount: Int
+  errorCount: Int
+  lastRunAt: DateTime
+}
+
+type AutomationTriggerConfig {
+  type: AutomationTrigger!
+  config: JSON
+}
+
+type AutomationActionConfig {
+  type: AutomationAction!
+  config: JSON
+}
+
+type Template {
+  id: ID!
+  name: String!
+  description: String
+  type: String
+  taskCount: Int
+  category: String
+  tags: [String!]
+}
+
+type Sprint {
+  id: ID!
+  listId: ID!
+  name: String!
+  startDate: DateTime
+  endDate: DateTime
+  status: String
+  points: SprintPoints
+}
+
+type SprintPoints {
+  total: Float
+  completed: Float
+  incomplete: Float
+}
+
+type OAuthToken {
+  accessToken: String!
+  tokenType: String!
+}
+
+type AuthorizedUser {
+  user: User!
+}
+
+# -----------------------------------------------------------------------
+# Input Types
+# -----------------------------------------------------------------------
+
+input CreateTaskInput {
+  name: String!
+  description: String
+  assignees: [Int!]
+  tags: [String!]
+  status: String
+  priority: Int
+  dueDate: String
+  dueDateTime: Boolean
+  timeEstimate: Int
+  startDate: String
+  startDateTime: Boolean
+  notifyAll: Boolean
+  parent: ID
+  linksTo: ID
+  checkRequiredCustomFields: Boolean
+  customFields: [CustomFieldInput!]
+}
+
+input UpdateTaskInput {
+  name: String
+  description: String
+  status: String
+  priority: Int
+  dueDate: String
+  dueDateTime: Boolean
+  parent: ID
+  timeEstimate: Int
+  startDate: String
+  startDateTime: Boolean
+  assignees: AssigneesInput
+  archived: Boolean
+}
+
+input AssigneesInput {
+  add: [Int!]
+  rem: [Int!]
+}
+
+input CustomFieldInput {
+  id: ID!
+  value: JSON!
+}
+
+input TaskFilterInput {
+  archived: Boolean
+  page: Int
+  orderBy: String
+  reverse: Boolean
+  subtasks: Boolean
+  statuses: [String!]
+  includeClosed: Boolean
+  assignees: [Int!]
+  tags: [String!]
+  dueDateGt: String
+  dueDateLt: String
+  dateCreatedGt: String
+  dateCreatedLt: String
+  dateUpdatedGt: String
+  dateUpdatedLt: String
+  creators: [Int!]
+  priority: [Int!]
+  customFields: [JSON!]
+}
+
+input CreateListInput {
+  name: String!
+  orderId: Int
+  content: String
+  dueDate: String
+  dueDateTime: Boolean
+  priority: Int
+  assignee: Int
+  status: String
+}
+
+input UpdateListInput {
+  name: String
+  content: String
+  dueDate: String
+  dueDateTime: Boolean
+  priority: Int
+  assignee: Int
+  unsetStatus: Boolean
+}
+
+input CreateFolderInput {
+  name: String!
+}
+
+input UpdateFolderInput {
+  name: String!
+}
+
+input CreateSpaceInput {
+  name: String!
+  multipleAssignees: Boolean
+  features: SpaceFeaturesInput
+}
+
+input UpdateSpaceInput {
+  name: String
+  color: String
+  private: Boolean
+  adminCanManage: Boolean
+  multipleAssignees: Boolean
+  features: SpaceFeaturesInput
+}
+
+input SpaceFeaturesInput {
+  dueDates: DueDateFeatureInput
+  timeTracking: FeatureConfigInput
+  tags: FeatureConfigInput
+  timeEstimates: FeatureConfigInput
+  checkUnresolved: CheckUnresolvedInput
+  zoom: FeatureConfigInput
+  milestones: FeatureConfigInput
+  customFields: FeatureConfigInput
+  remap: FeatureConfigInput
+  emails: FeatureConfigInput
+  multipleAssignees: FeatureConfigInput
+}
+
+input FeatureConfigInput {
+  enabled: Boolean!
+}
+
+input DueDateFeatureInput {
+  enabled: Boolean!
+  startDate: Boolean
+  remaps: Boolean
+  remapClosedDueDate: Boolean
+}
+
+input CheckUnresolvedInput {
+  enabled: Boolean!
+  subtasks: Boolean
+}
+
+input CreateCommentInput {
+  commentText: String!
+  assignee: Int
+  notifyAll: Boolean
+}
+
+input CreateChecklistInput {
+  name: String!
+}
+
+input CreateChecklistItemInput {
+  name: String!
+  assignee: Int
+}
+
+input CreateGoalInput {
+  name: String!
+  dueDate: String!
+  description: String
+  multipleOwners: Boolean
+  owners: [Int!]!
+  color: String
+}
+
+input UpdateGoalInput {
+  name: String
+  dueDate: String
+  description: String
+  remOwners: [Int!]
+  addOwners: [Int!]
+  color: String
+}
+
+input CreateKeyResultInput {
+  name: String!
+  owners: [Int!]!
+  type: GoalTargetType!
+  stepsStart: Float!
+  stepsEnd: Float!
+  unit: String
+  taskIds: [ID!]
+  note: String
+}
+
+input UpdateKeyResultInput {
+  steps_current: Float
+  note: String
+}
+
+input CreateTimeEntryInput {
+  description: String
+  tags: [JSON!]
+  start: DateTime!
+  billable: Boolean
+  duration: Int!
+  assignee: Int
+  tid: ID
+}
+
+input UpdateTimeEntryInput {
+  description: String
+  tags: [JSON!]
+  tagAction: String
+  start: DateTime
+  billable: Boolean
+  duration: Int
+  tid: ID
+}
+
+input TimeEntryFilterInput {
+  startDate: String
+  endDate: String
+  assignee: Int
+  includeTaskTags: Boolean
+  includeLocationNames: Boolean
+  spaceId: ID
+  folderId: ID
+  listId: ID
+  taskId: ID
+  customTaskIds: Boolean
+  teamId: ID
+}
+
+input CreateWebhookInput {
+  endpoint: String!
+  events: [WebhookEvent!]!
+  taskId: ID
+  listId: ID
+  folderId: ID
+  spaceId: ID
+}
+
+input UpdateWebhookInput {
+  endpoint: String
+  events: [WebhookEvent!]
+  status: String
+}
+
+input CreateViewInput {
+  name: String!
+  type: ViewType!
+  grouping: JSON
+  divide: JSON
+  sorting: JSON
+  filters: JSON
+  columns: JSON
+  teamSidebar: JSON
+  settings: JSON
+}
+
+# -----------------------------------------------------------------------
+# Query
+# -----------------------------------------------------------------------
+
+type Query {
+  # Workspace / Teams
+  workspaces: [Workspace!]!
+  workspace(id: ID!): Workspace
+
+  # Spaces
+  spaces(workspaceId: ID!, archived: Boolean): [Space!]!
+  space(id: ID!): Space
+
+  # Folders
+  folders(spaceId: ID!, archived: Boolean): [Folder!]!
+  folder(id: ID!): Folder
+
+  # Lists
+  lists(folderId: ID!, archived: Boolean): [List!]!
+  folderlessLists(spaceId: ID!, archived: Boolean): [List!]!
+  list(id: ID!): List
+
+  # Tasks
+  tasks(listId: ID!, filter: TaskFilterInput): [Task!]!
+  task(id: ID!, includeSubtasks: Boolean): Task
+  filteredTeamTasks(workspaceId: ID!, filter: TaskFilterInput): [Task!]!
+  searchTasks(workspaceId: ID!, query: String!): [Task!]!
+
+  # Comments
+  taskComments(taskId: ID!, start: String, startId: ID): [Comment!]!
+  listComments(listId: ID!, start: String, startId: ID): [Comment!]!
+  viewComments(viewId: ID!, start: String, startId: ID): [Comment!]!
+
+  # Checklists (retrieved via task)
+  taskChecklists(taskId: ID!): [Checklist!]!
+
+  # Custom Fields
+  listCustomFields(listId: ID!): [CustomField!]!
+  accessibleCustomFields(listId: ID!): [CustomField!]!
+
+  # Goals
+  goals(workspaceId: ID!, includeCompleted: Boolean): [Goal!]!
+  goal(id: ID!): Goal
+
+  # Time Tracking
+  timeEntries(workspaceId: ID!, filter: TimeEntryFilterInput): [TimeEntry!]!
+  timeEntry(workspaceId: ID!, timerId: ID!): TimeEntry
+  runningTimeEntry(workspaceId: ID!, assignee: Int): TimeEntry
+  allTimeEntryTags(workspaceId: ID!): [TimeTag!]!
+  singleTimeEntryHistory(workspaceId: ID!, timerId: ID!): TimeEntry
+
+  # Members / Users
+  workspaceMembers(workspaceId: ID!): [Member!]!
+  listMembers(listId: ID!): [Member!]!
+  spaceMembers(spaceId: ID!): [Member!]!
+  guests(workspaceId: ID!): [Guest!]!
+  guest(workspaceId: ID!, guestId: ID!): Guest
+  authorizedUser: AuthorizedUser!
+
+  # Tags
+  spaceTags(spaceId: ID!): [Tag!]!
+
+  # Views
+  teamViews(workspaceId: ID!): [View!]!
+  spaceViews(spaceId: ID!): [View!]!
+  folderViews(folderId: ID!): [View!]!
+  listViews(listId: ID!): [View!]!
+  view(id: ID!): View
+  viewTasks(viewId: ID!, page: Int): [Task!]!
+
+  # Webhooks
+  webhooks(workspaceId: ID!): [Webhook!]!
+
+  # Templates
+  templates(workspaceId: ID!, page: Int): [Template!]!
+
+  # Sprints (via ClickUp Spaces with sprint feature enabled)
+  sprints(listId: ID!): [Sprint!]!
+}
+
+# -----------------------------------------------------------------------
+# Mutation
+# -----------------------------------------------------------------------
+
+type Mutation {
+  # Tasks
+  createTask(listId: ID!, input: CreateTaskInput!): Task!
+  updateTask(taskId: ID!, input: UpdateTaskInput!): Task!
+  deleteTask(taskId: ID!): Boolean!
+  addTaskTag(taskId: ID!, tagName: String!): Boolean!
+  removeTaskTag(taskId: ID!, tagName: String!): Boolean!
+  addTaskDependency(taskId: ID!, dependsOn: ID!, type: DependencyType): Dependency!
+  deleteTaskDependency(taskId: ID!, dependsOn: ID!, type: DependencyType): Boolean!
+  addTaskLink(taskId: ID!, linksTo: ID!): Task!
+  deleteTaskLink(taskId: ID!, linkId: ID!): Boolean!
+  moveTask(taskId: ID!, listId: ID!): Task!
+  duplicateTask(taskId: ID!, listId: ID!): Task!
+  setCustomFieldValue(taskId: ID!, fieldId: ID!, value: JSON!): Boolean!
+  removeCustomFieldValue(taskId: ID!, fieldId: ID!): Boolean!
+
+  # Lists
+  createList(folderId: ID!, input: CreateListInput!): List!
+  createFolderlessList(spaceId: ID!, input: CreateListInput!): List!
+  updateList(listId: ID!, input: UpdateListInput!): List!
+  deleteList(listId: ID!): Boolean!
+  addMemberToList(listId: ID!, userId: Int!): Boolean!
+  removeMemberFromList(listId: ID!, userId: Int!): Boolean!
+
+  # Folders
+  createFolder(spaceId: ID!, input: CreateFolderInput!): Folder!
+  updateFolder(folderId: ID!, input: UpdateFolderInput!): Folder!
+  deleteFolder(folderId: ID!): Boolean!
+
+  # Spaces
+  createSpace(workspaceId: ID!, input: CreateSpaceInput!): Space!
+  updateSpace(spaceId: ID!, input: UpdateSpaceInput!): Space!
+  deleteSpace(spaceId: ID!): Boolean!
+
+  # Comments
+  createTaskComment(taskId: ID!, input: CreateCommentInput!): Comment!
+  createListComment(listId: ID!, input: CreateCommentInput!): Comment!
+  createViewComment(viewId: ID!, input: CreateCommentInput!): Comment!
+  updateComment(commentId: ID!, commentText: String!, assignee: Int, resolved: Boolean): Comment!
+  deleteComment(commentId: ID!): Boolean!
+
+  # Checklists
+  createChecklist(taskId: ID!, input: CreateChecklistInput!): Checklist!
+  updateChecklist(checklistId: ID!, name: String, position: Int): Checklist!
+  deleteChecklist(checklistId: ID!): Boolean!
+  createChecklistItem(checklistId: ID!, input: CreateChecklistItemInput!): ChecklistItem!
+  updateChecklistItem(checklistId: ID!, checklistItemId: ID!, name: String, assignee: Int, resolved: Boolean, parent: ID): ChecklistItem!
+  deleteChecklistItem(checklistId: ID!, checklistItemId: ID!): Boolean!
+
+  # Goals
+  createGoal(workspaceId: ID!, input: CreateGoalInput!): Goal!
+  updateGoal(goalId: ID!, input: UpdateGoalInput!): Goal!
+  deleteGoal(goalId: ID!): Boolean!
+  createKeyResult(goalId: ID!, input: CreateKeyResultInput!): GoalKeyResult!
+  updateKeyResult(keyResultId: ID!, input: UpdateKeyResultInput!): GoalKeyResult!
+  deleteKeyResult(keyResultId: ID!): Boolean!
+
+  # Tags
+  createSpaceTag(spaceId: ID!, name: String!, tagFg: String, tagBg: String): Tag!
+  updateSpaceTag(spaceId: ID!, tagName: String!, name: String, tagFg: String, tagBg: String): Tag!
+  deleteSpaceTag(spaceId: ID!, tagName: String!): Boolean!
+
+  # Time Tracking
+  createTimeEntry(workspaceId: ID!, input: CreateTimeEntryInput!): TimeEntry!
+  updateTimeEntry(workspaceId: ID!, timerId: ID!, input: UpdateTimeEntryInput!): TimeEntry!
+  deleteTimeEntry(workspaceId: ID!, timerId: ID!): TimeEntry!
+  startTimer(workspaceId: ID!, taskId: ID): TimeEntry!
+  stopTimer(workspaceId: ID!): TimeEntry!
+  addTagsFromTimeEntries(workspaceId: ID!, tags: [JSON!]!): Boolean!
+  deleteTagsFromTimeEntries(workspaceId: ID!, tags: [JSON!]!): Boolean!
+  changeTagNamesFromTimeEntries(workspaceId: ID!, name: String!, newName: String!): Boolean!
+
+  # Members / Guests
+  inviteGuestToWorkspace(workspaceId: ID!, email: String!, canEditTags: Boolean, canSeeTimeSpent: Boolean, canSeeTimeEstimated: Boolean, canCreateViews: Boolean, customRoleId: Int): Guest!
+  editGuestOnWorkspace(workspaceId: ID!, guestId: ID!, canEditTags: Boolean, canSeeTimeSpent: Boolean, canSeeTimeEstimated: Boolean, canCreateViews: Boolean, customRoleId: Int): Guest!
+  removeGuestFromWorkspace(workspaceId: ID!, guestId: ID!): Boolean!
+  addGuestToTask(taskId: ID!, guestId: ID!, permissionLevel: String!): Task!
+  removeGuestFromTask(taskId: ID!, guestId: ID!): Task!
+  addGuestToList(listId: ID!, guestId: ID!, permissionLevel: String!): List!
+  removeGuestFromList(listId: ID!, guestId: ID!): List!
+  addGuestToFolder(folderId: ID!, guestId: ID!, permissionLevel: String!): Folder!
+  removeGuestFromFolder(folderId: ID!, guestId: ID!): Folder!
+
+  # Views
+  createTeamView(workspaceId: ID!, input: CreateViewInput!): View!
+  createSpaceView(spaceId: ID!, input: CreateViewInput!): View!
+  createFolderView(folderId: ID!, input: CreateViewInput!): View!
+  createListView(listId: ID!, input: CreateViewInput!): View!
+  updateView(viewId: ID!, input: CreateViewInput!): View!
+  deleteView(viewId: ID!): Boolean!
+
+  # Webhooks
+  createWebhook(workspaceId: ID!, input: CreateWebhookInput!): Webhook!
+  updateWebhook(webhookId: ID!, input: UpdateWebhookInput!): Webhook!
+  deleteWebhook(webhookId: ID!): Boolean!
+
+  # Attachments
+  createTaskAttachment(taskId: ID!, file: Upload!): Attachment!
+}
