@@ -1,0 +1,2288 @@
+{
+  "item": [
+    {
+      "id": "667bcf23-ecd7-4a49-9e8c-51f38026bbf0",
+      "name": "Time Tracking",
+      "description": {
+        "content": "Operations for managing time entries and timers within a ClickUp Workspace.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "f3a73d66-8cf8-46ee-b923-2f83ba223be9",
+          "name": "Get time entries within a date range",
+          "request": {
+            "name": "Get time entries within a date range",
+            "description": {
+              "content": "Retrieves time entries within a specified date range for a Workspace. Results can be filtered by assignees and task IDs. Returns time entries with their duration, start time, end time, and associated task information.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "team",
+                ":team_id",
+                "time_entries"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "start_date",
+                  "value": "<long>",
+                  "description": "Unix timestamp in milliseconds for the start of the date range."
+                },
+                {
+                  "disabled": false,
+                  "key": "end_date",
+                  "value": "<long>",
+                  "description": "Unix timestamp in milliseconds for the end of the date range."
+                },
+                {
+                  "disabled": false,
+                  "key": "assignee",
+                  "value": "<string>",
+                  "description": "Comma-separated list of user IDs to filter by assignees."
+                },
+                {
+                  "disabled": false,
+                  "key": "include_task_tags",
+                  "value": "<boolean>",
+                  "description": "Include tags from the associated tasks."
+                },
+                {
+                  "disabled": false,
+                  "key": "include_location_names",
+                  "value": "<boolean>",
+                  "description": "Include names of the spaces, folders, and lists."
+                },
+                {
+                  "disabled": false,
+                  "key": "space_id",
+                  "value": "<integer>",
+                  "description": "Filter by Space ID."
+                },
+                {
+                  "disabled": false,
+                  "key": "folder_id",
+                  "value": "<integer>",
+                  "description": "Filter by Folder ID."
+                },
+                {
+                  "disabled": false,
+                  "key": "list_id",
+                  "value": "<integer>",
+                  "description": "Filter by List ID."
+                },
+                {
+                  "disabled": false,
+                  "key": "task_id",
+                  "value": "<string>",
+                  "description": "Filter by Task ID."
+                },
+                {
+                  "disabled": false,
+                  "key": "custom_task_ids",
+                  "value": "<boolean>",
+                  "description": "If true, the task_id parameter should be a custom task ID."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "team_id",
+                  "description": "(Required) The unique identifier of the Workspace (team)."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "09898668-8707-4255-be4f-7b597443d587",
+              "name": "Successfully retrieved time entries",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "team",
+                    ":team_id",
+                    "time_entries"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "start_date",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "end_date",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "assignee",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "include_task_tags",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "include_location_names",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "space_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "folder_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "list_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "task_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "custom_task_ids",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "team_id",
+                      "description": "(Required) The unique identifier of the Workspace (team)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"string\",\n      \"task\": {\n        \"id\": \"string\",\n        \"name\": \"string\",\n        \"status\": {\n          \"status\": \"string\",\n          \"color\": \"string\",\n          \"type\": \"string\"\n        },\n        \"custom_type\": \"string\"\n      },\n      \"wid\": \"string\",\n      \"user\": {\n        \"id\": 4880,\n        \"username\": \"string\",\n        \"email\": \"zWmFXmO9os@yYQISWbEBtIct.ubth\",\n        \"color\": \"string\",\n        \"profilePicture\": \"https://u.gebfIyWrJao-TwBZeTktnwamcbrD2tYcvO\",\n        \"initials\": \"string\"\n      },\n      \"billable\": false,\n      \"start\": \"string\",\n      \"end\": \"string\",\n      \"duration\": \"string\",\n      \"description\": \"string\",\n      \"tags\": [\n        {\n          \"name\": \"string\",\n          \"tag_bg\": \"string\",\n          \"tag_fg\": \"string\",\n          \"creator\": 441\n        },\n        {\n          \"name\": \"string\",\n          \"tag_bg\": \"string\",\n          \"tag_fg\": \"string\",\n          \"creator\": 8488\n        }\n      ],\n      \"source\": \"string\",\n      \"at\": \"string\",\n      \"task_location\": {\n        \"list_id\": 9976,\n        \"folder_id\": 3447,\n        \"space_id\": 9630,\n        \"list_name\": \"string\",\n        \"folder_name\": \"string\",\n        \"space_name\": \"string\"\n      }\n    },\n    {\n      \"id\": \"string\",\n      \"task\": {\n        \"id\": \"string\",\n        \"name\": \"string\",\n        \"status\": {\n          \"status\": \"string\",\n          \"color\": \"string\",\n          \"type\": \"string\"\n        },\n        \"custom_type\": \"string\"\n      },\n      \"wid\": \"string\",\n      \"user\": {\n        \"id\": 3679,\n        \"username\": \"string\",\n        \"email\": \"F1bRAAvz4dKd0iU@Mu.ii\",\n        \"color\": \"string\",\n        \"profilePicture\": \"https://FEYQidGczQmxcsA.fdvfnAS3i9\",\n        \"initials\": \"string\"\n      },\n      \"billable\": true,\n      \"start\": \"string\",\n      \"end\": \"string\",\n      \"duration\": \"string\",\n      \"description\": \"string\",\n      \"tags\": [\n        {\n          \"name\": \"string\",\n          \"tag_bg\": \"string\",\n          \"tag_fg\": \"string\",\n          \"creator\": 5527\n        },\n        {\n          \"name\": \"string\",\n          \"tag_bg\": \"string\",\n          \"tag_fg\": \"string\",\n          \"creator\": 8753\n        }\n      ],\n      \"source\": \"string\",\n      \"at\": \"string\",\n      \"task_location\": {\n        \"list_id\": 1553,\n        \"folder_id\": 9540,\n        \"space_id\": 9369,\n        \"list_name\": \"string\",\n        \"folder_name\": \"string\",\n        \"space_name\": \"string\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3a2e2a89-8d40-42a5-bf14-2dbb5e2ad458",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "team",
+                    ":team_id",
+                    "time_entries"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "start_date",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "end_date",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "assignee",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "include_task_tags",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "include_location_names",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "space_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "folder_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "list_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "task_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "custom_task_ids",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "team_id",
+                      "description": "(Required) The unique identifier of the Workspace (team)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "aa2c6c02-c6af-4903-aacc-2fffba12856d",
+          "name": "Create a time entry",
+          "request": {
+            "name": "Create a time entry",
+            "description": {
+              "content": "Creates a manual time entry for a task in a Workspace. The time entry requires a start timestamp and duration. Optionally, a description, tags, and billable status can be included.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "team",
+                ":team_id",
+                "time_entries"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "custom_task_ids",
+                  "value": "<boolean>",
+                  "description": "If true, the tid parameter should be a custom task ID."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "team_id",
+                  "description": "(Required) The unique identifier of the Workspace (team)."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"start\": \"<long>\",\n  \"duration\": \"<integer>\",\n  \"tid\": \"<string>\",\n  \"description\": \"<string>\",\n  \"stop\": \"<long>\",\n  \"assignee\": \"<integer>\",\n  \"billable\": \"<boolean>\",\n  \"tags\": [\n    {\n      \"name\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "09988698-c4a3-459d-91af-79bd157e4e09",
+              "name": "Time entry created successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "team",
+                    ":team_id",
+                    "time_entries"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "custom_task_ids",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "team_id",
+                      "description": "(Required) The unique identifier of the Workspace (team)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"start\": \"<long>\",\n  \"duration\": \"<integer>\",\n  \"tid\": \"<string>\",\n  \"description\": \"<string>\",\n  \"stop\": \"<long>\",\n  \"assignee\": \"<integer>\",\n  \"billable\": \"<boolean>\",\n  \"tags\": [\n    {\n      \"name\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"id\": \"string\",\n    \"task\": {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"status\": {\n        \"status\": \"string\",\n        \"color\": \"string\",\n        \"type\": \"string\"\n      },\n      \"custom_type\": \"string\"\n    },\n    \"wid\": \"string\",\n    \"user\": {\n      \"id\": 673,\n      \"username\": \"string\",\n      \"email\": \"n4ILHikqY@oZkkzomA.bhm\",\n      \"color\": \"string\",\n      \"profilePicture\": \"https://pkBBcuZmvQlyFWFwqeGDgSqzaC.waV5-VXibknnaRQfwWL,.nrLKwMYtYBRohjNEiNhOujfdA+UX4AOlvkJNTZv\",\n      \"initials\": \"string\"\n    },\n    \"billable\": true,\n    \"start\": \"string\",\n    \"end\": \"string\",\n    \"duration\": \"string\",\n    \"description\": \"string\",\n    \"tags\": [\n      {\n        \"name\": \"string\",\n        \"tag_bg\": \"string\",\n        \"tag_fg\": \"string\",\n        \"creator\": 3362\n      },\n      {\n        \"name\": \"string\",\n        \"tag_bg\": \"string\",\n        \"tag_fg\": \"string\",\n        \"creator\": 2107\n      }\n    ],\n    \"source\": \"string\",\n    \"at\": \"string\",\n    \"task_location\": {\n      \"list_id\": 1353,\n      \"folder_id\": 3499,\n      \"space_id\": 2225,\n      \"list_name\": \"string\",\n      \"folder_name\": \"string\",\n      \"space_name\": \"string\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b89d6cf2-824a-4408-9c21-db388ca8d87c",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "team",
+                    ":team_id",
+                    "time_entries"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "custom_task_ids",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "team_id",
+                      "description": "(Required) The unique identifier of the Workspace (team)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"start\": \"<long>\",\n  \"duration\": \"<integer>\",\n  \"tid\": \"<string>\",\n  \"description\": \"<string>\",\n  \"stop\": \"<long>\",\n  \"assignee\": \"<integer>\",\n  \"billable\": \"<boolean>\",\n  \"tags\": [\n    {\n      \"name\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "fd5458ee-807f-43c0-a6cf-f26c8ed4d20a",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "team",
+                    ":team_id",
+                    "time_entries"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "custom_task_ids",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "team_id",
+                      "description": "(Required) The unique identifier of the Workspace (team)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"start\": \"<long>\",\n  \"duration\": \"<integer>\",\n  \"tid\": \"<string>\",\n  \"description\": \"<string>\",\n  \"stop\": \"<long>\",\n  \"assignee\": \"<integer>\",\n  \"billable\": \"<boolean>\",\n  \"tags\": [\n    {\n      \"name\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "720b2928-1885-48ae-b441-a960628f75c6",
+          "name": "Get a single time entry",
+          "request": {
+            "name": "Get a single time entry",
+            "description": {
+              "content": "Retrieves details of a specific time entry by its ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "team",
+                ":team_id",
+                "time_entries",
+                ":timer_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "team_id",
+                  "description": "(Required) The unique identifier of the Workspace (team)."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "timer_id",
+                  "description": "(Required) The unique identifier of the time entry."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9cfbd1f9-1a03-40ae-9183-cdd4b2ee189e",
+              "name": "Successfully retrieved time entry",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "team",
+                    ":team_id",
+                    "time_entries",
+                    ":timer_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "team_id",
+                      "description": "(Required) The unique identifier of the Workspace (team)."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "timer_id",
+                      "description": "(Required) The unique identifier of the time entry."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"id\": \"string\",\n    \"task\": {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"status\": {\n        \"status\": \"string\",\n        \"color\": \"string\",\n        \"type\": \"string\"\n      },\n      \"custom_type\": \"string\"\n    },\n    \"wid\": \"string\",\n    \"user\": {\n      \"id\": 673,\n      \"username\": \"string\",\n      \"email\": \"n4ILHikqY@oZkkzomA.bhm\",\n      \"color\": \"string\",\n      \"profilePicture\": \"https://pkBBcuZmvQlyFWFwqeGDgSqzaC.waV5-VXibknnaRQfwWL,.nrLKwMYtYBRohjNEiNhOujfdA+UX4AOlvkJNTZv\",\n      \"initials\": \"string\"\n    },\n    \"billable\": true,\n    \"start\": \"string\",\n    \"end\": \"string\",\n    \"duration\": \"string\",\n    \"description\": \"string\",\n    \"tags\": [\n      {\n        \"name\": \"string\",\n        \"tag_bg\": \"string\",\n        \"tag_fg\": \"string\",\n        \"creator\": 3362\n      },\n      {\n        \"name\": \"string\",\n        \"tag_bg\": \"string\",\n        \"tag_fg\": \"string\",\n        \"creator\": 2107\n      }\n    ],\n    \"source\": \"string\",\n    \"at\": \"string\",\n    \"task_location\": {\n      \"list_id\": 1353,\n      \"folder_id\": 3499,\n      \"space_id\": 2225,\n      \"list_name\": \"string\",\n      \"folder_name\": \"string\",\n      \"space_name\": \"string\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "90629358-b037-4aa2-afa1-d769b693d44d",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "team",
+                    ":team_id",
+                    "time_entries",
+                    ":timer_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "team_id",
+                      "description": "(Required) The unique identifier of the Workspace (team)."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "timer_id",
+                      "description": "(Required) The unique identifier of the time entry."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "24a6f67f-153e-4275-9f63-4b14c060b60c",
+              "name": "Time entry not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "team",
+                    ":team_id",
+                    "time_entries",
+                    ":timer_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "team_id",
+                      "description": "(Required) The unique identifier of the Workspace (team)."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "timer_id",
+                      "description": "(Required) The unique identifier of the time entry."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6564e357-6a97-4d0f-8e9c-0cfc47613168",
+          "name": "Update a time entry",
+          "request": {
+            "name": "Update a time entry",
+            "description": {
+              "content": "Updates an existing time entry. The start time, end time, duration, description, tags, and billable status can be modified.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "team",
+                ":team_id",
+                "time_entries",
+                ":timer_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "custom_task_ids",
+                  "value": "<boolean>",
+                  "description": "If true, the tid parameter should be a custom task ID."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "team_id",
+                  "description": "(Required) The unique identifier of the Workspace (team)."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "timer_id",
+                  "description": "(Required) The unique identifier of the time entry."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"tid\": \"<string>\",\n  \"description\": \"<string>\",\n  \"start\": \"<long>\",\n  \"end\": \"<long>\",\n  \"duration\": \"<integer>\",\n  \"billable\": \"<boolean>\",\n  \"tag_action\": \"<string>\",\n  \"tags\": [\n    {\n      \"name\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "0d7a212e-28f8-4c78-b56b-16eb02ab811e",
+              "name": "Time entry updated successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "team",
+                    ":team_id",
+                    "time_entries",
+                    ":timer_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "custom_task_ids",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "team_id",
+                      "description": "(Required) The unique identifier of the Workspace (team)."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "timer_id",
+                      "description": "(Required) The unique identifier of the time entry."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"tid\": \"<string>\",\n  \"description\": \"<string>\",\n  \"start\": \"<long>\",\n  \"end\": \"<long>\",\n  \"duration\": \"<integer>\",\n  \"billable\": \"<boolean>\",\n  \"tag_action\": \"<string>\",\n  \"tags\": [\n    {\n      \"name\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"id\": \"string\",\n    \"task\": {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"status\": {\n        \"status\": \"string\",\n        \"color\": \"string\",\n        \"type\": \"string\"\n      },\n      \"custom_type\": \"string\"\n    },\n    \"wid\": \"string\",\n    \"user\": {\n      \"id\": 673,\n      \"username\": \"string\",\n      \"email\": \"n4ILHikqY@oZkkzomA.bhm\",\n      \"color\": \"string\",\n      \"profilePicture\": \"https://pkBBcuZmvQlyFWFwqeGDgSqzaC.waV5-VXibknnaRQfwWL,.nrLKwMYtYBRohjNEiNhOujfdA+UX4AOlvkJNTZv\",\n      \"initials\": \"string\"\n    },\n    \"billable\": true,\n    \"start\": \"string\",\n    \"end\": \"string\",\n    \"duration\": \"string\",\n    \"description\": \"string\",\n    \"tags\": [\n      {\n        \"name\": \"string\",\n        \"tag_bg\": \"string\",\n        \"tag_fg\": \"string\",\n        \"creator\": 3362\n      },\n      {\n        \"name\": \"string\",\n        \"tag_bg\": \"string\",\n        \"tag_fg\": \"string\",\n        \"creator\": 2107\n      }\n    ],\n    \"source\": \"string\",\n    \"at\": \"string\",\n    \"task_location\": {\n      \"list_id\": 1353,\n      \"folder_id\": 3499,\n      \"space_id\": 2225,\n      \"list_name\": \"string\",\n      \"folder_name\": \"string\",\n      \"space_name\": \"string\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a30a8998-5a7d-4c8f-83c2-f68d744685fd",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "team",
+                    ":team_id",
+                    "time_entries",
+                    ":timer_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "custom_task_ids",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "team_id",
+                      "description": "(Required) The unique identifier of the Workspace (team)."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "timer_id",
+                      "description": "(Required) The unique identifier of the time entry."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"tid\": \"<string>\",\n  \"description\": \"<string>\",\n  \"start\": \"<long>\",\n  \"end\": \"<long>\",\n  \"duration\": \"<integer>\",\n  \"billable\": \"<boolean>\",\n  \"tag_action\": \"<string>\",\n  \"tags\": [\n    {\n      \"name\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "9f690a6c-efbe-40db-8db5-64e19011d07e",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "team",
+                    ":team_id",
+                    "time_entries",
+                    ":timer_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "custom_task_ids",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "team_id",
+                      "description": "(Required) The unique identifier of the Workspace (team)."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "timer_id",
+                      "description": "(Required) The unique identifier of the time entry."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"tid\": \"<string>\",\n  \"description\": \"<string>\",\n  \"start\": \"<long>\",\n  \"end\": \"<long>\",\n  \"duration\": \"<integer>\",\n  \"billable\": \"<boolean>\",\n  \"tag_action\": \"<string>\",\n  \"tags\": [\n    {\n      \"name\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "b63e91c8-f4d4-45f8-9c11-159f30959632",
+              "name": "Time entry not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "team",
+                    ":team_id",
+                    "time_entries",
+                    ":timer_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "custom_task_ids",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "team_id",
+                      "description": "(Required) The unique identifier of the Workspace (team)."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "timer_id",
+                      "description": "(Required) The unique identifier of the time entry."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"tid\": \"<string>\",\n  \"description\": \"<string>\",\n  \"start\": \"<long>\",\n  \"end\": \"<long>\",\n  \"duration\": \"<integer>\",\n  \"billable\": \"<boolean>\",\n  \"tag_action\": \"<string>\",\n  \"tags\": [\n    {\n      \"name\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7de1f866-5c8d-467c-bab4-246c2edf3b00",
+          "name": "Delete a time entry",
+          "request": {
+            "name": "Delete a time entry",
+            "description": {
+              "content": "Permanently deletes a time entry. This action cannot be undone.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "team",
+                ":team_id",
+                "time_entries",
+                ":timer_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "team_id",
+                  "description": "(Required) The unique identifier of the Workspace (team)."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "timer_id",
+                  "description": "(Required) The unique identifier of the time entry."
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a5bebd36-7709-4252-afc4-d9d53bbc3a0c",
+              "name": "Time entry deleted successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "team",
+                    ":team_id",
+                    "time_entries",
+                    ":timer_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "team_id",
+                      "description": "(Required) The unique identifier of the Workspace (team)."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "timer_id",
+                      "description": "(Required) The unique identifier of the time entry."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "600c9dba-9696-4fb7-8ee3-5629a5c6dc49",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "team",
+                    ":team_id",
+                    "time_entries",
+                    ":timer_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "team_id",
+                      "description": "(Required) The unique identifier of the Workspace (team)."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "timer_id",
+                      "description": "(Required) The unique identifier of the time entry."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "319d9134-cbab-4db5-9212-db5652b31ab5",
+              "name": "Time entry not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "team",
+                    ":team_id",
+                    "time_entries",
+                    ":timer_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "team_id",
+                      "description": "(Required) The unique identifier of the Workspace (team)."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "timer_id",
+                      "description": "(Required) The unique identifier of the time entry."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "28c9f9f1-94bd-4ddc-ae8e-48631144fcb0",
+          "name": "Get running time entry",
+          "request": {
+            "name": "Get running time entry",
+            "description": {
+              "content": "Retrieves the currently running time entry (timer) for the authenticated user within a Workspace.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "team",
+                ":team_id",
+                "time_entries",
+                "current"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "assignee",
+                  "value": "<integer>",
+                  "description": "User ID to get the running timer for. Defaults to the authenticated user."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "team_id",
+                  "description": "(Required) The unique identifier of the Workspace (team)."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b8194a08-b836-418a-a261-c48daad5c588",
+              "name": "Successfully retrieved current time entry",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "team",
+                    ":team_id",
+                    "time_entries",
+                    "current"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "assignee",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "team_id",
+                      "description": "(Required) The unique identifier of the Workspace (team)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"id\": \"string\",\n    \"task\": {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"status\": {\n        \"status\": \"string\",\n        \"color\": \"string\",\n        \"type\": \"string\"\n      },\n      \"custom_type\": \"string\"\n    },\n    \"wid\": \"string\",\n    \"user\": {\n      \"id\": 673,\n      \"username\": \"string\",\n      \"email\": \"n4ILHikqY@oZkkzomA.bhm\",\n      \"color\": \"string\",\n      \"profilePicture\": \"https://pkBBcuZmvQlyFWFwqeGDgSqzaC.waV5-VXibknnaRQfwWL,.nrLKwMYtYBRohjNEiNhOujfdA+UX4AOlvkJNTZv\",\n      \"initials\": \"string\"\n    },\n    \"billable\": true,\n    \"start\": \"string\",\n    \"end\": \"string\",\n    \"duration\": \"string\",\n    \"description\": \"string\",\n    \"tags\": [\n      {\n        \"name\": \"string\",\n        \"tag_bg\": \"string\",\n        \"tag_fg\": \"string\",\n        \"creator\": 3362\n      },\n      {\n        \"name\": \"string\",\n        \"tag_bg\": \"string\",\n        \"tag_fg\": \"string\",\n        \"creator\": 2107\n      }\n    ],\n    \"source\": \"string\",\n    \"at\": \"string\",\n    \"task_location\": {\n      \"list_id\": 1353,\n      \"folder_id\": 3499,\n      \"space_id\": 2225,\n      \"list_name\": \"string\",\n      \"folder_name\": \"string\",\n      \"space_name\": \"string\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "74b21c7d-7411-4cb7-8e3e-bc2581442248",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "team",
+                    ":team_id",
+                    "time_entries",
+                    "current"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "assignee",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "team_id",
+                      "description": "(Required) The unique identifier of the Workspace (team)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "cce99117-25db-4583-aaa0-d560ef544b7f",
+          "name": "Start a time entry",
+          "request": {
+            "name": "Start a time entry",
+            "description": {
+              "content": "Starts a timer for a specific time entry. If another timer is already running, it will be stopped first.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "team",
+                ":team_id",
+                "time_entries",
+                "start",
+                ":timer_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "team_id",
+                  "description": "(Required) The unique identifier of the Workspace (team)."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "timer_id",
+                  "description": "(Required) The unique identifier of the time entry."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"tid\": \"<string>\",\n  \"description\": \"<string>\",\n  \"billable\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "386e632a-bcac-4293-adaf-9f4cd6a74b01",
+              "name": "Timer started successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "team",
+                    ":team_id",
+                    "time_entries",
+                    "start",
+                    ":timer_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "team_id",
+                      "description": "(Required) The unique identifier of the Workspace (team)."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "timer_id",
+                      "description": "(Required) The unique identifier of the time entry."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"tid\": \"<string>\",\n  \"description\": \"<string>\",\n  \"billable\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"id\": \"string\",\n    \"task\": {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"status\": {\n        \"status\": \"string\",\n        \"color\": \"string\",\n        \"type\": \"string\"\n      },\n      \"custom_type\": \"string\"\n    },\n    \"wid\": \"string\",\n    \"user\": {\n      \"id\": 673,\n      \"username\": \"string\",\n      \"email\": \"n4ILHikqY@oZkkzomA.bhm\",\n      \"color\": \"string\",\n      \"profilePicture\": \"https://pkBBcuZmvQlyFWFwqeGDgSqzaC.waV5-VXibknnaRQfwWL,.nrLKwMYtYBRohjNEiNhOujfdA+UX4AOlvkJNTZv\",\n      \"initials\": \"string\"\n    },\n    \"billable\": true,\n    \"start\": \"string\",\n    \"end\": \"string\",\n    \"duration\": \"string\",\n    \"description\": \"string\",\n    \"tags\": [\n      {\n        \"name\": \"string\",\n        \"tag_bg\": \"string\",\n        \"tag_fg\": \"string\",\n        \"creator\": 3362\n      },\n      {\n        \"name\": \"string\",\n        \"tag_bg\": \"string\",\n        \"tag_fg\": \"string\",\n        \"creator\": 2107\n      }\n    ],\n    \"source\": \"string\",\n    \"at\": \"string\",\n    \"task_location\": {\n      \"list_id\": 1353,\n      \"folder_id\": 3499,\n      \"space_id\": 2225,\n      \"list_name\": \"string\",\n      \"folder_name\": \"string\",\n      \"space_name\": \"string\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "48942abb-f974-496b-8e82-3fc8cc9816dc",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "team",
+                    ":team_id",
+                    "time_entries",
+                    "start",
+                    ":timer_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "team_id",
+                      "description": "(Required) The unique identifier of the Workspace (team)."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "timer_id",
+                      "description": "(Required) The unique identifier of the time entry."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"tid\": \"<string>\",\n  \"description\": \"<string>\",\n  \"billable\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2df450b7-7151-4a89-a90b-a23565cfd5cc",
+          "name": "Stop a time entry",
+          "request": {
+            "name": "Stop a time entry",
+            "description": {
+              "content": "Stops the currently running timer for the authenticated user within a Workspace.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "team",
+                ":team_id",
+                "time_entries",
+                "stop"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "team_id",
+                  "description": "(Required) The unique identifier of the Workspace (team)."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7c34be58-645a-4e8d-8b35-ba3958b51b82",
+              "name": "Timer stopped successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "team",
+                    ":team_id",
+                    "time_entries",
+                    "stop"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "team_id",
+                      "description": "(Required) The unique identifier of the Workspace (team)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"id\": \"string\",\n    \"task\": {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"status\": {\n        \"status\": \"string\",\n        \"color\": \"string\",\n        \"type\": \"string\"\n      },\n      \"custom_type\": \"string\"\n    },\n    \"wid\": \"string\",\n    \"user\": {\n      \"id\": 673,\n      \"username\": \"string\",\n      \"email\": \"n4ILHikqY@oZkkzomA.bhm\",\n      \"color\": \"string\",\n      \"profilePicture\": \"https://pkBBcuZmvQlyFWFwqeGDgSqzaC.waV5-VXibknnaRQfwWL,.nrLKwMYtYBRohjNEiNhOujfdA+UX4AOlvkJNTZv\",\n      \"initials\": \"string\"\n    },\n    \"billable\": true,\n    \"start\": \"string\",\n    \"end\": \"string\",\n    \"duration\": \"string\",\n    \"description\": \"string\",\n    \"tags\": [\n      {\n        \"name\": \"string\",\n        \"tag_bg\": \"string\",\n        \"tag_fg\": \"string\",\n        \"creator\": 3362\n      },\n      {\n        \"name\": \"string\",\n        \"tag_bg\": \"string\",\n        \"tag_fg\": \"string\",\n        \"creator\": 2107\n      }\n    ],\n    \"source\": \"string\",\n    \"at\": \"string\",\n    \"task_location\": {\n      \"list_id\": 1353,\n      \"folder_id\": 3499,\n      \"space_id\": 2225,\n      \"list_name\": \"string\",\n      \"folder_name\": \"string\",\n      \"space_name\": \"string\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fa4b017f-6516-43db-b9f8-8aea63276884",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "team",
+                    ":team_id",
+                    "time_entries",
+                    "stop"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "team_id",
+                      "description": "(Required) The unique identifier of the Workspace (team)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8a0b3e2d-c497-4280-83fb-19fe7f09e7e2",
+          "name": "Get all time entry tags",
+          "request": {
+            "name": "Get all time entry tags",
+            "description": {
+              "content": "Retrieves all tags that have been used on time entries within a Workspace.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "team",
+                ":team_id",
+                "time_entries",
+                "tags"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "team_id",
+                  "description": "(Required) The unique identifier of the Workspace (team)."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7d6cfac7-2bad-48ac-9554-a91988d9a78f",
+              "name": "Successfully retrieved time entry tags",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "team",
+                    ":team_id",
+                    "time_entries",
+                    "tags"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "team_id",
+                      "description": "(Required) The unique identifier of the Workspace (team)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"name\": \"string\",\n      \"tag_bg\": \"string\",\n      \"tag_fg\": \"string\",\n      \"creator\": 7601\n    },\n    {\n      \"name\": \"string\",\n      \"tag_bg\": \"string\",\n      \"tag_fg\": \"string\",\n      \"creator\": 8323\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "427c14dd-c26f-44ba-8888-69381811be4e",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "team",
+                    ":team_id",
+                    "time_entries",
+                    "tags"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "team_id",
+                      "description": "(Required) The unique identifier of the Workspace (team)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "63437a81-4c0a-49e2-809f-77d833b266c3",
+          "name": "Add tags to time entries",
+          "request": {
+            "name": "Add tags to time entries",
+            "description": {
+              "content": "Adds tags to one or more time entries within a Workspace.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "team",
+                ":team_id",
+                "time_entries",
+                "tags"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "team_id",
+                  "description": "(Required) The unique identifier of the Workspace (team)."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"time_entry_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"tags\": [\n    {\n      \"name\": \"<string>\",\n      \"tag_bg\": \"<string>\",\n      \"tag_fg\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"tag_bg\": \"<string>\",\n      \"tag_fg\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "276b7a2d-a167-46ba-af06-ad6ecfc2a7d0",
+              "name": "Tags added successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "team",
+                    ":team_id",
+                    "time_entries",
+                    "tags"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "team_id",
+                      "description": "(Required) The unique identifier of the Workspace (team)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"time_entry_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"tags\": [\n    {\n      \"name\": \"<string>\",\n      \"tag_bg\": \"<string>\",\n      \"tag_fg\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"tag_bg\": \"<string>\",\n      \"tag_fg\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "43567c99-dc58-4af0-9975-9cbb85b8a115",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "team",
+                    ":team_id",
+                    "time_entries",
+                    "tags"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "team_id",
+                      "description": "(Required) The unique identifier of the Workspace (team)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"time_entry_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"tags\": [\n    {\n      \"name\": \"<string>\",\n      \"tag_bg\": \"<string>\",\n      \"tag_fg\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"tag_bg\": \"<string>\",\n      \"tag_fg\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "1d565678-7ab2-4a05-a1c7-78012588c2bb",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "team",
+                    ":team_id",
+                    "time_entries",
+                    "tags"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "team_id",
+                      "description": "(Required) The unique identifier of the Workspace (team)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"time_entry_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"tags\": [\n    {\n      \"name\": \"<string>\",\n      \"tag_bg\": \"<string>\",\n      \"tag_fg\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"tag_bg\": \"<string>\",\n      \"tag_fg\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.clickup.com/api/v2",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "4f11765c-e672-41aa-b1ac-4f37f62dc179",
+    "name": "ClickUp Time Tracking API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The ClickUp Time Tracking API provides endpoints for recording and retrieving time entries associated with tasks. Developers can create manual time entries, start and stop timers, and query time entries within date ranges and across team members. This API supports building time reporting dashboards, invoicing integrations, and productivity analysis tools.\n\nContact Support:\n Name: ClickUp Support",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,332 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "ClickUp Time Tracking API",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Time Tracking",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get time entries within a date range",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.clickup.com/api/v2/team/:team_id/time_entries",
+            "params": [
+              {
+                "name": "team_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the Workspace (team)."
+              },
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query",
+                "description": "Unix timestamp in milliseconds for the start of the date range."
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query",
+                "description": "Unix timestamp in milliseconds for the end of the date range."
+              },
+              {
+                "name": "assignee",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of user IDs to filter by assignees."
+              },
+              {
+                "name": "include_task_tags",
+                "value": "",
+                "type": "query",
+                "description": "Include tags from the associated tasks."
+              },
+              {
+                "name": "include_location_names",
+                "value": "",
+                "type": "query",
+                "description": "Include names of the spaces, folders, and lists."
+              },
+              {
+                "name": "space_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by Space ID."
+              },
+              {
+                "name": "folder_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by Folder ID."
+              },
+              {
+                "name": "list_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by List ID."
+              },
+              {
+                "name": "task_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by Task ID."
+              },
+              {
+                "name": "custom_task_ids",
+                "value": "",
+                "type": "query",
+                "description": "If true, the task_id parameter should be a custom task ID."
+              }
+            ]
+          },
+          "docs": "Retrieves time entries within a specified date range for a Workspace. Results can be filtered by assignees and task IDs. Returns time entries with their duration, start time, end time, and associated task information."
+        },
+        {
+          "info": {
+            "name": "Create a time entry",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.clickup.com/api/v2/team/:team_id/time_entries",
+            "params": [
+              {
+                "name": "team_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the Workspace (team)."
+              },
+              {
+                "name": "custom_task_ids",
+                "value": "",
+                "type": "query",
+                "description": "If true, the tid parameter should be a custom task ID."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a manual time entry for a task in a Workspace. The time entry requires a start timestamp and duration. Optionally, a description, tags, and billable status can be included."
+        },
+        {
+          "info": {
+            "name": "Get a single time entry",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.clickup.com/api/v2/team/:team_id/time_entries/:timer_id",
+            "params": [
+              {
+                "name": "team_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the Workspace (team)."
+              },
+              {
+                "name": "timer_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the time entry."
+              }
+            ]
+          },
+          "docs": "Retrieves details of a specific time entry by its ID."
+        },
+        {
+          "info": {
+            "name": "Update a time entry",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.clickup.com/api/v2/team/:team_id/time_entries/:timer_id",
+            "params": [
+              {
+                "name": "team_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the Workspace (team)."
+              },
+              {
+                "name": "timer_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the time entry."
+              },
+              {
+                "name": "custom_task_ids",
+                "value": "",
+                "type": "query",
+                "description": "If true, the tid parameter should be a custom task ID."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an existing time entry. The start time, end time, duration, description, tags, and billable status can be modified."
+        },
+        {
+          "info": {
+            "name": "Delete a time entry",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.clickup.com/api/v2/team/:team_id/time_entries/:timer_id",
+            "params": [
+              {
+                "name": "team_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the Workspace (team)."
+              },
+              {
+                "name": "timer_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the time entry."
+              }
+            ]
+          },
+          "docs": "Permanently deletes a time entry. This action cannot be undone."
+        },
+        {
+          "info": {
+            "name": "Get running time entry",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.clickup.com/api/v2/team/:team_id/time_entries/current",
+            "params": [
+              {
+                "name": "team_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the Workspace (team)."
+              },
+              {
+                "name": "assignee",
+                "value": "",
+                "type": "query",
+                "description": "User ID to get the running timer for. Defaults to the authenticated user."
+              }
+            ]
+          },
+          "docs": "Retrieves the currently running time entry (timer) for the authenticated user within a Workspace."
+        },
+        {
+          "info": {
+            "name": "Start a time entry",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.clickup.com/api/v2/team/:team_id/time_entries/start/:timer_id",
+            "params": [
+              {
+                "name": "team_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the Workspace (team)."
+              },
+              {
+                "name": "timer_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the time entry."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Starts a timer for a specific time entry. If another timer is already running, it will be stopped first."
+        },
+        {
+          "info": {
+            "name": "Stop a time entry",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.clickup.com/api/v2/team/:team_id/time_entries/stop",
+            "params": [
+              {
+                "name": "team_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the Workspace (team)."
+              }
+            ]
+          },
+          "docs": "Stops the currently running timer for the authenticated user within a Workspace."
+        },
+        {
+          "info": {
+            "name": "Get all time entry tags",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.clickup.com/api/v2/team/:team_id/time_entries/tags",
+            "params": [
+              {
+                "name": "team_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the Workspace (team)."
+              }
+            ]
+          },
+          "docs": "Retrieves all tags that have been used on time entries within a Workspace."
+        },
+        {
+          "info": {
+            "name": "Add tags to time entries",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.clickup.com/api/v2/team/:team_id/time_entries/tags",
+            "params": [
+              {
+                "name": "team_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the Workspace (team)."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Adds tags to one or more time entries within a Workspace."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

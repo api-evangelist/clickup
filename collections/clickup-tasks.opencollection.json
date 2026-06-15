@@ -1,0 +1,523 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "ClickUp Tasks API",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Tasks",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get tasks in a list",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.clickup.com/api/v2/list/:list_id/task",
+            "params": [
+              {
+                "name": "list_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the list."
+              },
+              {
+                "name": "archived",
+                "value": "",
+                "type": "query",
+                "description": "Include archived tasks in the response."
+              },
+              {
+                "name": "include_markdown_description",
+                "value": "",
+                "type": "query",
+                "description": "Return task descriptions in Markdown format."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number for pagination. Starts at 0."
+              },
+              {
+                "name": "order_by",
+                "value": "",
+                "type": "query",
+                "description": "Field to order results by."
+              },
+              {
+                "name": "reverse",
+                "value": "",
+                "type": "query",
+                "description": "Reverse the order of results."
+              },
+              {
+                "name": "subtasks",
+                "value": "",
+                "type": "query",
+                "description": "Include subtasks in the response."
+              },
+              {
+                "name": "statuses[]",
+                "value": "",
+                "type": "query",
+                "description": "Filter by task status."
+              },
+              {
+                "name": "include_closed",
+                "value": "",
+                "type": "query",
+                "description": "Include closed tasks in the response."
+              },
+              {
+                "name": "assignees[]",
+                "value": "",
+                "type": "query",
+                "description": "Filter by assignee user IDs."
+              },
+              {
+                "name": "tags[]",
+                "value": "",
+                "type": "query",
+                "description": "Filter by tag names."
+              },
+              {
+                "name": "due_date_gt",
+                "value": "",
+                "type": "query",
+                "description": "Filter for tasks with due date greater than this Unix timestamp in milliseconds."
+              },
+              {
+                "name": "due_date_lt",
+                "value": "",
+                "type": "query",
+                "description": "Filter for tasks with due date less than this Unix timestamp in milliseconds."
+              },
+              {
+                "name": "date_created_gt",
+                "value": "",
+                "type": "query",
+                "description": "Filter for tasks created after this Unix timestamp in milliseconds."
+              },
+              {
+                "name": "date_created_lt",
+                "value": "",
+                "type": "query",
+                "description": "Filter for tasks created before this Unix timestamp in milliseconds."
+              },
+              {
+                "name": "date_updated_gt",
+                "value": "",
+                "type": "query",
+                "description": "Filter for tasks updated after this Unix timestamp in milliseconds."
+              },
+              {
+                "name": "date_updated_lt",
+                "value": "",
+                "type": "query",
+                "description": "Filter for tasks updated before this Unix timestamp in milliseconds."
+              },
+              {
+                "name": "custom_fields",
+                "value": "",
+                "type": "query",
+                "description": "Filter by custom field values. Provided as a JSON array of objects."
+              }
+            ]
+          },
+          "docs": "Retrieves all tasks within a specified list. Supports filtering, pagination, and inclusion of subtasks and closed tasks. Results can be ordered by various fields including due date, date created, and date updated."
+        },
+        {
+          "info": {
+            "name": "Create a task",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.clickup.com/api/v2/list/:list_id/task",
+            "params": [
+              {
+                "name": "list_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the list."
+              },
+              {
+                "name": "custom_task_ids",
+                "value": "",
+                "type": "query",
+                "description": "If you want to reference a task by its custom task ID, this value must be true."
+              },
+              {
+                "name": "team_id",
+                "value": "",
+                "type": "query",
+                "description": "Required when custom_task_ids is set to true. The Workspace ID."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new task within a specified list. The task can include a name, description, assignees, tags, priority, due date, start date, time estimate, custom fields, and other attributes."
+        },
+        {
+          "info": {
+            "name": "Get a task",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.clickup.com/api/v2/task/:task_id",
+            "params": [
+              {
+                "name": "task_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the task."
+              },
+              {
+                "name": "custom_task_ids",
+                "value": "",
+                "type": "query",
+                "description": "If you want to reference a task by its custom task ID, this value must be true."
+              },
+              {
+                "name": "team_id",
+                "value": "",
+                "type": "query",
+                "description": "Required when custom_task_ids is set to true. The Workspace ID."
+              },
+              {
+                "name": "include_subtasks",
+                "value": "",
+                "type": "query",
+                "description": "Include subtasks in the response."
+              },
+              {
+                "name": "include_markdown_description",
+                "value": "",
+                "type": "query",
+                "description": "Return the task description in Markdown format."
+              }
+            ]
+          },
+          "docs": "Retrieves a single task by its ID, including all task details such as status, assignees, tags, custom fields, and subtasks."
+        },
+        {
+          "info": {
+            "name": "Update a task",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.clickup.com/api/v2/task/:task_id",
+            "params": [
+              {
+                "name": "task_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the task."
+              },
+              {
+                "name": "custom_task_ids",
+                "value": "",
+                "type": "query",
+                "description": "If you want to reference a task by its custom task ID, this value must be true."
+              },
+              {
+                "name": "team_id",
+                "value": "",
+                "type": "query",
+                "description": "Required when custom_task_ids is set to true. The Workspace ID."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an existing task. Any fields included in the request body will be updated. Fields not included will remain unchanged."
+        },
+        {
+          "info": {
+            "name": "Delete a task",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.clickup.com/api/v2/task/:task_id",
+            "params": [
+              {
+                "name": "task_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the task."
+              },
+              {
+                "name": "custom_task_ids",
+                "value": "",
+                "type": "query",
+                "description": "If you want to reference a task by its custom task ID, this value must be true."
+              },
+              {
+                "name": "team_id",
+                "value": "",
+                "type": "query",
+                "description": "Required when custom_task_ids is set to true. The Workspace ID."
+              }
+            ]
+          },
+          "docs": "Permanently deletes a task by its ID. This action cannot be undone."
+        },
+        {
+          "info": {
+            "name": "Get filtered team tasks",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.clickup.com/api/v2/team/:team_id/task",
+            "params": [
+              {
+                "name": "team_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the Workspace (team)."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number for pagination. Starts at 0."
+              },
+              {
+                "name": "order_by",
+                "value": "",
+                "type": "query",
+                "description": "Field to order results by."
+              },
+              {
+                "name": "reverse",
+                "value": "",
+                "type": "query",
+                "description": "Reverse the order of results."
+              },
+              {
+                "name": "subtasks",
+                "value": "",
+                "type": "query",
+                "description": "Include subtasks in the response."
+              },
+              {
+                "name": "statuses[]",
+                "value": "",
+                "type": "query",
+                "description": "Filter by task statuses."
+              },
+              {
+                "name": "include_closed",
+                "value": "",
+                "type": "query",
+                "description": "Include closed tasks."
+              },
+              {
+                "name": "assignees[]",
+                "value": "",
+                "type": "query",
+                "description": "Filter by assignee user IDs."
+              },
+              {
+                "name": "tags[]",
+                "value": "",
+                "type": "query",
+                "description": "Filter by tag names."
+              },
+              {
+                "name": "due_date_gt",
+                "value": "",
+                "type": "query",
+                "description": "Filter for tasks with due date after this Unix timestamp in milliseconds."
+              },
+              {
+                "name": "due_date_lt",
+                "value": "",
+                "type": "query",
+                "description": "Filter for tasks with due date before this Unix timestamp in milliseconds."
+              },
+              {
+                "name": "date_created_gt",
+                "value": "",
+                "type": "query",
+                "description": "Filter for tasks created after this Unix timestamp in milliseconds."
+              },
+              {
+                "name": "date_created_lt",
+                "value": "",
+                "type": "query",
+                "description": "Filter for tasks created before this Unix timestamp in milliseconds."
+              },
+              {
+                "name": "date_updated_gt",
+                "value": "",
+                "type": "query",
+                "description": "Filter for tasks updated after this Unix timestamp in milliseconds."
+              },
+              {
+                "name": "date_updated_lt",
+                "value": "",
+                "type": "query",
+                "description": "Filter for tasks updated before this Unix timestamp in milliseconds."
+              },
+              {
+                "name": "list_ids[]",
+                "value": "",
+                "type": "query",
+                "description": "Filter by list IDs."
+              },
+              {
+                "name": "space_ids[]",
+                "value": "",
+                "type": "query",
+                "description": "Filter by space IDs."
+              },
+              {
+                "name": "project_ids[]",
+                "value": "",
+                "type": "query",
+                "description": "Filter by folder (project) IDs."
+              }
+            ]
+          },
+          "docs": "Retrieves tasks across an entire Workspace (team), with support for filtering by assignees, tags, statuses, due dates, and more. This endpoint searches tasks across all lists, folders, and spaces in the Workspace."
+        },
+        {
+          "info": {
+            "name": "Get task time in status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.clickup.com/api/v2/task/:task_id/time_in_status",
+            "params": [
+              {
+                "name": "task_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the task."
+              }
+            ]
+          },
+          "docs": "Retrieves how long a task has been in each status. Returns time information for every status the task has been in."
+        },
+        {
+          "info": {
+            "name": "Get bulk task time in status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.clickup.com/api/v2/task/bulk_time_in_status/task_ids",
+            "params": [
+              {
+                "name": "task_ids[]",
+                "value": "",
+                "type": "query",
+                "description": "Array of task IDs to retrieve time in status data for."
+              }
+            ]
+          },
+          "docs": "Retrieves time in status data for multiple tasks at once. Accepts an array of task IDs as query parameters."
+        },
+        {
+          "info": {
+            "name": "Get task members",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.clickup.com/api/v2/list/:list_id/task/:task_id/member",
+            "params": [
+              {
+                "name": "list_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the list."
+              },
+              {
+                "name": "task_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the task."
+              }
+            ]
+          },
+          "docs": "Retrieves the members (assignees and watchers) of a specific task."
+        },
+        {
+          "info": {
+            "name": "Add tag to task",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.clickup.com/api/v2/task/:task_id/tag/:tag_name",
+            "params": [
+              {
+                "name": "task_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the task."
+              },
+              {
+                "name": "tag_name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the tag to add."
+              }
+            ]
+          },
+          "docs": "Adds a tag to a task. If the tag does not exist in the Space, it will be created."
+        },
+        {
+          "info": {
+            "name": "Remove tag from task",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.clickup.com/api/v2/task/:task_id/tag/:tag_name",
+            "params": [
+              {
+                "name": "task_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the task."
+              },
+              {
+                "name": "tag_name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the tag to remove."
+              }
+            ]
+          },
+          "docs": "Removes a tag from a task."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

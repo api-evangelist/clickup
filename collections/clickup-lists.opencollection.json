@@ -1,0 +1,200 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "ClickUp Lists API",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Lists",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get lists in a folder",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.clickup.com/api/v2/folder/:folder_id/list",
+            "params": [
+              {
+                "name": "folder_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the Folder."
+              },
+              {
+                "name": "archived",
+                "value": "",
+                "type": "query",
+                "description": "Include archived Lists in the response."
+              }
+            ]
+          },
+          "docs": "Retrieves all Lists within a specified Folder. Optionally includes archived Lists in the response."
+        },
+        {
+          "info": {
+            "name": "Create a list in a folder",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.clickup.com/api/v2/folder/:folder_id/list",
+            "params": [
+              {
+                "name": "folder_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the Folder."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new List within a specified Folder. The List can be configured with a name, content description, due date, priority, assignee, and status."
+        },
+        {
+          "info": {
+            "name": "Get folderless lists",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.clickup.com/api/v2/space/:space_id/list",
+            "params": [
+              {
+                "name": "space_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the Space."
+              },
+              {
+                "name": "archived",
+                "value": "",
+                "type": "query",
+                "description": "Include archived Lists in the response."
+              }
+            ]
+          },
+          "docs": "Retrieves all Lists that are directly within a Space and not inside any Folder. These are sometimes called folderless Lists."
+        },
+        {
+          "info": {
+            "name": "Create a folderless list",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.clickup.com/api/v2/space/:space_id/list",
+            "params": [
+              {
+                "name": "space_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the Space."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new List directly within a Space, without placing it inside a Folder."
+        },
+        {
+          "info": {
+            "name": "Get a list",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.clickup.com/api/v2/list/:list_id",
+            "params": [
+              {
+                "name": "list_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the List."
+              }
+            ]
+          },
+          "docs": "Retrieves details of a specific List, including its statuses, content, and configuration."
+        },
+        {
+          "info": {
+            "name": "Update a list",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.clickup.com/api/v2/list/:list_id",
+            "params": [
+              {
+                "name": "list_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the List."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the properties of an existing List, including its name, content, due date, priority, assignee, and status."
+        },
+        {
+          "info": {
+            "name": "Delete a list",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.clickup.com/api/v2/list/:list_id",
+            "params": [
+              {
+                "name": "list_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the List."
+              }
+            ]
+          },
+          "docs": "Permanently deletes a List and all tasks it contains. This action cannot be undone."
+        },
+        {
+          "info": {
+            "name": "Get list members",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.clickup.com/api/v2/list/:list_id/member",
+            "params": [
+              {
+                "name": "list_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the List."
+              }
+            ]
+          },
+          "docs": "Retrieves the members who have access to a specific List."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

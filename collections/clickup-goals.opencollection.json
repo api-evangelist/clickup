@@ -1,0 +1,198 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "ClickUp Goals API",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Goals",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get goals",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.clickup.com/api/v2/team/:team_id/goal",
+            "params": [
+              {
+                "name": "team_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the Workspace (team)."
+              },
+              {
+                "name": "include_completed",
+                "value": "",
+                "type": "query",
+                "description": "Include completed Goals in the response."
+              }
+            ]
+          },
+          "docs": "Retrieves all Goals within a Workspace, including their key results and progress information."
+        },
+        {
+          "info": {
+            "name": "Create a goal",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.clickup.com/api/v2/team/:team_id/goal",
+            "params": [
+              {
+                "name": "team_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the Workspace (team)."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new Goal within a Workspace. Goals can include a name, due date, description, assignees, and color."
+        },
+        {
+          "info": {
+            "name": "Get a goal",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.clickup.com/api/v2/goal/:goal_id",
+            "params": [
+              {
+                "name": "goal_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the Goal."
+              }
+            ]
+          },
+          "docs": "Retrieves details of a specific Goal, including its key results, targets, and progress."
+        },
+        {
+          "info": {
+            "name": "Update a goal",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.clickup.com/api/v2/goal/:goal_id",
+            "params": [
+              {
+                "name": "goal_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the Goal."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the properties of an existing Goal."
+        },
+        {
+          "info": {
+            "name": "Delete a goal",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.clickup.com/api/v2/goal/:goal_id",
+            "params": [
+              {
+                "name": "goal_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the Goal."
+              }
+            ]
+          },
+          "docs": "Permanently deletes a Goal and all of its key results. This action cannot be undone."
+        },
+        {
+          "info": {
+            "name": "Create a key result",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.clickup.com/api/v2/goal/:goal_id/key_result",
+            "params": [
+              {
+                "name": "goal_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the Goal."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new Key Result (target) within a Goal. Key Results can be of type number, currency, boolean, percentage, or automatic (based on task completion)."
+        },
+        {
+          "info": {
+            "name": "Edit a key result",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.clickup.com/api/v2/key_result/:key_result_id",
+            "params": [
+              {
+                "name": "key_result_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the Key Result."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the properties and progress of an existing Key Result."
+        },
+        {
+          "info": {
+            "name": "Delete a key result",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.clickup.com/api/v2/key_result/:key_result_id",
+            "params": [
+              {
+                "name": "key_result_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the Key Result."
+              }
+            ]
+          },
+          "docs": "Permanently deletes a Key Result from a Goal."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

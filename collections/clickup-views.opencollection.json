@@ -1,0 +1,186 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "ClickUp Views API",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Views",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get team views",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.clickup.com/api/v2/team/:team_id/view",
+            "params": [
+              {
+                "name": "team_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the Workspace (team)."
+              }
+            ]
+          },
+          "docs": "Retrieves all views at the Workspace (team) level. These are views that span across all Spaces in the Workspace."
+        },
+        {
+          "info": {
+            "name": "Get space views",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.clickup.com/api/v2/space/:space_id/view",
+            "params": [
+              {
+                "name": "space_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the Space."
+              }
+            ]
+          },
+          "docs": "Retrieves all views within a specific Space."
+        },
+        {
+          "info": {
+            "name": "Get folder views",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.clickup.com/api/v2/folder/:folder_id/view",
+            "params": [
+              {
+                "name": "folder_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the Folder."
+              }
+            ]
+          },
+          "docs": "Retrieves all views within a specific Folder."
+        },
+        {
+          "info": {
+            "name": "Get list views",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.clickup.com/api/v2/list/:list_id/view",
+            "params": [
+              {
+                "name": "list_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the List."
+              }
+            ]
+          },
+          "docs": "Retrieves all views within a specific List."
+        },
+        {
+          "info": {
+            "name": "Get a view",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.clickup.com/api/v2/view/:view_id",
+            "params": [
+              {
+                "name": "view_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the View."
+              }
+            ]
+          },
+          "docs": "Retrieves details of a specific view, including its type, filters, grouping, sorting, and column configuration."
+        },
+        {
+          "info": {
+            "name": "Update a view",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.clickup.com/api/v2/view/:view_id",
+            "params": [
+              {
+                "name": "view_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the View."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an existing view's configuration, including its name, type, filters, grouping, sorting, and settings."
+        },
+        {
+          "info": {
+            "name": "Delete a view",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.clickup.com/api/v2/view/:view_id",
+            "params": [
+              {
+                "name": "view_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the View."
+              }
+            ]
+          },
+          "docs": "Permanently deletes a view. This action cannot be undone."
+        },
+        {
+          "info": {
+            "name": "Get view tasks",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.clickup.com/api/v2/view/:view_id/task",
+            "params": [
+              {
+                "name": "view_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the View."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number for pagination. Starts at 0."
+              }
+            ]
+          },
+          "docs": "Retrieves all tasks visible in a specific view, with the view's filters, sorting, and grouping applied."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

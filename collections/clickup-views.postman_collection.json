@@ -1,0 +1,1653 @@
+{
+  "item": [
+    {
+      "id": "cba9f74a-99b6-4652-ac62-91bf1df1ecb9",
+      "name": "Views",
+      "description": {
+        "content": "Operations for managing views at various levels of the ClickUp hierarchy.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "59e75016-b1ca-41ba-8c34-145c2f578a21",
+          "name": "Get team views",
+          "request": {
+            "name": "Get team views",
+            "description": {
+              "content": "Retrieves all views at the Workspace (team) level. These are views that span across all Spaces in the Workspace.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "team",
+                ":team_id",
+                "view"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "team_id",
+                  "description": "(Required) The unique identifier of the Workspace (team)."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4931aae9-f423-4ede-aa9a-b72007a07596",
+              "name": "Successfully retrieved team views",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "team",
+                    ":team_id",
+                    "view"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "team_id",
+                      "description": "(Required) The unique identifier of the Workspace (team)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"views\": [\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"type\": \"workload\",\n      \"parent\": {\n        \"id\": \"string\",\n        \"type\": 1233\n      },\n      \"grouping\": {\n        \"field\": \"string\",\n        \"dir\": 3850,\n        \"collapsed\": [\n          \"string\",\n          \"string\"\n        ],\n        \"ignore\": true\n      },\n      \"divide\": {\n        \"field\": \"string\",\n        \"dir\": 7166,\n        \"collapsed\": [\n          \"string\",\n          \"string\"\n        ]\n      },\n      \"sorting\": {\n        \"fields\": [\n          {\n            \"field\": \"string\",\n            \"dir\": 5999\n          },\n          {\n            \"field\": \"string\",\n            \"dir\": 8674\n          }\n        ]\n      },\n      \"filters\": {\n        \"op\": \"AND\",\n        \"search\": \"string\",\n        \"show_closed\": false\n      },\n      \"columns\": {\n        \"fields\": [\n          {\n            \"field\": \"string\",\n            \"hidden\": true,\n            \"width\": 271\n          },\n          {\n            \"field\": \"string\",\n            \"hidden\": true,\n            \"width\": 2399\n          }\n        ]\n      },\n      \"team_sidebar\": {},\n      \"settings\": {\n        \"show_task_locations\": false,\n        \"show_subtasks\": 6479,\n        \"show_subtask_parent_names\": true,\n        \"show_closed_subtasks\": true,\n        \"show_assignees\": false,\n        \"show_images\": true,\n        \"collapse_empty_columns\": {},\n        \"me_comments\": true,\n        \"me_subtasks\": true,\n        \"me_checklists\": true\n      },\n      \"date_created\": \"string\",\n      \"creator\": 5683,\n      \"visibility\": \"string\",\n      \"protected\": true,\n      \"orderindex\": 5159.195100419723\n    },\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"type\": \"board\",\n      \"parent\": {\n        \"id\": \"string\",\n        \"type\": 6945\n      },\n      \"grouping\": {\n        \"field\": \"string\",\n        \"dir\": 9987,\n        \"collapsed\": [\n          \"string\",\n          \"string\"\n        ],\n        \"ignore\": true\n      },\n      \"divide\": {\n        \"field\": \"string\",\n        \"dir\": 3022,\n        \"collapsed\": [\n          \"string\",\n          \"string\"\n        ]\n      },\n      \"sorting\": {\n        \"fields\": [\n          {\n            \"field\": \"string\",\n            \"dir\": 2572\n          },\n          {\n            \"field\": \"string\",\n            \"dir\": 1035\n          }\n        ]\n      },\n      \"filters\": {\n        \"op\": \"AND\",\n        \"search\": \"string\",\n        \"show_closed\": true\n      },\n      \"columns\": {\n        \"fields\": [\n          {\n            \"field\": \"string\",\n            \"hidden\": false,\n            \"width\": 6384\n          },\n          {\n            \"field\": \"string\",\n            \"hidden\": false,\n            \"width\": 4147\n          }\n        ]\n      },\n      \"team_sidebar\": {},\n      \"settings\": {\n        \"show_task_locations\": true,\n        \"show_subtasks\": 1176,\n        \"show_subtask_parent_names\": false,\n        \"show_closed_subtasks\": false,\n        \"show_assignees\": false,\n        \"show_images\": false,\n        \"collapse_empty_columns\": {},\n        \"me_comments\": false,\n        \"me_subtasks\": true,\n        \"me_checklists\": false\n      },\n      \"date_created\": \"string\",\n      \"creator\": 2043,\n      \"visibility\": \"string\",\n      \"protected\": false,\n      \"orderindex\": 4949.890529081331\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3287c339-8342-40ec-a84a-57e50b937c15",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "team",
+                    ":team_id",
+                    "view"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "team_id",
+                      "description": "(Required) The unique identifier of the Workspace (team)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "fc832373-88d9-4c40-8791-28d6ccb22382",
+          "name": "Get space views",
+          "request": {
+            "name": "Get space views",
+            "description": {
+              "content": "Retrieves all views within a specific Space.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "space",
+                ":space_id",
+                "view"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "space_id",
+                  "description": "(Required) The unique identifier of the Space."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "61df2d4a-fced-490d-8669-cd59588b443f",
+              "name": "Successfully retrieved space views",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "space",
+                    ":space_id",
+                    "view"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "space_id",
+                      "description": "(Required) The unique identifier of the Space."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"views\": [\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"type\": \"workload\",\n      \"parent\": {\n        \"id\": \"string\",\n        \"type\": 1233\n      },\n      \"grouping\": {\n        \"field\": \"string\",\n        \"dir\": 3850,\n        \"collapsed\": [\n          \"string\",\n          \"string\"\n        ],\n        \"ignore\": true\n      },\n      \"divide\": {\n        \"field\": \"string\",\n        \"dir\": 7166,\n        \"collapsed\": [\n          \"string\",\n          \"string\"\n        ]\n      },\n      \"sorting\": {\n        \"fields\": [\n          {\n            \"field\": \"string\",\n            \"dir\": 5999\n          },\n          {\n            \"field\": \"string\",\n            \"dir\": 8674\n          }\n        ]\n      },\n      \"filters\": {\n        \"op\": \"AND\",\n        \"search\": \"string\",\n        \"show_closed\": false\n      },\n      \"columns\": {\n        \"fields\": [\n          {\n            \"field\": \"string\",\n            \"hidden\": true,\n            \"width\": 271\n          },\n          {\n            \"field\": \"string\",\n            \"hidden\": true,\n            \"width\": 2399\n          }\n        ]\n      },\n      \"team_sidebar\": {},\n      \"settings\": {\n        \"show_task_locations\": false,\n        \"show_subtasks\": 6479,\n        \"show_subtask_parent_names\": true,\n        \"show_closed_subtasks\": true,\n        \"show_assignees\": false,\n        \"show_images\": true,\n        \"collapse_empty_columns\": {},\n        \"me_comments\": true,\n        \"me_subtasks\": true,\n        \"me_checklists\": true\n      },\n      \"date_created\": \"string\",\n      \"creator\": 5683,\n      \"visibility\": \"string\",\n      \"protected\": true,\n      \"orderindex\": 5159.195100419723\n    },\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"type\": \"board\",\n      \"parent\": {\n        \"id\": \"string\",\n        \"type\": 6945\n      },\n      \"grouping\": {\n        \"field\": \"string\",\n        \"dir\": 9987,\n        \"collapsed\": [\n          \"string\",\n          \"string\"\n        ],\n        \"ignore\": true\n      },\n      \"divide\": {\n        \"field\": \"string\",\n        \"dir\": 3022,\n        \"collapsed\": [\n          \"string\",\n          \"string\"\n        ]\n      },\n      \"sorting\": {\n        \"fields\": [\n          {\n            \"field\": \"string\",\n            \"dir\": 2572\n          },\n          {\n            \"field\": \"string\",\n            \"dir\": 1035\n          }\n        ]\n      },\n      \"filters\": {\n        \"op\": \"AND\",\n        \"search\": \"string\",\n        \"show_closed\": true\n      },\n      \"columns\": {\n        \"fields\": [\n          {\n            \"field\": \"string\",\n            \"hidden\": false,\n            \"width\": 6384\n          },\n          {\n            \"field\": \"string\",\n            \"hidden\": false,\n            \"width\": 4147\n          }\n        ]\n      },\n      \"team_sidebar\": {},\n      \"settings\": {\n        \"show_task_locations\": true,\n        \"show_subtasks\": 1176,\n        \"show_subtask_parent_names\": false,\n        \"show_closed_subtasks\": false,\n        \"show_assignees\": false,\n        \"show_images\": false,\n        \"collapse_empty_columns\": {},\n        \"me_comments\": false,\n        \"me_subtasks\": true,\n        \"me_checklists\": false\n      },\n      \"date_created\": \"string\",\n      \"creator\": 2043,\n      \"visibility\": \"string\",\n      \"protected\": false,\n      \"orderindex\": 4949.890529081331\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "af054dbd-243f-45bf-b9b3-3bffab0fe5e7",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "space",
+                    ":space_id",
+                    "view"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "space_id",
+                      "description": "(Required) The unique identifier of the Space."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "e99a1c1a-3f66-4e09-bff3-ee715f143d2d",
+              "name": "Space not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "space",
+                    ":space_id",
+                    "view"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "space_id",
+                      "description": "(Required) The unique identifier of the Space."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e042ab78-1abf-46fb-bb04-9c06bc41aa65",
+          "name": "Get folder views",
+          "request": {
+            "name": "Get folder views",
+            "description": {
+              "content": "Retrieves all views within a specific Folder.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "folder",
+                ":folder_id",
+                "view"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "folder_id",
+                  "description": "(Required) The unique identifier of the Folder."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "93e79300-1f1f-4bd4-a6af-a32d2d674a91",
+              "name": "Successfully retrieved folder views",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "folder",
+                    ":folder_id",
+                    "view"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "folder_id",
+                      "description": "(Required) The unique identifier of the Folder."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"views\": [\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"type\": \"workload\",\n      \"parent\": {\n        \"id\": \"string\",\n        \"type\": 1233\n      },\n      \"grouping\": {\n        \"field\": \"string\",\n        \"dir\": 3850,\n        \"collapsed\": [\n          \"string\",\n          \"string\"\n        ],\n        \"ignore\": true\n      },\n      \"divide\": {\n        \"field\": \"string\",\n        \"dir\": 7166,\n        \"collapsed\": [\n          \"string\",\n          \"string\"\n        ]\n      },\n      \"sorting\": {\n        \"fields\": [\n          {\n            \"field\": \"string\",\n            \"dir\": 5999\n          },\n          {\n            \"field\": \"string\",\n            \"dir\": 8674\n          }\n        ]\n      },\n      \"filters\": {\n        \"op\": \"AND\",\n        \"search\": \"string\",\n        \"show_closed\": false\n      },\n      \"columns\": {\n        \"fields\": [\n          {\n            \"field\": \"string\",\n            \"hidden\": true,\n            \"width\": 271\n          },\n          {\n            \"field\": \"string\",\n            \"hidden\": true,\n            \"width\": 2399\n          }\n        ]\n      },\n      \"team_sidebar\": {},\n      \"settings\": {\n        \"show_task_locations\": false,\n        \"show_subtasks\": 6479,\n        \"show_subtask_parent_names\": true,\n        \"show_closed_subtasks\": true,\n        \"show_assignees\": false,\n        \"show_images\": true,\n        \"collapse_empty_columns\": {},\n        \"me_comments\": true,\n        \"me_subtasks\": true,\n        \"me_checklists\": true\n      },\n      \"date_created\": \"string\",\n      \"creator\": 5683,\n      \"visibility\": \"string\",\n      \"protected\": true,\n      \"orderindex\": 5159.195100419723\n    },\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"type\": \"board\",\n      \"parent\": {\n        \"id\": \"string\",\n        \"type\": 6945\n      },\n      \"grouping\": {\n        \"field\": \"string\",\n        \"dir\": 9987,\n        \"collapsed\": [\n          \"string\",\n          \"string\"\n        ],\n        \"ignore\": true\n      },\n      \"divide\": {\n        \"field\": \"string\",\n        \"dir\": 3022,\n        \"collapsed\": [\n          \"string\",\n          \"string\"\n        ]\n      },\n      \"sorting\": {\n        \"fields\": [\n          {\n            \"field\": \"string\",\n            \"dir\": 2572\n          },\n          {\n            \"field\": \"string\",\n            \"dir\": 1035\n          }\n        ]\n      },\n      \"filters\": {\n        \"op\": \"AND\",\n        \"search\": \"string\",\n        \"show_closed\": true\n      },\n      \"columns\": {\n        \"fields\": [\n          {\n            \"field\": \"string\",\n            \"hidden\": false,\n            \"width\": 6384\n          },\n          {\n            \"field\": \"string\",\n            \"hidden\": false,\n            \"width\": 4147\n          }\n        ]\n      },\n      \"team_sidebar\": {},\n      \"settings\": {\n        \"show_task_locations\": true,\n        \"show_subtasks\": 1176,\n        \"show_subtask_parent_names\": false,\n        \"show_closed_subtasks\": false,\n        \"show_assignees\": false,\n        \"show_images\": false,\n        \"collapse_empty_columns\": {},\n        \"me_comments\": false,\n        \"me_subtasks\": true,\n        \"me_checklists\": false\n      },\n      \"date_created\": \"string\",\n      \"creator\": 2043,\n      \"visibility\": \"string\",\n      \"protected\": false,\n      \"orderindex\": 4949.890529081331\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8efefc41-b26d-493e-a7c7-c5e1ec25284d",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "folder",
+                    ":folder_id",
+                    "view"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "folder_id",
+                      "description": "(Required) The unique identifier of the Folder."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "b8cc3174-9baf-4785-b7e6-4c16e63610e9",
+              "name": "Folder not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "folder",
+                    ":folder_id",
+                    "view"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "folder_id",
+                      "description": "(Required) The unique identifier of the Folder."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b5f501b6-a446-46ea-b637-4188efd19dd0",
+          "name": "Get list views",
+          "request": {
+            "name": "Get list views",
+            "description": {
+              "content": "Retrieves all views within a specific List.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "list",
+                ":list_id",
+                "view"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "list_id",
+                  "description": "(Required) The unique identifier of the List."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3eb792f1-a0c2-40d8-aba2-f4618948af85",
+              "name": "Successfully retrieved list views",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "list",
+                    ":list_id",
+                    "view"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "list_id",
+                      "description": "(Required) The unique identifier of the List."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"views\": [\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"type\": \"workload\",\n      \"parent\": {\n        \"id\": \"string\",\n        \"type\": 1233\n      },\n      \"grouping\": {\n        \"field\": \"string\",\n        \"dir\": 3850,\n        \"collapsed\": [\n          \"string\",\n          \"string\"\n        ],\n        \"ignore\": true\n      },\n      \"divide\": {\n        \"field\": \"string\",\n        \"dir\": 7166,\n        \"collapsed\": [\n          \"string\",\n          \"string\"\n        ]\n      },\n      \"sorting\": {\n        \"fields\": [\n          {\n            \"field\": \"string\",\n            \"dir\": 5999\n          },\n          {\n            \"field\": \"string\",\n            \"dir\": 8674\n          }\n        ]\n      },\n      \"filters\": {\n        \"op\": \"AND\",\n        \"search\": \"string\",\n        \"show_closed\": false\n      },\n      \"columns\": {\n        \"fields\": [\n          {\n            \"field\": \"string\",\n            \"hidden\": true,\n            \"width\": 271\n          },\n          {\n            \"field\": \"string\",\n            \"hidden\": true,\n            \"width\": 2399\n          }\n        ]\n      },\n      \"team_sidebar\": {},\n      \"settings\": {\n        \"show_task_locations\": false,\n        \"show_subtasks\": 6479,\n        \"show_subtask_parent_names\": true,\n        \"show_closed_subtasks\": true,\n        \"show_assignees\": false,\n        \"show_images\": true,\n        \"collapse_empty_columns\": {},\n        \"me_comments\": true,\n        \"me_subtasks\": true,\n        \"me_checklists\": true\n      },\n      \"date_created\": \"string\",\n      \"creator\": 5683,\n      \"visibility\": \"string\",\n      \"protected\": true,\n      \"orderindex\": 5159.195100419723\n    },\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"type\": \"board\",\n      \"parent\": {\n        \"id\": \"string\",\n        \"type\": 6945\n      },\n      \"grouping\": {\n        \"field\": \"string\",\n        \"dir\": 9987,\n        \"collapsed\": [\n          \"string\",\n          \"string\"\n        ],\n        \"ignore\": true\n      },\n      \"divide\": {\n        \"field\": \"string\",\n        \"dir\": 3022,\n        \"collapsed\": [\n          \"string\",\n          \"string\"\n        ]\n      },\n      \"sorting\": {\n        \"fields\": [\n          {\n            \"field\": \"string\",\n            \"dir\": 2572\n          },\n          {\n            \"field\": \"string\",\n            \"dir\": 1035\n          }\n        ]\n      },\n      \"filters\": {\n        \"op\": \"AND\",\n        \"search\": \"string\",\n        \"show_closed\": true\n      },\n      \"columns\": {\n        \"fields\": [\n          {\n            \"field\": \"string\",\n            \"hidden\": false,\n            \"width\": 6384\n          },\n          {\n            \"field\": \"string\",\n            \"hidden\": false,\n            \"width\": 4147\n          }\n        ]\n      },\n      \"team_sidebar\": {},\n      \"settings\": {\n        \"show_task_locations\": true,\n        \"show_subtasks\": 1176,\n        \"show_subtask_parent_names\": false,\n        \"show_closed_subtasks\": false,\n        \"show_assignees\": false,\n        \"show_images\": false,\n        \"collapse_empty_columns\": {},\n        \"me_comments\": false,\n        \"me_subtasks\": true,\n        \"me_checklists\": false\n      },\n      \"date_created\": \"string\",\n      \"creator\": 2043,\n      \"visibility\": \"string\",\n      \"protected\": false,\n      \"orderindex\": 4949.890529081331\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ce8ea7ad-a17d-425e-8c8d-96258a2afb48",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "list",
+                    ":list_id",
+                    "view"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "list_id",
+                      "description": "(Required) The unique identifier of the List."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "f5423ecb-7a68-469a-9482-364c8429dd66",
+              "name": "List not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "list",
+                    ":list_id",
+                    "view"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "list_id",
+                      "description": "(Required) The unique identifier of the List."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "aafa6a1f-e167-4ae3-bfe3-ad7396e5e6ea",
+          "name": "Get a view",
+          "request": {
+            "name": "Get a view",
+            "description": {
+              "content": "Retrieves details of a specific view, including its type, filters, grouping, sorting, and column configuration.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "view",
+                ":view_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "view_id",
+                  "description": "(Required) The unique identifier of the View."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d5f0f44b-09fe-4ce5-9d8e-82281df3a39b",
+              "name": "Successfully retrieved view",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "view",
+                    ":view_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "view_id",
+                      "description": "(Required) The unique identifier of the View."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"view\": {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"type\": \"map\",\n    \"parent\": {\n      \"id\": \"string\",\n      \"type\": 8733\n    },\n    \"grouping\": {\n      \"field\": \"string\",\n      \"dir\": 3338,\n      \"collapsed\": [\n        \"string\",\n        \"string\"\n      ],\n      \"ignore\": true\n    },\n    \"divide\": {\n      \"field\": \"string\",\n      \"dir\": 2148,\n      \"collapsed\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    \"sorting\": {\n      \"fields\": [\n        {\n          \"field\": \"string\",\n          \"dir\": 5820\n        },\n        {\n          \"field\": \"string\",\n          \"dir\": 7204\n        }\n      ]\n    },\n    \"filters\": {\n      \"op\": \"AND\",\n      \"search\": \"string\",\n      \"show_closed\": false\n    },\n    \"columns\": {\n      \"fields\": [\n        {\n          \"field\": \"string\",\n          \"hidden\": false,\n          \"width\": 7436\n        },\n        {\n          \"field\": \"string\",\n          \"hidden\": true,\n          \"width\": 9199\n        }\n      ]\n    },\n    \"team_sidebar\": {},\n    \"settings\": {\n      \"show_task_locations\": true,\n      \"show_subtasks\": 3666,\n      \"show_subtask_parent_names\": false,\n      \"show_closed_subtasks\": true,\n      \"show_assignees\": true,\n      \"show_images\": false,\n      \"collapse_empty_columns\": {},\n      \"me_comments\": true,\n      \"me_subtasks\": false,\n      \"me_checklists\": false\n    },\n    \"date_created\": \"string\",\n    \"creator\": 5359,\n    \"visibility\": \"string\",\n    \"protected\": true,\n    \"orderindex\": 4196.956581104283\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "203e3aa9-17f7-4e08-8613-c114ca2baa2f",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "view",
+                    ":view_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "view_id",
+                      "description": "(Required) The unique identifier of the View."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "37b3b8aa-ffc7-4865-93e5-5bf09d9c884c",
+              "name": "View not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "view",
+                    ":view_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "view_id",
+                      "description": "(Required) The unique identifier of the View."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ec4db6db-a315-48cf-b05b-ec267169c793",
+          "name": "Update a view",
+          "request": {
+            "name": "Update a view",
+            "description": {
+              "content": "Updates an existing view's configuration, including its name, type, filters, grouping, sorting, and settings.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "view",
+                ":view_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "view_id",
+                  "description": "(Required) The unique identifier of the View."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"type\": \"<string>\",\n  \"parent\": {\n    \"id\": \"<string>\",\n    \"type\": \"<integer>\"\n  },\n  \"grouping\": \"<object>\",\n  \"divide\": \"<object>\",\n  \"sorting\": \"<object>\",\n  \"filters\": \"<object>\",\n  \"columns\": \"<object>\",\n  \"settings\": \"<object>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "03d541df-9e6e-4484-b770-05f30548b5f8",
+              "name": "View updated successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "view",
+                    ":view_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "view_id",
+                      "description": "(Required) The unique identifier of the View."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"type\": \"<string>\",\n  \"parent\": {\n    \"id\": \"<string>\",\n    \"type\": \"<integer>\"\n  },\n  \"grouping\": \"<object>\",\n  \"divide\": \"<object>\",\n  \"sorting\": \"<object>\",\n  \"filters\": \"<object>\",\n  \"columns\": \"<object>\",\n  \"settings\": \"<object>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"view\": {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"type\": \"map\",\n    \"parent\": {\n      \"id\": \"string\",\n      \"type\": 8733\n    },\n    \"grouping\": {\n      \"field\": \"string\",\n      \"dir\": 3338,\n      \"collapsed\": [\n        \"string\",\n        \"string\"\n      ],\n      \"ignore\": true\n    },\n    \"divide\": {\n      \"field\": \"string\",\n      \"dir\": 2148,\n      \"collapsed\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    \"sorting\": {\n      \"fields\": [\n        {\n          \"field\": \"string\",\n          \"dir\": 5820\n        },\n        {\n          \"field\": \"string\",\n          \"dir\": 7204\n        }\n      ]\n    },\n    \"filters\": {\n      \"op\": \"AND\",\n      \"search\": \"string\",\n      \"show_closed\": false\n    },\n    \"columns\": {\n      \"fields\": [\n        {\n          \"field\": \"string\",\n          \"hidden\": false,\n          \"width\": 7436\n        },\n        {\n          \"field\": \"string\",\n          \"hidden\": true,\n          \"width\": 9199\n        }\n      ]\n    },\n    \"team_sidebar\": {},\n    \"settings\": {\n      \"show_task_locations\": true,\n      \"show_subtasks\": 3666,\n      \"show_subtask_parent_names\": false,\n      \"show_closed_subtasks\": true,\n      \"show_assignees\": true,\n      \"show_images\": false,\n      \"collapse_empty_columns\": {},\n      \"me_comments\": true,\n      \"me_subtasks\": false,\n      \"me_checklists\": false\n    },\n    \"date_created\": \"string\",\n    \"creator\": 5359,\n    \"visibility\": \"string\",\n    \"protected\": true,\n    \"orderindex\": 4196.956581104283\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c9c7ca27-dbf0-45a7-a666-8d42c2e67cfe",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "view",
+                    ":view_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "view_id",
+                      "description": "(Required) The unique identifier of the View."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"type\": \"<string>\",\n  \"parent\": {\n    \"id\": \"<string>\",\n    \"type\": \"<integer>\"\n  },\n  \"grouping\": \"<object>\",\n  \"divide\": \"<object>\",\n  \"sorting\": \"<object>\",\n  \"filters\": \"<object>\",\n  \"columns\": \"<object>\",\n  \"settings\": \"<object>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "87c63320-dbd5-473f-bd95-7a4639dfac15",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "view",
+                    ":view_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "view_id",
+                      "description": "(Required) The unique identifier of the View."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"type\": \"<string>\",\n  \"parent\": {\n    \"id\": \"<string>\",\n    \"type\": \"<integer>\"\n  },\n  \"grouping\": \"<object>\",\n  \"divide\": \"<object>\",\n  \"sorting\": \"<object>\",\n  \"filters\": \"<object>\",\n  \"columns\": \"<object>\",\n  \"settings\": \"<object>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "311987cc-29c5-4d80-8b43-da34ecb264f4",
+              "name": "View not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "view",
+                    ":view_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "view_id",
+                      "description": "(Required) The unique identifier of the View."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"type\": \"<string>\",\n  \"parent\": {\n    \"id\": \"<string>\",\n    \"type\": \"<integer>\"\n  },\n  \"grouping\": \"<object>\",\n  \"divide\": \"<object>\",\n  \"sorting\": \"<object>\",\n  \"filters\": \"<object>\",\n  \"columns\": \"<object>\",\n  \"settings\": \"<object>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5cb36c27-70e1-44ff-a387-92ac8287a596",
+          "name": "Delete a view",
+          "request": {
+            "name": "Delete a view",
+            "description": {
+              "content": "Permanently deletes a view. This action cannot be undone.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "view",
+                ":view_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "view_id",
+                  "description": "(Required) The unique identifier of the View."
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f3955cb5-4fec-4e3d-a373-4bfa9dabc14f",
+              "name": "View deleted successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "view",
+                    ":view_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "view_id",
+                      "description": "(Required) The unique identifier of the View."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "b944f7b6-01f6-4509-aeb6-fb2d74f3e1a4",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "view",
+                    ":view_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "view_id",
+                      "description": "(Required) The unique identifier of the View."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "d832b1b9-0057-4a9f-b94f-d52b5e9ad9bc",
+              "name": "View not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "view",
+                    ":view_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "view_id",
+                      "description": "(Required) The unique identifier of the View."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8cd65ee1-1635-46c8-ab1a-12e44a08d803",
+          "name": "Get view tasks",
+          "request": {
+            "name": "Get view tasks",
+            "description": {
+              "content": "Retrieves all tasks visible in a specific view, with the view's filters, sorting, and grouping applied.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "view",
+                ":view_id",
+                "task"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<integer>",
+                  "description": "Page number for pagination. Starts at 0."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "view_id",
+                  "description": "(Required) The unique identifier of the View."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2cdc20fe-1831-4982-9f9c-a45f40965b42",
+              "name": "Successfully retrieved view tasks",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "view",
+                    ":view_id",
+                    "task"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "view_id",
+                      "description": "(Required) The unique identifier of the View."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"last_page\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8995ca4d-a0db-42b3-933c-9dbc94bb1cea",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "view",
+                    ":view_id",
+                    "task"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "view_id",
+                      "description": "(Required) The unique identifier of the View."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "1dccd4cb-57b7-4a4c-af6e-6fe7638f7984",
+              "name": "View not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "view",
+                    ":view_id",
+                    "task"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "view_id",
+                      "description": "(Required) The unique identifier of the View."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.clickup.com/api/v2",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "50b599f3-9f6e-4a28-ace8-6a6cfd785b53",
+    "name": "ClickUp Views API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The ClickUp Views API enables developers to create and manage views at the team, space, folder, and list levels. Views define how tasks are displayed and filtered, supporting formats such as list, board, calendar, gantt, and table. The API allows programmatic creation of saved views with specific filters, groupings, and sort configurations.\n\nContact Support:\n Name: ClickUp Support",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,550 @@
+{
+  "item": [
+    {
+      "id": "cd397bca-5894-40f7-b426-5e8365f87d45",
+      "name": "Teams",
+      "description": {
+        "content": "Operations for retrieving Workspace (team) information and membership.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "8d30d611-f48a-4775-afca-30ab5666eb5a",
+          "name": "Get authorized teams (workspaces)",
+          "request": {
+            "name": "Get authorized teams (workspaces)",
+            "description": {
+              "content": "Retrieves the Workspaces (teams) that the authenticated user has access to. Returns Workspace details including name, color, avatar, and a list of members with their roles and permissions.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "team"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9484989d-e405-4a15-b00e-9d4cc5451b31",
+              "name": "Successfully retrieved teams",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "team"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"teams\": [\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"color\": \"string\",\n      \"avatar\": \"string\",\n      \"members\": [\n        {\n          \"user\": {\n            \"id\": 1715,\n            \"username\": \"string\",\n            \"email\": \"ws3W@eoBuIgwUjYNILEJ.plqv\",\n            \"color\": \"string\",\n            \"profilePicture\": \"http://BIBJeSZZou.ozP4JDTMqY2ZkOaguGK\",\n            \"initials\": \"string\",\n            \"role\": 8055,\n            \"last_active\": \"string\",\n            \"date_joined\": \"string\",\n            \"date_invited\": \"string\"\n          },\n          \"invited_by\": {\n            \"id\": 5839,\n            \"username\": \"string\",\n            \"email\": \"L1I7G8STedY@NOwxr.ygyg\",\n            \"color\": \"string\",\n            \"profilePicture\": \"https://rqI.qorwGAsRnh\",\n            \"initials\": \"string\"\n          }\n        },\n        {\n          \"user\": {\n            \"id\": 515,\n            \"username\": \"string\",\n            \"email\": \"4A14blpGql@GJQhATgBH.at\",\n            \"color\": \"string\",\n            \"profilePicture\": \"https://EPyrQAsxAmFxEUxaIIfxvTPkpoIhtWo.izpqPvrfSvcZIM-tUP\",\n            \"initials\": \"string\",\n            \"role\": 1040,\n            \"last_active\": \"string\",\n            \"date_joined\": \"string\",\n            \"date_invited\": \"string\"\n          },\n          \"invited_by\": {\n            \"id\": 8426,\n            \"username\": \"string\",\n            \"email\": \"hCsrE-9m8Mz48@qLLSnimuljKdrtCszUmF.op\",\n            \"color\": \"string\",\n            \"profilePicture\": \"http://nKyvDiQqyVPsRu.mfeoOrONSeKMPQ52Rr\",\n            \"initials\": \"string\"\n          }\n        }\n      ]\n    },\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"color\": \"string\",\n      \"avatar\": \"string\",\n      \"members\": [\n        {\n          \"user\": {\n            \"id\": 9351,\n            \"username\": \"string\",\n            \"email\": \"zI8mCq@zeEx.jji\",\n            \"color\": \"string\",\n            \"profilePicture\": \"https://JAFqBrrQqnmHEcTviDRnhj.dxYvNp6.M\",\n            \"initials\": \"string\",\n            \"role\": 4055,\n            \"last_active\": \"string\",\n            \"date_joined\": \"string\",\n            \"date_invited\": \"string\"\n          },\n          \"invited_by\": {\n            \"id\": 3670,\n            \"username\": \"string\",\n            \"email\": \"XUFqZD1WHm@ZwHvrjpEciJuvuQfojcxeuMfpgBzwwZXf.av\",\n            \"color\": \"string\",\n            \"profilePicture\": \"https://Q.prtotwu3LICn23P6w28QxcR93ehigsC4D28KTK0OPkQfcmgZDNULqdb02KzupmgQ.Kw\",\n            \"initials\": \"string\"\n          }\n        },\n        {\n          \"user\": {\n            \"id\": 4478,\n            \"username\": \"string\",\n            \"email\": \"BRMgT@depLQYlWfcIAdCzRXEKZkpPAYVypxhVOP.jrq\",\n            \"color\": \"string\",\n            \"profilePicture\": \"https://SJuxLYpgDQzASRihvtktbZbRbp.bhgyUOiF4mIIwsI5cJSMMdqsNjWVUWBDdN4lTLplenEfCzokHqO-W+\",\n            \"initials\": \"string\",\n            \"role\": 1044,\n            \"last_active\": \"string\",\n            \"date_joined\": \"string\",\n            \"date_invited\": \"string\"\n          },\n          \"invited_by\": {\n            \"id\": 855,\n            \"username\": \"string\",\n            \"email\": \"HqfxbdmZW@RCNA.lrf\",\n            \"color\": \"string\",\n            \"profilePicture\": \"https://LKQHDYAvSQRKTHfFlsadSpGFDqJkMC.uexq+eg\",\n            \"initials\": \"string\"\n          }\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3811847a-8dc6-4de7-8dfb-06a2a6e06821",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "team"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c0e8d2e6-84e1-4f2e-8a6d-6012d2118370",
+          "name": "Get workspace seats",
+          "request": {
+            "name": "Get workspace seats",
+            "description": {
+              "content": "Retrieves the seat allocation information for a Workspace, including the total number of seats, filled seats, and empty seats.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "team",
+                ":team_id",
+                "seats"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "team_id",
+                  "description": "(Required) The unique identifier of the Workspace (team)."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "fbd975be-ed50-45ec-b777-7d4f6b373b0e",
+              "name": "Successfully retrieved seat information",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "team",
+                    ":team_id",
+                    "seats"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "team_id",
+                      "description": "(Required) The unique identifier of the Workspace (team)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"members\": {\n    \"filled_member_seats\": 9263,\n    \"empty_member_seats\": 3824,\n    \"total_member_seats\": 4635\n  },\n  \"guests\": {\n    \"filled_guest_seats\": 2824,\n    \"empty_guest_seats\": 685,\n    \"total_guest_seats\": 4008\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6d9c630a-e04a-40ec-95fc-8b5b8172b816",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "team",
+                    ":team_id",
+                    "seats"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "team_id",
+                      "description": "(Required) The unique identifier of the Workspace (team)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "d205e432-ff07-431b-a1ba-4e3ae19e4f1c",
+              "name": "Team not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "team",
+                    ":team_id",
+                    "seats"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "team_id",
+                      "description": "(Required) The unique identifier of the Workspace (team)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2965b7e3-a772-4b10-bc53-389d0f918b59",
+          "name": "Get team members",
+          "request": {
+            "name": "Get team members",
+            "description": {
+              "content": "Retrieves the members of a Workspace, including their roles and permissions. Only available to Workspace owners and admins.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "team",
+                ":team_id",
+                "user"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "team_id",
+                  "description": "(Required) The unique identifier of the Workspace (team)."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7c6f2e9e-975f-492a-94fe-83e81602eb84",
+              "name": "Successfully retrieved team members",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "team",
+                    ":team_id",
+                    "user"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "team_id",
+                      "description": "(Required) The unique identifier of the Workspace (team)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"members\": [\n    {\n      \"user\": {\n        \"id\": 8243,\n        \"username\": \"string\",\n        \"email\": \"Z4Po@ajl.xqpy\",\n        \"color\": \"string\",\n        \"profilePicture\": \"https://nPxCdoDTlOmwKBImMz.mipftWsIPJHj0.zzJdiy,YxvgSRdFJ5cVgnSq2brDFArbWm61r\",\n        \"initials\": \"string\",\n        \"role\": 2827,\n        \"last_active\": \"string\",\n        \"date_joined\": \"string\",\n        \"date_invited\": \"string\"\n      },\n      \"invited_by\": {\n        \"id\": 4291,\n        \"username\": \"string\",\n        \"email\": \"tMa4Yg5wqw-KXJW@SityGdKPWFOBGCZAvmUlW.qq\",\n        \"color\": \"string\",\n        \"profilePicture\": \"http://DxpmDcDIKxDmZqplrrjAPnSttIceUSg.mgus8oiGB0U1\",\n        \"initials\": \"string\"\n      }\n    },\n    {\n      \"user\": {\n        \"id\": 3363,\n        \"username\": \"string\",\n        \"email\": \"69NZaJUYx@tdYYOZPjHTGlbVFPMdqyPTcg.fv\",\n        \"color\": \"string\",\n        \"profilePicture\": \"https://WhzHOnaAbii.stQL8RAlP6gLHpKBNme2CWxrQGn+2j1XhuR680HH\",\n        \"initials\": \"string\",\n        \"role\": 1014,\n        \"last_active\": \"string\",\n        \"date_joined\": \"string\",\n        \"date_invited\": \"string\"\n      },\n      \"invited_by\": {\n        \"id\": 5125,\n        \"username\": \"string\",\n        \"email\": \"Wf8sVE@kQPSCkUJEEOAmycccYCzUUnShtoFZTz.mdbh\",\n        \"color\": \"string\",\n        \"profilePicture\": \"https://bTTryxpFVQSZaiwssh.fcbpEtDL7HJUxh-\",\n        \"initials\": \"string\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d44e1126-fe97-476a-ae43-f59773a9f906",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "team",
+                    ":team_id",
+                    "user"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "team_id",
+                      "description": "(Required) The unique identifier of the Workspace (team)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "2d4703ba-9c2a-4efa-a090-0f11e8056a66",
+              "name": "Team not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "team",
+                    ":team_id",
+                    "user"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "team_id",
+                      "description": "(Required) The unique identifier of the Workspace (team)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.clickup.com/api/v2",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "2a7baf6e-2e39-4afa-9bed-1328b24b90cd",
+    "name": "ClickUp Teams (Workspaces) API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The ClickUp Teams API provides access to Workspace-level information and membership. In the ClickUp API, Teams correspond to Workspaces, which are the top-level organizational unit. The API allows developers to retrieve a list of Workspaces the authenticated user belongs to, along with member details and roles. This is typically the starting point for navigating the ClickUp hierarchy.\n\nContact Support:\n Name: ClickUp Support",
+      "type": "text/plain"
+    }
+  }
+}

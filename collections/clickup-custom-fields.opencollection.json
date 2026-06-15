@@ -1,0 +1,121 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "ClickUp Custom Fields API",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Custom Fields",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get accessible custom fields",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.clickup.com/api/v2/list/:list_id/field",
+            "params": [
+              {
+                "name": "list_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the list."
+              }
+            ]
+          },
+          "docs": "Retrieves all custom fields that are accessible on a specific list. Returns field definitions including type, name, configuration, and possible values for dropdown and label fields."
+        },
+        {
+          "info": {
+            "name": "Set custom field value",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.clickup.com/api/v2/task/:task_id/field/:field_id",
+            "params": [
+              {
+                "name": "task_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the task."
+              },
+              {
+                "name": "field_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the custom field."
+              },
+              {
+                "name": "custom_task_ids",
+                "value": "",
+                "type": "query",
+                "description": "If you want to reference a task by its custom task ID, this value must be true."
+              },
+              {
+                "name": "team_id",
+                "value": "",
+                "type": "query",
+                "description": "Required when custom_task_ids is set to true. The Workspace ID."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Sets the value of a custom field on a task. The value format depends on the custom field type. For dropdown fields, provide the option order index. For label fields, provide an array of label IDs. For relationship fields, provide an array of task IDs."
+        },
+        {
+          "info": {
+            "name": "Remove custom field value",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.clickup.com/api/v2/task/:task_id/field/:field_id",
+            "params": [
+              {
+                "name": "task_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the task."
+              },
+              {
+                "name": "field_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the custom field."
+              },
+              {
+                "name": "custom_task_ids",
+                "value": "",
+                "type": "query",
+                "description": "If you want to reference a task by its custom task ID, this value must be true."
+              },
+              {
+                "name": "team_id",
+                "value": "",
+                "type": "query",
+                "description": "Required when custom_task_ids is set to true. The Workspace ID."
+              }
+            ]
+          },
+          "docs": "Removes the value of a custom field from a task, resetting it to empty."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

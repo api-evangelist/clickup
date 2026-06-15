@@ -1,0 +1,252 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "ClickUp Comments API",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Comments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get task comments",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.clickup.com/api/v2/task/:task_id/comment",
+            "params": [
+              {
+                "name": "task_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the task."
+              },
+              {
+                "name": "custom_task_ids",
+                "value": "",
+                "type": "query",
+                "description": "If you want to reference a task by its custom task ID, this value must be true."
+              },
+              {
+                "name": "team_id",
+                "value": "",
+                "type": "query",
+                "description": "Required when custom_task_ids is set to true. The Workspace ID."
+              },
+              {
+                "name": "start",
+                "value": "",
+                "type": "query",
+                "description": "Unix timestamp in milliseconds to start from for pagination."
+              },
+              {
+                "name": "start_id",
+                "value": "",
+                "type": "query",
+                "description": "Comment ID to start from for pagination."
+              }
+            ]
+          },
+          "docs": "Retrieves all comments on a specific task. Comments are returned in chronological order and include user information, timestamps, and formatted content."
+        },
+        {
+          "info": {
+            "name": "Create a task comment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.clickup.com/api/v2/task/:task_id/comment",
+            "params": [
+              {
+                "name": "task_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the task."
+              },
+              {
+                "name": "custom_task_ids",
+                "value": "",
+                "type": "query",
+                "description": "If you want to reference a task by its custom task ID, this value must be true."
+              },
+              {
+                "name": "team_id",
+                "value": "",
+                "type": "query",
+                "description": "Required when custom_task_ids is set to true. The Workspace ID."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new comment on a task. Comments can include plain text, rich text formatting with mentions, and can be assigned to users for follow-up. The assignee will be notified of the comment."
+        },
+        {
+          "info": {
+            "name": "Get view comments",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.clickup.com/api/v2/view/:view_id/comment",
+            "params": [
+              {
+                "name": "view_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the view."
+              },
+              {
+                "name": "start",
+                "value": "",
+                "type": "query",
+                "description": "Unix timestamp in milliseconds to start from for pagination."
+              },
+              {
+                "name": "start_id",
+                "value": "",
+                "type": "query",
+                "description": "Comment ID to start from for pagination."
+              }
+            ]
+          },
+          "docs": "Retrieves all comments on a specific view."
+        },
+        {
+          "info": {
+            "name": "Create a view comment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.clickup.com/api/v2/view/:view_id/comment",
+            "params": [
+              {
+                "name": "view_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the view."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new comment on a view."
+        },
+        {
+          "info": {
+            "name": "Get list comments",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.clickup.com/api/v2/list/:list_id/comment",
+            "params": [
+              {
+                "name": "list_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the list."
+              },
+              {
+                "name": "start",
+                "value": "",
+                "type": "query",
+                "description": "Unix timestamp in milliseconds to start from for pagination."
+              },
+              {
+                "name": "start_id",
+                "value": "",
+                "type": "query",
+                "description": "Comment ID to start from for pagination."
+              }
+            ]
+          },
+          "docs": "Retrieves all comments on a specific list."
+        },
+        {
+          "info": {
+            "name": "Create a list comment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.clickup.com/api/v2/list/:list_id/comment",
+            "params": [
+              {
+                "name": "list_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the list."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new comment on a list."
+        },
+        {
+          "info": {
+            "name": "Update a comment",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.clickup.com/api/v2/comment/:comment_id",
+            "params": [
+              {
+                "name": "comment_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the comment."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an existing comment. The comment text and assignee can be modified. The resolved status can also be toggled."
+        },
+        {
+          "info": {
+            "name": "Delete a comment",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.clickup.com/api/v2/comment/:comment_id",
+            "params": [
+              {
+                "name": "comment_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the comment."
+              }
+            ]
+          },
+          "docs": "Permanently deletes a comment. This action cannot be undone."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

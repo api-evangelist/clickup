@@ -1,0 +1,73 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "ClickUp Teams (Workspaces) API",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Teams",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get authorized teams (workspaces)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.clickup.com/api/v2/team"
+          },
+          "docs": "Retrieves the Workspaces (teams) that the authenticated user has access to. Returns Workspace details including name, color, avatar, and a list of members with their roles and permissions."
+        },
+        {
+          "info": {
+            "name": "Get workspace seats",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.clickup.com/api/v2/team/:team_id/seats",
+            "params": [
+              {
+                "name": "team_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the Workspace (team)."
+              }
+            ]
+          },
+          "docs": "Retrieves the seat allocation information for a Workspace, including the total number of seats, filled seats, and empty seats."
+        },
+        {
+          "info": {
+            "name": "Get team members",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.clickup.com/api/v2/team/:team_id/user",
+            "params": [
+              {
+                "name": "team_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the Workspace (team)."
+              }
+            ]
+          },
+          "docs": "Retrieves the members of a Workspace, including their roles and permissions. Only available to Workspace owners and admins."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

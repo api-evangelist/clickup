@@ -1,0 +1,3254 @@
+{
+  "item": [
+    {
+      "id": "aa71eea6-9a7f-45f2-be90-c7eab2d3e442",
+      "name": "Tasks",
+      "description": {
+        "content": "Operations for creating, retrieving, updating, and deleting tasks within ClickUp lists and workspaces.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "e97d8602-abb1-471b-b80d-24cad725f2d9",
+          "name": "Get tasks in a list",
+          "request": {
+            "name": "Get tasks in a list",
+            "description": {
+              "content": "Retrieves all tasks within a specified list. Supports filtering, pagination, and inclusion of subtasks and closed tasks. Results can be ordered by various fields including due date, date created, and date updated.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "list",
+                ":list_id",
+                "task"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "archived",
+                  "value": "false",
+                  "description": "Include archived tasks in the response."
+                },
+                {
+                  "disabled": false,
+                  "key": "include_markdown_description",
+                  "value": "false",
+                  "description": "Return task descriptions in Markdown format."
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<integer>",
+                  "description": "Page number for pagination. Starts at 0."
+                },
+                {
+                  "disabled": false,
+                  "key": "order_by",
+                  "value": "<string>",
+                  "description": "Field to order results by."
+                },
+                {
+                  "disabled": false,
+                  "key": "reverse",
+                  "value": "<boolean>",
+                  "description": "Reverse the order of results."
+                },
+                {
+                  "disabled": false,
+                  "key": "subtasks",
+                  "value": "<boolean>",
+                  "description": "Include subtasks in the response."
+                },
+                {
+                  "disabled": false,
+                  "key": "statuses[]",
+                  "value": "<string>",
+                  "description": "Filter by task status."
+                },
+                {
+                  "disabled": false,
+                  "key": "statuses[]",
+                  "value": "<string>",
+                  "description": "Filter by task status."
+                },
+                {
+                  "disabled": false,
+                  "key": "include_closed",
+                  "value": "false",
+                  "description": "Include closed tasks in the response."
+                },
+                {
+                  "disabled": false,
+                  "key": "assignees[]",
+                  "value": "<integer>",
+                  "description": "Filter by assignee user IDs."
+                },
+                {
+                  "disabled": false,
+                  "key": "assignees[]",
+                  "value": "<integer>",
+                  "description": "Filter by assignee user IDs."
+                },
+                {
+                  "disabled": false,
+                  "key": "tags[]",
+                  "value": "<string>",
+                  "description": "Filter by tag names."
+                },
+                {
+                  "disabled": false,
+                  "key": "tags[]",
+                  "value": "<string>",
+                  "description": "Filter by tag names."
+                },
+                {
+                  "disabled": false,
+                  "key": "due_date_gt",
+                  "value": "<long>",
+                  "description": "Filter for tasks with due date greater than this Unix timestamp in milliseconds."
+                },
+                {
+                  "disabled": false,
+                  "key": "due_date_lt",
+                  "value": "<long>",
+                  "description": "Filter for tasks with due date less than this Unix timestamp in milliseconds."
+                },
+                {
+                  "disabled": false,
+                  "key": "date_created_gt",
+                  "value": "<long>",
+                  "description": "Filter for tasks created after this Unix timestamp in milliseconds."
+                },
+                {
+                  "disabled": false,
+                  "key": "date_created_lt",
+                  "value": "<long>",
+                  "description": "Filter for tasks created before this Unix timestamp in milliseconds."
+                },
+                {
+                  "disabled": false,
+                  "key": "date_updated_gt",
+                  "value": "<long>",
+                  "description": "Filter for tasks updated after this Unix timestamp in milliseconds."
+                },
+                {
+                  "disabled": false,
+                  "key": "date_updated_lt",
+                  "value": "<long>",
+                  "description": "Filter for tasks updated before this Unix timestamp in milliseconds."
+                },
+                {
+                  "disabled": false,
+                  "key": "custom_fields",
+                  "value": "<string>",
+                  "description": "Filter by custom field values. Provided as a JSON array of objects."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "list_id",
+                  "description": "(Required) The unique identifier of the list."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c674b380-aa5b-418a-bdc6-992954590295",
+              "name": "Successfully retrieved tasks",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "list",
+                    ":list_id",
+                    "task"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "archived",
+                      "value": "false"
+                    },
+                    {
+                      "key": "include_markdown_description",
+                      "value": "false"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "order_by",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "reverse",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "subtasks",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "statuses[]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "statuses[]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "include_closed",
+                      "value": "false"
+                    },
+                    {
+                      "key": "assignees[]",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "assignees[]",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "tags[]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tags[]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "due_date_gt",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "due_date_lt",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "date_created_gt",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "date_created_lt",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "date_updated_gt",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "date_updated_lt",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "custom_fields",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "list_id",
+                      "description": "(Required) The unique identifier of the list."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"tasks\": [\n    {\n      \"id\": \"string\",\n      \"custom_id\": \"string\",\n      \"name\": \"string\",\n      \"text_content\": \"string\",\n      \"description\": \"string\",\n      \"markdown_description\": \"string\",\n      \"status\": {\n        \"id\": \"string\",\n        \"status\": \"string\",\n        \"color\": \"string\",\n        \"orderindex\": 9693,\n        \"type\": \"open\"\n      },\n      \"orderindex\": \"string\",\n      \"date_created\": \"string\",\n      \"date_updated\": \"string\",\n      \"date_closed\": \"string\",\n      \"date_done\": \"string\",\n      \"archived\": true,\n      \"creator\": {\n        \"id\": 8637,\n        \"username\": \"string\",\n        \"email\": \"kV3eYm@nQVjIcgSANumzedL.nfkl\",\n        \"color\": \"string\",\n        \"profilePicture\": \"https://GzCxYTijMBZeu.icrO6c\",\n        \"initials\": \"string\"\n      },\n      \"assignees\": [\n        {\n          \"id\": 2700,\n          \"username\": \"string\",\n          \"email\": \"bry7tUuJUDb4p@NEoYSKHJo.ir\",\n          \"color\": \"string\",\n          \"profilePicture\": \"https://sn.kgn4rbnvx5CHlVuMhmyiUKTvigSfPY-M06TJ3nrlsV\",\n          \"initials\": \"string\"\n        },\n        {\n          \"id\": 9529,\n          \"username\": \"string\",\n          \"email\": \"YEluSz@HoUgCjFlUCDJqPPxNVimw.hn\",\n          \"color\": \"string\",\n          \"profilePicture\": \"http://znyxirsB.bcxAudM7y4QLehynhFBAUtuw7DZ+C73j+fMKcmaane,8JCNwKUB\",\n          \"initials\": \"string\"\n        }\n      ],\n      \"watchers\": [\n        {\n          \"id\": 1529,\n          \"username\": \"string\",\n          \"email\": \"PFT8F@WdYFEgEpKAlDDFqMkch.zt\",\n          \"color\": \"string\",\n          \"profilePicture\": \"http://fFkFQfkECFRNPocnXrRu.ylwyM91ATLT3h3VOdLXC.GibM,0Dngc1VN6ZshhWmkxE2ykvZgZR-eHg\",\n          \"initials\": \"string\"\n        },\n        {\n          \"id\": 8736,\n          \"username\": \"string\",\n          \"email\": \"9xbbhi@YgiKEQPqFqwuUzwLxJGpoMC.mm\",\n          \"color\": \"string\",\n          \"profilePicture\": \"https://q.hhDf-,FJZKd70Qfe\",\n          \"initials\": \"string\"\n        }\n      ],\n      \"tags\": [\n        {\n          \"name\": \"string\",\n          \"tag_fg\": \"string\",\n          \"tag_bg\": \"string\",\n          \"creator\": 5811\n        },\n        {\n          \"name\": \"string\",\n          \"tag_fg\": \"string\",\n          \"tag_bg\": \"string\",\n          \"creator\": 3633\n        }\n      ],\n      \"parent\": \"string\",\n      \"priority\": {\n        \"id\": \"string\",\n        \"priority\": \"high\",\n        \"color\": \"string\",\n        \"orderindex\": \"string\"\n      },\n      \"due_date\": \"string\",\n      \"start_date\": \"string\",\n      \"points\": 9392.588348897218,\n      \"time_estimate\": 5099,\n      \"time_spent\": 2652,\n      \"custom_fields\": [\n        {\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"type\": \"string\",\n          \"type_config\": {},\n          \"date_created\": \"string\",\n          \"hide_from_guests\": false,\n          \"value\": {},\n          \"required\": false\n        },\n        {\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"type\": \"string\",\n          \"type_config\": {},\n          \"date_created\": \"string\",\n          \"hide_from_guests\": true,\n          \"value\": {},\n          \"required\": false\n        }\n      ],\n      \"team_id\": \"string\",\n      \"url\": \"http://ago.pcAaSWWAAZHHVYMn+8Q73RqjADM+7mYYEmIrOYAogrI2R3FkSH91JDRBeX1Z,z8q0q\",\n      \"list\": {\n        \"id\": \"string\",\n        \"name\": \"string\",\n        \"access\": true\n      },\n      \"project\": {\n        \"id\": \"string\",\n        \"name\": \"string\",\n        \"access\": false\n      },\n      \"folder\": {\n        \"id\": \"string\",\n        \"name\": \"string\",\n        \"access\": true\n      },\n      \"space\": {\n        \"id\": \"string\"\n      }\n    },\n    {\n      \"id\": \"string\",\n      \"custom_id\": \"string\",\n      \"name\": \"string\",\n      \"text_content\": \"string\",\n      \"description\": \"string\",\n      \"markdown_description\": \"string\",\n      \"status\": {\n        \"id\": \"string\",\n        \"status\": \"string\",\n        \"color\": \"string\",\n        \"orderindex\": 2120,\n        \"type\": \"done\"\n      },\n      \"orderindex\": \"string\",\n      \"date_created\": \"string\",\n      \"date_updated\": \"string\",\n      \"date_closed\": \"string\",\n      \"date_done\": \"string\",\n      \"archived\": false,\n      \"creator\": {\n        \"id\": 145,\n        \"username\": \"string\",\n        \"email\": \"uKsv@aZpgQCesae.hlkv\",\n        \"color\": \"string\",\n        \"profilePicture\": \"https://OAwwCqtJBcXlDufSRCrZegonCC.zesz-HV56T3TSds7-H9XA6d-wsYj98uPR+yxpxiHyteNxx2mF2cCkN\",\n        \"initials\": \"string\"\n      },\n      \"assignees\": [\n        {\n          \"id\": 3108,\n          \"username\": \"string\",\n          \"email\": \"XHtrBoC@qallMcHDbtBLphbTCHlvlZssyxENAEkDK.qkc\",\n          \"color\": \"string\",\n          \"profilePicture\": \"http://frchvJhWVpKSvKrJSCAURMuWPx.chpibfwtDxMl2\",\n          \"initials\": \"string\"\n        },\n        {\n          \"id\": 2062,\n          \"username\": \"string\",\n          \"email\": \"fuJKO9mOmW@xRzEemRdjweGEsSuWiuQllTl.hmvr\",\n          \"color\": \"string\",\n          \"profilePicture\": \"http://NVMmjugSDdTFzwzezoTi.psmgNUV0phCH5j5Rf5NTLqYKSEXZCMsjuJ6mYPl2AxkXRK\",\n          \"initials\": \"string\"\n        }\n      ],\n      \"watchers\": [\n        {\n          \"id\": 5254,\n          \"username\": \"string\",\n          \"email\": \"xZ9U@EydFnMterLIsYEdpadQnZaopWUKveqrUh.cjx\",\n          \"color\": \"string\",\n          \"profilePicture\": \"http://kUsSFxCbeXykJelUsZHbxhwaTTasgWbOO.zvDLE3gxBjR2SlwbLBft-m5cnUSm9Pz3V2PGxsIPQIaCjQ4\",\n          \"initials\": \"string\"\n        },\n        {\n          \"id\": 5941,\n          \"username\": \"string\",\n          \"email\": \"0zPJVB5K81@dzVTNNThHbbAvjfuGtwUAzYWMw.hpix\",\n          \"color\": \"string\",\n          \"profilePicture\": \"http://ZEudzh.hcriw3FZKM3HTlty7SEm9R5XIOkgM37FfesXakYNxOm7Gt0eLrvkrZ\",\n          \"initials\": \"string\"\n        }\n      ],\n      \"tags\": [\n        {\n          \"name\": \"string\",\n          \"tag_fg\": \"string\",\n          \"tag_bg\": \"string\",\n          \"creator\": 4315\n        },\n        {\n          \"name\": \"string\",\n          \"tag_fg\": \"string\",\n          \"tag_bg\": \"string\",\n          \"creator\": 7805\n        }\n      ],\n      \"parent\": \"string\",\n      \"priority\": {\n        \"id\": \"string\",\n        \"priority\": \"normal\",\n        \"color\": \"string\",\n        \"orderindex\": \"string\"\n      },\n      \"due_date\": \"string\",\n      \"start_date\": \"string\",\n      \"points\": 9781.614836497025,\n      \"time_estimate\": 2364,\n      \"time_spent\": 3953,\n      \"custom_fields\": [\n        {\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"type\": \"string\",\n          \"type_config\": {},\n          \"date_created\": \"string\",\n          \"hide_from_guests\": false,\n          \"value\": {},\n          \"required\": false\n        },\n        {\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"type\": \"string\",\n          \"type_config\": {},\n          \"date_created\": \"string\",\n          \"hide_from_guests\": false,\n          \"value\": {},\n          \"required\": false\n        }\n      ],\n      \"team_id\": \"string\",\n      \"url\": \"https://nfEVOUrmwZgGx.fzxHhM+JCtN2B4,2PvNMvnjU3JDJeUMmdVy.nZhZ\",\n      \"list\": {\n        \"id\": \"string\",\n        \"name\": \"string\",\n        \"access\": true\n      },\n      \"project\": {\n        \"id\": \"string\",\n        \"name\": \"string\",\n        \"access\": false\n      },\n      \"folder\": {\n        \"id\": \"string\",\n        \"name\": \"string\",\n        \"access\": false\n      },\n      \"space\": {\n        \"id\": \"string\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6790f13e-45b1-435c-be26-b07120182c0d",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "list",
+                    ":list_id",
+                    "task"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "archived",
+                      "value": "false"
+                    },
+                    {
+                      "key": "include_markdown_description",
+                      "value": "false"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "order_by",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "reverse",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "subtasks",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "statuses[]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "statuses[]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "include_closed",
+                      "value": "false"
+                    },
+                    {
+                      "key": "assignees[]",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "assignees[]",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "tags[]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tags[]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "due_date_gt",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "due_date_lt",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "date_created_gt",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "date_created_lt",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "date_updated_gt",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "date_updated_lt",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "custom_fields",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "list_id",
+                      "description": "(Required) The unique identifier of the list."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "c7860288-3e2a-4490-a758-c8c3d6beb66b",
+              "name": "List not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "list",
+                    ":list_id",
+                    "task"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "archived",
+                      "value": "false"
+                    },
+                    {
+                      "key": "include_markdown_description",
+                      "value": "false"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "order_by",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "reverse",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "subtasks",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "statuses[]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "statuses[]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "include_closed",
+                      "value": "false"
+                    },
+                    {
+                      "key": "assignees[]",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "assignees[]",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "tags[]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tags[]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "due_date_gt",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "due_date_lt",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "date_created_gt",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "date_created_lt",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "date_updated_gt",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "date_updated_lt",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "custom_fields",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "list_id",
+                      "description": "(Required) The unique identifier of the list."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "eb4163f8-4534-4679-841a-89ceedfc4267",
+          "name": "Create a task",
+          "request": {
+            "name": "Create a task",
+            "description": {
+              "content": "Creates a new task within a specified list. The task can include a name, description, assignees, tags, priority, due date, start date, time estimate, custom fields, and other attributes.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "list",
+                ":list_id",
+                "task"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "custom_task_ids",
+                  "value": "<boolean>",
+                  "description": "If you want to reference a task by its custom task ID, this value must be true."
+                },
+                {
+                  "disabled": false,
+                  "key": "team_id",
+                  "value": "<integer>",
+                  "description": "Required when custom_task_ids is set to true. The Workspace ID."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "list_id",
+                  "description": "(Required) The unique identifier of the list."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"markdown_description\": \"<string>\",\n  \"assignees\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"status\": \"<string>\",\n  \"priority\": \"<integer>\",\n  \"due_date\": \"<long>\",\n  \"due_date_time\": \"<boolean>\",\n  \"time_estimate\": \"<integer>\",\n  \"start_date\": \"<long>\",\n  \"start_date_time\": \"<boolean>\",\n  \"notify_all\": \"<boolean>\",\n  \"parent\": \"<string>\",\n  \"links_to\": \"<string>\",\n  \"check_required_custom_fields\": \"<boolean>\",\n  \"custom_fields\": [\n    {\n      \"id\": \"<string>\",\n      \"value\": {}\n    },\n    {\n      \"id\": \"<string>\",\n      \"value\": {}\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "a61a7314-784f-45a8-acd9-d188709fbb2d",
+              "name": "Task created successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "list",
+                    ":list_id",
+                    "task"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "custom_task_ids",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "team_id",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "list_id",
+                      "description": "(Required) The unique identifier of the list."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"markdown_description\": \"<string>\",\n  \"assignees\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"status\": \"<string>\",\n  \"priority\": \"<integer>\",\n  \"due_date\": \"<long>\",\n  \"due_date_time\": \"<boolean>\",\n  \"time_estimate\": \"<integer>\",\n  \"start_date\": \"<long>\",\n  \"start_date_time\": \"<boolean>\",\n  \"notify_all\": \"<boolean>\",\n  \"parent\": \"<string>\",\n  \"links_to\": \"<string>\",\n  \"check_required_custom_fields\": \"<boolean>\",\n  \"custom_fields\": [\n    {\n      \"id\": \"<string>\",\n      \"value\": {}\n    },\n    {\n      \"id\": \"<string>\",\n      \"value\": {}\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"custom_id\": \"string\",\n  \"name\": \"string\",\n  \"text_content\": \"string\",\n  \"description\": \"string\",\n  \"markdown_description\": \"string\",\n  \"status\": {\n    \"id\": \"string\",\n    \"status\": \"string\",\n    \"color\": \"string\",\n    \"orderindex\": 7870,\n    \"type\": \"closed\"\n  },\n  \"orderindex\": \"string\",\n  \"date_created\": \"string\",\n  \"date_updated\": \"string\",\n  \"date_closed\": \"string\",\n  \"date_done\": \"string\",\n  \"archived\": false,\n  \"creator\": {\n    \"id\": 6953,\n    \"username\": \"string\",\n    \"email\": \"0s0HWe@xsvgAgRRmpZJHTYwmRzmYNrBltq.uz\",\n    \"color\": \"string\",\n    \"profilePicture\": \"http://J.ftckYTRUwK.nSwRaloXekxAWpWfntqz4RzHbrzV\",\n    \"initials\": \"string\"\n  },\n  \"assignees\": [\n    {\n      \"id\": 4765,\n      \"username\": \"string\",\n      \"email\": \"ykYeuvP@dIhZHZpaXqEjmEPGIBLsHOTg.mm\",\n      \"color\": \"string\",\n      \"profilePicture\": \"https://NJFKzskgpAQYQZFVtwcpKW.kfoveBt5VjuOJrv7gkj+lOAH1igwzoI8uIYM.MABJaY7DplkhYBnaivUcoDWPgGxrUBYh\",\n      \"initials\": \"string\"\n    },\n    {\n      \"id\": 8668,\n      \"username\": \"string\",\n      \"email\": \"Hg7aFZBit@bZMhtamCOjAPSxiLYfSCfYRQXUWzginn.oy\",\n      \"color\": \"string\",\n      \"profilePicture\": \"https://jNDKolJsMme.bibfb9QPRI1De4.Ywuky.OoZB8qJr7ELn5x\",\n      \"initials\": \"string\"\n    }\n  ],\n  \"watchers\": [\n    {\n      \"id\": 7154,\n      \"username\": \"string\",\n      \"email\": \"AOXRz@DjhFH.ba\",\n      \"color\": \"string\",\n      \"profilePicture\": \"http://cIRgp.qwjuS,-MIMESe8wlyt3alXUnwsUeze6xGiydnStNwxmlbmFbP2ekxoQVJ2xraoiyy2o5RPuWrHOX+Xi-15v.l-\",\n      \"initials\": \"string\"\n    },\n    {\n      \"id\": 1592,\n      \"username\": \"string\",\n      \"email\": \"fz1c@yQtQeYvfhtwoTLUMzzqvgiiNXiXt.lo\",\n      \"color\": \"string\",\n      \"profilePicture\": \"https://U.kpEYSGMzTvFZ\",\n      \"initials\": \"string\"\n    }\n  ],\n  \"tags\": [\n    {\n      \"name\": \"string\",\n      \"tag_fg\": \"string\",\n      \"tag_bg\": \"string\",\n      \"creator\": 5894\n    },\n    {\n      \"name\": \"string\",\n      \"tag_fg\": \"string\",\n      \"tag_bg\": \"string\",\n      \"creator\": 2405\n    }\n  ],\n  \"parent\": \"string\",\n  \"priority\": {\n    \"id\": \"string\",\n    \"priority\": \"urgent\",\n    \"color\": \"string\",\n    \"orderindex\": \"string\"\n  },\n  \"due_date\": \"string\",\n  \"start_date\": \"string\",\n  \"points\": 9457.096527744987,\n  \"time_estimate\": 3241,\n  \"time_spent\": 1073,\n  \"custom_fields\": [\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"type\": \"string\",\n      \"type_config\": {},\n      \"date_created\": \"string\",\n      \"hide_from_guests\": false,\n      \"value\": {},\n      \"required\": false\n    },\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"type\": \"string\",\n      \"type_config\": {},\n      \"date_created\": \"string\",\n      \"hide_from_guests\": false,\n      \"value\": {},\n      \"required\": true\n    }\n  ],\n  \"team_id\": \"string\",\n  \"url\": \"https://OGrAfjZbZMBtgCvujIKcSgcNWdFx.whtid2PXX48VABHeqVku1FSU3d\",\n  \"list\": {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"access\": false\n  },\n  \"project\": {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"access\": false\n  },\n  \"folder\": {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"access\": true\n  },\n  \"space\": {\n    \"id\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1ac362df-1d44-4978-a578-a70ea141ef45",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "list",
+                    ":list_id",
+                    "task"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "custom_task_ids",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "team_id",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "list_id",
+                      "description": "(Required) The unique identifier of the list."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"markdown_description\": \"<string>\",\n  \"assignees\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"status\": \"<string>\",\n  \"priority\": \"<integer>\",\n  \"due_date\": \"<long>\",\n  \"due_date_time\": \"<boolean>\",\n  \"time_estimate\": \"<integer>\",\n  \"start_date\": \"<long>\",\n  \"start_date_time\": \"<boolean>\",\n  \"notify_all\": \"<boolean>\",\n  \"parent\": \"<string>\",\n  \"links_to\": \"<string>\",\n  \"check_required_custom_fields\": \"<boolean>\",\n  \"custom_fields\": [\n    {\n      \"id\": \"<string>\",\n      \"value\": {}\n    },\n    {\n      \"id\": \"<string>\",\n      \"value\": {}\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "4c561ff3-c2b4-443e-adac-e10a6479d54f",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "list",
+                    ":list_id",
+                    "task"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "custom_task_ids",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "team_id",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "list_id",
+                      "description": "(Required) The unique identifier of the list."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"markdown_description\": \"<string>\",\n  \"assignees\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"status\": \"<string>\",\n  \"priority\": \"<integer>\",\n  \"due_date\": \"<long>\",\n  \"due_date_time\": \"<boolean>\",\n  \"time_estimate\": \"<integer>\",\n  \"start_date\": \"<long>\",\n  \"start_date_time\": \"<boolean>\",\n  \"notify_all\": \"<boolean>\",\n  \"parent\": \"<string>\",\n  \"links_to\": \"<string>\",\n  \"check_required_custom_fields\": \"<boolean>\",\n  \"custom_fields\": [\n    {\n      \"id\": \"<string>\",\n      \"value\": {}\n    },\n    {\n      \"id\": \"<string>\",\n      \"value\": {}\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "03284b33-0f73-4914-b777-84dea6e9850c",
+              "name": "List not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "list",
+                    ":list_id",
+                    "task"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "custom_task_ids",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "team_id",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "list_id",
+                      "description": "(Required) The unique identifier of the list."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"markdown_description\": \"<string>\",\n  \"assignees\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"status\": \"<string>\",\n  \"priority\": \"<integer>\",\n  \"due_date\": \"<long>\",\n  \"due_date_time\": \"<boolean>\",\n  \"time_estimate\": \"<integer>\",\n  \"start_date\": \"<long>\",\n  \"start_date_time\": \"<boolean>\",\n  \"notify_all\": \"<boolean>\",\n  \"parent\": \"<string>\",\n  \"links_to\": \"<string>\",\n  \"check_required_custom_fields\": \"<boolean>\",\n  \"custom_fields\": [\n    {\n      \"id\": \"<string>\",\n      \"value\": {}\n    },\n    {\n      \"id\": \"<string>\",\n      \"value\": {}\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ca31d4a7-7b48-4c23-a613-eb14d82bdcbf",
+          "name": "Get a task",
+          "request": {
+            "name": "Get a task",
+            "description": {
+              "content": "Retrieves a single task by its ID, including all task details such as status, assignees, tags, custom fields, and subtasks.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "task",
+                ":task_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "custom_task_ids",
+                  "value": "<boolean>",
+                  "description": "If you want to reference a task by its custom task ID, this value must be true."
+                },
+                {
+                  "disabled": false,
+                  "key": "team_id",
+                  "value": "<integer>",
+                  "description": "Required when custom_task_ids is set to true. The Workspace ID."
+                },
+                {
+                  "disabled": false,
+                  "key": "include_subtasks",
+                  "value": "<boolean>",
+                  "description": "Include subtasks in the response."
+                },
+                {
+                  "disabled": false,
+                  "key": "include_markdown_description",
+                  "value": "<boolean>",
+                  "description": "Return the task description in Markdown format."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "task_id",
+                  "description": "(Required) The unique identifier of the task."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "539e8505-219b-4320-afa0-2b6a9d241cad",
+              "name": "Successfully retrieved task",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "task",
+                    ":task_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "custom_task_ids",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "team_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "include_subtasks",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "include_markdown_description",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "task_id",
+                      "description": "(Required) The unique identifier of the task."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"custom_id\": \"string\",\n  \"name\": \"string\",\n  \"text_content\": \"string\",\n  \"description\": \"string\",\n  \"markdown_description\": \"string\",\n  \"status\": {\n    \"id\": \"string\",\n    \"status\": \"string\",\n    \"color\": \"string\",\n    \"orderindex\": 7870,\n    \"type\": \"closed\"\n  },\n  \"orderindex\": \"string\",\n  \"date_created\": \"string\",\n  \"date_updated\": \"string\",\n  \"date_closed\": \"string\",\n  \"date_done\": \"string\",\n  \"archived\": false,\n  \"creator\": {\n    \"id\": 6953,\n    \"username\": \"string\",\n    \"email\": \"0s0HWe@xsvgAgRRmpZJHTYwmRzmYNrBltq.uz\",\n    \"color\": \"string\",\n    \"profilePicture\": \"http://J.ftckYTRUwK.nSwRaloXekxAWpWfntqz4RzHbrzV\",\n    \"initials\": \"string\"\n  },\n  \"assignees\": [\n    {\n      \"id\": 4765,\n      \"username\": \"string\",\n      \"email\": \"ykYeuvP@dIhZHZpaXqEjmEPGIBLsHOTg.mm\",\n      \"color\": \"string\",\n      \"profilePicture\": \"https://NJFKzskgpAQYQZFVtwcpKW.kfoveBt5VjuOJrv7gkj+lOAH1igwzoI8uIYM.MABJaY7DplkhYBnaivUcoDWPgGxrUBYh\",\n      \"initials\": \"string\"\n    },\n    {\n      \"id\": 8668,\n      \"username\": \"string\",\n      \"email\": \"Hg7aFZBit@bZMhtamCOjAPSxiLYfSCfYRQXUWzginn.oy\",\n      \"color\": \"string\",\n      \"profilePicture\": \"https://jNDKolJsMme.bibfb9QPRI1De4.Ywuky.OoZB8qJr7ELn5x\",\n      \"initials\": \"string\"\n    }\n  ],\n  \"watchers\": [\n    {\n      \"id\": 7154,\n      \"username\": \"string\",\n      \"email\": \"AOXRz@DjhFH.ba\",\n      \"color\": \"string\",\n      \"profilePicture\": \"http://cIRgp.qwjuS,-MIMESe8wlyt3alXUnwsUeze6xGiydnStNwxmlbmFbP2ekxoQVJ2xraoiyy2o5RPuWrHOX+Xi-15v.l-\",\n      \"initials\": \"string\"\n    },\n    {\n      \"id\": 1592,\n      \"username\": \"string\",\n      \"email\": \"fz1c@yQtQeYvfhtwoTLUMzzqvgiiNXiXt.lo\",\n      \"color\": \"string\",\n      \"profilePicture\": \"https://U.kpEYSGMzTvFZ\",\n      \"initials\": \"string\"\n    }\n  ],\n  \"tags\": [\n    {\n      \"name\": \"string\",\n      \"tag_fg\": \"string\",\n      \"tag_bg\": \"string\",\n      \"creator\": 5894\n    },\n    {\n      \"name\": \"string\",\n      \"tag_fg\": \"string\",\n      \"tag_bg\": \"string\",\n      \"creator\": 2405\n    }\n  ],\n  \"parent\": \"string\",\n  \"priority\": {\n    \"id\": \"string\",\n    \"priority\": \"urgent\",\n    \"color\": \"string\",\n    \"orderindex\": \"string\"\n  },\n  \"due_date\": \"string\",\n  \"start_date\": \"string\",\n  \"points\": 9457.096527744987,\n  \"time_estimate\": 3241,\n  \"time_spent\": 1073,\n  \"custom_fields\": [\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"type\": \"string\",\n      \"type_config\": {},\n      \"date_created\": \"string\",\n      \"hide_from_guests\": false,\n      \"value\": {},\n      \"required\": false\n    },\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"type\": \"string\",\n      \"type_config\": {},\n      \"date_created\": \"string\",\n      \"hide_from_guests\": false,\n      \"value\": {},\n      \"required\": true\n    }\n  ],\n  \"team_id\": \"string\",\n  \"url\": \"https://OGrAfjZbZMBtgCvujIKcSgcNWdFx.whtid2PXX48VABHeqVku1FSU3d\",\n  \"list\": {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"access\": false\n  },\n  \"project\": {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"access\": false\n  },\n  \"folder\": {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"access\": true\n  },\n  \"space\": {\n    \"id\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5e0b398c-bf67-429c-b85a-bcc10e19e751",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "task",
+                    ":task_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "custom_task_ids",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "team_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "include_subtasks",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "include_markdown_description",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "task_id",
+                      "description": "(Required) The unique identifier of the task."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "53755356-ae45-440b-bb2c-12ccb37922e4",
+              "name": "Task not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "task",
+                    ":task_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "custom_task_ids",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "team_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "include_subtasks",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "include_markdown_description",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "task_id",
+                      "description": "(Required) The unique identifier of the task."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "10f44b9e-70bf-4cfc-9741-953edcc23905",
+          "name": "Update a task",
+          "request": {
+            "name": "Update a task",
+            "description": {
+              "content": "Updates an existing task. Any fields included in the request body will be updated. Fields not included will remain unchanged.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "task",
+                ":task_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "custom_task_ids",
+                  "value": "<boolean>",
+                  "description": "If you want to reference a task by its custom task ID, this value must be true."
+                },
+                {
+                  "disabled": false,
+                  "key": "team_id",
+                  "value": "<integer>",
+                  "description": "Required when custom_task_ids is set to true. The Workspace ID."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "task_id",
+                  "description": "(Required) The unique identifier of the task."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"markdown_description\": \"<string>\",\n  \"assignees\": {\n    \"add\": [\n      \"<integer>\",\n      \"<integer>\"\n    ],\n    \"rem\": [\n      \"<integer>\",\n      \"<integer>\"\n    ]\n  },\n  \"status\": \"<string>\",\n  \"priority\": \"<integer>\",\n  \"due_date\": \"<long>\",\n  \"due_date_time\": \"<boolean>\",\n  \"time_estimate\": \"<integer>\",\n  \"start_date\": \"<long>\",\n  \"start_date_time\": \"<boolean>\",\n  \"parent\": \"<string>\",\n  \"archived\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "299bc926-4cc4-4311-96fa-74513f75a7ad",
+              "name": "Task updated successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "task",
+                    ":task_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "custom_task_ids",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "team_id",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "task_id",
+                      "description": "(Required) The unique identifier of the task."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"markdown_description\": \"<string>\",\n  \"assignees\": {\n    \"add\": [\n      \"<integer>\",\n      \"<integer>\"\n    ],\n    \"rem\": [\n      \"<integer>\",\n      \"<integer>\"\n    ]\n  },\n  \"status\": \"<string>\",\n  \"priority\": \"<integer>\",\n  \"due_date\": \"<long>\",\n  \"due_date_time\": \"<boolean>\",\n  \"time_estimate\": \"<integer>\",\n  \"start_date\": \"<long>\",\n  \"start_date_time\": \"<boolean>\",\n  \"parent\": \"<string>\",\n  \"archived\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"custom_id\": \"string\",\n  \"name\": \"string\",\n  \"text_content\": \"string\",\n  \"description\": \"string\",\n  \"markdown_description\": \"string\",\n  \"status\": {\n    \"id\": \"string\",\n    \"status\": \"string\",\n    \"color\": \"string\",\n    \"orderindex\": 7870,\n    \"type\": \"closed\"\n  },\n  \"orderindex\": \"string\",\n  \"date_created\": \"string\",\n  \"date_updated\": \"string\",\n  \"date_closed\": \"string\",\n  \"date_done\": \"string\",\n  \"archived\": false,\n  \"creator\": {\n    \"id\": 6953,\n    \"username\": \"string\",\n    \"email\": \"0s0HWe@xsvgAgRRmpZJHTYwmRzmYNrBltq.uz\",\n    \"color\": \"string\",\n    \"profilePicture\": \"http://J.ftckYTRUwK.nSwRaloXekxAWpWfntqz4RzHbrzV\",\n    \"initials\": \"string\"\n  },\n  \"assignees\": [\n    {\n      \"id\": 4765,\n      \"username\": \"string\",\n      \"email\": \"ykYeuvP@dIhZHZpaXqEjmEPGIBLsHOTg.mm\",\n      \"color\": \"string\",\n      \"profilePicture\": \"https://NJFKzskgpAQYQZFVtwcpKW.kfoveBt5VjuOJrv7gkj+lOAH1igwzoI8uIYM.MABJaY7DplkhYBnaivUcoDWPgGxrUBYh\",\n      \"initials\": \"string\"\n    },\n    {\n      \"id\": 8668,\n      \"username\": \"string\",\n      \"email\": \"Hg7aFZBit@bZMhtamCOjAPSxiLYfSCfYRQXUWzginn.oy\",\n      \"color\": \"string\",\n      \"profilePicture\": \"https://jNDKolJsMme.bibfb9QPRI1De4.Ywuky.OoZB8qJr7ELn5x\",\n      \"initials\": \"string\"\n    }\n  ],\n  \"watchers\": [\n    {\n      \"id\": 7154,\n      \"username\": \"string\",\n      \"email\": \"AOXRz@DjhFH.ba\",\n      \"color\": \"string\",\n      \"profilePicture\": \"http://cIRgp.qwjuS,-MIMESe8wlyt3alXUnwsUeze6xGiydnStNwxmlbmFbP2ekxoQVJ2xraoiyy2o5RPuWrHOX+Xi-15v.l-\",\n      \"initials\": \"string\"\n    },\n    {\n      \"id\": 1592,\n      \"username\": \"string\",\n      \"email\": \"fz1c@yQtQeYvfhtwoTLUMzzqvgiiNXiXt.lo\",\n      \"color\": \"string\",\n      \"profilePicture\": \"https://U.kpEYSGMzTvFZ\",\n      \"initials\": \"string\"\n    }\n  ],\n  \"tags\": [\n    {\n      \"name\": \"string\",\n      \"tag_fg\": \"string\",\n      \"tag_bg\": \"string\",\n      \"creator\": 5894\n    },\n    {\n      \"name\": \"string\",\n      \"tag_fg\": \"string\",\n      \"tag_bg\": \"string\",\n      \"creator\": 2405\n    }\n  ],\n  \"parent\": \"string\",\n  \"priority\": {\n    \"id\": \"string\",\n    \"priority\": \"urgent\",\n    \"color\": \"string\",\n    \"orderindex\": \"string\"\n  },\n  \"due_date\": \"string\",\n  \"start_date\": \"string\",\n  \"points\": 9457.096527744987,\n  \"time_estimate\": 3241,\n  \"time_spent\": 1073,\n  \"custom_fields\": [\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"type\": \"string\",\n      \"type_config\": {},\n      \"date_created\": \"string\",\n      \"hide_from_guests\": false,\n      \"value\": {},\n      \"required\": false\n    },\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"type\": \"string\",\n      \"type_config\": {},\n      \"date_created\": \"string\",\n      \"hide_from_guests\": false,\n      \"value\": {},\n      \"required\": true\n    }\n  ],\n  \"team_id\": \"string\",\n  \"url\": \"https://OGrAfjZbZMBtgCvujIKcSgcNWdFx.whtid2PXX48VABHeqVku1FSU3d\",\n  \"list\": {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"access\": false\n  },\n  \"project\": {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"access\": false\n  },\n  \"folder\": {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"access\": true\n  },\n  \"space\": {\n    \"id\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b0c745c4-1ead-4567-b13d-780a22309e0d",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "task",
+                    ":task_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "custom_task_ids",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "team_id",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "task_id",
+                      "description": "(Required) The unique identifier of the task."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"markdown_description\": \"<string>\",\n  \"assignees\": {\n    \"add\": [\n      \"<integer>\",\n      \"<integer>\"\n    ],\n    \"rem\": [\n      \"<integer>\",\n      \"<integer>\"\n    ]\n  },\n  \"status\": \"<string>\",\n  \"priority\": \"<integer>\",\n  \"due_date\": \"<long>\",\n  \"due_date_time\": \"<boolean>\",\n  \"time_estimate\": \"<integer>\",\n  \"start_date\": \"<long>\",\n  \"start_date_time\": \"<boolean>\",\n  \"parent\": \"<string>\",\n  \"archived\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "e7403259-e5b9-4508-90ad-4b6d8f5fadc0",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "task",
+                    ":task_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "custom_task_ids",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "team_id",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "task_id",
+                      "description": "(Required) The unique identifier of the task."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"markdown_description\": \"<string>\",\n  \"assignees\": {\n    \"add\": [\n      \"<integer>\",\n      \"<integer>\"\n    ],\n    \"rem\": [\n      \"<integer>\",\n      \"<integer>\"\n    ]\n  },\n  \"status\": \"<string>\",\n  \"priority\": \"<integer>\",\n  \"due_date\": \"<long>\",\n  \"due_date_time\": \"<boolean>\",\n  \"time_estimate\": \"<integer>\",\n  \"start_date\": \"<long>\",\n  \"start_date_time\": \"<boolean>\",\n  \"parent\": \"<string>\",\n  \"archived\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "dbf0c65d-2631-4325-be76-4df46b140fc4",
+              "name": "Task not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "task",
+                    ":task_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "custom_task_ids",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "team_id",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "task_id",
+                      "description": "(Required) The unique identifier of the task."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"markdown_description\": \"<string>\",\n  \"assignees\": {\n    \"add\": [\n      \"<integer>\",\n      \"<integer>\"\n    ],\n    \"rem\": [\n      \"<integer>\",\n      \"<integer>\"\n    ]\n  },\n  \"status\": \"<string>\",\n  \"priority\": \"<integer>\",\n  \"due_date\": \"<long>\",\n  \"due_date_time\": \"<boolean>\",\n  \"time_estimate\": \"<integer>\",\n  \"start_date\": \"<long>\",\n  \"start_date_time\": \"<boolean>\",\n  \"parent\": \"<string>\",\n  \"archived\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3cc204ce-a657-481e-a6d6-abccb882f9ca",
+          "name": "Delete a task",
+          "request": {
+            "name": "Delete a task",
+            "description": {
+              "content": "Permanently deletes a task by its ID. This action cannot be undone.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "task",
+                ":task_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "custom_task_ids",
+                  "value": "<boolean>",
+                  "description": "If you want to reference a task by its custom task ID, this value must be true."
+                },
+                {
+                  "disabled": false,
+                  "key": "team_id",
+                  "value": "<integer>",
+                  "description": "Required when custom_task_ids is set to true. The Workspace ID."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "task_id",
+                  "description": "(Required) The unique identifier of the task."
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "34f3d538-865f-4248-8374-1a0705e98d26",
+              "name": "Task deleted successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "task",
+                    ":task_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "custom_task_ids",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "team_id",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "task_id",
+                      "description": "(Required) The unique identifier of the task."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "17cb29bb-d6d5-46cc-8f9c-9ddc97118ad3",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "task",
+                    ":task_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "custom_task_ids",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "team_id",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "task_id",
+                      "description": "(Required) The unique identifier of the task."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "463aa6c8-2d11-43a1-9500-d0e68d373844",
+              "name": "Task not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "task",
+                    ":task_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "custom_task_ids",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "team_id",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "task_id",
+                      "description": "(Required) The unique identifier of the task."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "26392e58-6f4d-49d7-89ab-dd41ef1e7470",
+          "name": "Get filtered team tasks",
+          "request": {
+            "name": "Get filtered team tasks",
+            "description": {
+              "content": "Retrieves tasks across an entire Workspace (team), with support for filtering by assignees, tags, statuses, due dates, and more. This endpoint searches tasks across all lists, folders, and spaces in the Workspace.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "team",
+                ":team_id",
+                "task"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<integer>",
+                  "description": "Page number for pagination. Starts at 0."
+                },
+                {
+                  "disabled": false,
+                  "key": "order_by",
+                  "value": "<string>",
+                  "description": "Field to order results by."
+                },
+                {
+                  "disabled": false,
+                  "key": "reverse",
+                  "value": "<boolean>",
+                  "description": "Reverse the order of results."
+                },
+                {
+                  "disabled": false,
+                  "key": "subtasks",
+                  "value": "<boolean>",
+                  "description": "Include subtasks in the response."
+                },
+                {
+                  "disabled": false,
+                  "key": "statuses[]",
+                  "value": "<string>",
+                  "description": "Filter by task statuses."
+                },
+                {
+                  "disabled": false,
+                  "key": "statuses[]",
+                  "value": "<string>",
+                  "description": "Filter by task statuses."
+                },
+                {
+                  "disabled": false,
+                  "key": "include_closed",
+                  "value": "<boolean>",
+                  "description": "Include closed tasks."
+                },
+                {
+                  "disabled": false,
+                  "key": "assignees[]",
+                  "value": "<integer>",
+                  "description": "Filter by assignee user IDs."
+                },
+                {
+                  "disabled": false,
+                  "key": "assignees[]",
+                  "value": "<integer>",
+                  "description": "Filter by assignee user IDs."
+                },
+                {
+                  "disabled": false,
+                  "key": "tags[]",
+                  "value": "<string>",
+                  "description": "Filter by tag names."
+                },
+                {
+                  "disabled": false,
+                  "key": "tags[]",
+                  "value": "<string>",
+                  "description": "Filter by tag names."
+                },
+                {
+                  "disabled": false,
+                  "key": "due_date_gt",
+                  "value": "<long>",
+                  "description": "Filter for tasks with due date after this Unix timestamp in milliseconds."
+                },
+                {
+                  "disabled": false,
+                  "key": "due_date_lt",
+                  "value": "<long>",
+                  "description": "Filter for tasks with due date before this Unix timestamp in milliseconds."
+                },
+                {
+                  "disabled": false,
+                  "key": "date_created_gt",
+                  "value": "<long>",
+                  "description": "Filter for tasks created after this Unix timestamp in milliseconds."
+                },
+                {
+                  "disabled": false,
+                  "key": "date_created_lt",
+                  "value": "<long>",
+                  "description": "Filter for tasks created before this Unix timestamp in milliseconds."
+                },
+                {
+                  "disabled": false,
+                  "key": "date_updated_gt",
+                  "value": "<long>",
+                  "description": "Filter for tasks updated after this Unix timestamp in milliseconds."
+                },
+                {
+                  "disabled": false,
+                  "key": "date_updated_lt",
+                  "value": "<long>",
+                  "description": "Filter for tasks updated before this Unix timestamp in milliseconds."
+                },
+                {
+                  "disabled": false,
+                  "key": "list_ids[]",
+                  "value": "<integer>",
+                  "description": "Filter by list IDs."
+                },
+                {
+                  "disabled": false,
+                  "key": "list_ids[]",
+                  "value": "<integer>",
+                  "description": "Filter by list IDs."
+                },
+                {
+                  "disabled": false,
+                  "key": "space_ids[]",
+                  "value": "<integer>",
+                  "description": "Filter by space IDs."
+                },
+                {
+                  "disabled": false,
+                  "key": "space_ids[]",
+                  "value": "<integer>",
+                  "description": "Filter by space IDs."
+                },
+                {
+                  "disabled": false,
+                  "key": "project_ids[]",
+                  "value": "<integer>",
+                  "description": "Filter by folder (project) IDs."
+                },
+                {
+                  "disabled": false,
+                  "key": "project_ids[]",
+                  "value": "<integer>",
+                  "description": "Filter by folder (project) IDs."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "team_id",
+                  "description": "(Required) The unique identifier of the Workspace (team)."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e22e3c8f-214a-4581-8eb6-e8b47ab56b8f",
+              "name": "Successfully retrieved filtered tasks",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "team",
+                    ":team_id",
+                    "task"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "order_by",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "reverse",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "subtasks",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "statuses[]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "statuses[]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "include_closed",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "assignees[]",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "assignees[]",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "tags[]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tags[]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "due_date_gt",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "due_date_lt",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "date_created_gt",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "date_created_lt",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "date_updated_gt",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "date_updated_lt",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "list_ids[]",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "list_ids[]",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "space_ids[]",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "space_ids[]",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "project_ids[]",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "project_ids[]",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "team_id",
+                      "description": "(Required) The unique identifier of the Workspace (team)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"tasks\": [\n    {\n      \"id\": \"string\",\n      \"custom_id\": \"string\",\n      \"name\": \"string\",\n      \"text_content\": \"string\",\n      \"description\": \"string\",\n      \"markdown_description\": \"string\",\n      \"status\": {\n        \"id\": \"string\",\n        \"status\": \"string\",\n        \"color\": \"string\",\n        \"orderindex\": 9693,\n        \"type\": \"open\"\n      },\n      \"orderindex\": \"string\",\n      \"date_created\": \"string\",\n      \"date_updated\": \"string\",\n      \"date_closed\": \"string\",\n      \"date_done\": \"string\",\n      \"archived\": true,\n      \"creator\": {\n        \"id\": 8637,\n        \"username\": \"string\",\n        \"email\": \"kV3eYm@nQVjIcgSANumzedL.nfkl\",\n        \"color\": \"string\",\n        \"profilePicture\": \"https://GzCxYTijMBZeu.icrO6c\",\n        \"initials\": \"string\"\n      },\n      \"assignees\": [\n        {\n          \"id\": 2700,\n          \"username\": \"string\",\n          \"email\": \"bry7tUuJUDb4p@NEoYSKHJo.ir\",\n          \"color\": \"string\",\n          \"profilePicture\": \"https://sn.kgn4rbnvx5CHlVuMhmyiUKTvigSfPY-M06TJ3nrlsV\",\n          \"initials\": \"string\"\n        },\n        {\n          \"id\": 9529,\n          \"username\": \"string\",\n          \"email\": \"YEluSz@HoUgCjFlUCDJqPPxNVimw.hn\",\n          \"color\": \"string\",\n          \"profilePicture\": \"http://znyxirsB.bcxAudM7y4QLehynhFBAUtuw7DZ+C73j+fMKcmaane,8JCNwKUB\",\n          \"initials\": \"string\"\n        }\n      ],\n      \"watchers\": [\n        {\n          \"id\": 1529,\n          \"username\": \"string\",\n          \"email\": \"PFT8F@WdYFEgEpKAlDDFqMkch.zt\",\n          \"color\": \"string\",\n          \"profilePicture\": \"http://fFkFQfkECFRNPocnXrRu.ylwyM91ATLT3h3VOdLXC.GibM,0Dngc1VN6ZshhWmkxE2ykvZgZR-eHg\",\n          \"initials\": \"string\"\n        },\n        {\n          \"id\": 8736,\n          \"username\": \"string\",\n          \"email\": \"9xbbhi@YgiKEQPqFqwuUzwLxJGpoMC.mm\",\n          \"color\": \"string\",\n          \"profilePicture\": \"https://q.hhDf-,FJZKd70Qfe\",\n          \"initials\": \"string\"\n        }\n      ],\n      \"tags\": [\n        {\n          \"name\": \"string\",\n          \"tag_fg\": \"string\",\n          \"tag_bg\": \"string\",\n          \"creator\": 5811\n        },\n        {\n          \"name\": \"string\",\n          \"tag_fg\": \"string\",\n          \"tag_bg\": \"string\",\n          \"creator\": 3633\n        }\n      ],\n      \"parent\": \"string\",\n      \"priority\": {\n        \"id\": \"string\",\n        \"priority\": \"high\",\n        \"color\": \"string\",\n        \"orderindex\": \"string\"\n      },\n      \"due_date\": \"string\",\n      \"start_date\": \"string\",\n      \"points\": 9392.588348897218,\n      \"time_estimate\": 5099,\n      \"time_spent\": 2652,\n      \"custom_fields\": [\n        {\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"type\": \"string\",\n          \"type_config\": {},\n          \"date_created\": \"string\",\n          \"hide_from_guests\": false,\n          \"value\": {},\n          \"required\": false\n        },\n        {\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"type\": \"string\",\n          \"type_config\": {},\n          \"date_created\": \"string\",\n          \"hide_from_guests\": true,\n          \"value\": {},\n          \"required\": false\n        }\n      ],\n      \"team_id\": \"string\",\n      \"url\": \"http://ago.pcAaSWWAAZHHVYMn+8Q73RqjADM+7mYYEmIrOYAogrI2R3FkSH91JDRBeX1Z,z8q0q\",\n      \"list\": {\n        \"id\": \"string\",\n        \"name\": \"string\",\n        \"access\": true\n      },\n      \"project\": {\n        \"id\": \"string\",\n        \"name\": \"string\",\n        \"access\": false\n      },\n      \"folder\": {\n        \"id\": \"string\",\n        \"name\": \"string\",\n        \"access\": true\n      },\n      \"space\": {\n        \"id\": \"string\"\n      }\n    },\n    {\n      \"id\": \"string\",\n      \"custom_id\": \"string\",\n      \"name\": \"string\",\n      \"text_content\": \"string\",\n      \"description\": \"string\",\n      \"markdown_description\": \"string\",\n      \"status\": {\n        \"id\": \"string\",\n        \"status\": \"string\",\n        \"color\": \"string\",\n        \"orderindex\": 2120,\n        \"type\": \"done\"\n      },\n      \"orderindex\": \"string\",\n      \"date_created\": \"string\",\n      \"date_updated\": \"string\",\n      \"date_closed\": \"string\",\n      \"date_done\": \"string\",\n      \"archived\": false,\n      \"creator\": {\n        \"id\": 145,\n        \"username\": \"string\",\n        \"email\": \"uKsv@aZpgQCesae.hlkv\",\n        \"color\": \"string\",\n        \"profilePicture\": \"https://OAwwCqtJBcXlDufSRCrZegonCC.zesz-HV56T3TSds7-H9XA6d-wsYj98uPR+yxpxiHyteNxx2mF2cCkN\",\n        \"initials\": \"string\"\n      },\n      \"assignees\": [\n        {\n          \"id\": 3108,\n          \"username\": \"string\",\n          \"email\": \"XHtrBoC@qallMcHDbtBLphbTCHlvlZssyxENAEkDK.qkc\",\n          \"color\": \"string\",\n          \"profilePicture\": \"http://frchvJhWVpKSvKrJSCAURMuWPx.chpibfwtDxMl2\",\n          \"initials\": \"string\"\n        },\n        {\n          \"id\": 2062,\n          \"username\": \"string\",\n          \"email\": \"fuJKO9mOmW@xRzEemRdjweGEsSuWiuQllTl.hmvr\",\n          \"color\": \"string\",\n          \"profilePicture\": \"http://NVMmjugSDdTFzwzezoTi.psmgNUV0phCH5j5Rf5NTLqYKSEXZCMsjuJ6mYPl2AxkXRK\",\n          \"initials\": \"string\"\n        }\n      ],\n      \"watchers\": [\n        {\n          \"id\": 5254,\n          \"username\": \"string\",\n          \"email\": \"xZ9U@EydFnMterLIsYEdpadQnZaopWUKveqrUh.cjx\",\n          \"color\": \"string\",\n          \"profilePicture\": \"http://kUsSFxCbeXykJelUsZHbxhwaTTasgWbOO.zvDLE3gxBjR2SlwbLBft-m5cnUSm9Pz3V2PGxsIPQIaCjQ4\",\n          \"initials\": \"string\"\n        },\n        {\n          \"id\": 5941,\n          \"username\": \"string\",\n          \"email\": \"0zPJVB5K81@dzVTNNThHbbAvjfuGtwUAzYWMw.hpix\",\n          \"color\": \"string\",\n          \"profilePicture\": \"http://ZEudzh.hcriw3FZKM3HTlty7SEm9R5XIOkgM37FfesXakYNxOm7Gt0eLrvkrZ\",\n          \"initials\": \"string\"\n        }\n      ],\n      \"tags\": [\n        {\n          \"name\": \"string\",\n          \"tag_fg\": \"string\",\n          \"tag_bg\": \"string\",\n          \"creator\": 4315\n        },\n        {\n          \"name\": \"string\",\n          \"tag_fg\": \"string\",\n          \"tag_bg\": \"string\",\n          \"creator\": 7805\n        }\n      ],\n      \"parent\": \"string\",\n      \"priority\": {\n        \"id\": \"string\",\n        \"priority\": \"normal\",\n        \"color\": \"string\",\n        \"orderindex\": \"string\"\n      },\n      \"due_date\": \"string\",\n      \"start_date\": \"string\",\n      \"points\": 9781.614836497025,\n      \"time_estimate\": 2364,\n      \"time_spent\": 3953,\n      \"custom_fields\": [\n        {\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"type\": \"string\",\n          \"type_config\": {},\n          \"date_created\": \"string\",\n          \"hide_from_guests\": false,\n          \"value\": {},\n          \"required\": false\n        },\n        {\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"type\": \"string\",\n          \"type_config\": {},\n          \"date_created\": \"string\",\n          \"hide_from_guests\": false,\n          \"value\": {},\n          \"required\": false\n        }\n      ],\n      \"team_id\": \"string\",\n      \"url\": \"https://nfEVOUrmwZgGx.fzxHhM+JCtN2B4,2PvNMvnjU3JDJeUMmdVy.nZhZ\",\n      \"list\": {\n        \"id\": \"string\",\n        \"name\": \"string\",\n        \"access\": true\n      },\n      \"project\": {\n        \"id\": \"string\",\n        \"name\": \"string\",\n        \"access\": false\n      },\n      \"folder\": {\n        \"id\": \"string\",\n        \"name\": \"string\",\n        \"access\": false\n      },\n      \"space\": {\n        \"id\": \"string\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e6cd925a-fc64-4b24-b43d-eece849da159",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "team",
+                    ":team_id",
+                    "task"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "order_by",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "reverse",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "subtasks",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "statuses[]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "statuses[]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "include_closed",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "assignees[]",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "assignees[]",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "tags[]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tags[]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "due_date_gt",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "due_date_lt",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "date_created_gt",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "date_created_lt",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "date_updated_gt",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "date_updated_lt",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "list_ids[]",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "list_ids[]",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "space_ids[]",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "space_ids[]",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "project_ids[]",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "project_ids[]",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "team_id",
+                      "description": "(Required) The unique identifier of the Workspace (team)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "fed1ecbf-d7ef-4c78-9082-8f69c095c054",
+          "name": "Get task time in status",
+          "request": {
+            "name": "Get task time in status",
+            "description": {
+              "content": "Retrieves how long a task has been in each status. Returns time information for every status the task has been in.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "task",
+                ":task_id",
+                "time_in_status"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "task_id",
+                  "description": "(Required) The unique identifier of the task."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "91f94bfc-5380-4bd6-931e-7fb30737eb57",
+              "name": "Successfully retrieved time in status data",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "task",
+                    ":task_id",
+                    "time_in_status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "task_id",
+                      "description": "(Required) The unique identifier of the task."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"current_status\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e957dab9-46da-4343-9de2-a2a56293d6c4",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "task",
+                    ":task_id",
+                    "time_in_status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "task_id",
+                      "description": "(Required) The unique identifier of the task."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "ba3af1c5-6678-433c-bc98-905a9433321f",
+              "name": "Task not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "task",
+                    ":task_id",
+                    "time_in_status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "task_id",
+                      "description": "(Required) The unique identifier of the task."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "fca3d997-d707-497a-b596-d10d1b40f76c",
+          "name": "Get bulk task time in status",
+          "request": {
+            "name": "Get bulk task time in status",
+            "description": {
+              "content": "Retrieves time in status data for multiple tasks at once. Accepts an array of task IDs as query parameters.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "task",
+                "bulk_time_in_status",
+                "task_ids"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "task_ids[]",
+                  "value": "<string>",
+                  "description": "(Required) Array of task IDs to retrieve time in status data for."
+                },
+                {
+                  "disabled": false,
+                  "key": "task_ids[]",
+                  "value": "<string>",
+                  "description": "(Required) Array of task IDs to retrieve time in status data for."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "aefdd45e-97b1-41ce-9531-7c9a035ea02a",
+              "name": "Successfully retrieved bulk time in status data",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "task",
+                    "bulk_time_in_status",
+                    "task_ids"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "task_ids[]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "task_ids[]",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"key_0\": {},\n  \"key_1\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5c546b50-c129-4847-9ac8-478834d14618",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "task",
+                    "bulk_time_in_status",
+                    "task_ids"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "task_ids[]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "task_ids[]",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ed18637c-bea1-42ce-832d-8c5a2b6f2e2b",
+          "name": "Get task members",
+          "request": {
+            "name": "Get task members",
+            "description": {
+              "content": "Retrieves the members (assignees and watchers) of a specific task.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "list",
+                ":list_id",
+                "task",
+                ":task_id",
+                "member"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "list_id",
+                  "description": "(Required) The unique identifier of the list."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "task_id",
+                  "description": "(Required) The unique identifier of the task."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ca9c3aa7-426d-47a7-9df7-b361e0fbf4fc",
+              "name": "Successfully retrieved task members",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "list",
+                    ":list_id",
+                    "task",
+                    ":task_id",
+                    "member"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "list_id",
+                      "description": "(Required) The unique identifier of the list."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "task_id",
+                      "description": "(Required) The unique identifier of the task."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"members\": [\n    {\n      \"id\": 9253,\n      \"username\": \"string\",\n      \"email\": \"8WSHuQJRKV@PtHgZryeIaPRkuSRSY.yua\",\n      \"color\": \"string\",\n      \"profilePicture\": \"http://stRLoIpkhCLcIHdWyCIRjyFiHieHT.yrlTeCyN4h7reQczv.-uHucQsTpZ6w\",\n      \"initials\": \"string\"\n    },\n    {\n      \"id\": 4579,\n      \"username\": \"string\",\n      \"email\": \"bg1zLI@UzVNKTBPNYnPkVbgQXfMPtoIG.ipv\",\n      \"color\": \"string\",\n      \"profilePicture\": \"http://wcszOU.rkbimSpV35m-Itzb-m\",\n      \"initials\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "978045f8-17b9-47f7-858b-9ee2d103ad53",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "list",
+                    ":list_id",
+                    "task",
+                    ":task_id",
+                    "member"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "list_id",
+                      "description": "(Required) The unique identifier of the list."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "task_id",
+                      "description": "(Required) The unique identifier of the task."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "e39c0b87-99ee-4d8c-b768-c9af2ef12b7e",
+              "name": "Task or list not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "list",
+                    ":list_id",
+                    "task",
+                    ":task_id",
+                    "member"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "list_id",
+                      "description": "(Required) The unique identifier of the list."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "task_id",
+                      "description": "(Required) The unique identifier of the task."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2dd9d223-6c15-4d23-838b-de8464225417",
+          "name": "Add tag to task",
+          "request": {
+            "name": "Add tag to task",
+            "description": {
+              "content": "Adds a tag to a task. If the tag does not exist in the Space, it will be created.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "task",
+                ":task_id",
+                "tag",
+                ":tag_name"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "task_id",
+                  "description": "(Required) The unique identifier of the task."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "tag_name",
+                  "description": "(Required) The name of the tag to add."
+                }
+              ]
+            },
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "97e3a0c1-7fae-4987-ae30-0e31540800bd",
+              "name": "Tag added successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "task",
+                    ":task_id",
+                    "tag",
+                    ":tag_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "task_id",
+                      "description": "(Required) The unique identifier of the task."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tag_name",
+                      "description": "(Required) The name of the tag to add."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "50913b43-5073-4017-9f96-35b6ca560fd0",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "task",
+                    ":task_id",
+                    "tag",
+                    ":tag_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "task_id",
+                      "description": "(Required) The unique identifier of the task."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tag_name",
+                      "description": "(Required) The name of the tag to add."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "a573706c-8686-4f50-92e1-f4251650550f",
+              "name": "Task not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "task",
+                    ":task_id",
+                    "tag",
+                    ":tag_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "task_id",
+                      "description": "(Required) The unique identifier of the task."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tag_name",
+                      "description": "(Required) The name of the tag to add."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3bd7b67d-5609-4b4c-b0ee-d1f9f0be248e",
+          "name": "Remove tag from task",
+          "request": {
+            "name": "Remove tag from task",
+            "description": {
+              "content": "Removes a tag from a task.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "task",
+                ":task_id",
+                "tag",
+                ":tag_name"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "task_id",
+                  "description": "(Required) The unique identifier of the task."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "tag_name",
+                  "description": "(Required) The name of the tag to remove."
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5b7760ed-c7d4-43b5-9a0a-0f1030d8c91b",
+              "name": "Tag removed successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "task",
+                    ":task_id",
+                    "tag",
+                    ":tag_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "task_id",
+                      "description": "(Required) The unique identifier of the task."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tag_name",
+                      "description": "(Required) The name of the tag to remove."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "bea46761-68dd-471b-9dec-ab4dd0527a85",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "task",
+                    ":task_id",
+                    "tag",
+                    ":tag_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "task_id",
+                      "description": "(Required) The unique identifier of the task."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tag_name",
+                      "description": "(Required) The name of the tag to remove."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "6d9469df-00d0-4754-a1c4-fe509c4aa6e6",
+              "name": "Task not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "task",
+                    ":task_id",
+                    "tag",
+                    ":tag_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "task_id",
+                      "description": "(Required) The unique identifier of the task."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tag_name",
+                      "description": "(Required) The name of the tag to remove."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.clickup.com/api/v2",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "3d1e0098-d70d-4154-a5af-d9bf4bdfa944",
+    "name": "ClickUp Tasks API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The ClickUp Tasks API allows developers to create, read, update, and delete tasks within ClickUp workspaces. Tasks are the core unit of work in ClickUp and can include custom fields, assignees, due dates, tags, priorities, and attachments. The API supports filtering tasks by list, space, or project, and enables bulk operations for managing large numbers of tasks programmatically.\n\nContact Support:\n Name: ClickUp Support",
+      "type": "text/plain"
+    }
+  }
+}
