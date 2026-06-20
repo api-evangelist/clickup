@@ -9,7 +9,7 @@ apis:
   - Productivity
   - Project Management
   - Tasks
-  image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
   baseURL: https://api.clickup.com
   humanURL: https://developer.clickup.com/docs/tasks
   properties:
@@ -30,7 +30,7 @@ apis:
   - Organization
   - Project Management
   - Workspaces
-  image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
   baseURL: https://api.clickup.com
   humanURL: https://developer.clickup.com/reference/get-spaces
   properties:
@@ -49,7 +49,7 @@ apis:
   - Lists
   - Project Management
   - Task Organization
-  image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
   baseURL: https://api.clickup.com
   humanURL: https://developer.clickup.com/reference/get-lists
   properties:
@@ -68,7 +68,7 @@ apis:
   - Folders
   - Organization
   - Project Management
-  image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
   baseURL: https://api.clickup.com
   humanURL: https://developer.clickup.com/reference/get-folders
   properties:
@@ -88,7 +88,7 @@ apis:
   - OKR
   - Project Management
   - Tracking
-  image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
   baseURL: https://api.clickup.com
   humanURL: https://developer.clickup.com/reference/get-goals
   properties:
@@ -107,7 +107,7 @@ apis:
   - Collaboration
   - Comments
   - Project Management
-  image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
   baseURL: https://api.clickup.com
   humanURL: https://developer.clickup.com/reference/get-task-comments
   properties:
@@ -127,7 +127,7 @@ apis:
   - Teams
   - Users
   - Workspaces
-  image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
   baseURL: https://api.clickup.com
   humanURL: https://developer.clickup.com/reference/get-teams
   properties:
@@ -147,7 +147,7 @@ apis:
   - Project Management
   - Real-Time
   - Webhooks
-  image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
   baseURL: https://api.clickup.com
   humanURL: https://developer.clickup.com/docs/webhooks
   properties:
@@ -168,7 +168,7 @@ apis:
   - Custom Fields
   - Metadata
   - Project Management
-  image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
   baseURL: https://api.clickup.com
   humanURL: https://developer.clickup.com/reference/get-accessible-custom-fields
   properties:
@@ -189,7 +189,7 @@ apis:
   - Project Management
   - Reporting
   - Time Tracking
-  image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
   baseURL: https://api.clickup.com
   humanURL: https://developer.clickup.com/reference/get-time-entries-within-a-date-range
   properties:
@@ -208,7 +208,7 @@ apis:
   - Dashboards
   - Project Management
   - Views
-  image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
   baseURL: https://api.clickup.com
   humanURL: https://developer.clickup.com/reference/get-views
   properties:
@@ -228,7 +228,7 @@ apis:
   - Authorization
   - OAuth
   - Project Management
-  image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
   baseURL: https://api.clickup.com
   humanURL: https://developer.clickup.com/docs/authentication
   properties:
