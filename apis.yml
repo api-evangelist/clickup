@@ -274,6 +274,6 @@ common:
   sources:
   - https://clickup.com/pricing
   updated: '2026-05-04'
-- type: LLMsTxt
+- type: LlmsText
   url: https://developer.clickup.com/llms.txt
 description: Work with tasks using the ClickUp API.
