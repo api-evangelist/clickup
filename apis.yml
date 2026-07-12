@@ -243,6 +243,12 @@ apis:
     for obtaining authorization codes, exchanging them for access tokens, and retrieving
     the authenticated user's information.
 common:
+- type: TrustCenter
+  url: security/clickup-trust-center.yml
+- type: DomainSecurity
+  url: security/clickup-domain-security.yml
+- type: Authentication
+  url: authentication/clickup-authentication.yml
 - type: GitHubOrganization
   url: https://github.com/clickup
 - type: LinkedIn
@@ -276,4 +282,6 @@ common:
   updated: '2026-05-04'
 - type: LlmsText
   url: https://developer.clickup.com/llms.txt
+- url: https://clickup.com/blog
+  type: Blog
 description: Work with tasks using the ClickUp API.
