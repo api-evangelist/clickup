@@ -243,6 +243,8 @@ apis:
     for obtaining authorization codes, exchanging them for access tokens, and retrieving
     the authenticated user's information.
 common:
+- type: AgenticAccess
+  url: agentic-access/clickup-agentic-access.yml
 - type: TrustCenter
   url: security/clickup-trust-center.yml
 - type: DomainSecurity
