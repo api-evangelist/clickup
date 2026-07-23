@@ -1,0 +1,68 @@
+openapi: 3.1.0
+info:
+  title: ClickUp Comments Authorization OAuth API
+  description: The ClickUp Comments API provides endpoints for creating and retrieving comments on tasks, views, and lists. Comments support rich text formatting, mentions, and attachments. Developers can use this API to build integrations that synchronize discussions between ClickUp and other collaboration tools, or to programmatically add status updates and notes to tasks.
+  version: '2.0'
+  contact:
+    name: ClickUp Support
+    url: https://help.clickup.com
+  termsOfService: https://clickup.com/terms
+servers:
+- url: https://api.clickup.com/api/v2
+  description: ClickUp API v2 Production Server
+security:
+- bearerAuth: []
+tags:
+- name: OAuth
+  description: Operations for OAuth 2.0 authentication and token management.
+paths:
+  /oauth/token:
+    post:
+      operationId: getAccessToken
+      summary: Get access token
+      description: Exchanges an authorization code for an access token. This is the second step in the OAuth 2.0 authorization code flow. The client ID, client secret, and authorization code must be provided.
+      tags:
+      - OAuth
+      parameters:
+      - name: client_id
+        in: query
+        required: true
+        description: The OAuth app client ID.
+        schema:
+          type: string
+      - name: client_secret
+        in: query
+        required: true
+        description: The OAuth app client secret.
+        schema:
+          type: string
+      - name: code
+        in: query
+        required: true
+        description: The authorization code received from the authorization step.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Access token obtained successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  access_token:
+                    type: string
+                    description: The access token to use for API requests.
+        '400':
+          description: Bad request - invalid code or credentials
+        '401':
+          description: Unauthorized - invalid client credentials
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: ClickUp personal API token or OAuth access token.
+externalDocs:
+  description: ClickUp Comments API Documentation
+  url: https://developer.clickup.com/reference/get-task-comments
