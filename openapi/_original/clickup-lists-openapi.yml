@@ -1,0 +1,541 @@
+openapi: 3.1.0
+info:
+  title: ClickUp Lists API
+  description: >-
+    The ClickUp Lists API enables developers to manage Lists, which are
+    containers that hold tasks within a Space or Folder. Lists define the
+    workflow statuses available to tasks and serve as the primary grouping
+    mechanism for related work items. The API supports creating, updating,
+    and deleting Lists, as well as retrieving List details and the tasks
+    they contain.
+  version: '2.0'
+  contact:
+    name: ClickUp Support
+    url: https://help.clickup.com
+  termsOfService: https://clickup.com/terms
+externalDocs:
+  description: ClickUp Lists API Documentation
+  url: https://developer.clickup.com/reference/get-lists
+servers:
+  - url: https://api.clickup.com/api/v2
+    description: ClickUp API v2 Production Server
+tags:
+  - name: Lists
+    description: >-
+      Operations for managing Lists within ClickUp Spaces and Folders.
+security:
+  - bearerAuth: []
+paths:
+  /folder/{folder_id}/list:
+    get:
+      operationId: getLists
+      summary: Get lists in a folder
+      description: >-
+        Retrieves all Lists within a specified Folder. Optionally includes
+        archived Lists in the response.
+      tags:
+        - Lists
+      parameters:
+        - $ref: '#/components/parameters/folderId'
+        - name: archived
+          in: query
+          description: >-
+            Include archived Lists in the response.
+          schema:
+            type: boolean
+            default: false
+      responses:
+        '200':
+          description: Successfully retrieved lists
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  lists:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/List'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Folder not found
+    post:
+      operationId: createList
+      summary: Create a list in a folder
+      description: >-
+        Creates a new List within a specified Folder. The List can be
+        configured with a name, content description, due date, priority,
+        assignee, and status.
+      tags:
+        - Lists
+      parameters:
+        - $ref: '#/components/parameters/folderId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateListRequest'
+      responses:
+        '200':
+          description: List created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/List'
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Folder not found
+  /space/{space_id}/list:
+    get:
+      operationId: getFolderlessLists
+      summary: Get folderless lists
+      description: >-
+        Retrieves all Lists that are directly within a Space and not
+        inside any Folder. These are sometimes called folderless Lists.
+      tags:
+        - Lists
+      parameters:
+        - $ref: '#/components/parameters/spaceId'
+        - name: archived
+          in: query
+          description: >-
+            Include archived Lists in the response.
+          schema:
+            type: boolean
+            default: false
+      responses:
+        '200':
+          description: Successfully retrieved folderless lists
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  lists:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/List'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Space not found
+    post:
+      operationId: createFolderlessList
+      summary: Create a folderless list
+      description: >-
+        Creates a new List directly within a Space, without placing it
+        inside a Folder.
+      tags:
+        - Lists
+      parameters:
+        - $ref: '#/components/parameters/spaceId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateListRequest'
+      responses:
+        '200':
+          description: List created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/List'
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Space not found
+  /list/{list_id}:
+    get:
+      operationId: getList
+      summary: Get a list
+      description: >-
+        Retrieves details of a specific List, including its statuses,
+        content, and configuration.
+      tags:
+        - Lists
+      parameters:
+        - $ref: '#/components/parameters/listId'
+      responses:
+        '200':
+          description: Successfully retrieved list
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/List'
+        '401':
+          description: Unauthorized
+        '404':
+          description: List not found
+    put:
+      operationId: updateList
+      summary: Update a list
+      description: >-
+        Updates the properties of an existing List, including its name,
+        content, due date, priority, assignee, and status.
+      tags:
+        - Lists
+      parameters:
+        - $ref: '#/components/parameters/listId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateListRequest'
+      responses:
+        '200':
+          description: List updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/List'
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: List not found
+    delete:
+      operationId: deleteList
+      summary: Delete a list
+      description: >-
+        Permanently deletes a List and all tasks it contains. This action
+        cannot be undone.
+      tags:
+        - Lists
+      parameters:
+        - $ref: '#/components/parameters/listId'
+      responses:
+        '200':
+          description: List deleted successfully
+        '401':
+          description: Unauthorized
+        '404':
+          description: List not found
+  /list/{list_id}/member:
+    get:
+      operationId: getListMembers
+      summary: Get list members
+      description: >-
+        Retrieves the members who have access to a specific List.
+      tags:
+        - Lists
+      parameters:
+        - $ref: '#/components/parameters/listId'
+      responses:
+        '200':
+          description: Successfully retrieved list members
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  members:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Member'
+        '401':
+          description: Unauthorized
+        '404':
+          description: List not found
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: >-
+        ClickUp personal API token or OAuth access token.
+  parameters:
+    folderId:
+      name: folder_id
+      in: path
+      required: true
+      description: >-
+        The unique identifier of the Folder.
+      schema:
+        type: integer
+    spaceId:
+      name: space_id
+      in: path
+      required: true
+      description: >-
+        The unique identifier of the Space.
+      schema:
+        type: integer
+    listId:
+      name: list_id
+      in: path
+      required: true
+      description: >-
+        The unique identifier of the List.
+      schema:
+        type: integer
+  schemas:
+    List:
+      type: object
+      description: >-
+        A List object representing a container for tasks within a Space
+        or Folder.
+      properties:
+        id:
+          type: string
+          description: >-
+            The unique identifier of the List.
+        name:
+          type: string
+          description: >-
+            The name of the List.
+        orderindex:
+          type: integer
+          description: >-
+            The order index of the List.
+        content:
+          type: string
+          nullable: true
+          description: >-
+            The content description of the List.
+        status:
+          type: object
+          nullable: true
+          properties:
+            status:
+              type: string
+              description: >-
+                The status name.
+            color:
+              type: string
+              description: >-
+                The hex color code.
+            hide_label:
+              type: boolean
+              description: >-
+                Whether to hide the status label.
+          description: >-
+            The status of the List.
+        priority:
+          type: object
+          nullable: true
+          properties:
+            priority:
+              type: string
+              description: >-
+                The priority level.
+            color:
+              type: string
+              description: >-
+                The hex color code.
+          description: >-
+            The priority of the List.
+        assignee:
+          type: object
+          nullable: true
+          description: >-
+            The user assigned to the List.
+        task_count:
+          type: integer
+          nullable: true
+          description: >-
+            The number of tasks in the List.
+        due_date:
+          type: string
+          nullable: true
+          description: >-
+            The due date as a Unix timestamp in milliseconds.
+        start_date:
+          type: string
+          nullable: true
+          description: >-
+            The start date as a Unix timestamp in milliseconds.
+        folder:
+          type: object
+          properties:
+            id:
+              type: string
+              description: >-
+                The Folder ID.
+            name:
+              type: string
+              description: >-
+                The Folder name.
+            hidden:
+              type: boolean
+              description: >-
+                Whether the Folder is hidden.
+            access:
+              type: boolean
+              description: >-
+                Whether the user has access.
+          description: >-
+            The Folder this List belongs to.
+        space:
+          type: object
+          properties:
+            id:
+              type: string
+              description: >-
+                The Space ID.
+            name:
+              type: string
+              description: >-
+                The Space name.
+            access:
+              type: boolean
+              description: >-
+                Whether the user has access.
+          description: >-
+            The Space this List belongs to.
+        archived:
+          type: boolean
+          description: >-
+            Whether the List is archived.
+        override_statuses:
+          type: boolean
+          description: >-
+            Whether the List overrides the Space statuses.
+        statuses:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+                description: >-
+                  The status ID.
+              status:
+                type: string
+                description: >-
+                  The status name.
+              orderindex:
+                type: integer
+                description: >-
+                  The order index.
+              color:
+                type: string
+                description: >-
+                  The hex color code.
+              type:
+                type: string
+                description: >-
+                  The status type.
+          description: >-
+            Available statuses for the List.
+        permission_level:
+          type: string
+          description: >-
+            The permission level of the List.
+    CreateListRequest:
+      type: object
+      required:
+        - name
+      description: >-
+        Request body for creating a new List.
+      properties:
+        name:
+          type: string
+          description: >-
+            The name of the List.
+        content:
+          type: string
+          description: >-
+            The content description of the List.
+        due_date:
+          type: integer
+          format: int64
+          description: >-
+            Due date as Unix timestamp in milliseconds.
+        due_date_time:
+          type: boolean
+          description: >-
+            Whether the due date includes a time component.
+        priority:
+          type: integer
+          minimum: 1
+          maximum: 4
+          description: >-
+            Priority level. 1 is Urgent, 2 is High, 3 is Normal, 4 is Low.
+        assignee:
+          type: integer
+          description: >-
+            User ID to assign to the List.
+        status:
+          type: string
+          description: >-
+            The status to set on the List.
+    UpdateListRequest:
+      type: object
+      description: >-
+        Request body for updating an existing List.
+      properties:
+        name:
+          type: string
+          description: >-
+            The updated name of the List.
+        content:
+          type: string
+          description: >-
+            The updated content description.
+        due_date:
+          type: integer
+          format: int64
+          description: >-
+            Updated due date as Unix timestamp in milliseconds.
+        due_date_time:
+          type: boolean
+          description: >-
+            Whether the due date includes a time component.
+        priority:
+          type: integer
+          minimum: 1
+          maximum: 4
+          description: >-
+            Updated priority level.
+        assignee:
+          type: integer
+          nullable: true
+          description: >-
+            User ID to assign, or null to unassign.
+        unset_status:
+          type: boolean
+          description: >-
+            Set to true to clear the List status.
+    Member:
+      type: object
+      description: >-
+        A member with access to a List.
+      properties:
+        id:
+          type: integer
+          description: >-
+            The user ID.
+        username:
+          type: string
+          description: >-
+            The username.
+        email:
+          type: string
+          format: email
+          description: >-
+            The email address.
+        color:
+          type: string
+          description: >-
+            The user color.
+        profilePicture:
+          type: string
+          format: uri
+          nullable: true
+          description: >-
+            URL of the profile picture.
+        initials:
+          type: string
+          description: >-
+            The user initials.

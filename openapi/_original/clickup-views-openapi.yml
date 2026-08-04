@@ -1,0 +1,572 @@
+openapi: 3.1.0
+info:
+  title: ClickUp Views API
+  description: >-
+    The ClickUp Views API enables developers to create and manage views
+    at the team, space, folder, and list levels. Views define how tasks
+    are displayed and filtered, supporting formats such as list, board,
+    calendar, gantt, and table. The API allows programmatic creation of
+    saved views with specific filters, groupings, and sort configurations.
+  version: '2.0'
+  contact:
+    name: ClickUp Support
+    url: https://help.clickup.com
+  termsOfService: https://clickup.com/terms
+externalDocs:
+  description: ClickUp Views API Documentation
+  url: https://developer.clickup.com/reference/get-views
+servers:
+  - url: https://api.clickup.com/api/v2
+    description: ClickUp API v2 Production Server
+tags:
+  - name: Views
+    description: >-
+      Operations for managing views at various levels of the ClickUp
+      hierarchy.
+security:
+  - bearerAuth: []
+paths:
+  /team/{team_id}/view:
+    get:
+      operationId: getTeamViews
+      summary: Get team views
+      description: >-
+        Retrieves all views at the Workspace (team) level. These are
+        views that span across all Spaces in the Workspace.
+      tags:
+        - Views
+      parameters:
+        - $ref: '#/components/parameters/teamId'
+      responses:
+        '200':
+          description: Successfully retrieved team views
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  views:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/View'
+        '401':
+          description: Unauthorized
+  /space/{space_id}/view:
+    get:
+      operationId: getSpaceViews
+      summary: Get space views
+      description: >-
+        Retrieves all views within a specific Space.
+      tags:
+        - Views
+      parameters:
+        - $ref: '#/components/parameters/spaceId'
+      responses:
+        '200':
+          description: Successfully retrieved space views
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  views:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/View'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Space not found
+  /folder/{folder_id}/view:
+    get:
+      operationId: getFolderViews
+      summary: Get folder views
+      description: >-
+        Retrieves all views within a specific Folder.
+      tags:
+        - Views
+      parameters:
+        - $ref: '#/components/parameters/folderId'
+      responses:
+        '200':
+          description: Successfully retrieved folder views
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  views:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/View'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Folder not found
+  /list/{list_id}/view:
+    get:
+      operationId: getListViews
+      summary: Get list views
+      description: >-
+        Retrieves all views within a specific List.
+      tags:
+        - Views
+      parameters:
+        - $ref: '#/components/parameters/listId'
+      responses:
+        '200':
+          description: Successfully retrieved list views
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  views:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/View'
+        '401':
+          description: Unauthorized
+        '404':
+          description: List not found
+  /view/{view_id}:
+    get:
+      operationId: getView
+      summary: Get a view
+      description: >-
+        Retrieves details of a specific view, including its type,
+        filters, grouping, sorting, and column configuration.
+      tags:
+        - Views
+      parameters:
+        - $ref: '#/components/parameters/viewId'
+      responses:
+        '200':
+          description: Successfully retrieved view
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  view:
+                    $ref: '#/components/schemas/View'
+        '401':
+          description: Unauthorized
+        '404':
+          description: View not found
+    put:
+      operationId: updateView
+      summary: Update a view
+      description: >-
+        Updates an existing view's configuration, including its name,
+        type, filters, grouping, sorting, and settings.
+      tags:
+        - Views
+      parameters:
+        - $ref: '#/components/parameters/viewId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateViewRequest'
+      responses:
+        '200':
+          description: View updated successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  view:
+                    $ref: '#/components/schemas/View'
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: View not found
+    delete:
+      operationId: deleteView
+      summary: Delete a view
+      description: >-
+        Permanently deletes a view. This action cannot be undone.
+      tags:
+        - Views
+      parameters:
+        - $ref: '#/components/parameters/viewId'
+      responses:
+        '200':
+          description: View deleted successfully
+        '401':
+          description: Unauthorized
+        '404':
+          description: View not found
+  /view/{view_id}/task:
+    get:
+      operationId: getViewTasks
+      summary: Get view tasks
+      description: >-
+        Retrieves all tasks visible in a specific view, with the view's
+        filters, sorting, and grouping applied.
+      tags:
+        - Views
+      parameters:
+        - $ref: '#/components/parameters/viewId'
+        - name: page
+          in: query
+          description: >-
+            Page number for pagination. Starts at 0.
+          schema:
+            type: integer
+            minimum: 0
+      responses:
+        '200':
+          description: Successfully retrieved view tasks
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  tasks:
+                    type: array
+                    items:
+                      type: object
+                    description: >-
+                      Array of task objects matching the view configuration.
+                  last_page:
+                    type: boolean
+                    description: >-
+                      Whether this is the last page of results.
+        '401':
+          description: Unauthorized
+        '404':
+          description: View not found
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: >-
+        ClickUp personal API token or OAuth access token.
+  parameters:
+    teamId:
+      name: team_id
+      in: path
+      required: true
+      description: >-
+        The unique identifier of the Workspace (team).
+      schema:
+        type: integer
+    spaceId:
+      name: space_id
+      in: path
+      required: true
+      description: >-
+        The unique identifier of the Space.
+      schema:
+        type: integer
+    folderId:
+      name: folder_id
+      in: path
+      required: true
+      description: >-
+        The unique identifier of the Folder.
+      schema:
+        type: integer
+    listId:
+      name: list_id
+      in: path
+      required: true
+      description: >-
+        The unique identifier of the List.
+      schema:
+        type: integer
+    viewId:
+      name: view_id
+      in: path
+      required: true
+      description: >-
+        The unique identifier of the View.
+      schema:
+        type: string
+  schemas:
+    View:
+      type: object
+      description: >-
+        A view object defining how tasks are displayed and filtered.
+      properties:
+        id:
+          type: string
+          description: >-
+            The unique identifier of the view.
+        name:
+          type: string
+          description: >-
+            The name of the view.
+        type:
+          type: string
+          enum:
+            - list
+            - board
+            - calendar
+            - gantt
+            - table
+            - timeline
+            - workload
+            - activity
+            - map
+            - conversation
+          description: >-
+            The type of view.
+        parent:
+          type: object
+          properties:
+            id:
+              type: string
+              description: >-
+                The parent object ID.
+            type:
+              type: integer
+              description: >-
+                The parent type code.
+          description: >-
+            The parent object (team, space, folder, or list).
+        grouping:
+          type: object
+          properties:
+            field:
+              type: string
+              description: >-
+                The field to group tasks by.
+            dir:
+              type: integer
+              description: >-
+                The grouping direction. 1 for ascending, -1 for descending.
+            collapsed:
+              type: array
+              items:
+                type: string
+              description: >-
+                IDs of collapsed groups.
+            ignore:
+              type: boolean
+              description: >-
+                Whether to ignore grouping.
+          description: >-
+            The grouping configuration.
+        divide:
+          type: object
+          properties:
+            field:
+              type: string
+              description: >-
+                The field to divide (swimlane) by.
+            dir:
+              type: integer
+              description: >-
+                The divide direction.
+            collapsed:
+              type: array
+              items:
+                type: string
+              description: >-
+                IDs of collapsed divisions.
+          description: >-
+            The divide (swimlane) configuration.
+        sorting:
+          type: object
+          properties:
+            fields:
+              type: array
+              items:
+                type: object
+                properties:
+                  field:
+                    type: string
+                    description: >-
+                      The field to sort by.
+                  dir:
+                    type: integer
+                    description: >-
+                      Sort direction. 1 for ascending, -1 for descending.
+              description: >-
+                Array of sort field configurations.
+          description: >-
+            The sorting configuration.
+        filters:
+          type: object
+          properties:
+            op:
+              type: string
+              enum:
+                - AND
+                - OR
+              description: >-
+                The logical operator for combining filters.
+            fields:
+              type: array
+              items:
+                type: object
+              description: >-
+                Array of filter conditions.
+            search:
+              type: string
+              description: >-
+                Text search filter.
+            show_closed:
+              type: boolean
+              description: >-
+                Whether to show closed tasks.
+          description: >-
+            The filter configuration.
+        columns:
+          type: object
+          properties:
+            fields:
+              type: array
+              items:
+                type: object
+                properties:
+                  field:
+                    type: string
+                    description: >-
+                      The column field name.
+                  hidden:
+                    type: boolean
+                    description: >-
+                      Whether the column is hidden.
+                  width:
+                    type: integer
+                    description: >-
+                      The column width in pixels.
+              description: >-
+                Array of column configurations.
+          description: >-
+            The column configuration for table and list views.
+        team_sidebar:
+          type: object
+          description: >-
+            Team sidebar configuration.
+        settings:
+          type: object
+          properties:
+            show_task_locations:
+              type: boolean
+              description: >-
+                Whether to show task locations.
+            show_subtasks:
+              type: integer
+              description: >-
+                Subtask display mode.
+            show_subtask_parent_names:
+              type: boolean
+              description: >-
+                Whether to show parent task names.
+            show_closed_subtasks:
+              type: boolean
+              description: >-
+                Whether to show closed subtasks.
+            show_assignees:
+              type: boolean
+              description: >-
+                Whether to show assignees.
+            show_images:
+              type: boolean
+              description: >-
+                Whether to show images.
+            collapse_empty_columns:
+              type: object
+              nullable: true
+              description: >-
+                Configuration for collapsing empty columns.
+            me_comments:
+              type: boolean
+              description: >-
+                Whether to filter to only my comments.
+            me_subtasks:
+              type: boolean
+              description: >-
+                Whether to filter to only my subtasks.
+            me_checklists:
+              type: boolean
+              description: >-
+                Whether to filter to only my checklists.
+          description: >-
+            View display settings.
+        date_created:
+          type: string
+          description: >-
+            Unix timestamp when the view was created.
+        creator:
+          type: integer
+          description: >-
+            The user ID of the view creator.
+        visibility:
+          type: string
+          description: >-
+            The visibility setting of the view.
+        protected:
+          type: boolean
+          description: >-
+            Whether the view is protected from editing.
+        orderindex:
+          type: number
+          description: >-
+            The order index of the view.
+    UpdateViewRequest:
+      type: object
+      description: >-
+        Request body for updating a view.
+      properties:
+        name:
+          type: string
+          description: >-
+            The updated name of the view.
+        type:
+          type: string
+          enum:
+            - list
+            - board
+            - calendar
+            - gantt
+            - table
+          description: >-
+            The updated view type.
+        parent:
+          type: object
+          properties:
+            id:
+              type: string
+              description: >-
+                The parent object ID.
+            type:
+              type: integer
+              description: >-
+                The parent type code.
+          description: >-
+            The updated parent object.
+        grouping:
+          type: object
+          description: >-
+            Updated grouping configuration.
+        divide:
+          type: object
+          description: >-
+            Updated divide configuration.
+        sorting:
+          type: object
+          description: >-
+            Updated sorting configuration.
+        filters:
+          type: object
+          description: >-
+            Updated filter configuration.
+        columns:
+          type: object
+          description: >-
+            Updated column configuration.
+        settings:
+          type: object
+          description: >-
+            Updated display settings.

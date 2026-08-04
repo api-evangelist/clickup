@@ -1,0 +1,349 @@
+openapi: 3.1.0
+info:
+  title: ClickUp Folders API
+  description: >-
+    The ClickUp Folders API provides endpoints for managing Folders, which
+    are optional organizational containers that sit between Spaces and
+    Lists in the ClickUp hierarchy. Folders group related Lists together
+    and can be used to organize projects or workstreams within a Space.
+    Developers can create, update, delete, and retrieve Folders and their
+    associated Lists.
+  version: '2.0'
+  contact:
+    name: ClickUp Support
+    url: https://help.clickup.com
+  termsOfService: https://clickup.com/terms
+externalDocs:
+  description: ClickUp Folders API Documentation
+  url: https://developer.clickup.com/reference/get-folders
+servers:
+  - url: https://api.clickup.com/api/v2
+    description: ClickUp API v2 Production Server
+tags:
+  - name: Folders
+    description: >-
+      Operations for managing Folders within ClickUp Spaces.
+security:
+  - bearerAuth: []
+paths:
+  /space/{space_id}/folder:
+    get:
+      operationId: getFolders
+      summary: Get folders
+      description: >-
+        Retrieves all Folders within a specified Space. Optionally includes
+        archived Folders in the response.
+      tags:
+        - Folders
+      parameters:
+        - $ref: '#/components/parameters/spaceId'
+        - name: archived
+          in: query
+          description: >-
+            Include archived Folders in the response.
+          schema:
+            type: boolean
+            default: false
+      responses:
+        '200':
+          description: Successfully retrieved folders
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  folders:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Folder'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Space not found
+    post:
+      operationId: createFolder
+      summary: Create a folder
+      description: >-
+        Creates a new Folder within a specified Space.
+      tags:
+        - Folders
+      parameters:
+        - $ref: '#/components/parameters/spaceId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateFolderRequest'
+      responses:
+        '200':
+          description: Folder created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Folder'
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Space not found
+  /folder/{folder_id}:
+    get:
+      operationId: getFolder
+      summary: Get a folder
+      description: >-
+        Retrieves details of a specific Folder, including its Lists
+        and configuration.
+      tags:
+        - Folders
+      parameters:
+        - $ref: '#/components/parameters/folderId'
+      responses:
+        '200':
+          description: Successfully retrieved folder
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Folder'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Folder not found
+    put:
+      operationId: updateFolder
+      summary: Update a folder
+      description: >-
+        Updates the properties of an existing Folder.
+      tags:
+        - Folders
+      parameters:
+        - $ref: '#/components/parameters/folderId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateFolderRequest'
+      responses:
+        '200':
+          description: Folder updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Folder'
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Folder not found
+    delete:
+      operationId: deleteFolder
+      summary: Delete a folder
+      description: >-
+        Permanently deletes a Folder and all of its contents including
+        Lists and Tasks. This action cannot be undone.
+      tags:
+        - Folders
+      parameters:
+        - $ref: '#/components/parameters/folderId'
+      responses:
+        '200':
+          description: Folder deleted successfully
+        '401':
+          description: Unauthorized
+        '404':
+          description: Folder not found
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: >-
+        ClickUp personal API token or OAuth access token.
+  parameters:
+    spaceId:
+      name: space_id
+      in: path
+      required: true
+      description: >-
+        The unique identifier of the Space.
+      schema:
+        type: integer
+    folderId:
+      name: folder_id
+      in: path
+      required: true
+      description: >-
+        The unique identifier of the Folder.
+      schema:
+        type: integer
+  schemas:
+    Folder:
+      type: object
+      description: >-
+        A Folder object representing an organizational container within
+        a Space.
+      properties:
+        id:
+          type: string
+          description: >-
+            The unique identifier of the Folder.
+        name:
+          type: string
+          description: >-
+            The name of the Folder.
+        orderindex:
+          type: integer
+          description: >-
+            The order index of the Folder.
+        override_statuses:
+          type: boolean
+          description: >-
+            Whether the Folder overrides Space statuses.
+        hidden:
+          type: boolean
+          description: >-
+            Whether the Folder is hidden.
+        space:
+          type: object
+          properties:
+            id:
+              type: string
+              description: >-
+                The Space ID.
+            name:
+              type: string
+              description: >-
+                The Space name.
+            access:
+              type: boolean
+              description: >-
+                Whether the user has access.
+          description: >-
+            The Space this Folder belongs to.
+        task_count:
+          type: string
+          description: >-
+            The total number of tasks in the Folder.
+        archived:
+          type: boolean
+          description: >-
+            Whether the Folder is archived.
+        statuses:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+                description: >-
+                  The status ID.
+              status:
+                type: string
+                description: >-
+                  The status name.
+              orderindex:
+                type: integer
+                description: >-
+                  The order index.
+              color:
+                type: string
+                description: >-
+                  The hex color code.
+              type:
+                type: string
+                description: >-
+                  The status type.
+          description: >-
+            Available statuses for the Folder.
+        lists:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+                description: >-
+                  The List ID.
+              name:
+                type: string
+                description: >-
+                  The List name.
+              orderindex:
+                type: integer
+                description: >-
+                  The order index.
+              status:
+                type: object
+                nullable: true
+                description: >-
+                  The List status.
+              priority:
+                type: object
+                nullable: true
+                description: >-
+                  The List priority.
+              assignee:
+                type: object
+                nullable: true
+                description: >-
+                  The List assignee.
+              task_count:
+                type: integer
+                description: >-
+                  The number of tasks.
+              due_date:
+                type: string
+                nullable: true
+                description: >-
+                  The due date as Unix timestamp.
+              start_date:
+                type: string
+                nullable: true
+                description: >-
+                  The start date as Unix timestamp.
+              space:
+                type: object
+                description: >-
+                  The Space reference.
+              archived:
+                type: boolean
+                description: >-
+                  Whether the List is archived.
+              override_statuses:
+                type: boolean
+                nullable: true
+                description: >-
+                  Whether statuses are overridden.
+              permission_level:
+                type: string
+                description: >-
+                  The permission level.
+          description: >-
+            Lists within the Folder.
+        permission_level:
+          type: string
+          description: >-
+            The permission level of the Folder.
+    CreateFolderRequest:
+      type: object
+      required:
+        - name
+      description: >-
+        Request body for creating a new Folder.
+      properties:
+        name:
+          type: string
+          description: >-
+            The name of the Folder.
+    UpdateFolderRequest:
+      type: object
+      description: >-
+        Request body for updating an existing Folder.
+      properties:
+        name:
+          type: string
+          description: >-
+            The updated name of the Folder.

@@ -1,0 +1,329 @@
+openapi: 3.1.0
+info:
+  title: ClickUp Webhooks API
+  description: >-
+    The ClickUp Webhooks API enables developers to subscribe to real-time
+    events within a Workspace. When subscribed events occur, ClickUp sends
+    HTTP POST requests to a specified endpoint URL with event details.
+    Webhooks support events for tasks, lists, folders, spaces, and goals.
+    Each webhook payload is signed with a shared secret for verification,
+    ensuring the event originated from ClickUp.
+  version: '2.0'
+  contact:
+    name: ClickUp Support
+    url: https://help.clickup.com
+  termsOfService: https://clickup.com/terms
+externalDocs:
+  description: ClickUp Webhooks Documentation
+  url: https://developer.clickup.com/docs/webhooks
+servers:
+  - url: https://api.clickup.com/api/v2
+    description: ClickUp API v2 Production Server
+tags:
+  - name: Webhooks
+    description: >-
+      Operations for creating, retrieving, updating, and deleting webhook
+      subscriptions.
+security:
+  - bearerAuth: []
+paths:
+  /team/{team_id}/webhook:
+    get:
+      operationId: getWebhooks
+      summary: Get webhooks
+      description: >-
+        Retrieves all webhook subscriptions for a Workspace. Returns
+        webhook details including the endpoint URL, subscribed events,
+        status, and health information.
+      tags:
+        - Webhooks
+      parameters:
+        - $ref: '#/components/parameters/teamId'
+      responses:
+        '200':
+          description: Successfully retrieved webhooks
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  webhooks:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Webhook'
+        '401':
+          description: Unauthorized
+    post:
+      operationId: createWebhook
+      summary: Create a webhook
+      description: >-
+        Creates a new webhook subscription for a Workspace. The webhook
+        can be configured to listen for specific events and send notifications
+        to a specified endpoint URL. A shared secret is returned for
+        signature verification of incoming webhook payloads.
+      tags:
+        - Webhooks
+      parameters:
+        - $ref: '#/components/parameters/teamId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateWebhookRequest'
+      responses:
+        '200':
+          description: Webhook created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    description: >-
+                      The unique identifier of the webhook.
+                  webhook:
+                    $ref: '#/components/schemas/Webhook'
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+  /webhook/{webhook_id}:
+    put:
+      operationId: updateWebhook
+      summary: Update a webhook
+      description: >-
+        Updates an existing webhook subscription. The endpoint URL,
+        subscribed events, and status can be modified.
+      tags:
+        - Webhooks
+      parameters:
+        - $ref: '#/components/parameters/webhookId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateWebhookRequest'
+      responses:
+        '200':
+          description: Webhook updated successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    description: >-
+                      The unique identifier of the webhook.
+                  webhook:
+                    $ref: '#/components/schemas/Webhook'
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Webhook not found
+    delete:
+      operationId: deleteWebhook
+      summary: Delete a webhook
+      description: >-
+        Permanently deletes a webhook subscription. ClickUp will stop
+        sending events to the endpoint URL immediately.
+      tags:
+        - Webhooks
+      parameters:
+        - $ref: '#/components/parameters/webhookId'
+      responses:
+        '200':
+          description: Webhook deleted successfully
+        '401':
+          description: Unauthorized
+        '404':
+          description: Webhook not found
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: >-
+        ClickUp personal API token or OAuth access token.
+  parameters:
+    teamId:
+      name: team_id
+      in: path
+      required: true
+      description: >-
+        The unique identifier of the Workspace (team).
+      schema:
+        type: integer
+    webhookId:
+      name: webhook_id
+      in: path
+      required: true
+      description: >-
+        The unique identifier of the webhook.
+      schema:
+        type: string
+  schemas:
+    Webhook:
+      type: object
+      description: >-
+        A webhook subscription object.
+      properties:
+        id:
+          type: string
+          description: >-
+            The unique identifier of the webhook.
+        userid:
+          type: integer
+          description: >-
+            The user ID who created the webhook.
+        team_id:
+          type: integer
+          description: >-
+            The Workspace ID the webhook belongs to.
+        endpoint:
+          type: string
+          format: uri
+          description: >-
+            The URL that ClickUp sends event payloads to.
+        client_id:
+          type: string
+          nullable: true
+          description: >-
+            The OAuth client ID if the webhook was created via OAuth.
+        events:
+          type: array
+          items:
+            type: string
+            enum:
+              - taskCreated
+              - taskUpdated
+              - taskDeleted
+              - taskPriorityUpdated
+              - taskStatusUpdated
+              - taskAssigneeUpdated
+              - taskDueDateUpdated
+              - taskTagUpdated
+              - taskMoved
+              - taskCommentPosted
+              - taskCommentUpdated
+              - taskTimeEstimateUpdated
+              - taskTimeTrackedUpdated
+              - listCreated
+              - listUpdated
+              - listDeleted
+              - folderCreated
+              - folderUpdated
+              - folderDeleted
+              - spaceCreated
+              - spaceUpdated
+              - spaceDeleted
+              - goalCreated
+              - goalUpdated
+              - goalDeleted
+              - keyResultCreated
+              - keyResultUpdated
+              - keyResultDeleted
+          description: >-
+            The events the webhook is subscribed to.
+        task_id:
+          type: string
+          nullable: true
+          description: >-
+            Optional task ID to scope webhook events to a specific task.
+        list_id:
+          type: integer
+          nullable: true
+          description: >-
+            Optional list ID to scope webhook events to a specific list.
+        folder_id:
+          type: integer
+          nullable: true
+          description: >-
+            Optional folder ID to scope webhook events to a specific folder.
+        space_id:
+          type: integer
+          nullable: true
+          description: >-
+            Optional space ID to scope webhook events to a specific space.
+        health:
+          type: object
+          properties:
+            status:
+              type: string
+              description: >-
+                The health status of the webhook (active, failing, etc.).
+            fail_count:
+              type: integer
+              description: >-
+                Number of consecutive failures.
+          description: >-
+            Health status of the webhook.
+        secret:
+          type: string
+          description: >-
+            The shared secret for HMAC-SHA256 signature verification.
+            Only returned when the webhook is first created.
+    CreateWebhookRequest:
+      type: object
+      required:
+        - endpoint
+        - events
+      description: >-
+        Request body for creating a new webhook subscription.
+      properties:
+        endpoint:
+          type: string
+          format: uri
+          description: >-
+            The URL to send webhook event payloads to.
+        events:
+          type: array
+          items:
+            type: string
+          description: >-
+            Array of event names to subscribe to. Use '*' to subscribe
+            to all events.
+        task_id:
+          type: string
+          description: >-
+            Optional task ID to scope webhook events to a specific task.
+        list_id:
+          type: integer
+          description: >-
+            Optional list ID to scope webhook events to a specific list.
+        folder_id:
+          type: integer
+          description: >-
+            Optional folder ID to scope webhook events to a specific folder.
+        space_id:
+          type: integer
+          description: >-
+            Optional space ID to scope webhook events to a specific space.
+    UpdateWebhookRequest:
+      type: object
+      description: >-
+        Request body for updating an existing webhook subscription.
+      properties:
+        endpoint:
+          type: string
+          format: uri
+          description: >-
+            The updated endpoint URL.
+        events:
+          type: array
+          items:
+            type: string
+          description: >-
+            Updated array of event names to subscribe to.
+        status:
+          type: string
+          enum:
+            - active
+            - inactive
+          description: >-
+            Set the webhook status to active or inactive.

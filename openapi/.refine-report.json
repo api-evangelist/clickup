@@ -1,0 +1,38 @@
+{
+  "provider": "clickup",
+  "sources": [
+    "clickup-authorization-api-openapi.yml",
+    "clickup-comments-api-openapi.yml",
+    "clickup-custom-fields-api-openapi.yml",
+    "clickup-folders-api-openapi.yml",
+    "clickup-goals-api-openapi.yml",
+    "clickup-lists-api-openapi.yml",
+    "clickup-oauth-api-openapi.yml",
+    "clickup-spaces-api-openapi.yml",
+    "clickup-tasks-api-openapi.yml",
+    "clickup-teams-api-openapi.yml",
+    "clickup-time-tracking-api-openapi.yml",
+    "clickup-views-api-openapi.yml",
+    "clickup-webhooks-api-openapi.yml"
+  ],
+  "outputs": [
+    "clickup-authorization-api-openapi.yml",
+    "clickup-comments-api-openapi.yml",
+    "clickup-custom-fields-api-openapi.yml",
+    "clickup-folders-api-openapi.yml",
+    "clickup-goals-api-openapi.yml",
+    "clickup-lists-api-openapi.yml",
+    "clickup-oauth-api-openapi.yml",
+    "clickup-spaces-api-openapi.yml",
+    "clickup-tasks-api-openapi.yml",
+    "clickup-teams-api-openapi.yml",
+    "clickup-time-tracking-api-openapi.yml",
+    "clickup-views-api-openapi.yml",
+    "clickup-webhooks-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}

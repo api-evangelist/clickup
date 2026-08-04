@@ -1,0 +1,263 @@
+openapi: 3.1.0
+info:
+  title: ClickUp Teams (Workspaces) API
+  description: >-
+    The ClickUp Teams API provides access to Workspace-level information
+    and membership. In the ClickUp API, Teams correspond to Workspaces,
+    which are the top-level organizational unit. The API allows developers
+    to retrieve a list of Workspaces the authenticated user belongs to,
+    along with member details and roles. This is typically the starting
+    point for navigating the ClickUp hierarchy.
+  version: '2.0'
+  contact:
+    name: ClickUp Support
+    url: https://help.clickup.com
+  termsOfService: https://clickup.com/terms
+externalDocs:
+  description: ClickUp Teams API Documentation
+  url: https://developer.clickup.com/reference/get-teams
+servers:
+  - url: https://api.clickup.com/api/v2
+    description: ClickUp API v2 Production Server
+tags:
+  - name: Teams
+    description: >-
+      Operations for retrieving Workspace (team) information and membership.
+security:
+  - bearerAuth: []
+paths:
+  /team:
+    get:
+      operationId: getTeams
+      summary: Get authorized teams (workspaces)
+      description: >-
+        Retrieves the Workspaces (teams) that the authenticated user has
+        access to. Returns Workspace details including name, color, avatar,
+        and a list of members with their roles and permissions.
+      tags:
+        - Teams
+      responses:
+        '200':
+          description: Successfully retrieved teams
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  teams:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Team'
+        '401':
+          description: Unauthorized
+  /team/{team_id}/seats:
+    get:
+      operationId: getTeamSeats
+      summary: Get workspace seats
+      description: >-
+        Retrieves the seat allocation information for a Workspace, including
+        the total number of seats, filled seats, and empty seats.
+      tags:
+        - Teams
+      parameters:
+        - $ref: '#/components/parameters/teamId'
+      responses:
+        '200':
+          description: Successfully retrieved seat information
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  members:
+                    type: object
+                    properties:
+                      filled_member_seats:
+                        type: integer
+                        description: >-
+                          Number of filled member seats.
+                      empty_member_seats:
+                        type: integer
+                        description: >-
+                          Number of empty member seats.
+                      total_member_seats:
+                        type: integer
+                        description: >-
+                          Total number of member seats.
+                  guests:
+                    type: object
+                    properties:
+                      filled_guest_seats:
+                        type: integer
+                        description: >-
+                          Number of filled guest seats.
+                      empty_guest_seats:
+                        type: integer
+                        description: >-
+                          Number of empty guest seats.
+                      total_guest_seats:
+                        type: integer
+                        description: >-
+                          Total number of guest seats.
+        '401':
+          description: Unauthorized
+        '404':
+          description: Team not found
+  /team/{team_id}/user:
+    get:
+      operationId: getTeamMembers
+      summary: Get team members
+      description: >-
+        Retrieves the members of a Workspace, including their roles
+        and permissions. Only available to Workspace owners and admins.
+      tags:
+        - Teams
+      parameters:
+        - $ref: '#/components/parameters/teamId'
+      responses:
+        '200':
+          description: Successfully retrieved team members
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  members:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/TeamMember'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Team not found
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: >-
+        ClickUp personal API token or OAuth access token.
+  parameters:
+    teamId:
+      name: team_id
+      in: path
+      required: true
+      description: >-
+        The unique identifier of the Workspace (team).
+      schema:
+        type: integer
+  schemas:
+    Team:
+      type: object
+      description: >-
+        A Workspace (team) object in ClickUp.
+      properties:
+        id:
+          type: string
+          description: >-
+            The unique identifier of the Workspace.
+        name:
+          type: string
+          description: >-
+            The name of the Workspace.
+        color:
+          type: string
+          description: >-
+            The hex color code of the Workspace.
+        avatar:
+          type: string
+          nullable: true
+          description: >-
+            The avatar URL of the Workspace.
+        members:
+          type: array
+          items:
+            $ref: '#/components/schemas/TeamMember'
+          description: >-
+            Members of the Workspace.
+    TeamMember:
+      type: object
+      description: >-
+        A member of a ClickUp Workspace.
+      properties:
+        user:
+          type: object
+          properties:
+            id:
+              type: integer
+              description: >-
+                The user ID.
+            username:
+              type: string
+              description: >-
+                The username.
+            email:
+              type: string
+              format: email
+              description: >-
+                The email address.
+            color:
+              type: string
+              description: >-
+                The user color.
+            profilePicture:
+              type: string
+              format: uri
+              nullable: true
+              description: >-
+                URL of the profile picture.
+            initials:
+              type: string
+              description: >-
+                The user initials.
+            role:
+              type: integer
+              description: >-
+                The role code. 1 is owner, 2 is admin, 3 is member, 4 is guest.
+            last_active:
+              type: string
+              description: >-
+                Unix timestamp of last activity.
+            date_joined:
+              type: string
+              description: >-
+                Unix timestamp when the user joined.
+            date_invited:
+              type: string
+              description: >-
+                Unix timestamp when the user was invited.
+          description: >-
+            The user details.
+        invited_by:
+          type: object
+          nullable: true
+          properties:
+            id:
+              type: integer
+              description: >-
+                The inviter user ID.
+            username:
+              type: string
+              description: >-
+                The inviter username.
+            email:
+              type: string
+              format: email
+              description: >-
+                The inviter email.
+            color:
+              type: string
+              description: >-
+                The inviter color.
+            profilePicture:
+              type: string
+              format: uri
+              nullable: true
+              description: >-
+                URL of the inviter profile picture.
+            initials:
+              type: string
+              description: >-
+                The inviter initials.
+          description: >-
+            The user who invited this member.
