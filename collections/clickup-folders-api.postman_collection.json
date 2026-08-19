@@ -1,0 +1,1208 @@
+{
+  "item": [
+    {
+      "id": "5560c89f-0ab4-4880-8df6-bf216ea76508",
+      "name": "Folders",
+      "description": {
+        "content": "Operations for managing Folders within ClickUp Spaces.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "54059f3b-6002-468e-82a0-787a06d49959",
+          "name": "Get folders",
+          "request": {
+            "name": "Get folders",
+            "description": {
+              "content": "Retrieves all Folders within a specified Space. Optionally includes archived Folders in the response.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "space",
+                ":space_id",
+                "folder"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "archived",
+                  "value": "false",
+                  "description": "Include archived Folders in the response."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "space_id",
+                  "description": "(Required) The unique identifier of the Space."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "15f9f7e8-7901-4acc-b3f5-c140e9974daf",
+              "name": "Successfully retrieved folders",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "space",
+                    ":space_id",
+                    "folder"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "archived",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "space_id",
+                      "description": "(Required) The unique identifier of the Space."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"folders\": [\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"orderindex\": 8884,\n      \"override_statuses\": true,\n      \"hidden\": false,\n      \"space\": {\n        \"id\": \"string\",\n        \"name\": \"string\",\n        \"access\": true\n      },\n      \"task_count\": \"string\",\n      \"archived\": false,\n      \"statuses\": [\n        {\n          \"id\": \"string\",\n          \"status\": \"string\",\n          \"orderindex\": 2057,\n          \"color\": \"string\",\n          \"type\": \"string\"\n        },\n        {\n          \"id\": \"string\",\n          \"status\": \"string\",\n          \"orderindex\": 8195,\n          \"color\": \"string\",\n          \"type\": \"string\"\n        }\n      ],\n      \"lists\": [\n        {\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"orderindex\": 3024,\n          \"status\": {},\n          \"priority\": {},\n          \"assignee\": {},\n          \"task_count\": 4895,\n          \"due_date\": \"string\",\n          \"start_date\": \"string\",\n          \"space\": {},\n          \"archived\": true,\n          \"override_statuses\": true,\n          \"permission_level\": \"string\"\n        },\n        {\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"orderindex\": 8343,\n          \"status\": {},\n          \"priority\": {},\n          \"assignee\": {},\n          \"task_count\": 5345,\n          \"due_date\": \"string\",\n          \"start_date\": \"string\",\n          \"space\": {},\n          \"archived\": true,\n          \"override_statuses\": false,\n          \"permission_level\": \"string\"\n        }\n      ],\n      \"permission_level\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"orderindex\": 5203,\n      \"override_statuses\": false,\n      \"hidden\": true,\n      \"space\": {\n        \"id\": \"string\",\n        \"name\": \"string\",\n        \"access\": false\n      },\n      \"task_count\": \"string\",\n      \"archived\": true,\n      \"statuses\": [\n        {\n          \"id\": \"string\",\n          \"status\": \"string\",\n          \"orderindex\": 4941,\n          \"color\": \"string\",\n          \"type\": \"string\"\n        },\n        {\n          \"id\": \"string\",\n          \"status\": \"string\",\n          \"orderindex\": 8463,\n          \"color\": \"string\",\n          \"type\": \"string\"\n        }\n      ],\n      \"lists\": [\n        {\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"orderindex\": 6365,\n          \"status\": {},\n          \"priority\": {},\n          \"assignee\": {},\n          \"task_count\": 5779,\n          \"due_date\": \"string\",\n          \"start_date\": \"string\",\n          \"space\": {},\n          \"archived\": true,\n          \"override_statuses\": false,\n          \"permission_level\": \"string\"\n        },\n        {\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"orderindex\": 7695,\n          \"status\": {},\n          \"priority\": {},\n          \"assignee\": {},\n          \"task_count\": 5662,\n          \"due_date\": \"string\",\n          \"start_date\": \"string\",\n          \"space\": {},\n          \"archived\": true,\n          \"override_statuses\": true,\n          \"permission_level\": \"string\"\n        }\n      ],\n      \"permission_level\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "82f1eee8-2bf4-463c-969a-91407711f4a4",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "space",
+                    ":space_id",
+                    "folder"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "archived",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "space_id",
+                      "description": "(Required) The unique identifier of the Space."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "f105cd0f-189b-41c1-ba66-2c18d3da2eeb",
+              "name": "Space not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "space",
+                    ":space_id",
+                    "folder"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "archived",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "space_id",
+                      "description": "(Required) The unique identifier of the Space."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "809e395d-71c0-4dbf-b679-90899995abfb",
+          "name": "Create a folder",
+          "request": {
+            "name": "Create a folder",
+            "description": {
+              "content": "Creates a new Folder within a specified Space.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "space",
+                ":space_id",
+                "folder"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "space_id",
+                  "description": "(Required) The unique identifier of the Space."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "40705f17-fb84-4f2a-9fdf-0408f77e94a1",
+              "name": "Folder created successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "space",
+                    ":space_id",
+                    "folder"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "space_id",
+                      "description": "(Required) The unique identifier of the Space."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"name\": \"string\",\n  \"orderindex\": 7412,\n  \"override_statuses\": false,\n  \"hidden\": false,\n  \"space\": {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"access\": true\n  },\n  \"task_count\": \"string\",\n  \"archived\": false,\n  \"statuses\": [\n    {\n      \"id\": \"string\",\n      \"status\": \"string\",\n      \"orderindex\": 20,\n      \"color\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"status\": \"string\",\n      \"orderindex\": 8863,\n      \"color\": \"string\",\n      \"type\": \"string\"\n    }\n  ],\n  \"lists\": [\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"orderindex\": 2262,\n      \"status\": {},\n      \"priority\": {},\n      \"assignee\": {},\n      \"task_count\": 7349,\n      \"due_date\": \"string\",\n      \"start_date\": \"string\",\n      \"space\": {},\n      \"archived\": true,\n      \"override_statuses\": false,\n      \"permission_level\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"orderindex\": 894,\n      \"status\": {},\n      \"priority\": {},\n      \"assignee\": {},\n      \"task_count\": 3281,\n      \"due_date\": \"string\",\n      \"start_date\": \"string\",\n      \"space\": {},\n      \"archived\": false,\n      \"override_statuses\": true,\n      \"permission_level\": \"string\"\n    }\n  ],\n  \"permission_level\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ea8b9310-9442-4ddd-80fa-b3a385e726db",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "space",
+                    ":space_id",
+                    "folder"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "space_id",
+                      "description": "(Required) The unique identifier of the Space."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "09778865-6bda-4b91-8cae-25f0d8854cc7",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "space",
+                    ":space_id",
+                    "folder"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "space_id",
+                      "description": "(Required) The unique identifier of the Space."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "165a2c59-b72d-412a-b7a9-fa1646194f67",
+              "name": "Space not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "space",
+                    ":space_id",
+                    "folder"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "space_id",
+                      "description": "(Required) The unique identifier of the Space."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "97215de7-17af-42ca-b6bb-54b53a0cced1",
+          "name": "Get a folder",
+          "request": {
+            "name": "Get a folder",
+            "description": {
+              "content": "Retrieves details of a specific Folder, including its Lists and configuration.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "folder",
+                ":folder_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "folder_id",
+                  "description": "(Required) The unique identifier of the Folder."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0c4bbd74-b307-420d-8181-1e265506f921",
+              "name": "Successfully retrieved folder",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "folder",
+                    ":folder_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "folder_id",
+                      "description": "(Required) The unique identifier of the Folder."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"name\": \"string\",\n  \"orderindex\": 7412,\n  \"override_statuses\": false,\n  \"hidden\": false,\n  \"space\": {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"access\": true\n  },\n  \"task_count\": \"string\",\n  \"archived\": false,\n  \"statuses\": [\n    {\n      \"id\": \"string\",\n      \"status\": \"string\",\n      \"orderindex\": 20,\n      \"color\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"status\": \"string\",\n      \"orderindex\": 8863,\n      \"color\": \"string\",\n      \"type\": \"string\"\n    }\n  ],\n  \"lists\": [\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"orderindex\": 2262,\n      \"status\": {},\n      \"priority\": {},\n      \"assignee\": {},\n      \"task_count\": 7349,\n      \"due_date\": \"string\",\n      \"start_date\": \"string\",\n      \"space\": {},\n      \"archived\": true,\n      \"override_statuses\": false,\n      \"permission_level\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"orderindex\": 894,\n      \"status\": {},\n      \"priority\": {},\n      \"assignee\": {},\n      \"task_count\": 3281,\n      \"due_date\": \"string\",\n      \"start_date\": \"string\",\n      \"space\": {},\n      \"archived\": false,\n      \"override_statuses\": true,\n      \"permission_level\": \"string\"\n    }\n  ],\n  \"permission_level\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b93adfe5-adb0-4225-95cb-978f61450f69",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "folder",
+                    ":folder_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "folder_id",
+                      "description": "(Required) The unique identifier of the Folder."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "4cdf347a-9711-412a-895f-33fa1233ed35",
+              "name": "Folder not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "folder",
+                    ":folder_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "folder_id",
+                      "description": "(Required) The unique identifier of the Folder."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "34c24ff8-697c-42ed-84fa-3cf08c703fa1",
+          "name": "Update a folder",
+          "request": {
+            "name": "Update a folder",
+            "description": {
+              "content": "Updates the properties of an existing Folder.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "folder",
+                ":folder_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "folder_id",
+                  "description": "(Required) The unique identifier of the Folder."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "32895fb4-1cf4-4dec-9b03-8c2b36b85e41",
+              "name": "Folder updated successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "folder",
+                    ":folder_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "folder_id",
+                      "description": "(Required) The unique identifier of the Folder."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"name\": \"string\",\n  \"orderindex\": 7412,\n  \"override_statuses\": false,\n  \"hidden\": false,\n  \"space\": {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"access\": true\n  },\n  \"task_count\": \"string\",\n  \"archived\": false,\n  \"statuses\": [\n    {\n      \"id\": \"string\",\n      \"status\": \"string\",\n      \"orderindex\": 20,\n      \"color\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"status\": \"string\",\n      \"orderindex\": 8863,\n      \"color\": \"string\",\n      \"type\": \"string\"\n    }\n  ],\n  \"lists\": [\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"orderindex\": 2262,\n      \"status\": {},\n      \"priority\": {},\n      \"assignee\": {},\n      \"task_count\": 7349,\n      \"due_date\": \"string\",\n      \"start_date\": \"string\",\n      \"space\": {},\n      \"archived\": true,\n      \"override_statuses\": false,\n      \"permission_level\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"orderindex\": 894,\n      \"status\": {},\n      \"priority\": {},\n      \"assignee\": {},\n      \"task_count\": 3281,\n      \"due_date\": \"string\",\n      \"start_date\": \"string\",\n      \"space\": {},\n      \"archived\": false,\n      \"override_statuses\": true,\n      \"permission_level\": \"string\"\n    }\n  ],\n  \"permission_level\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6afac916-082e-4692-8a2f-6daf5f050a18",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "folder",
+                    ":folder_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "folder_id",
+                      "description": "(Required) The unique identifier of the Folder."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "cc780001-0e7b-4000-a230-0373ff4d10fd",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "folder",
+                    ":folder_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "folder_id",
+                      "description": "(Required) The unique identifier of the Folder."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "cc849ed3-7fa7-40bf-b6ce-c0f3da5f871a",
+              "name": "Folder not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "folder",
+                    ":folder_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "folder_id",
+                      "description": "(Required) The unique identifier of the Folder."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a896ccfa-1c86-47f9-945b-d6656d0867bf",
+          "name": "Delete a folder",
+          "request": {
+            "name": "Delete a folder",
+            "description": {
+              "content": "Permanently deletes a Folder and all of its contents including Lists and Tasks. This action cannot be undone.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "folder",
+                ":folder_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "folder_id",
+                  "description": "(Required) The unique identifier of the Folder."
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "389a5622-1e2b-4a0d-8cd3-6894fad1a811",
+              "name": "Folder deleted successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "folder",
+                    ":folder_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "folder_id",
+                      "description": "(Required) The unique identifier of the Folder."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "7ef3cda1-2479-4b07-9475-5ca410ce64ed",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "folder",
+                    ":folder_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "folder_id",
+                      "description": "(Required) The unique identifier of the Folder."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "ed1b9a31-b342-4e3b-a30c-be6db1466f7f",
+              "name": "Folder not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "folder",
+                    ":folder_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "folder_id",
+                      "description": "(Required) The unique identifier of the Folder."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.clickup.com/api/v2",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "585a512b-e8de-405c-89e4-d873580b7d49",
+    "name": "ClickUp Comments Authorization Folders API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The ClickUp Comments API provides endpoints for creating and retrieving comments on tasks, views, and lists. Comments support rich text formatting, mentions, and attachments. Developers can use this API to build integrations that synchronize discussions between ClickUp and other collaboration tools, or to programmatically add status updates and notes to tasks.\n\nContact Support:\n Name: ClickUp Support",
+      "type": "text/plain"
+    }
+  }
+}

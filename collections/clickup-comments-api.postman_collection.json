@@ -1,0 +1,2163 @@
+{
+  "item": [
+    {
+      "id": "0192d91b-1ca9-441b-adf5-f0863f46d7e0",
+      "name": "Comments",
+      "description": {
+        "content": "Operations for managing comments on tasks, views, and lists.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "8d55180a-e0ce-4d76-a931-539f11be5f58",
+          "name": "Get task comments",
+          "request": {
+            "name": "Get task comments",
+            "description": {
+              "content": "Retrieves all comments on a specific task. Comments are returned in chronological order and include user information, timestamps, and formatted content.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "task",
+                ":task_id",
+                "comment"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "custom_task_ids",
+                  "value": "<boolean>",
+                  "description": "If you want to reference a task by its custom task ID, this value must be true."
+                },
+                {
+                  "disabled": false,
+                  "key": "team_id",
+                  "value": "<integer>",
+                  "description": "Required when custom_task_ids is set to true. The Workspace ID."
+                },
+                {
+                  "disabled": false,
+                  "key": "start",
+                  "value": "<long>",
+                  "description": "Unix timestamp in milliseconds to start from for pagination."
+                },
+                {
+                  "disabled": false,
+                  "key": "start_id",
+                  "value": "<string>",
+                  "description": "Comment ID to start from for pagination."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "task_id",
+                  "description": "(Required) The unique identifier of the task."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f1312375-642d-44a5-bc10-d23e82cb6fc0",
+              "name": "Successfully retrieved comments",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "task",
+                    ":task_id",
+                    "comment"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "custom_task_ids",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "team_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "start",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "start_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "task_id",
+                      "description": "(Required) The unique identifier of the task."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"comments\": [\n    {\n      \"id\": \"string\",\n      \"comment\": [\n        {\n          \"text\": \"string\",\n          \"type\": \"string\",\n          \"attributes\": {}\n        },\n        {\n          \"text\": \"string\",\n          \"type\": \"string\",\n          \"attributes\": {}\n        }\n      ],\n      \"comment_text\": \"string\",\n      \"user\": {\n        \"id\": 1525,\n        \"username\": \"string\",\n        \"email\": \"S6zcjUkpt6cgp@ZmkcQwMlLKJPVN.jac\",\n        \"color\": \"string\",\n        \"profilePicture\": \"http://r.khon.Hb4OreIbivkGmz1ewwCt\",\n        \"initials\": \"string\"\n      },\n      \"resolved\": true,\n      \"assignee\": {},\n      \"assigned_by\": {},\n      \"date\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"comment\": [\n        {\n          \"text\": \"string\",\n          \"type\": \"string\",\n          \"attributes\": {}\n        },\n        {\n          \"text\": \"string\",\n          \"type\": \"string\",\n          \"attributes\": {}\n        }\n      ],\n      \"comment_text\": \"string\",\n      \"user\": {\n        \"id\": 5016,\n        \"username\": \"string\",\n        \"email\": \"jFhpXQV@PMxjmgWjtQelmQmxHMAZT.zpr\",\n        \"color\": \"string\",\n        \"profilePicture\": \"https://oKmFYI.fhfhnEhrVZRzW2BmH,h,5jV\",\n        \"initials\": \"string\"\n      },\n      \"resolved\": true,\n      \"assignee\": {},\n      \"assigned_by\": {},\n      \"date\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "07f45bfc-89cd-417c-988f-09c6d63af16b",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "task",
+                    ":task_id",
+                    "comment"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "custom_task_ids",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "team_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "start",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "start_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "task_id",
+                      "description": "(Required) The unique identifier of the task."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "5ca5d817-9c5f-4438-861d-2ee246cb06be",
+              "name": "Task not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "task",
+                    ":task_id",
+                    "comment"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "custom_task_ids",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "team_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "start",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "start_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "task_id",
+                      "description": "(Required) The unique identifier of the task."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a5de6d38-3de3-4292-8fcb-364149eb8157",
+          "name": "Create a task comment",
+          "request": {
+            "name": "Create a task comment",
+            "description": {
+              "content": "Creates a new comment on a task. Comments can include plain text, rich text formatting with mentions, and can be assigned to users for follow-up. The assignee will be notified of the comment.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "task",
+                ":task_id",
+                "comment"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "custom_task_ids",
+                  "value": "<boolean>",
+                  "description": "If you want to reference a task by its custom task ID, this value must be true."
+                },
+                {
+                  "disabled": false,
+                  "key": "team_id",
+                  "value": "<integer>",
+                  "description": "Required when custom_task_ids is set to true. The Workspace ID."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "task_id",
+                  "description": "(Required) The unique identifier of the task."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"comment_text\": \"<string>\",\n  \"assignee\": \"<integer>\",\n  \"notify_all\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "4feca6b9-2bf3-4851-b7eb-dd8c5983af9b",
+              "name": "Comment created successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "task",
+                    ":task_id",
+                    "comment"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "custom_task_ids",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "team_id",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "task_id",
+                      "description": "(Required) The unique identifier of the task."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"comment_text\": \"<string>\",\n  \"assignee\": \"<integer>\",\n  \"notify_all\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"comment\": [\n    {\n      \"text\": \"string\",\n      \"type\": \"string\",\n      \"attributes\": {}\n    },\n    {\n      \"text\": \"string\",\n      \"type\": \"string\",\n      \"attributes\": {}\n    }\n  ],\n  \"comment_text\": \"string\",\n  \"user\": {\n    \"id\": 6881,\n    \"username\": \"string\",\n    \"email\": \"fxr4AyeOz2QP@EbxURKJjcTnqBkMsnu.zk\",\n    \"color\": \"string\",\n    \"profilePicture\": \"http://LJhSQoXoRYcTk.sfwHAuwew8Hmi5KJ8GBWzlOOdsxI59xoVeFzakofPda,\",\n    \"initials\": \"string\"\n  },\n  \"resolved\": false,\n  \"assignee\": {},\n  \"assigned_by\": {},\n  \"date\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cd94d208-e2a8-4ff7-a221-f8750dee7d22",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "task",
+                    ":task_id",
+                    "comment"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "custom_task_ids",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "team_id",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "task_id",
+                      "description": "(Required) The unique identifier of the task."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"comment_text\": \"<string>\",\n  \"assignee\": \"<integer>\",\n  \"notify_all\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "239e0984-edeb-4012-b5c8-f362d231bdec",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "task",
+                    ":task_id",
+                    "comment"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "custom_task_ids",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "team_id",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "task_id",
+                      "description": "(Required) The unique identifier of the task."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"comment_text\": \"<string>\",\n  \"assignee\": \"<integer>\",\n  \"notify_all\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "9f925aff-712a-436c-8263-a7493ea2cd40",
+              "name": "Task not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "task",
+                    ":task_id",
+                    "comment"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "custom_task_ids",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "team_id",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "task_id",
+                      "description": "(Required) The unique identifier of the task."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"comment_text\": \"<string>\",\n  \"assignee\": \"<integer>\",\n  \"notify_all\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7eb47d86-93d5-4713-8062-0cc9eaa8936d",
+          "name": "Get view comments",
+          "request": {
+            "name": "Get view comments",
+            "description": {
+              "content": "Retrieves all comments on a specific view.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "view",
+                ":view_id",
+                "comment"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "start",
+                  "value": "<long>",
+                  "description": "Unix timestamp in milliseconds to start from for pagination."
+                },
+                {
+                  "disabled": false,
+                  "key": "start_id",
+                  "value": "<string>",
+                  "description": "Comment ID to start from for pagination."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "view_id",
+                  "description": "(Required) The unique identifier of the view."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4bdd25d3-3549-4d63-a4f1-00b2e76a3147",
+              "name": "Successfully retrieved view comments",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "view",
+                    ":view_id",
+                    "comment"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "start",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "start_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "view_id",
+                      "description": "(Required) The unique identifier of the view."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"comments\": [\n    {\n      \"id\": \"string\",\n      \"comment\": [\n        {\n          \"text\": \"string\",\n          \"type\": \"string\",\n          \"attributes\": {}\n        },\n        {\n          \"text\": \"string\",\n          \"type\": \"string\",\n          \"attributes\": {}\n        }\n      ],\n      \"comment_text\": \"string\",\n      \"user\": {\n        \"id\": 1525,\n        \"username\": \"string\",\n        \"email\": \"S6zcjUkpt6cgp@ZmkcQwMlLKJPVN.jac\",\n        \"color\": \"string\",\n        \"profilePicture\": \"http://r.khon.Hb4OreIbivkGmz1ewwCt\",\n        \"initials\": \"string\"\n      },\n      \"resolved\": true,\n      \"assignee\": {},\n      \"assigned_by\": {},\n      \"date\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"comment\": [\n        {\n          \"text\": \"string\",\n          \"type\": \"string\",\n          \"attributes\": {}\n        },\n        {\n          \"text\": \"string\",\n          \"type\": \"string\",\n          \"attributes\": {}\n        }\n      ],\n      \"comment_text\": \"string\",\n      \"user\": {\n        \"id\": 5016,\n        \"username\": \"string\",\n        \"email\": \"jFhpXQV@PMxjmgWjtQelmQmxHMAZT.zpr\",\n        \"color\": \"string\",\n        \"profilePicture\": \"https://oKmFYI.fhfhnEhrVZRzW2BmH,h,5jV\",\n        \"initials\": \"string\"\n      },\n      \"resolved\": true,\n      \"assignee\": {},\n      \"assigned_by\": {},\n      \"date\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "287bf3c9-7403-4f74-baf5-e6ca151206ff",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "view",
+                    ":view_id",
+                    "comment"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "start",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "start_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "view_id",
+                      "description": "(Required) The unique identifier of the view."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "7f8a99d0-7011-4c55-b0ed-6947a901abf8",
+              "name": "View not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "view",
+                    ":view_id",
+                    "comment"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "start",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "start_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "view_id",
+                      "description": "(Required) The unique identifier of the view."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "fceee69f-79dd-4989-901b-283872e2bff2",
+          "name": "Create a view comment",
+          "request": {
+            "name": "Create a view comment",
+            "description": {
+              "content": "Creates a new comment on a view.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "view",
+                ":view_id",
+                "comment"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "view_id",
+                  "description": "(Required) The unique identifier of the view."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"comment_text\": \"<string>\",\n  \"assignee\": \"<integer>\",\n  \"notify_all\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "46ebe768-853e-48cd-8406-522460f71560",
+              "name": "Comment created successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "view",
+                    ":view_id",
+                    "comment"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "view_id",
+                      "description": "(Required) The unique identifier of the view."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"comment_text\": \"<string>\",\n  \"assignee\": \"<integer>\",\n  \"notify_all\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"comment\": [\n    {\n      \"text\": \"string\",\n      \"type\": \"string\",\n      \"attributes\": {}\n    },\n    {\n      \"text\": \"string\",\n      \"type\": \"string\",\n      \"attributes\": {}\n    }\n  ],\n  \"comment_text\": \"string\",\n  \"user\": {\n    \"id\": 6881,\n    \"username\": \"string\",\n    \"email\": \"fxr4AyeOz2QP@EbxURKJjcTnqBkMsnu.zk\",\n    \"color\": \"string\",\n    \"profilePicture\": \"http://LJhSQoXoRYcTk.sfwHAuwew8Hmi5KJ8GBWzlOOdsxI59xoVeFzakofPda,\",\n    \"initials\": \"string\"\n  },\n  \"resolved\": false,\n  \"assignee\": {},\n  \"assigned_by\": {},\n  \"date\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d78e91af-9253-4712-8d51-4b3f433c68be",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "view",
+                    ":view_id",
+                    "comment"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "view_id",
+                      "description": "(Required) The unique identifier of the view."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"comment_text\": \"<string>\",\n  \"assignee\": \"<integer>\",\n  \"notify_all\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "8d980f76-38f9-45a7-ba76-16c2e88e9f9d",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "view",
+                    ":view_id",
+                    "comment"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "view_id",
+                      "description": "(Required) The unique identifier of the view."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"comment_text\": \"<string>\",\n  \"assignee\": \"<integer>\",\n  \"notify_all\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "aac595c5-cedc-4290-84a7-743b3c7808ce",
+              "name": "View not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "view",
+                    ":view_id",
+                    "comment"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "view_id",
+                      "description": "(Required) The unique identifier of the view."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"comment_text\": \"<string>\",\n  \"assignee\": \"<integer>\",\n  \"notify_all\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "afc28538-4d59-4d01-8cfa-0f671e166a55",
+          "name": "Get list comments",
+          "request": {
+            "name": "Get list comments",
+            "description": {
+              "content": "Retrieves all comments on a specific list.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "list",
+                ":list_id",
+                "comment"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "start",
+                  "value": "<long>",
+                  "description": "Unix timestamp in milliseconds to start from for pagination."
+                },
+                {
+                  "disabled": false,
+                  "key": "start_id",
+                  "value": "<string>",
+                  "description": "Comment ID to start from for pagination."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "list_id",
+                  "description": "(Required) The unique identifier of the list."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c3a9c525-ae9e-4457-8427-ab89dea19a41",
+              "name": "Successfully retrieved list comments",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "list",
+                    ":list_id",
+                    "comment"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "start",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "start_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "list_id",
+                      "description": "(Required) The unique identifier of the list."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"comments\": [\n    {\n      \"id\": \"string\",\n      \"comment\": [\n        {\n          \"text\": \"string\",\n          \"type\": \"string\",\n          \"attributes\": {}\n        },\n        {\n          \"text\": \"string\",\n          \"type\": \"string\",\n          \"attributes\": {}\n        }\n      ],\n      \"comment_text\": \"string\",\n      \"user\": {\n        \"id\": 1525,\n        \"username\": \"string\",\n        \"email\": \"S6zcjUkpt6cgp@ZmkcQwMlLKJPVN.jac\",\n        \"color\": \"string\",\n        \"profilePicture\": \"http://r.khon.Hb4OreIbivkGmz1ewwCt\",\n        \"initials\": \"string\"\n      },\n      \"resolved\": true,\n      \"assignee\": {},\n      \"assigned_by\": {},\n      \"date\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"comment\": [\n        {\n          \"text\": \"string\",\n          \"type\": \"string\",\n          \"attributes\": {}\n        },\n        {\n          \"text\": \"string\",\n          \"type\": \"string\",\n          \"attributes\": {}\n        }\n      ],\n      \"comment_text\": \"string\",\n      \"user\": {\n        \"id\": 5016,\n        \"username\": \"string\",\n        \"email\": \"jFhpXQV@PMxjmgWjtQelmQmxHMAZT.zpr\",\n        \"color\": \"string\",\n        \"profilePicture\": \"https://oKmFYI.fhfhnEhrVZRzW2BmH,h,5jV\",\n        \"initials\": \"string\"\n      },\n      \"resolved\": true,\n      \"assignee\": {},\n      \"assigned_by\": {},\n      \"date\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b4257fd2-ca6d-43f2-b4c2-796b197a1bf0",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "list",
+                    ":list_id",
+                    "comment"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "start",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "start_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "list_id",
+                      "description": "(Required) The unique identifier of the list."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "4e9c212e-f434-4bac-bfcf-8da9ed9f2403",
+              "name": "List not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "list",
+                    ":list_id",
+                    "comment"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "start",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "start_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "list_id",
+                      "description": "(Required) The unique identifier of the list."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "cef673f9-8430-4d4f-b594-09baf75c2c3e",
+          "name": "Create a list comment",
+          "request": {
+            "name": "Create a list comment",
+            "description": {
+              "content": "Creates a new comment on a list.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "list",
+                ":list_id",
+                "comment"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "list_id",
+                  "description": "(Required) The unique identifier of the list."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"comment_text\": \"<string>\",\n  \"assignee\": \"<integer>\",\n  \"notify_all\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "d4211300-c7eb-440c-9a06-63cbf1988b20",
+              "name": "Comment created successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "list",
+                    ":list_id",
+                    "comment"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "list_id",
+                      "description": "(Required) The unique identifier of the list."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"comment_text\": \"<string>\",\n  \"assignee\": \"<integer>\",\n  \"notify_all\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"comment\": [\n    {\n      \"text\": \"string\",\n      \"type\": \"string\",\n      \"attributes\": {}\n    },\n    {\n      \"text\": \"string\",\n      \"type\": \"string\",\n      \"attributes\": {}\n    }\n  ],\n  \"comment_text\": \"string\",\n  \"user\": {\n    \"id\": 6881,\n    \"username\": \"string\",\n    \"email\": \"fxr4AyeOz2QP@EbxURKJjcTnqBkMsnu.zk\",\n    \"color\": \"string\",\n    \"profilePicture\": \"http://LJhSQoXoRYcTk.sfwHAuwew8Hmi5KJ8GBWzlOOdsxI59xoVeFzakofPda,\",\n    \"initials\": \"string\"\n  },\n  \"resolved\": false,\n  \"assignee\": {},\n  \"assigned_by\": {},\n  \"date\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f8943c4a-a120-4a56-a44a-0f9c38488ff2",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "list",
+                    ":list_id",
+                    "comment"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "list_id",
+                      "description": "(Required) The unique identifier of the list."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"comment_text\": \"<string>\",\n  \"assignee\": \"<integer>\",\n  \"notify_all\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "7d47a7ba-569a-4398-bc0d-0538cf7e7cec",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "list",
+                    ":list_id",
+                    "comment"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "list_id",
+                      "description": "(Required) The unique identifier of the list."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"comment_text\": \"<string>\",\n  \"assignee\": \"<integer>\",\n  \"notify_all\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "ffbedc20-1939-419d-9ad1-907fd6215953",
+              "name": "List not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "list",
+                    ":list_id",
+                    "comment"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "list_id",
+                      "description": "(Required) The unique identifier of the list."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"comment_text\": \"<string>\",\n  \"assignee\": \"<integer>\",\n  \"notify_all\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3a91969f-ca37-4d37-9670-2c453878e3cb",
+          "name": "Update a comment",
+          "request": {
+            "name": "Update a comment",
+            "description": {
+              "content": "Updates an existing comment. The comment text and assignee can be modified. The resolved status can also be toggled.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "comment",
+                ":comment_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "comment_id",
+                  "description": "(Required) The unique identifier of the comment."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"comment_text\": \"<string>\",\n  \"assignee\": \"<integer>\",\n  \"resolved\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "6455ffec-4709-4dbd-8ff8-ba3e9c7301b3",
+              "name": "Comment updated successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "comment",
+                    ":comment_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "comment_id",
+                      "description": "(Required) The unique identifier of the comment."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"comment_text\": \"<string>\",\n  \"assignee\": \"<integer>\",\n  \"resolved\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "2dcbc6cd-a683-4f1b-8ff3-7fe4dff9c876",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "comment",
+                    ":comment_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "comment_id",
+                      "description": "(Required) The unique identifier of the comment."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"comment_text\": \"<string>\",\n  \"assignee\": \"<integer>\",\n  \"resolved\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "46cb7f45-462f-4a67-855e-add6768909c7",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "comment",
+                    ":comment_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "comment_id",
+                      "description": "(Required) The unique identifier of the comment."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"comment_text\": \"<string>\",\n  \"assignee\": \"<integer>\",\n  \"resolved\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "c710a76f-fdfa-4ede-9aa9-4e9aa5a43410",
+              "name": "Comment not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "comment",
+                    ":comment_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "comment_id",
+                      "description": "(Required) The unique identifier of the comment."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"comment_text\": \"<string>\",\n  \"assignee\": \"<integer>\",\n  \"resolved\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ecf7df02-34f3-4e56-8816-22b74e199949",
+          "name": "Delete a comment",
+          "request": {
+            "name": "Delete a comment",
+            "description": {
+              "content": "Permanently deletes a comment. This action cannot be undone.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "comment",
+                ":comment_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "comment_id",
+                  "description": "(Required) The unique identifier of the comment."
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2e437141-f490-4638-8ff2-a2a178b55030",
+              "name": "Comment deleted successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "comment",
+                    ":comment_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "comment_id",
+                      "description": "(Required) The unique identifier of the comment."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "892e5b51-9c45-459d-9d9d-34bd6cf97abe",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "comment",
+                    ":comment_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "comment_id",
+                      "description": "(Required) The unique identifier of the comment."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "c7483fda-8d6d-4098-81df-2cdb3358bca3",
+              "name": "Comment not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "comment",
+                    ":comment_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "comment_id",
+                      "description": "(Required) The unique identifier of the comment."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.clickup.com/api/v2",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "687dc11a-99b0-44fd-b965-679a0fa7d23a",
+    "name": "ClickUp Authorization Comments API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The ClickUp Comments API provides endpoints for creating and retrieving comments on tasks, views, and lists. Comments support rich text formatting, mentions, and attachments. Developers can use this API to build integrations that synchronize discussions between ClickUp and other collaboration tools, or to programmatically add status updates and notes to tasks.\n\nContact Support:\n Name: ClickUp Support",
+      "type": "text/plain"
+    }
+  }
+}

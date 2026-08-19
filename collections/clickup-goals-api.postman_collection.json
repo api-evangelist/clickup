@@ -1,0 +1,1854 @@
+{
+  "item": [
+    {
+      "id": "dfa4a364-9e1d-4ddc-8361-3977021b8efe",
+      "name": "Goals",
+      "description": {
+        "content": "Operations for managing Goals and Key Results within a ClickUp Workspace.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "3d151077-8d25-4c0f-8be5-0bf701a3939c",
+          "name": "Get goals",
+          "request": {
+            "name": "Get goals",
+            "description": {
+              "content": "Retrieves all Goals within a Workspace, including their key results and progress information.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "team",
+                ":team_id",
+                "goal"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "include_completed",
+                  "value": "false",
+                  "description": "Include completed Goals in the response."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "team_id",
+                  "description": "(Required) The unique identifier of the Workspace (team)."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c7570b4a-64c5-4846-bcf6-29d632877279",
+              "name": "Successfully retrieved goals",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "team",
+                    ":team_id",
+                    "goal"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "include_completed",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "team_id",
+                      "description": "(Required) The unique identifier of the Workspace (team)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"goals\": [\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"team_id\": \"string\",\n      \"date_created\": \"string\",\n      \"start_date\": \"string\",\n      \"due_date\": \"string\",\n      \"description\": \"string\",\n      \"private\": true,\n      \"archived\": false,\n      \"creator\": 8657,\n      \"color\": \"string\",\n      \"pretty_id\": \"string\",\n      \"multiple_owners\": false,\n      \"folder_id\": \"string\",\n      \"key_results\": [\n        {\n          \"id\": \"string\",\n          \"goal_id\": \"string\",\n          \"name\": \"string\",\n          \"creator\": 7372,\n          \"type\": \"number\",\n          \"date_created\": \"string\",\n          \"goal_pretty_id\": \"string\",\n          \"percent_completed\": 94,\n          \"completed\": true,\n          \"task_ids\": [\n            \"string\",\n            \"string\"\n          ],\n          \"list_ids\": [\n            \"string\",\n            \"string\"\n          ],\n          \"steps_start\": 6949.353006461628,\n          \"steps_end\": 865.6951634472509,\n          \"steps_current\": 156.7769414235898,\n          \"unit\": \"string\",\n          \"last_action\": {}\n        },\n        {\n          \"id\": \"string\",\n          \"goal_id\": \"string\",\n          \"name\": \"string\",\n          \"creator\": 5125,\n          \"type\": \"boolean\",\n          \"date_created\": \"string\",\n          \"goal_pretty_id\": \"string\",\n          \"percent_completed\": 91,\n          \"completed\": false,\n          \"task_ids\": [\n            \"string\",\n            \"string\"\n          ],\n          \"list_ids\": [\n            \"string\",\n            \"string\"\n          ],\n          \"steps_start\": 7846.008927086677,\n          \"steps_end\": 1600.319510497542,\n          \"steps_current\": 312.0593443990205,\n          \"unit\": \"string\",\n          \"last_action\": {}\n        }\n      ],\n      \"percent_completed\": 74,\n      \"pretty_url\": \"http://ajeRzztrczlPIKF.dqxvRrfTfI7Auxag4geMoRtXTyQZNvpjmui5NBOhHIJ3nKx.h0mmcgvzVW\"\n    },\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"team_id\": \"string\",\n      \"date_created\": \"string\",\n      \"start_date\": \"string\",\n      \"due_date\": \"string\",\n      \"description\": \"string\",\n      \"private\": false,\n      \"archived\": true,\n      \"creator\": 1079,\n      \"color\": \"string\",\n      \"pretty_id\": \"string\",\n      \"multiple_owners\": true,\n      \"folder_id\": \"string\",\n      \"key_results\": [\n        {\n          \"id\": \"string\",\n          \"goal_id\": \"string\",\n          \"name\": \"string\",\n          \"creator\": 272,\n          \"type\": \"number\",\n          \"date_created\": \"string\",\n          \"goal_pretty_id\": \"string\",\n          \"percent_completed\": 86,\n          \"completed\": true,\n          \"task_ids\": [\n            \"string\",\n            \"string\"\n          ],\n          \"list_ids\": [\n            \"string\",\n            \"string\"\n          ],\n          \"steps_start\": 4215.753267415118,\n          \"steps_end\": 1532.343992922728,\n          \"steps_current\": 3423.5365563499063,\n          \"unit\": \"string\",\n          \"last_action\": {}\n        },\n        {\n          \"id\": \"string\",\n          \"goal_id\": \"string\",\n          \"name\": \"string\",\n          \"creator\": 5127,\n          \"type\": \"currency\",\n          \"date_created\": \"string\",\n          \"goal_pretty_id\": \"string\",\n          \"percent_completed\": 90,\n          \"completed\": true,\n          \"task_ids\": [\n            \"string\",\n            \"string\"\n          ],\n          \"list_ids\": [\n            \"string\",\n            \"string\"\n          ],\n          \"steps_start\": 6780.80740291991,\n          \"steps_end\": 8855.24952367268,\n          \"steps_current\": 1593.713303772849,\n          \"unit\": \"string\",\n          \"last_action\": {}\n        }\n      ],\n      \"percent_completed\": 8,\n      \"pretty_url\": \"https://MJWSUpQEyhCm.kimeb6ZiYFqOXSb8i.up93LjRW\"\n    }\n  ],\n  \"folders\": [\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"team_id\": \"string\",\n      \"private\": true,\n      \"date_created\": \"string\",\n      \"creator\": 746,\n      \"goal_count\": 3363,\n      \"goals\": [\n        {\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"team_id\": \"string\",\n          \"date_created\": \"string\",\n          \"start_date\": \"string\",\n          \"due_date\": \"string\",\n          \"description\": \"string\",\n          \"private\": true,\n          \"archived\": true,\n          \"creator\": 283,\n          \"color\": \"string\",\n          \"pretty_id\": \"string\",\n          \"multiple_owners\": false,\n          \"folder_id\": \"string\",\n          \"key_results\": [\n            {\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"goal_id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"creator\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"date_created\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"goal_pretty_id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"percent_completed\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"completed\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"task_ids\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"list_ids\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"owners\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"steps_start\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"steps_end\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"steps_current\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"unit\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"last_action\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"goal_id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"creator\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"date_created\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"goal_pretty_id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"percent_completed\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"completed\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"task_ids\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"list_ids\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"owners\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"steps_start\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"steps_end\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"steps_current\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"unit\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"last_action\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"percent_completed\": 98,\n          \"pretty_url\": \"http://WWguFPJqYeYRVnXTsOpYab.neeTzbh8kloKizztiTRpgQYwaKJ8LmKXmIdj7jlq.Z4r\"\n        },\n        {\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"team_id\": \"string\",\n          \"date_created\": \"string\",\n          \"start_date\": \"string\",\n          \"due_date\": \"string\",\n          \"description\": \"string\",\n          \"private\": false,\n          \"archived\": true,\n          \"creator\": 4468,\n          \"color\": \"string\",\n          \"pretty_id\": \"string\",\n          \"multiple_owners\": true,\n          \"folder_id\": \"string\",\n          \"key_results\": [\n            {\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"goal_id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"creator\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"date_created\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"goal_pretty_id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"percent_completed\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"completed\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"task_ids\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"list_ids\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"owners\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"steps_start\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"steps_end\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"steps_current\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"unit\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"last_action\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"goal_id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"creator\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"date_created\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"goal_pretty_id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"percent_completed\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"completed\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"task_ids\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"list_ids\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"owners\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"steps_start\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"steps_end\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"steps_current\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"unit\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"last_action\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"percent_completed\": 22,\n          \"pretty_url\": \"http://VIMSXurlcTaXneUhAlj.fqqdzV.,GPdzpu\"\n        }\n      ]\n    },\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"team_id\": \"string\",\n      \"private\": false,\n      \"date_created\": \"string\",\n      \"creator\": 3016,\n      \"goal_count\": 9316,\n      \"goals\": [\n        {\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"team_id\": \"string\",\n          \"date_created\": \"string\",\n          \"start_date\": \"string\",\n          \"due_date\": \"string\",\n          \"description\": \"string\",\n          \"private\": true,\n          \"archived\": true,\n          \"creator\": 8347,\n          \"color\": \"string\",\n          \"pretty_id\": \"string\",\n          \"multiple_owners\": true,\n          \"folder_id\": \"string\",\n          \"key_results\": [\n            {\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"goal_id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"creator\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"date_created\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"goal_pretty_id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"percent_completed\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"completed\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"task_ids\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"list_ids\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"owners\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"steps_start\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"steps_end\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"steps_current\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"unit\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"last_action\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"goal_id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"creator\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"date_created\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"goal_pretty_id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"percent_completed\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"completed\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"task_ids\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"list_ids\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"owners\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"steps_start\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"steps_end\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"steps_current\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"unit\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"last_action\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"percent_completed\": 28,\n          \"pretty_url\": \"https://TknrQa.ectSM7gRn1vJZkNw0s,LoIUUQkUNmUBdeY,7Q3\"\n        },\n        {\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"team_id\": \"string\",\n          \"date_created\": \"string\",\n          \"start_date\": \"string\",\n          \"due_date\": \"string\",\n          \"description\": \"string\",\n          \"private\": false,\n          \"archived\": false,\n          \"creator\": 7733,\n          \"color\": \"string\",\n          \"pretty_id\": \"string\",\n          \"multiple_owners\": false,\n          \"folder_id\": \"string\",\n          \"key_results\": [\n            {\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"goal_id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"creator\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"date_created\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"goal_pretty_id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"percent_completed\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"completed\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"task_ids\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"list_ids\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"owners\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"steps_start\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"steps_end\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"steps_current\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"unit\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"last_action\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"goal_id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"creator\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"date_created\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"goal_pretty_id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"percent_completed\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"completed\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"task_ids\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"list_ids\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"owners\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"steps_start\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"steps_end\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"steps_current\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"unit\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"last_action\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"percent_completed\": 63,\n          \"pretty_url\": \"http://wMBMTTfKgsbqykqROsxLdkvZe.uyhiylU-o,Nwh9bBt8ofoEQpz110P9plDYatu-SjLP-S3Lc.Jrw+NNdayVsT2dLrBr1x\"\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "754618d6-7f0e-4a82-8338-5be6e7cc1fa3",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "team",
+                    ":team_id",
+                    "goal"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "include_completed",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "team_id",
+                      "description": "(Required) The unique identifier of the Workspace (team)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6cdbd9f9-bd0c-49dd-8fe6-26f5c1b77be2",
+          "name": "Create a goal",
+          "request": {
+            "name": "Create a goal",
+            "description": {
+              "content": "Creates a new Goal within a Workspace. Goals can include a name, due date, description, assignees, and color.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "team",
+                ":team_id",
+                "goal"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "team_id",
+                  "description": "(Required) The unique identifier of the Workspace (team)."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"due_date\": \"<long>\",\n  \"description\": \"<string>\",\n  \"multiple_owners\": \"<boolean>\",\n  \"owners\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"color\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "d1138476-db8e-4365-b510-b6d1a72eccd6",
+              "name": "Goal created successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "team",
+                    ":team_id",
+                    "goal"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "team_id",
+                      "description": "(Required) The unique identifier of the Workspace (team)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"due_date\": \"<long>\",\n  \"description\": \"<string>\",\n  \"multiple_owners\": \"<boolean>\",\n  \"owners\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"color\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"goal\": {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"team_id\": \"string\",\n    \"date_created\": \"string\",\n    \"start_date\": \"string\",\n    \"due_date\": \"string\",\n    \"description\": \"string\",\n    \"private\": true,\n    \"archived\": false,\n    \"creator\": 5024,\n    \"color\": \"string\",\n    \"pretty_id\": \"string\",\n    \"multiple_owners\": false,\n    \"folder_id\": \"string\",\n    \"key_results\": [\n      {\n        \"id\": \"string\",\n        \"goal_id\": \"string\",\n        \"name\": \"string\",\n        \"creator\": 7379,\n        \"type\": \"number\",\n        \"date_created\": \"string\",\n        \"goal_pretty_id\": \"string\",\n        \"percent_completed\": 84,\n        \"completed\": false,\n        \"task_ids\": [\n          \"string\",\n          \"string\"\n        ],\n        \"list_ids\": [\n          \"string\",\n          \"string\"\n        ],\n        \"steps_start\": 9599.666176658253,\n        \"steps_end\": 2661.4464654119474,\n        \"steps_current\": 4785.794232354023,\n        \"unit\": \"string\",\n        \"last_action\": {}\n      },\n      {\n        \"id\": \"string\",\n        \"goal_id\": \"string\",\n        \"name\": \"string\",\n        \"creator\": 2212,\n        \"type\": \"number\",\n        \"date_created\": \"string\",\n        \"goal_pretty_id\": \"string\",\n        \"percent_completed\": 83,\n        \"completed\": false,\n        \"task_ids\": [\n          \"string\",\n          \"string\"\n        ],\n        \"list_ids\": [\n          \"string\",\n          \"string\"\n        ],\n        \"steps_start\": 9232.335786952108,\n        \"steps_end\": 5594.2580760330575,\n        \"steps_current\": 7525.5902772595255,\n        \"unit\": \"string\",\n        \"last_action\": {}\n      }\n    ],\n    \"percent_completed\": 11,\n    \"pretty_url\": \"https://BDeeFbrAhvGhWrvnKrmnRSbCkdntsqUba.ujWcH8RdBUWa9Z\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "05c4f5af-f708-48a8-8630-00e1cde90d78",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "team",
+                    ":team_id",
+                    "goal"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "team_id",
+                      "description": "(Required) The unique identifier of the Workspace (team)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"due_date\": \"<long>\",\n  \"description\": \"<string>\",\n  \"multiple_owners\": \"<boolean>\",\n  \"owners\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"color\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "61bed296-2d99-488e-84cf-fbe594558b87",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "team",
+                    ":team_id",
+                    "goal"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "team_id",
+                      "description": "(Required) The unique identifier of the Workspace (team)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"due_date\": \"<long>\",\n  \"description\": \"<string>\",\n  \"multiple_owners\": \"<boolean>\",\n  \"owners\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"color\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b438c49e-df86-48a5-ab71-ce41d1fe2fb3",
+          "name": "Get a goal",
+          "request": {
+            "name": "Get a goal",
+            "description": {
+              "content": "Retrieves details of a specific Goal, including its key results, targets, and progress.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "goal",
+                ":goal_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "goal_id",
+                  "description": "(Required) The unique identifier of the Goal."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ee290f4c-8065-47af-9ad0-bc679cf034ed",
+              "name": "Successfully retrieved goal",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "goal",
+                    ":goal_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "goal_id",
+                      "description": "(Required) The unique identifier of the Goal."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"goal\": {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"team_id\": \"string\",\n    \"date_created\": \"string\",\n    \"start_date\": \"string\",\n    \"due_date\": \"string\",\n    \"description\": \"string\",\n    \"private\": true,\n    \"archived\": false,\n    \"creator\": 5024,\n    \"color\": \"string\",\n    \"pretty_id\": \"string\",\n    \"multiple_owners\": false,\n    \"folder_id\": \"string\",\n    \"key_results\": [\n      {\n        \"id\": \"string\",\n        \"goal_id\": \"string\",\n        \"name\": \"string\",\n        \"creator\": 7379,\n        \"type\": \"number\",\n        \"date_created\": \"string\",\n        \"goal_pretty_id\": \"string\",\n        \"percent_completed\": 84,\n        \"completed\": false,\n        \"task_ids\": [\n          \"string\",\n          \"string\"\n        ],\n        \"list_ids\": [\n          \"string\",\n          \"string\"\n        ],\n        \"steps_start\": 9599.666176658253,\n        \"steps_end\": 2661.4464654119474,\n        \"steps_current\": 4785.794232354023,\n        \"unit\": \"string\",\n        \"last_action\": {}\n      },\n      {\n        \"id\": \"string\",\n        \"goal_id\": \"string\",\n        \"name\": \"string\",\n        \"creator\": 2212,\n        \"type\": \"number\",\n        \"date_created\": \"string\",\n        \"goal_pretty_id\": \"string\",\n        \"percent_completed\": 83,\n        \"completed\": false,\n        \"task_ids\": [\n          \"string\",\n          \"string\"\n        ],\n        \"list_ids\": [\n          \"string\",\n          \"string\"\n        ],\n        \"steps_start\": 9232.335786952108,\n        \"steps_end\": 5594.2580760330575,\n        \"steps_current\": 7525.5902772595255,\n        \"unit\": \"string\",\n        \"last_action\": {}\n      }\n    ],\n    \"percent_completed\": 11,\n    \"pretty_url\": \"https://BDeeFbrAhvGhWrvnKrmnRSbCkdntsqUba.ujWcH8RdBUWa9Z\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "de13d967-ab96-4c05-8248-379cafa56d2e",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "goal",
+                    ":goal_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "goal_id",
+                      "description": "(Required) The unique identifier of the Goal."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "4c8105d7-05ed-4df1-aeaa-fd41ea343f47",
+              "name": "Goal not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "goal",
+                    ":goal_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "goal_id",
+                      "description": "(Required) The unique identifier of the Goal."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "fc1c40ef-0d63-4e86-a0a0-26d0fff336e4",
+          "name": "Update a goal",
+          "request": {
+            "name": "Update a goal",
+            "description": {
+              "content": "Updates the properties of an existing Goal.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "goal",
+                ":goal_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "goal_id",
+                  "description": "(Required) The unique identifier of the Goal."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"due_date\": \"<long>\",\n  \"description\": \"<string>\",\n  \"rem_owners\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"add_owners\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"color\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "5dfd2577-5ca4-4070-98de-b172a86d93fe",
+              "name": "Goal updated successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "goal",
+                    ":goal_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "goal_id",
+                      "description": "(Required) The unique identifier of the Goal."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"due_date\": \"<long>\",\n  \"description\": \"<string>\",\n  \"rem_owners\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"add_owners\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"color\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"goal\": {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"team_id\": \"string\",\n    \"date_created\": \"string\",\n    \"start_date\": \"string\",\n    \"due_date\": \"string\",\n    \"description\": \"string\",\n    \"private\": true,\n    \"archived\": false,\n    \"creator\": 5024,\n    \"color\": \"string\",\n    \"pretty_id\": \"string\",\n    \"multiple_owners\": false,\n    \"folder_id\": \"string\",\n    \"key_results\": [\n      {\n        \"id\": \"string\",\n        \"goal_id\": \"string\",\n        \"name\": \"string\",\n        \"creator\": 7379,\n        \"type\": \"number\",\n        \"date_created\": \"string\",\n        \"goal_pretty_id\": \"string\",\n        \"percent_completed\": 84,\n        \"completed\": false,\n        \"task_ids\": [\n          \"string\",\n          \"string\"\n        ],\n        \"list_ids\": [\n          \"string\",\n          \"string\"\n        ],\n        \"steps_start\": 9599.666176658253,\n        \"steps_end\": 2661.4464654119474,\n        \"steps_current\": 4785.794232354023,\n        \"unit\": \"string\",\n        \"last_action\": {}\n      },\n      {\n        \"id\": \"string\",\n        \"goal_id\": \"string\",\n        \"name\": \"string\",\n        \"creator\": 2212,\n        \"type\": \"number\",\n        \"date_created\": \"string\",\n        \"goal_pretty_id\": \"string\",\n        \"percent_completed\": 83,\n        \"completed\": false,\n        \"task_ids\": [\n          \"string\",\n          \"string\"\n        ],\n        \"list_ids\": [\n          \"string\",\n          \"string\"\n        ],\n        \"steps_start\": 9232.335786952108,\n        \"steps_end\": 5594.2580760330575,\n        \"steps_current\": 7525.5902772595255,\n        \"unit\": \"string\",\n        \"last_action\": {}\n      }\n    ],\n    \"percent_completed\": 11,\n    \"pretty_url\": \"https://BDeeFbrAhvGhWrvnKrmnRSbCkdntsqUba.ujWcH8RdBUWa9Z\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ba02f783-7971-45ec-8a0e-3ff21d966dc2",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "goal",
+                    ":goal_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "goal_id",
+                      "description": "(Required) The unique identifier of the Goal."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"due_date\": \"<long>\",\n  \"description\": \"<string>\",\n  \"rem_owners\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"add_owners\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"color\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "d7d5deae-7b3c-4ad9-9c0d-2239827bd910",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "goal",
+                    ":goal_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "goal_id",
+                      "description": "(Required) The unique identifier of the Goal."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"due_date\": \"<long>\",\n  \"description\": \"<string>\",\n  \"rem_owners\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"add_owners\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"color\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "f0e5fed0-a377-4d24-8111-15a247803cc1",
+              "name": "Goal not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "goal",
+                    ":goal_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "goal_id",
+                      "description": "(Required) The unique identifier of the Goal."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"due_date\": \"<long>\",\n  \"description\": \"<string>\",\n  \"rem_owners\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"add_owners\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"color\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e7f43010-bc28-4b4d-9123-44beecad7e1a",
+          "name": "Delete a goal",
+          "request": {
+            "name": "Delete a goal",
+            "description": {
+              "content": "Permanently deletes a Goal and all of its key results. This action cannot be undone.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "goal",
+                ":goal_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "goal_id",
+                  "description": "(Required) The unique identifier of the Goal."
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "acfb086d-c900-42b1-ac1b-783f10c39178",
+              "name": "Goal deleted successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "goal",
+                    ":goal_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "goal_id",
+                      "description": "(Required) The unique identifier of the Goal."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "ce39daac-8dd8-4804-b20a-eb1758a38db2",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "goal",
+                    ":goal_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "goal_id",
+                      "description": "(Required) The unique identifier of the Goal."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "cbe19c17-ddc1-4355-9e26-885462fb495a",
+              "name": "Goal not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "goal",
+                    ":goal_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "goal_id",
+                      "description": "(Required) The unique identifier of the Goal."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a6ac3029-ec97-493b-8487-1d857577e66f",
+          "name": "Create a key result",
+          "request": {
+            "name": "Create a key result",
+            "description": {
+              "content": "Creates a new Key Result (target) within a Goal. Key Results can be of type number, currency, boolean, percentage, or automatic (based on task completion).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "goal",
+                ":goal_id",
+                "key_result"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "goal_id",
+                  "description": "(Required) The unique identifier of the Goal."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"type\": \"<string>\",\n  \"owners\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"steps_start\": \"<number>\",\n  \"steps_end\": \"<number>\",\n  \"unit\": \"<string>\",\n  \"task_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"list_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "a1a67e94-fa66-4db4-8536-10720f97b0f6",
+              "name": "Key result created successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "goal",
+                    ":goal_id",
+                    "key_result"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "goal_id",
+                      "description": "(Required) The unique identifier of the Goal."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"type\": \"<string>\",\n  \"owners\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"steps_start\": \"<number>\",\n  \"steps_end\": \"<number>\",\n  \"unit\": \"<string>\",\n  \"task_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"list_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"key_result\": {\n    \"id\": \"string\",\n    \"goal_id\": \"string\",\n    \"name\": \"string\",\n    \"creator\": 6043,\n    \"type\": \"boolean\",\n    \"date_created\": \"string\",\n    \"goal_pretty_id\": \"string\",\n    \"percent_completed\": 94,\n    \"completed\": false,\n    \"task_ids\": [\n      \"string\",\n      \"string\"\n    ],\n    \"list_ids\": [\n      \"string\",\n      \"string\"\n    ],\n    \"steps_start\": 2732.3268650534037,\n    \"steps_end\": 1211.374956115645,\n    \"steps_current\": 6918.696215101233,\n    \"unit\": \"string\",\n    \"last_action\": {}\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4c7eec3e-96a4-465f-89cd-bbf6e573c375",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "goal",
+                    ":goal_id",
+                    "key_result"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "goal_id",
+                      "description": "(Required) The unique identifier of the Goal."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"type\": \"<string>\",\n  \"owners\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"steps_start\": \"<number>\",\n  \"steps_end\": \"<number>\",\n  \"unit\": \"<string>\",\n  \"task_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"list_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "af37b06b-8741-431f-b2fc-7a98da8dd90a",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "goal",
+                    ":goal_id",
+                    "key_result"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "goal_id",
+                      "description": "(Required) The unique identifier of the Goal."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"type\": \"<string>\",\n  \"owners\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"steps_start\": \"<number>\",\n  \"steps_end\": \"<number>\",\n  \"unit\": \"<string>\",\n  \"task_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"list_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "e7fbce89-71f8-44c5-94f1-3b785779d1b8",
+              "name": "Goal not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "goal",
+                    ":goal_id",
+                    "key_result"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "goal_id",
+                      "description": "(Required) The unique identifier of the Goal."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"type\": \"<string>\",\n  \"owners\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"steps_start\": \"<number>\",\n  \"steps_end\": \"<number>\",\n  \"unit\": \"<string>\",\n  \"task_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"list_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e161005a-0dba-4f87-a881-4bcef7814e4d",
+          "name": "Edit a key result",
+          "request": {
+            "name": "Edit a key result",
+            "description": {
+              "content": "Updates the properties and progress of an existing Key Result.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "key_result",
+                ":key_result_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "key_result_id",
+                  "description": "(Required) The unique identifier of the Key Result."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"steps_current\": \"<number>\",\n  \"note\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "5c5b86a3-5816-4e3b-985d-2adf3158ea60",
+              "name": "Key result updated successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "key_result",
+                    ":key_result_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "key_result_id",
+                      "description": "(Required) The unique identifier of the Key Result."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"steps_current\": \"<number>\",\n  \"note\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"key_result\": {\n    \"id\": \"string\",\n    \"goal_id\": \"string\",\n    \"name\": \"string\",\n    \"creator\": 6043,\n    \"type\": \"boolean\",\n    \"date_created\": \"string\",\n    \"goal_pretty_id\": \"string\",\n    \"percent_completed\": 94,\n    \"completed\": false,\n    \"task_ids\": [\n      \"string\",\n      \"string\"\n    ],\n    \"list_ids\": [\n      \"string\",\n      \"string\"\n    ],\n    \"steps_start\": 2732.3268650534037,\n    \"steps_end\": 1211.374956115645,\n    \"steps_current\": 6918.696215101233,\n    \"unit\": \"string\",\n    \"last_action\": {}\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9948f20b-d434-4b02-b6c9-ca61c787a8f6",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "key_result",
+                    ":key_result_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "key_result_id",
+                      "description": "(Required) The unique identifier of the Key Result."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"steps_current\": \"<number>\",\n  \"note\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "5815ec08-14cb-48b0-b3b6-661a2cb3b06a",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "key_result",
+                    ":key_result_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "key_result_id",
+                      "description": "(Required) The unique identifier of the Key Result."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"steps_current\": \"<number>\",\n  \"note\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "33544f23-71aa-48a4-86ed-751a8c634d33",
+              "name": "Key result not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "key_result",
+                    ":key_result_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "key_result_id",
+                      "description": "(Required) The unique identifier of the Key Result."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"steps_current\": \"<number>\",\n  \"note\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3b37643d-0571-4779-9fac-9de9eba034bc",
+          "name": "Delete a key result",
+          "request": {
+            "name": "Delete a key result",
+            "description": {
+              "content": "Permanently deletes a Key Result from a Goal.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "key_result",
+                ":key_result_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "key_result_id",
+                  "description": "(Required) The unique identifier of the Key Result."
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "24b0799d-a71b-4ba8-abb5-1bda205a7204",
+              "name": "Key result deleted successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "key_result",
+                    ":key_result_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "key_result_id",
+                      "description": "(Required) The unique identifier of the Key Result."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "c6f2c686-47c6-4eb9-af52-055d996040d3",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "key_result",
+                    ":key_result_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "key_result_id",
+                      "description": "(Required) The unique identifier of the Key Result."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "fcde52bc-84b0-451a-8214-31682873b55e",
+              "name": "Key result not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "key_result",
+                    ":key_result_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "key_result_id",
+                      "description": "(Required) The unique identifier of the Key Result."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.clickup.com/api/v2",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "1f314566-9acb-4b82-8407-cf4c3c1d0990",
+    "name": "ClickUp Comments Authorization Goals API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The ClickUp Comments API provides endpoints for creating and retrieving comments on tasks, views, and lists. Comments support rich text formatting, mentions, and attachments. Developers can use this API to build integrations that synchronize discussions between ClickUp and other collaboration tools, or to programmatically add status updates and notes to tasks.\n\nContact Support:\n Name: ClickUp Support",
+      "type": "text/plain"
+    }
+  }
+}

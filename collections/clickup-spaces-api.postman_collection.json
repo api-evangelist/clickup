@@ -1,0 +1,1097 @@
+{
+  "item": [
+    {
+      "id": "50ad7973-77a1-46fc-8efe-96c47e6991a9",
+      "name": "Spaces",
+      "description": {
+        "content": "Operations for managing Spaces within a ClickUp Workspace.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "1b854ade-501c-4256-80de-315ff23dca2f",
+          "name": "Get spaces",
+          "request": {
+            "name": "Get spaces",
+            "description": {
+              "content": "Retrieves all Spaces within a Workspace. Optionally includes archived Spaces in the response.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "team",
+                ":team_id",
+                "space"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "archived",
+                  "value": "false",
+                  "description": "Include archived Spaces in the response."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "team_id",
+                  "description": "(Required) The unique identifier of the Workspace (team)."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "78fe4063-8ee2-4c0d-805b-b1574a8d8363",
+              "name": "Successfully retrieved spaces",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "team",
+                    ":team_id",
+                    "space"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "archived",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "team_id",
+                      "description": "(Required) The unique identifier of the Workspace (team)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"spaces\": [\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"private\": true,\n      \"color\": \"string\",\n      \"avatar\": \"string\",\n      \"admin_can_manage\": false,\n      \"archived\": false,\n      \"members\": [\n        {\n          \"user\": {\n            \"id\": 4927,\n            \"username\": \"string\",\n            \"email\": \"9-aXzwd62bc@vbCemFyHzMZvbOFhJJFJeNh.hun\",\n            \"color\": \"string\",\n            \"profilePicture\": \"http://AIJLoOpnOufcqXw.ickvTk5,vrSLR.4,2f\",\n            \"initials\": \"string\"\n          }\n        },\n        {\n          \"user\": {\n            \"id\": 6406,\n            \"username\": \"string\",\n            \"email\": \"bpVx@SJeqQIaUGPJDFvRGhfgOfANdeHU.nu\",\n            \"color\": \"string\",\n            \"profilePicture\": \"https://NuBjigzKhaAJyFImAYVIiyGUP.fzoaQUASqnfo7b+cKzwTh.1SI71uhxScw754HaVfGAxzJJ-F2OK5tmBcMxCFBgVonqld-rl2qp\",\n            \"initials\": \"string\"\n          }\n        }\n      ],\n      \"statuses\": [\n        {\n          \"id\": \"string\",\n          \"status\": \"string\",\n          \"type\": \"string\",\n          \"orderindex\": 7650,\n          \"color\": \"string\"\n        },\n        {\n          \"id\": \"string\",\n          \"status\": \"string\",\n          \"type\": \"string\",\n          \"orderindex\": 5842,\n          \"color\": \"string\"\n        }\n      ],\n      \"multiple_assignees\": true,\n      \"features\": {\n        \"due_dates\": {\n          \"enabled\": false,\n          \"start_date\": true,\n          \"remap_due_dates\": true,\n          \"remap_closed_due_date\": true\n        },\n        \"time_tracking\": {\n          \"enabled\": false\n        },\n        \"tags\": {\n          \"enabled\": false\n        },\n        \"time_estimates\": {\n          \"enabled\": true\n        },\n        \"checklists\": {\n          \"enabled\": true\n        },\n        \"custom_fields\": {\n          \"enabled\": true\n        },\n        \"remap_dependencies\": {\n          \"enabled\": false\n        },\n        \"dependency_warning\": {\n          \"enabled\": true\n        },\n        \"portfolios\": {\n          \"enabled\": true\n        }\n      }\n    },\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"private\": false,\n      \"color\": \"string\",\n      \"avatar\": \"string\",\n      \"admin_can_manage\": false,\n      \"archived\": true,\n      \"members\": [\n        {\n          \"user\": {\n            \"id\": 9077,\n            \"username\": \"string\",\n            \"email\": \"9fGzbuEp7o@IDMpxhpwQkrdOthFgCdYqdid.mixw\",\n            \"color\": \"string\",\n            \"profilePicture\": \"https://EPVURrlLFrhiJlaodsRNMKrGk.qrCq.5SH52ZR+kpg9ebEtQc8dMidq+uj3iUrVIB35ivDG8jLZ,+WpRFaReWbgtHbqtZ\",\n            \"initials\": \"string\"\n          }\n        },\n        {\n          \"user\": {\n            \"id\": 7082,\n            \"username\": \"string\",\n            \"email\": \"fI-pZGCqXv7DTK@GYkZEwZwENnE.thar\",\n            \"color\": \"string\",\n            \"profilePicture\": \"http://tLQrSWlDlLyE.qfe,y7JPMLZ+UWcepB7,7knVI+RIQsexOJHGqTCjqfIwITvEr-2IBWW4OFI4aFRQJi0CtMq\",\n            \"initials\": \"string\"\n          }\n        }\n      ],\n      \"statuses\": [\n        {\n          \"id\": \"string\",\n          \"status\": \"string\",\n          \"type\": \"string\",\n          \"orderindex\": 1242,\n          \"color\": \"string\"\n        },\n        {\n          \"id\": \"string\",\n          \"status\": \"string\",\n          \"type\": \"string\",\n          \"orderindex\": 1603,\n          \"color\": \"string\"\n        }\n      ],\n      \"multiple_assignees\": false,\n      \"features\": {\n        \"due_dates\": {\n          \"enabled\": true,\n          \"start_date\": false,\n          \"remap_due_dates\": true,\n          \"remap_closed_due_date\": true\n        },\n        \"time_tracking\": {\n          \"enabled\": true\n        },\n        \"tags\": {\n          \"enabled\": false\n        },\n        \"time_estimates\": {\n          \"enabled\": false\n        },\n        \"checklists\": {\n          \"enabled\": false\n        },\n        \"custom_fields\": {\n          \"enabled\": true\n        },\n        \"remap_dependencies\": {\n          \"enabled\": false\n        },\n        \"dependency_warning\": {\n          \"enabled\": false\n        },\n        \"portfolios\": {\n          \"enabled\": false\n        }\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8a0f8350-2c68-4374-9eee-765ec5cd0097",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "team",
+                    ":team_id",
+                    "space"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "archived",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "team_id",
+                      "description": "(Required) The unique identifier of the Workspace (team)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "dc316b3d-362e-4fa9-bf12-5669e45f7430",
+          "name": "Create a space",
+          "request": {
+            "name": "Create a space",
+            "description": {
+              "content": "Creates a new Space within a Workspace. The Space can be configured with specific features, statuses, and multiple assignee settings.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "team",
+                ":team_id",
+                "space"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "team_id",
+                  "description": "(Required) The unique identifier of the Workspace (team)."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"multiple_assignees\": \"<boolean>\",\n  \"features\": {\n    \"due_dates\": {\n      \"enabled\": \"<boolean>\",\n      \"start_date\": \"<boolean>\",\n      \"remap_due_dates\": \"<boolean>\",\n      \"remap_closed_due_date\": \"<boolean>\"\n    },\n    \"time_tracking\": {\n      \"enabled\": \"<boolean>\"\n    },\n    \"tags\": {\n      \"enabled\": \"<boolean>\"\n    },\n    \"time_estimates\": {\n      \"enabled\": \"<boolean>\"\n    },\n    \"checklists\": {\n      \"enabled\": \"<boolean>\"\n    },\n    \"custom_fields\": {\n      \"enabled\": \"<boolean>\"\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "94af732c-9839-4d75-a05f-6c9008e8a16d",
+              "name": "Space created successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "team",
+                    ":team_id",
+                    "space"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "team_id",
+                      "description": "(Required) The unique identifier of the Workspace (team)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"multiple_assignees\": \"<boolean>\",\n  \"features\": {\n    \"due_dates\": {\n      \"enabled\": \"<boolean>\",\n      \"start_date\": \"<boolean>\",\n      \"remap_due_dates\": \"<boolean>\",\n      \"remap_closed_due_date\": \"<boolean>\"\n    },\n    \"time_tracking\": {\n      \"enabled\": \"<boolean>\"\n    },\n    \"tags\": {\n      \"enabled\": \"<boolean>\"\n    },\n    \"time_estimates\": {\n      \"enabled\": \"<boolean>\"\n    },\n    \"checklists\": {\n      \"enabled\": \"<boolean>\"\n    },\n    \"custom_fields\": {\n      \"enabled\": \"<boolean>\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"name\": \"string\",\n  \"private\": false,\n  \"color\": \"string\",\n  \"avatar\": \"string\",\n  \"admin_can_manage\": true,\n  \"archived\": false,\n  \"members\": [\n    {\n      \"user\": {\n        \"id\": 8771,\n        \"username\": \"string\",\n        \"email\": \"GkDvC@flmTqZcSlZYMbeFCOBIPNzDSgGZM.hdwc\",\n        \"color\": \"string\",\n        \"profilePicture\": \"http://UZYNGLfkFgqi.uuaey5nekMiCH,wH,.P6RmIcih9xrHMPcf1fIPJF,KqP4PTrVaF5TxonT1+4QetkA6n\",\n        \"initials\": \"string\"\n      }\n    },\n    {\n      \"user\": {\n        \"id\": 8268,\n        \"username\": \"string\",\n        \"email\": \"O0oZfbzH18@NJaQqvlwiNFlGroyPxod.mf\",\n        \"color\": \"string\",\n        \"profilePicture\": \"https://GULYQhdceKXxjpncGTtPtxxeC.dfaeXL0AmPVyxkvx-VMP1sgLa1mb4.aGSpRGbzzu7a0f-W+byfMpZMVarZEs\",\n        \"initials\": \"string\"\n      }\n    }\n  ],\n  \"statuses\": [\n    {\n      \"id\": \"string\",\n      \"status\": \"string\",\n      \"type\": \"string\",\n      \"orderindex\": 5172,\n      \"color\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"status\": \"string\",\n      \"type\": \"string\",\n      \"orderindex\": 8486,\n      \"color\": \"string\"\n    }\n  ],\n  \"multiple_assignees\": false,\n  \"features\": {\n    \"due_dates\": {\n      \"enabled\": true,\n      \"start_date\": false,\n      \"remap_due_dates\": false,\n      \"remap_closed_due_date\": true\n    },\n    \"time_tracking\": {\n      \"enabled\": true\n    },\n    \"tags\": {\n      \"enabled\": false\n    },\n    \"time_estimates\": {\n      \"enabled\": false\n    },\n    \"checklists\": {\n      \"enabled\": false\n    },\n    \"custom_fields\": {\n      \"enabled\": false\n    },\n    \"remap_dependencies\": {\n      \"enabled\": false\n    },\n    \"dependency_warning\": {\n      \"enabled\": false\n    },\n    \"portfolios\": {\n      \"enabled\": false\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "810ac68b-ba74-4cfb-8e58-141e22719556",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "team",
+                    ":team_id",
+                    "space"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "team_id",
+                      "description": "(Required) The unique identifier of the Workspace (team)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"multiple_assignees\": \"<boolean>\",\n  \"features\": {\n    \"due_dates\": {\n      \"enabled\": \"<boolean>\",\n      \"start_date\": \"<boolean>\",\n      \"remap_due_dates\": \"<boolean>\",\n      \"remap_closed_due_date\": \"<boolean>\"\n    },\n    \"time_tracking\": {\n      \"enabled\": \"<boolean>\"\n    },\n    \"tags\": {\n      \"enabled\": \"<boolean>\"\n    },\n    \"time_estimates\": {\n      \"enabled\": \"<boolean>\"\n    },\n    \"checklists\": {\n      \"enabled\": \"<boolean>\"\n    },\n    \"custom_fields\": {\n      \"enabled\": \"<boolean>\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "0fcb4009-bc47-41be-9d83-f6c3de0d1919",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "team",
+                    ":team_id",
+                    "space"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "team_id",
+                      "description": "(Required) The unique identifier of the Workspace (team)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"multiple_assignees\": \"<boolean>\",\n  \"features\": {\n    \"due_dates\": {\n      \"enabled\": \"<boolean>\",\n      \"start_date\": \"<boolean>\",\n      \"remap_due_dates\": \"<boolean>\",\n      \"remap_closed_due_date\": \"<boolean>\"\n    },\n    \"time_tracking\": {\n      \"enabled\": \"<boolean>\"\n    },\n    \"tags\": {\n      \"enabled\": \"<boolean>\"\n    },\n    \"time_estimates\": {\n      \"enabled\": \"<boolean>\"\n    },\n    \"checklists\": {\n      \"enabled\": \"<boolean>\"\n    },\n    \"custom_fields\": {\n      \"enabled\": \"<boolean>\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "132bf25e-45f6-45e9-8af5-a12093c43199",
+          "name": "Get a space",
+          "request": {
+            "name": "Get a space",
+            "description": {
+              "content": "Retrieves details of a specific Space, including its features, statuses, and configuration.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "space",
+                ":space_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "space_id",
+                  "description": "(Required) The unique identifier of the Space."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2ad7e4be-6876-449a-84c0-f0a052aad19b",
+              "name": "Successfully retrieved space",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "space",
+                    ":space_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "space_id",
+                      "description": "(Required) The unique identifier of the Space."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"name\": \"string\",\n  \"private\": false,\n  \"color\": \"string\",\n  \"avatar\": \"string\",\n  \"admin_can_manage\": true,\n  \"archived\": false,\n  \"members\": [\n    {\n      \"user\": {\n        \"id\": 8771,\n        \"username\": \"string\",\n        \"email\": \"GkDvC@flmTqZcSlZYMbeFCOBIPNzDSgGZM.hdwc\",\n        \"color\": \"string\",\n        \"profilePicture\": \"http://UZYNGLfkFgqi.uuaey5nekMiCH,wH,.P6RmIcih9xrHMPcf1fIPJF,KqP4PTrVaF5TxonT1+4QetkA6n\",\n        \"initials\": \"string\"\n      }\n    },\n    {\n      \"user\": {\n        \"id\": 8268,\n        \"username\": \"string\",\n        \"email\": \"O0oZfbzH18@NJaQqvlwiNFlGroyPxod.mf\",\n        \"color\": \"string\",\n        \"profilePicture\": \"https://GULYQhdceKXxjpncGTtPtxxeC.dfaeXL0AmPVyxkvx-VMP1sgLa1mb4.aGSpRGbzzu7a0f-W+byfMpZMVarZEs\",\n        \"initials\": \"string\"\n      }\n    }\n  ],\n  \"statuses\": [\n    {\n      \"id\": \"string\",\n      \"status\": \"string\",\n      \"type\": \"string\",\n      \"orderindex\": 5172,\n      \"color\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"status\": \"string\",\n      \"type\": \"string\",\n      \"orderindex\": 8486,\n      \"color\": \"string\"\n    }\n  ],\n  \"multiple_assignees\": false,\n  \"features\": {\n    \"due_dates\": {\n      \"enabled\": true,\n      \"start_date\": false,\n      \"remap_due_dates\": false,\n      \"remap_closed_due_date\": true\n    },\n    \"time_tracking\": {\n      \"enabled\": true\n    },\n    \"tags\": {\n      \"enabled\": false\n    },\n    \"time_estimates\": {\n      \"enabled\": false\n    },\n    \"checklists\": {\n      \"enabled\": false\n    },\n    \"custom_fields\": {\n      \"enabled\": false\n    },\n    \"remap_dependencies\": {\n      \"enabled\": false\n    },\n    \"dependency_warning\": {\n      \"enabled\": false\n    },\n    \"portfolios\": {\n      \"enabled\": false\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5b54b1d7-2034-484e-ad9f-fd3d992dd59e",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "space",
+                    ":space_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "space_id",
+                      "description": "(Required) The unique identifier of the Space."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "8e3147b0-3040-48cc-8bb0-6542bae217f9",
+              "name": "Space not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "space",
+                    ":space_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "space_id",
+                      "description": "(Required) The unique identifier of the Space."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d105acf2-d2b9-463f-8f17-6b2962cbb6ed",
+          "name": "Update a space",
+          "request": {
+            "name": "Update a space",
+            "description": {
+              "content": "Updates the properties of an existing Space, including its name, color, privacy settings, and enabled features.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "space",
+                ":space_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "space_id",
+                  "description": "(Required) The unique identifier of the Space."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"color\": \"<string>\",\n  \"private\": \"<boolean>\",\n  \"admin_can_manage\": \"<boolean>\",\n  \"multiple_assignees\": \"<boolean>\",\n  \"features\": \"<object>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "246a1686-22a0-42a5-a397-664530a113a4",
+              "name": "Space updated successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "space",
+                    ":space_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "space_id",
+                      "description": "(Required) The unique identifier of the Space."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"color\": \"<string>\",\n  \"private\": \"<boolean>\",\n  \"admin_can_manage\": \"<boolean>\",\n  \"multiple_assignees\": \"<boolean>\",\n  \"features\": \"<object>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"name\": \"string\",\n  \"private\": false,\n  \"color\": \"string\",\n  \"avatar\": \"string\",\n  \"admin_can_manage\": true,\n  \"archived\": false,\n  \"members\": [\n    {\n      \"user\": {\n        \"id\": 8771,\n        \"username\": \"string\",\n        \"email\": \"GkDvC@flmTqZcSlZYMbeFCOBIPNzDSgGZM.hdwc\",\n        \"color\": \"string\",\n        \"profilePicture\": \"http://UZYNGLfkFgqi.uuaey5nekMiCH,wH,.P6RmIcih9xrHMPcf1fIPJF,KqP4PTrVaF5TxonT1+4QetkA6n\",\n        \"initials\": \"string\"\n      }\n    },\n    {\n      \"user\": {\n        \"id\": 8268,\n        \"username\": \"string\",\n        \"email\": \"O0oZfbzH18@NJaQqvlwiNFlGroyPxod.mf\",\n        \"color\": \"string\",\n        \"profilePicture\": \"https://GULYQhdceKXxjpncGTtPtxxeC.dfaeXL0AmPVyxkvx-VMP1sgLa1mb4.aGSpRGbzzu7a0f-W+byfMpZMVarZEs\",\n        \"initials\": \"string\"\n      }\n    }\n  ],\n  \"statuses\": [\n    {\n      \"id\": \"string\",\n      \"status\": \"string\",\n      \"type\": \"string\",\n      \"orderindex\": 5172,\n      \"color\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"status\": \"string\",\n      \"type\": \"string\",\n      \"orderindex\": 8486,\n      \"color\": \"string\"\n    }\n  ],\n  \"multiple_assignees\": false,\n  \"features\": {\n    \"due_dates\": {\n      \"enabled\": true,\n      \"start_date\": false,\n      \"remap_due_dates\": false,\n      \"remap_closed_due_date\": true\n    },\n    \"time_tracking\": {\n      \"enabled\": true\n    },\n    \"tags\": {\n      \"enabled\": false\n    },\n    \"time_estimates\": {\n      \"enabled\": false\n    },\n    \"checklists\": {\n      \"enabled\": false\n    },\n    \"custom_fields\": {\n      \"enabled\": false\n    },\n    \"remap_dependencies\": {\n      \"enabled\": false\n    },\n    \"dependency_warning\": {\n      \"enabled\": false\n    },\n    \"portfolios\": {\n      \"enabled\": false\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1ac4d015-5fa8-4ea7-9d74-8e80fd2bf049",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "space",
+                    ":space_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "space_id",
+                      "description": "(Required) The unique identifier of the Space."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"color\": \"<string>\",\n  \"private\": \"<boolean>\",\n  \"admin_can_manage\": \"<boolean>\",\n  \"multiple_assignees\": \"<boolean>\",\n  \"features\": \"<object>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "3c9cf00d-57ab-4863-9a92-9559b72ef42f",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "space",
+                    ":space_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "space_id",
+                      "description": "(Required) The unique identifier of the Space."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"color\": \"<string>\",\n  \"private\": \"<boolean>\",\n  \"admin_can_manage\": \"<boolean>\",\n  \"multiple_assignees\": \"<boolean>\",\n  \"features\": \"<object>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "eb45d5a3-56a0-4cb5-8a3a-a2b18a6036e9",
+              "name": "Space not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "space",
+                    ":space_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "space_id",
+                      "description": "(Required) The unique identifier of the Space."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"color\": \"<string>\",\n  \"private\": \"<boolean>\",\n  \"admin_can_manage\": \"<boolean>\",\n  \"multiple_assignees\": \"<boolean>\",\n  \"features\": \"<object>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0528e039-a989-4017-8c4d-8bc3de8fbe9f",
+          "name": "Delete a space",
+          "request": {
+            "name": "Delete a space",
+            "description": {
+              "content": "Permanently deletes a Space and all of its contents including Folders, Lists, and Tasks. This action cannot be undone.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "space",
+                ":space_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "space_id",
+                  "description": "(Required) The unique identifier of the Space."
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8d1c5751-6cff-48a6-ad52-adaba67c4af6",
+              "name": "Space deleted successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "space",
+                    ":space_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "space_id",
+                      "description": "(Required) The unique identifier of the Space."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "22c23839-afec-4d86-bbb0-513193448ea5",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "space",
+                    ":space_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "space_id",
+                      "description": "(Required) The unique identifier of the Space."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "e8ba90a1-510a-4b44-b308-a1c8956ed6c1",
+              "name": "Space not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "space",
+                    ":space_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "space_id",
+                      "description": "(Required) The unique identifier of the Space."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.clickup.com/api/v2",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "c5b30ee9-9a03-4019-86ef-3e7f128c21a9",
+    "name": "ClickUp Comments Authorization Spaces API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The ClickUp Comments API provides endpoints for creating and retrieving comments on tasks, views, and lists. Comments support rich text formatting, mentions, and attachments. Developers can use this API to build integrations that synchronize discussions between ClickUp and other collaboration tools, or to programmatically add status updates and notes to tasks.\n\nContact Support:\n Name: ClickUp Support",
+      "type": "text/plain"
+    }
+  }
+}

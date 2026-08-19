@@ -1,0 +1,1912 @@
+{
+  "item": [
+    {
+      "id": "5e440cb7-6ace-4ede-a96e-fcdab2627b87",
+      "name": "Lists",
+      "description": {
+        "content": "Operations for managing Lists within ClickUp Spaces and Folders.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "17e77e5f-0337-4b80-845e-24ba92ce80f6",
+          "name": "Get lists in a folder",
+          "request": {
+            "name": "Get lists in a folder",
+            "description": {
+              "content": "Retrieves all Lists within a specified Folder. Optionally includes archived Lists in the response.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "folder",
+                ":folder_id",
+                "list"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "archived",
+                  "value": "false",
+                  "description": "Include archived Lists in the response."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "folder_id",
+                  "description": "(Required) The unique identifier of the Folder."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7e199ef6-910d-4a97-83ec-841df8c0ea08",
+              "name": "Successfully retrieved lists",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "folder",
+                    ":folder_id",
+                    "list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "archived",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "folder_id",
+                      "description": "(Required) The unique identifier of the Folder."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"lists\": [\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"orderindex\": 5146,\n      \"content\": \"string\",\n      \"status\": {\n        \"status\": \"string\",\n        \"color\": \"string\",\n        \"hide_label\": true\n      },\n      \"priority\": {\n        \"priority\": \"string\",\n        \"color\": \"string\"\n      },\n      \"assignee\": {},\n      \"task_count\": 1494,\n      \"due_date\": \"string\",\n      \"start_date\": \"string\",\n      \"folder\": {\n        \"id\": \"string\",\n        \"name\": \"string\",\n        \"hidden\": false,\n        \"access\": true\n      },\n      \"space\": {\n        \"id\": \"string\",\n        \"name\": \"string\",\n        \"access\": false\n      },\n      \"archived\": false,\n      \"override_statuses\": true,\n      \"statuses\": [\n        {\n          \"id\": \"string\",\n          \"status\": \"string\",\n          \"orderindex\": 6181,\n          \"color\": \"string\",\n          \"type\": \"string\"\n        },\n        {\n          \"id\": \"string\",\n          \"status\": \"string\",\n          \"orderindex\": 2730,\n          \"color\": \"string\",\n          \"type\": \"string\"\n        }\n      ],\n      \"permission_level\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"orderindex\": 6008,\n      \"content\": \"string\",\n      \"status\": {\n        \"status\": \"string\",\n        \"color\": \"string\",\n        \"hide_label\": false\n      },\n      \"priority\": {\n        \"priority\": \"string\",\n        \"color\": \"string\"\n      },\n      \"assignee\": {},\n      \"task_count\": 5265,\n      \"due_date\": \"string\",\n      \"start_date\": \"string\",\n      \"folder\": {\n        \"id\": \"string\",\n        \"name\": \"string\",\n        \"hidden\": false,\n        \"access\": false\n      },\n      \"space\": {\n        \"id\": \"string\",\n        \"name\": \"string\",\n        \"access\": false\n      },\n      \"archived\": true,\n      \"override_statuses\": false,\n      \"statuses\": [\n        {\n          \"id\": \"string\",\n          \"status\": \"string\",\n          \"orderindex\": 852,\n          \"color\": \"string\",\n          \"type\": \"string\"\n        },\n        {\n          \"id\": \"string\",\n          \"status\": \"string\",\n          \"orderindex\": 4780,\n          \"color\": \"string\",\n          \"type\": \"string\"\n        }\n      ],\n      \"permission_level\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e21ff74e-c720-4b35-9149-dad8dbc459f0",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "folder",
+                    ":folder_id",
+                    "list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "archived",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "folder_id",
+                      "description": "(Required) The unique identifier of the Folder."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "6c8af866-f886-4e38-b87d-7030436f82fb",
+              "name": "Folder not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "folder",
+                    ":folder_id",
+                    "list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "archived",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "folder_id",
+                      "description": "(Required) The unique identifier of the Folder."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6c72d51c-f806-4505-a182-60724b244cf3",
+          "name": "Create a list in a folder",
+          "request": {
+            "name": "Create a list in a folder",
+            "description": {
+              "content": "Creates a new List within a specified Folder. The List can be configured with a name, content description, due date, priority, assignee, and status.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "folder",
+                ":folder_id",
+                "list"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "folder_id",
+                  "description": "(Required) The unique identifier of the Folder."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"content\": \"<string>\",\n  \"due_date\": \"<long>\",\n  \"due_date_time\": \"<boolean>\",\n  \"priority\": \"<integer>\",\n  \"assignee\": \"<integer>\",\n  \"status\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "f95e6e1b-9b2c-40fd-b8c9-5dcbadb87bfc",
+              "name": "List created successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "folder",
+                    ":folder_id",
+                    "list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "folder_id",
+                      "description": "(Required) The unique identifier of the Folder."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"content\": \"<string>\",\n  \"due_date\": \"<long>\",\n  \"due_date_time\": \"<boolean>\",\n  \"priority\": \"<integer>\",\n  \"assignee\": \"<integer>\",\n  \"status\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"name\": \"string\",\n  \"orderindex\": 6067,\n  \"content\": \"string\",\n  \"status\": {\n    \"status\": \"string\",\n    \"color\": \"string\",\n    \"hide_label\": true\n  },\n  \"priority\": {\n    \"priority\": \"string\",\n    \"color\": \"string\"\n  },\n  \"assignee\": {},\n  \"task_count\": 3738,\n  \"due_date\": \"string\",\n  \"start_date\": \"string\",\n  \"folder\": {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"hidden\": false,\n    \"access\": true\n  },\n  \"space\": {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"access\": true\n  },\n  \"archived\": false,\n  \"override_statuses\": true,\n  \"statuses\": [\n    {\n      \"id\": \"string\",\n      \"status\": \"string\",\n      \"orderindex\": 6853,\n      \"color\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"status\": \"string\",\n      \"orderindex\": 4165,\n      \"color\": \"string\",\n      \"type\": \"string\"\n    }\n  ],\n  \"permission_level\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2d07ae17-2caa-4d7f-ad78-054cebb55df2",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "folder",
+                    ":folder_id",
+                    "list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "folder_id",
+                      "description": "(Required) The unique identifier of the Folder."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"content\": \"<string>\",\n  \"due_date\": \"<long>\",\n  \"due_date_time\": \"<boolean>\",\n  \"priority\": \"<integer>\",\n  \"assignee\": \"<integer>\",\n  \"status\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "85a26655-1851-4b64-9aaf-6f94a842c08c",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "folder",
+                    ":folder_id",
+                    "list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "folder_id",
+                      "description": "(Required) The unique identifier of the Folder."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"content\": \"<string>\",\n  \"due_date\": \"<long>\",\n  \"due_date_time\": \"<boolean>\",\n  \"priority\": \"<integer>\",\n  \"assignee\": \"<integer>\",\n  \"status\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "bac24183-b900-42fd-8ada-2a96c09291fd",
+              "name": "Folder not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "folder",
+                    ":folder_id",
+                    "list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "folder_id",
+                      "description": "(Required) The unique identifier of the Folder."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"content\": \"<string>\",\n  \"due_date\": \"<long>\",\n  \"due_date_time\": \"<boolean>\",\n  \"priority\": \"<integer>\",\n  \"assignee\": \"<integer>\",\n  \"status\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ee82cb8f-d598-446e-9ead-6fd0453d3abc",
+          "name": "Get folderless lists",
+          "request": {
+            "name": "Get folderless lists",
+            "description": {
+              "content": "Retrieves all Lists that are directly within a Space and not inside any Folder. These are sometimes called folderless Lists.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "space",
+                ":space_id",
+                "list"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "archived",
+                  "value": "false",
+                  "description": "Include archived Lists in the response."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "space_id",
+                  "description": "(Required) The unique identifier of the Space."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3e6b08f7-493c-4001-9b01-aaaad1a592db",
+              "name": "Successfully retrieved folderless lists",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "space",
+                    ":space_id",
+                    "list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "archived",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "space_id",
+                      "description": "(Required) The unique identifier of the Space."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"lists\": [\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"orderindex\": 5146,\n      \"content\": \"string\",\n      \"status\": {\n        \"status\": \"string\",\n        \"color\": \"string\",\n        \"hide_label\": true\n      },\n      \"priority\": {\n        \"priority\": \"string\",\n        \"color\": \"string\"\n      },\n      \"assignee\": {},\n      \"task_count\": 1494,\n      \"due_date\": \"string\",\n      \"start_date\": \"string\",\n      \"folder\": {\n        \"id\": \"string\",\n        \"name\": \"string\",\n        \"hidden\": false,\n        \"access\": true\n      },\n      \"space\": {\n        \"id\": \"string\",\n        \"name\": \"string\",\n        \"access\": false\n      },\n      \"archived\": false,\n      \"override_statuses\": true,\n      \"statuses\": [\n        {\n          \"id\": \"string\",\n          \"status\": \"string\",\n          \"orderindex\": 6181,\n          \"color\": \"string\",\n          \"type\": \"string\"\n        },\n        {\n          \"id\": \"string\",\n          \"status\": \"string\",\n          \"orderindex\": 2730,\n          \"color\": \"string\",\n          \"type\": \"string\"\n        }\n      ],\n      \"permission_level\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"orderindex\": 6008,\n      \"content\": \"string\",\n      \"status\": {\n        \"status\": \"string\",\n        \"color\": \"string\",\n        \"hide_label\": false\n      },\n      \"priority\": {\n        \"priority\": \"string\",\n        \"color\": \"string\"\n      },\n      \"assignee\": {},\n      \"task_count\": 5265,\n      \"due_date\": \"string\",\n      \"start_date\": \"string\",\n      \"folder\": {\n        \"id\": \"string\",\n        \"name\": \"string\",\n        \"hidden\": false,\n        \"access\": false\n      },\n      \"space\": {\n        \"id\": \"string\",\n        \"name\": \"string\",\n        \"access\": false\n      },\n      \"archived\": true,\n      \"override_statuses\": false,\n      \"statuses\": [\n        {\n          \"id\": \"string\",\n          \"status\": \"string\",\n          \"orderindex\": 852,\n          \"color\": \"string\",\n          \"type\": \"string\"\n        },\n        {\n          \"id\": \"string\",\n          \"status\": \"string\",\n          \"orderindex\": 4780,\n          \"color\": \"string\",\n          \"type\": \"string\"\n        }\n      ],\n      \"permission_level\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1044ea5e-b6b7-4321-b8c7-d20d8494ae77",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "space",
+                    ":space_id",
+                    "list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "archived",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "space_id",
+                      "description": "(Required) The unique identifier of the Space."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "6feda495-01dd-4fdb-8dd3-ca76a2bb9d0d",
+              "name": "Space not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "space",
+                    ":space_id",
+                    "list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "archived",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "space_id",
+                      "description": "(Required) The unique identifier of the Space."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b3a4bca4-9ae1-4634-9f33-2cbb8dad7f64",
+          "name": "Create a folderless list",
+          "request": {
+            "name": "Create a folderless list",
+            "description": {
+              "content": "Creates a new List directly within a Space, without placing it inside a Folder.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "space",
+                ":space_id",
+                "list"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "space_id",
+                  "description": "(Required) The unique identifier of the Space."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"content\": \"<string>\",\n  \"due_date\": \"<long>\",\n  \"due_date_time\": \"<boolean>\",\n  \"priority\": \"<integer>\",\n  \"assignee\": \"<integer>\",\n  \"status\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "f84aed2a-efa2-4cd6-91ed-46031a231093",
+              "name": "List created successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "space",
+                    ":space_id",
+                    "list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "space_id",
+                      "description": "(Required) The unique identifier of the Space."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"content\": \"<string>\",\n  \"due_date\": \"<long>\",\n  \"due_date_time\": \"<boolean>\",\n  \"priority\": \"<integer>\",\n  \"assignee\": \"<integer>\",\n  \"status\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"name\": \"string\",\n  \"orderindex\": 6067,\n  \"content\": \"string\",\n  \"status\": {\n    \"status\": \"string\",\n    \"color\": \"string\",\n    \"hide_label\": true\n  },\n  \"priority\": {\n    \"priority\": \"string\",\n    \"color\": \"string\"\n  },\n  \"assignee\": {},\n  \"task_count\": 3738,\n  \"due_date\": \"string\",\n  \"start_date\": \"string\",\n  \"folder\": {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"hidden\": false,\n    \"access\": true\n  },\n  \"space\": {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"access\": true\n  },\n  \"archived\": false,\n  \"override_statuses\": true,\n  \"statuses\": [\n    {\n      \"id\": \"string\",\n      \"status\": \"string\",\n      \"orderindex\": 6853,\n      \"color\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"status\": \"string\",\n      \"orderindex\": 4165,\n      \"color\": \"string\",\n      \"type\": \"string\"\n    }\n  ],\n  \"permission_level\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "07cea997-628c-4197-afd3-4c1416cc1b72",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "space",
+                    ":space_id",
+                    "list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "space_id",
+                      "description": "(Required) The unique identifier of the Space."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"content\": \"<string>\",\n  \"due_date\": \"<long>\",\n  \"due_date_time\": \"<boolean>\",\n  \"priority\": \"<integer>\",\n  \"assignee\": \"<integer>\",\n  \"status\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "8a549a49-4125-4d34-987b-d9ec4f1b83c7",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "space",
+                    ":space_id",
+                    "list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "space_id",
+                      "description": "(Required) The unique identifier of the Space."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"content\": \"<string>\",\n  \"due_date\": \"<long>\",\n  \"due_date_time\": \"<boolean>\",\n  \"priority\": \"<integer>\",\n  \"assignee\": \"<integer>\",\n  \"status\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "2a167be4-530c-44cb-80b7-6a945cb45223",
+              "name": "Space not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "space",
+                    ":space_id",
+                    "list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "space_id",
+                      "description": "(Required) The unique identifier of the Space."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"content\": \"<string>\",\n  \"due_date\": \"<long>\",\n  \"due_date_time\": \"<boolean>\",\n  \"priority\": \"<integer>\",\n  \"assignee\": \"<integer>\",\n  \"status\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9be6d00a-1531-4dc4-8191-07ee3601f938",
+          "name": "Get a list",
+          "request": {
+            "name": "Get a list",
+            "description": {
+              "content": "Retrieves details of a specific List, including its statuses, content, and configuration.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "list",
+                ":list_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "list_id",
+                  "description": "(Required) The unique identifier of the List."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "da8000c9-ffbd-4c5f-83cf-e5aa74681ec5",
+              "name": "Successfully retrieved list",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "list",
+                    ":list_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "list_id",
+                      "description": "(Required) The unique identifier of the List."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"name\": \"string\",\n  \"orderindex\": 6067,\n  \"content\": \"string\",\n  \"status\": {\n    \"status\": \"string\",\n    \"color\": \"string\",\n    \"hide_label\": true\n  },\n  \"priority\": {\n    \"priority\": \"string\",\n    \"color\": \"string\"\n  },\n  \"assignee\": {},\n  \"task_count\": 3738,\n  \"due_date\": \"string\",\n  \"start_date\": \"string\",\n  \"folder\": {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"hidden\": false,\n    \"access\": true\n  },\n  \"space\": {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"access\": true\n  },\n  \"archived\": false,\n  \"override_statuses\": true,\n  \"statuses\": [\n    {\n      \"id\": \"string\",\n      \"status\": \"string\",\n      \"orderindex\": 6853,\n      \"color\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"status\": \"string\",\n      \"orderindex\": 4165,\n      \"color\": \"string\",\n      \"type\": \"string\"\n    }\n  ],\n  \"permission_level\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b06fc5b4-0325-484d-9082-f112a36e610c",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "list",
+                    ":list_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "list_id",
+                      "description": "(Required) The unique identifier of the List."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "c5e5802b-c085-41db-9036-1825f4732edf",
+              "name": "List not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "list",
+                    ":list_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "list_id",
+                      "description": "(Required) The unique identifier of the List."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "43d7ea56-8c06-4b78-8bc8-f34babee766b",
+          "name": "Update a list",
+          "request": {
+            "name": "Update a list",
+            "description": {
+              "content": "Updates the properties of an existing List, including its name, content, due date, priority, assignee, and status.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "list",
+                ":list_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "list_id",
+                  "description": "(Required) The unique identifier of the List."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"content\": \"<string>\",\n  \"due_date\": \"<long>\",\n  \"due_date_time\": \"<boolean>\",\n  \"priority\": \"<integer>\",\n  \"assignee\": \"<integer>\",\n  \"unset_status\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ec63bc5e-d47f-45c3-bf5f-3afe50b6e865",
+              "name": "List updated successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "list",
+                    ":list_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "list_id",
+                      "description": "(Required) The unique identifier of the List."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"content\": \"<string>\",\n  \"due_date\": \"<long>\",\n  \"due_date_time\": \"<boolean>\",\n  \"priority\": \"<integer>\",\n  \"assignee\": \"<integer>\",\n  \"unset_status\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"name\": \"string\",\n  \"orderindex\": 6067,\n  \"content\": \"string\",\n  \"status\": {\n    \"status\": \"string\",\n    \"color\": \"string\",\n    \"hide_label\": true\n  },\n  \"priority\": {\n    \"priority\": \"string\",\n    \"color\": \"string\"\n  },\n  \"assignee\": {},\n  \"task_count\": 3738,\n  \"due_date\": \"string\",\n  \"start_date\": \"string\",\n  \"folder\": {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"hidden\": false,\n    \"access\": true\n  },\n  \"space\": {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"access\": true\n  },\n  \"archived\": false,\n  \"override_statuses\": true,\n  \"statuses\": [\n    {\n      \"id\": \"string\",\n      \"status\": \"string\",\n      \"orderindex\": 6853,\n      \"color\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"status\": \"string\",\n      \"orderindex\": 4165,\n      \"color\": \"string\",\n      \"type\": \"string\"\n    }\n  ],\n  \"permission_level\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5320fd2c-bb75-45f7-a858-c96cbcf4801d",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "list",
+                    ":list_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "list_id",
+                      "description": "(Required) The unique identifier of the List."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"content\": \"<string>\",\n  \"due_date\": \"<long>\",\n  \"due_date_time\": \"<boolean>\",\n  \"priority\": \"<integer>\",\n  \"assignee\": \"<integer>\",\n  \"unset_status\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "91240883-60d3-4880-bb38-d5be059f54e5",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "list",
+                    ":list_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "list_id",
+                      "description": "(Required) The unique identifier of the List."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"content\": \"<string>\",\n  \"due_date\": \"<long>\",\n  \"due_date_time\": \"<boolean>\",\n  \"priority\": \"<integer>\",\n  \"assignee\": \"<integer>\",\n  \"unset_status\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "3554adad-a682-48e9-8b64-3fe22634c70d",
+              "name": "List not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "list",
+                    ":list_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "list_id",
+                      "description": "(Required) The unique identifier of the List."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"content\": \"<string>\",\n  \"due_date\": \"<long>\",\n  \"due_date_time\": \"<boolean>\",\n  \"priority\": \"<integer>\",\n  \"assignee\": \"<integer>\",\n  \"unset_status\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b0be333c-a2a7-4ca2-bdca-a02c6db5f369",
+          "name": "Delete a list",
+          "request": {
+            "name": "Delete a list",
+            "description": {
+              "content": "Permanently deletes a List and all tasks it contains. This action cannot be undone.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "list",
+                ":list_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "list_id",
+                  "description": "(Required) The unique identifier of the List."
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "170dfa52-00ca-4d20-8d3a-09de6cce87ab",
+              "name": "List deleted successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "list",
+                    ":list_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "list_id",
+                      "description": "(Required) The unique identifier of the List."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "23a30970-6034-4250-a2ed-e32a2e8eaeeb",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "list",
+                    ":list_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "list_id",
+                      "description": "(Required) The unique identifier of the List."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "fd44f837-b96a-41ef-b5b5-9c836c4be299",
+              "name": "List not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "list",
+                    ":list_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "list_id",
+                      "description": "(Required) The unique identifier of the List."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8b108cf2-e553-4a57-8423-9e581f2378ab",
+          "name": "Get list members",
+          "request": {
+            "name": "Get list members",
+            "description": {
+              "content": "Retrieves the members who have access to a specific List.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "list",
+                ":list_id",
+                "member"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "list_id",
+                  "description": "(Required) The unique identifier of the List."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5504830b-28cf-4e43-8f18-898da2dcdd73",
+              "name": "Successfully retrieved list members",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "list",
+                    ":list_id",
+                    "member"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "list_id",
+                      "description": "(Required) The unique identifier of the List."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"members\": [\n    {\n      \"id\": 3306,\n      \"username\": \"string\",\n      \"email\": \"lFQGzpFu6h4Fk2@TvDJaa.kotg\",\n      \"color\": \"string\",\n      \"profilePicture\": \"https://gJHfYjPpJMiSufOeEqgQsKvNkBOJd.sqzYZ6wvGJSPnTpcjOOvRM7KRmnqh4pg,66Z\",\n      \"initials\": \"string\"\n    },\n    {\n      \"id\": 8341,\n      \"username\": \"string\",\n      \"email\": \"IkylRiF@zpdGanUvSraqTsXFGDHufiFiPhsvH.mept\",\n      \"color\": \"string\",\n      \"profilePicture\": \"https://tUECSBQJvvSLNPHSHNnBawpfJ.bswdP22pwpEDbGATXRQ7MQOMI,D4HH-a1XAriOKe,xgZ\",\n      \"initials\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c92534d1-bc2f-4e4f-9ae5-347265bdba62",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "list",
+                    ":list_id",
+                    "member"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "list_id",
+                      "description": "(Required) The unique identifier of the List."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "f747e9d9-d239-4250-80fe-b821cac116ea",
+              "name": "List not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "list",
+                    ":list_id",
+                    "member"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "list_id",
+                      "description": "(Required) The unique identifier of the List."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.clickup.com/api/v2",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "db138268-bc27-4490-9e2a-9685382013ff",
+    "name": "ClickUp Comments Authorization Lists API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The ClickUp Comments API provides endpoints for creating and retrieving comments on tasks, views, and lists. Comments support rich text formatting, mentions, and attachments. Developers can use this API to build integrations that synchronize discussions between ClickUp and other collaboration tools, or to programmatically add status updates and notes to tasks.\n\nContact Support:\n Name: ClickUp Support",
+      "type": "text/plain"
+    }
+  }
+}
