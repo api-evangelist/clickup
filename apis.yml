@@ -537,6 +537,8 @@ apis:
   - type: Documentation
     url: https://developer.clickup.com/docs/authentication
 common:
+- type: Website
+  url: https://www.clickup.com/
 - type: AgenticAccess
   url: agentic-access/clickup-agentic-access.yml
 - type: TrustCenter
