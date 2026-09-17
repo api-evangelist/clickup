@@ -261,46 +261,6 @@ apis:
     url: https://developer.clickup.com/reference/get-views
   - type: Documentation
     url: https://developer.clickup.com/docs/authentication
-- aid: clickup:clickup-oauth-api
-  name: clickup OAuth API
-  description: Operations for OAuth 2.0 authentication and token management.
-  humanURL: https://developer.clickup.com/docs/tasks
-  baseURL: https://api.clickup.com
-  tags:
-  - Authentication
-  tags_raw:
-  - OAuth
-  properties:
-  - type: OpenAPI
-    url: openapi/clickup-oauth-api-openapi.yml
-  - type: Documentation
-    url: https://developer.clickup.com/docs/tasks
-  - type: GraphQL
-    url: graphql/clickup-graphql.md
-  - type: Documentation
-    url: https://developer.clickup.com/reference/get-spaces
-  - type: Documentation
-    url: https://developer.clickup.com/reference/get-lists
-  - type: Documentation
-    url: https://developer.clickup.com/reference/get-folders
-  - type: Documentation
-    url: https://developer.clickup.com/reference/get-goals
-  - type: Documentation
-    url: https://developer.clickup.com/reference/get-task-comments
-  - type: Documentation
-    url: https://developer.clickup.com/reference/get-teams
-  - type: Documentation
-    url: https://developer.clickup.com/docs/webhooks
-  - type: AsyncAPI
-    url: asyncapi/clickup-webhooks-asyncapi.yml
-  - type: Documentation
-    url: https://developer.clickup.com/reference/get-accessible-custom-fields
-  - type: Documentation
-    url: https://developer.clickup.com/reference/get-time-entries-within-a-date-range
-  - type: Documentation
-    url: https://developer.clickup.com/reference/get-views
-  - type: Documentation
-    url: https://developer.clickup.com/docs/authentication
 - aid: clickup:clickup-spaces-api
   name: clickup Spaces API
   description: Operations for managing Spaces within a ClickUp Workspace.
@@ -508,6 +468,44 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/clickup-webhooks-api-openapi.yml
+  - type: Documentation
+    url: https://developer.clickup.com/docs/tasks
+  - type: GraphQL
+    url: graphql/clickup-graphql.md
+  - type: Documentation
+    url: https://developer.clickup.com/reference/get-spaces
+  - type: Documentation
+    url: https://developer.clickup.com/reference/get-lists
+  - type: Documentation
+    url: https://developer.clickup.com/reference/get-folders
+  - type: Documentation
+    url: https://developer.clickup.com/reference/get-goals
+  - type: Documentation
+    url: https://developer.clickup.com/reference/get-task-comments
+  - type: Documentation
+    url: https://developer.clickup.com/reference/get-teams
+  - type: Documentation
+    url: https://developer.clickup.com/docs/webhooks
+  - type: AsyncAPI
+    url: asyncapi/clickup-webhooks-asyncapi.yml
+  - type: Documentation
+    url: https://developer.clickup.com/reference/get-accessible-custom-fields
+  - type: Documentation
+    url: https://developer.clickup.com/reference/get-time-entries-within-a-date-range
+  - type: Documentation
+    url: https://developer.clickup.com/reference/get-views
+  - type: Documentation
+    url: https://developer.clickup.com/docs/authentication
+- aid: clickup:clickup-oauth-api
+  name: Clickup O Auth API
+  description: Operations for OAuth 2.0 authentication and token management.
+  humanURL: https://developer.clickup.com/docs/tasks
+  baseURL: https://api.clickup.com
+  tags:
+  - OAuth
+  properties:
+  - type: OpenAPI
+    url: openapi/clickup-oauth-api-openapi.yml
   - type: Documentation
     url: https://developer.clickup.com/docs/tasks
   - type: GraphQL
