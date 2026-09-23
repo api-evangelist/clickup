@@ -1,0 +1,62 @@
+generated: '2026-09-17'
+method: searched
+source: registry.npmjs.org search + pypi.org + rubygems.org + github.com/clickup, cross-checked against
+  https://developer.clickup.com/llms.txt (the complete docs index)
+summary: >-
+  ClickUp publishes NO first-party client SDK in any package registry. The docs index at
+  developer.clickup.com/llms.txt lists 40 guides and ~180 reference pages and names no SDK; the
+  github.com/clickup organization holds 6 public repositories, none of them a client library (the only
+  API-related one is clickup-APIv2-demo, an example app the webhooks guide links to). Every ClickUp
+  client library on npm, PyPI and RubyGems is community-authored. That is the finding: consumers of the
+  ClickUp API write raw HTTP or adopt an unaffiliated wrapper.
+official_package_count: 0
+packages:
+- language: javascript
+  registry: npm
+  name: clickup.js
+  url: https://www.npmjs.com/package/clickup.js
+  install: npm install clickup.js
+  official: false
+  version: 4.0.2
+  published: '2026-02-16'
+  note: Community JavaScript wrapper; the most-maintained third-party ClickUp client on npm.
+- language: javascript
+  registry: npm
+  name: clickup
+  url: https://www.npmjs.com/package/clickup
+  install: npm install clickup
+  official: false
+  version: 0.0.1
+  published: '2018-05-15'
+  note: Community Node client, unmaintained since 2018 — holds the bare `clickup` name on npm.
+- language: python
+  registry: pypi
+  name: clickup-python-sdk
+  url: https://pypi.org/project/clickup-python-sdk/
+  install: pip install clickup-python-sdk
+  official: false
+  version: 2.0.1
+  published: '2025-04-18'
+  note: Community Python SDK (Michael Broyles, github.com/MB0390231/clickup_python_sdk).
+- language: python
+  registry: pypi
+  name: pyclickup
+  url: https://pypi.org/project/pyclickup/
+  install: pip install pyclickup
+  official: false
+  version: 0.1.4
+  published: '2019-08-14'
+  note: Community Python wrapper, last released 2019 — predates the v3 API entirely.
+source_code:
+- name: clickup-APIv2-demo
+  url: https://github.com/clickup/clickup-APIv2-demo
+  official: true
+  note: >-
+    First-party EXAMPLE application (not a distributable library) referenced from
+    https://developer.clickup.com/docs/webhooks as the reference for subscribing to webhooks.
+- name: clickup-plugin
+  url: https://github.com/clickup/clickup-plugin
+  official: true
+  note: >-
+    Official ClickUp plugin connecting a Workspace to AI coding tools; distributed from the repository,
+    not from a package registry, so there is no registry version to read.

@@ -1,0 +1,52 @@
+generated: '2026-09-17'
+method: searched
+source: >-
+  https://developer.clickup.com/docs/general-v2-v3-api, https://developer.clickup.com/docs/open-api-spec,
+  https://developer.clickup.com/docs/apis-available-by-plan, https://status.clickup.com/
+versioning:
+  scheme: uri-path
+  current: v3
+  versions:
+  - version: v2
+    base: https://api.clickup.com/api/v2
+    status: active
+    spec: https://developer.clickup.com/openapi/clickup-api-v2-reference.json
+    note: The broad surface (138 operations) — tasks, Lists, Folders, Spaces, Goals, Views, Time Tracking, Webhooks.
+  - version: v3
+    base: https://api.clickup.com/api/v3
+    status: active
+    spec: https://developer.clickup.com/openapi/ClickUp_PUBLIC_API_V3.yaml
+    note: >-
+      Newer, narrower surface (35 operations) — Chat, Docs, Attachments, Audit Logs, ACLs, task moves and
+      per-user time estimates. v2 and v3 run side by side; v3 renames v2's "Team" to "Workspace".
+  docs: https://developer.clickup.com/docs/general-v2-v3-api
+deprecation:
+  policy_url: null
+  sunset_header: false
+  finding: >-
+    No deprecation or sunset policy is published. The complete docs index (llms.txt, 40 guides) contains
+    no deprecation page, no sunset schedule and no RFC 8594 header commitment; the only lifecycle signal
+    in the contract is the "Time Tracking (Legacy)" tag on four v2 operations, which carries no removal
+    date. An integrator has no published notice period.
+  legacy_surface:
+    tag: Time Tracking (Legacy)
+    operations: [Gettrackedtime, Tracktime, Edittimetracked, Deletetimetracked]
+    source: openapi/clickup-api-v2-reference-openapi.json
+deprecated_operations: []
+availability_by_plan:
+  docs: https://developer.clickup.com/docs/apis-available-by-plan
+  note: >-
+    The public API is on every plan, but named operations are Enterprise-only — the Users endpoints
+    (InviteUserToWorkspace, GetUser, EditUserOnWorkspace, RemoveUserFromWorkspace) and the full Guests
+    set. Some parameters are plan-gated too (admin_can_manage on UpdateSpace).
+status_page: https://status.clickup.com/
+status_page_api: https://status.clickup.com/api/v2/status.json
+status_page_probe:
+  url: https://status.clickup.com/api/v2/status.json
+  status: 200
+  checked: '2026-09-17'
+  observed: '{"page":{"name":"ClickUp Worldwide"},"status":{"description":"All Systems Operational","indicator":"none"}}'
+sla:
+  url: null
+  uptime_target: null
+  note: No public uptime SLA is published; contractual uptime terms sit inside the Enterprise MSA.

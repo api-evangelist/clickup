@@ -1,0 +1,18 @@
+generated: '2026-09-17'
+method: generated
+source: openapi/clickup-api-v2-reference-openapi.json, openapi/clickup-public-api-v3-openapi.json,
+  conventions/clickup-conventions.yml, errors/clickup-error-codes.yml
+note: Every operationId referenced in these skills was grepped out of the published specs.
+skills:
+- file: clickup-create-and-track-task.md
+  name: Create and track a ClickUp task
+  api: openapi/clickup-api-v2-reference-openapi.json
+  operations: [GetAuthorizedTeams, GetSpaces, GetFolders, GetLists, GetFolderlessLists, CreateTask, GetTask, GetAccessibleCustomFields, SetCustomFieldValue, CreateTaskComment, StartatimeEntry, StopatimeEntry, UpdateTask, DeleteTask]
+- file: clickup-subscribe-to-webhooks.md
+  name: Subscribe to ClickUp webhooks
+  api: openapi/clickup-api-v2-reference-openapi.json
+  operations: [GetAuthorizedTeams, CreateWebhook, GetWebhooks, UpdateWebhook, DeleteWebhook]
+- file: clickup-work-with-docs-and-chat.md
+  name: Work with ClickUp Docs and Chat (API v3)
+  api: openapi/clickup-public-api-v3-openapi.json
+  operations: [searchDocsPublic, createDocPublic, getDocPublic, getDocPageListingPublic, getDocPagesPublic, createPagePublic, getPagePublic, editPagePublic, getChatChannels, getChatMessages, createChatMessage, createReplyMessage, createChatReaction, getSubtypes]

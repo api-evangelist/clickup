@@ -1,7 +1,7 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: ClickUp Comments Authorization Views API
-  description: The ClickUp Comments API provides endpoints for creating and retrieving comments on tasks, views, and lists. Comments support rich text formatting, mentions, and attachments. Developers can use this API to build integrations that synchronize discussions between ClickUp and other collaboration tools, or to programmatically add status updates and notes to tasks.
+  title: ClickUp Views API
+  description: The ClickUp Views API enables developers to create and manage views at the team, space, folder, and list levels. Views define how tasks are displayed and filtered, supporting formats such as list, board, calendar, gantt, and table. The API allows programmatic creation of saved views with specific filters, groupings, and sort configurations.
   version: '2.0'
   contact:
     name: ClickUp Support
@@ -218,6 +218,42 @@ paths:
         '404':
           description: View not found
 components:
+  parameters:
+    spaceId:
+      name: space_id
+      in: path
+      required: true
+      description: The unique identifier of the Space.
+      schema:
+        type: integer
+    viewId:
+      name: view_id
+      in: path
+      required: true
+      description: The unique identifier of the View.
+      schema:
+        type: string
+    teamId:
+      name: team_id
+      in: path
+      required: true
+      description: The unique identifier of the Workspace (team).
+      schema:
+        type: integer
+    listId:
+      name: list_id
+      in: path
+      required: true
+      description: The unique identifier of the List.
+      schema:
+        type: integer
+    folderId:
+      name: folder_id
+      in: path
+      required: true
+      description: The unique identifier of the Folder.
+      schema:
+        type: integer
   schemas:
     View:
       type: object
@@ -439,47 +475,11 @@ components:
         settings:
           type: object
           description: Updated display settings.
-  parameters:
-    viewId:
-      name: view_id
-      in: path
-      required: true
-      description: The unique identifier of the View.
-      schema:
-        type: string
-    listId:
-      name: list_id
-      in: path
-      required: true
-      description: The unique identifier of the List.
-      schema:
-        type: integer
-    folderId:
-      name: folder_id
-      in: path
-      required: true
-      description: The unique identifier of the Folder.
-      schema:
-        type: integer
-    teamId:
-      name: team_id
-      in: path
-      required: true
-      description: The unique identifier of the Workspace (team).
-      schema:
-        type: integer
-    spaceId:
-      name: space_id
-      in: path
-      required: true
-      description: The unique identifier of the Space.
-      schema:
-        type: integer
   securitySchemes:
     bearerAuth:
       type: http
       scheme: bearer
       description: ClickUp personal API token or OAuth access token.
 externalDocs:
-  description: ClickUp Comments API Documentation
-  url: https://developer.clickup.com/reference/get-task-comments
+  description: ClickUp Views API Documentation
+  url: https://developer.clickup.com/reference/get-views

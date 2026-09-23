@@ -1,0 +1,44 @@
+generated: '2026-09-17'
+method: searched
+source: https://developer.clickup.com/docs/common_errors
+format: vendor-code-registry
+envelope_field: ECODE
+note: >-
+  ClickUp publishes a short common-errors page rather than a full error-code registry. The OAUTH_* codes
+  below are the ones the provider documents by code; the page also describes error CONDITIONS (CORS from
+  a browser origin, rate limiting) that carry no code. Codes are recorded exactly as published — the
+  ranges are ClickUp's own and no code is inferred.
+errors:
+- codes: [OAUTH_023, OAUTH_026, OAUTH_027, "OAUTH_029..OAUTH_045"]
+  title: Team not authorized
+  meaning: The Workspace (team) was not authorized by the user for this access token.
+  action: Re-run the OAuth flow and have the user authorize the Workspace being addressed.
+- codes: [OAUTH_019, OAUTH_021, OAUTH_025, OAUTH_077]
+  title: Token not found
+  meaning: Authorization was revoked by the user, or the token no longer exists.
+  action: Obtain a new token; personal tokens are regenerated from Settings > Apps.
+- codes: [OAUTH_017]
+  title: Authorization header required / redirect URI not passed
+  meaning: The Authorization header was missing on the request, or the redirect_uri was absent during the OAuth flow.
+  action: "Send the Authorization header (personal token, or Bearer {access_token} for OAuth); pass redirect_uri on the authorize call."
+- codes: [OAUTH_010]
+  title: Client not found
+  meaning: The client application was not created correctly.
+  action: Recreate the OAuth app in Settings > Apps and use the issued client_id.
+- codes: [OAUTH_007]
+  title: Redirect URI does not match
+  meaning: The redirect URI is not registered with the client application.
+  action: Register the exact redirect URI on the app before starting the flow.
+- codes: [OAUTH_171]
+  title: Webhook configuration already exists
+  meaning: A webhook already exists for this combination of events and location.
+  action: Reuse or update the existing webhook (UpdateWebhook) instead of creating a duplicate.
+conditions_without_codes:
+- title: CORS blocked
+  status: null
+  meaning: Requests made directly from a browser origin are blocked; ClickUp has no browser-callable CORS surface.
+  action: Proxy the call server-side.
+- title: Rate limit reached
+  status: 429
+  meaning: Per-token rate limit exceeded.
+  action: Back off using X-RateLimit-Reset; see rate-limits/clickup-rate-limits.yml.

@@ -1,7 +1,7 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: ClickUp Comments Authorization Custom Fields API
-  description: The ClickUp Comments API provides endpoints for creating and retrieving comments on tasks, views, and lists. Comments support rich text formatting, mentions, and attachments. Developers can use this API to build integrations that synchronize discussions between ClickUp and other collaboration tools, or to programmatically add status updates and notes to tasks.
+  title: ClickUp Custom Fields API
+  description: The ClickUp Custom Fields API allows developers to retrieve available custom fields for a list and set or update custom field values on tasks. Custom fields extend the default task data model with user-defined attributes such as dropdowns, labels, numbers, dates, and relationships. This API is essential for integrations that need to read or write structured metadata beyond the standard task fields.
   version: '2.0'
   contact:
     name: ClickUp Support
@@ -109,18 +109,18 @@ paths:
           description: Task or field not found
 components:
   parameters:
-    taskId:
-      name: task_id
-      in: path
-      required: true
-      description: The unique identifier of the task.
-      schema:
-        type: string
     fieldId:
       name: field_id
       in: path
       required: true
       description: The unique identifier of the custom field.
+      schema:
+        type: string
+    taskId:
+      name: task_id
+      in: path
+      required: true
+      description: The unique identifier of the task.
       schema:
         type: string
     listId:
@@ -234,5 +234,5 @@ components:
       scheme: bearer
       description: ClickUp personal API token or OAuth access token.
 externalDocs:
-  description: ClickUp Comments API Documentation
-  url: https://developer.clickup.com/reference/get-task-comments
+  description: ClickUp Custom Fields API Documentation
+  url: https://developer.clickup.com/reference/get-accessible-custom-fields

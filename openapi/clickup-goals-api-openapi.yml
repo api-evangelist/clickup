@@ -1,7 +1,7 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: ClickUp Comments Authorization Goals API
-  description: The ClickUp Comments API provides endpoints for creating and retrieving comments on tasks, views, and lists. Comments support rich text formatting, mentions, and attachments. Developers can use this API to build integrations that synchronize discussions between ClickUp and other collaboration tools, or to programmatically add status updates and notes to tasks.
+  title: ClickUp Goals API
+  description: The ClickUp Goals API allows developers to create and manage goals within a Workspace. Goals can track progress toward objectives using targets based on numbers, currency, percentages, or task completion. The API supports creating goals, adding key results and targets, updating progress, and retrieving goal details. This is useful for building OKR tracking and reporting integrations.
   version: '2.0'
   contact:
     name: ClickUp Support
@@ -224,36 +224,6 @@ paths:
           description: Key result not found
 components:
   schemas:
-    GoalFolder:
-      type: object
-      description: A folder for organizing Goals.
-      properties:
-        id:
-          type: string
-          description: The folder ID.
-        name:
-          type: string
-          description: The folder name.
-        team_id:
-          type: string
-          description: The Workspace ID.
-        private:
-          type: boolean
-          description: Whether the folder is private.
-        date_created:
-          type: string
-          description: Unix timestamp when the folder was created.
-        creator:
-          type: integer
-          description: The user ID of the folder creator.
-        goal_count:
-          type: integer
-          description: The number of Goals in the folder.
-        goals:
-          type: array
-          items:
-            $ref: '#/components/schemas/Goal'
-          description: Goals within the folder.
     KeyResult:
       type: object
       description: A Key Result (target) within a Goal.
@@ -366,33 +336,64 @@ components:
           items:
             type: string
           description: List IDs to link for automatic tracking.
-    UpdateGoalRequest:
+    GoalFolder:
       type: object
-      description: Request body for updating an existing Goal.
+      description: A folder for organizing Goals.
+      properties:
+        id:
+          type: string
+          description: The folder ID.
+        name:
+          type: string
+          description: The folder name.
+        team_id:
+          type: string
+          description: The Workspace ID.
+        private:
+          type: boolean
+          description: Whether the folder is private.
+        date_created:
+          type: string
+          description: Unix timestamp when the folder was created.
+        creator:
+          type: integer
+          description: The user ID of the folder creator.
+        goal_count:
+          type: integer
+          description: The number of Goals in the folder.
+        goals:
+          type: array
+          items:
+            $ref: '#/components/schemas/Goal'
+          description: Goals within the folder.
+    CreateGoalRequest:
+      type: object
+      required:
+      - name
+      - due_date
+      description: Request body for creating a new Goal.
       properties:
         name:
           type: string
-          description: The updated name of the Goal.
+          description: The name of the Goal.
         due_date:
           type: integer
           format: int64
-          description: Updated due date as Unix timestamp in milliseconds.
+          description: Due date as Unix timestamp in milliseconds.
         description:
           type: string
-          description: The updated description.
-        rem_owners:
+          description: The description of the Goal.
+        multiple_owners:
+          type: boolean
+          description: Whether the Goal has multiple owners.
+        owners:
           type: array
           items:
             type: integer
-          description: User IDs to remove as owners.
-        add_owners:
-          type: array
-          items:
-            type: integer
-          description: User IDs to add as owners.
+          description: Array of user IDs to set as owners.
         color:
           type: string
-          description: The updated hex color code.
+          description: The hex color code of the Goal.
     Goal:
       type: object
       description: A Goal object representing an objective with trackable key results.
@@ -471,34 +472,6 @@ components:
           type: string
           format: uri
           description: The URL to the Goal in the ClickUp web application.
-    CreateGoalRequest:
-      type: object
-      required:
-      - name
-      - due_date
-      description: Request body for creating a new Goal.
-      properties:
-        name:
-          type: string
-          description: The name of the Goal.
-        due_date:
-          type: integer
-          format: int64
-          description: Due date as Unix timestamp in milliseconds.
-        description:
-          type: string
-          description: The description of the Goal.
-        multiple_owners:
-          type: boolean
-          description: Whether the Goal has multiple owners.
-        owners:
-          type: array
-          items:
-            type: integer
-          description: Array of user IDs to set as owners.
-        color:
-          type: string
-          description: The hex color code of the Goal.
     UpdateKeyResultRequest:
       type: object
       description: Request body for updating an existing Key Result.
@@ -509,14 +482,34 @@ components:
         note:
           type: string
           description: A note to add with the update.
+    UpdateGoalRequest:
+      type: object
+      description: Request body for updating an existing Goal.
+      properties:
+        name:
+          type: string
+          description: The updated name of the Goal.
+        due_date:
+          type: integer
+          format: int64
+          description: Updated due date as Unix timestamp in milliseconds.
+        description:
+          type: string
+          description: The updated description.
+        rem_owners:
+          type: array
+          items:
+            type: integer
+          description: User IDs to remove as owners.
+        add_owners:
+          type: array
+          items:
+            type: integer
+          description: User IDs to add as owners.
+        color:
+          type: string
+          description: The updated hex color code.
   parameters:
-    keyResultId:
-      name: key_result_id
-      in: path
-      required: true
-      description: The unique identifier of the Key Result.
-      schema:
-        type: string
     teamId:
       name: team_id
       in: path
@@ -524,6 +517,13 @@ components:
       description: The unique identifier of the Workspace (team).
       schema:
         type: integer
+    keyResultId:
+      name: key_result_id
+      in: path
+      required: true
+      description: The unique identifier of the Key Result.
+      schema:
+        type: string
     goalId:
       name: goal_id
       in: path
@@ -537,5 +537,5 @@ components:
       scheme: bearer
       description: ClickUp personal API token or OAuth access token.
 externalDocs:
-  description: ClickUp Comments API Documentation
-  url: https://developer.clickup.com/reference/get-task-comments
+  description: ClickUp Goals API Documentation
+  url: https://developer.clickup.com/reference/get-goals

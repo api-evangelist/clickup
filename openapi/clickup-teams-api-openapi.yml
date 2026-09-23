@@ -1,7 +1,7 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: ClickUp Comments Authorization Teams API
-  description: The ClickUp Comments API provides endpoints for creating and retrieving comments on tasks, views, and lists. Comments support rich text formatting, mentions, and attachments. Developers can use this API to build integrations that synchronize discussions between ClickUp and other collaboration tools, or to programmatically add status updates and notes to tasks.
+  title: ClickUp (Workspaces) Teams API
+  description: The ClickUp Teams API provides access to Workspace-level information and membership. In the ClickUp API, Teams correspond to Workspaces, which are the top-level organizational unit. The API allows developers to retrieve a list of Workspaces the authenticated user belongs to, along with member details and roles. This is typically the starting point for navigating the ClickUp hierarchy.
   version: '2.0'
   contact:
     name: ClickUp Support
@@ -109,6 +109,28 @@ paths:
           description: Team not found
 components:
   schemas:
+    Team:
+      type: object
+      description: A Workspace (team) object in ClickUp.
+      properties:
+        id:
+          type: string
+          description: The unique identifier of the Workspace.
+        name:
+          type: string
+          description: The name of the Workspace.
+        color:
+          type: string
+          description: The hex color code of the Workspace.
+        avatar:
+          type: string
+          nullable: true
+          description: The avatar URL of the Workspace.
+        members:
+          type: array
+          items:
+            $ref: '#/components/schemas/TeamMember'
+          description: Members of the Workspace.
     TeamMember:
       type: object
       description: A member of a ClickUp Workspace.
@@ -176,28 +198,6 @@ components:
               type: string
               description: The inviter initials.
           description: The user who invited this member.
-    Team:
-      type: object
-      description: A Workspace (team) object in ClickUp.
-      properties:
-        id:
-          type: string
-          description: The unique identifier of the Workspace.
-        name:
-          type: string
-          description: The name of the Workspace.
-        color:
-          type: string
-          description: The hex color code of the Workspace.
-        avatar:
-          type: string
-          nullable: true
-          description: The avatar URL of the Workspace.
-        members:
-          type: array
-          items:
-            $ref: '#/components/schemas/TeamMember'
-          description: Members of the Workspace.
   parameters:
     teamId:
       name: team_id
@@ -212,5 +212,5 @@ components:
       scheme: bearer
       description: ClickUp personal API token or OAuth access token.
 externalDocs:
-  description: ClickUp Comments API Documentation
-  url: https://developer.clickup.com/reference/get-task-comments
+  description: ClickUp Teams API Documentation
+  url: https://developer.clickup.com/reference/get-teams

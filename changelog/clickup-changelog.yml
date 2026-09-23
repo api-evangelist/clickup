@@ -1,0 +1,46 @@
+generated: '2026-09-17'
+method: searched
+source: https://clickup.canny.io/changelog
+docs: https://clickup.canny.io/changelog
+finding: >-
+  ClickUp publishes a dated PRODUCT changelog (Canny) covering the whole platform, and NO API-specific
+  changelog. developer.clickup.com has no /changelog (404) and the complete docs index (llms.txt) lists
+  no release-notes page, so an integrator cannot see when an endpoint, field or behaviour changed. The
+  only per-page signal on the developer site is an `updatedAt` stamp in each doc page's markdown
+  frontmatter. Entries below are the product changelog's recent window; the feed is JS-rendered with no
+  RSS, so they were read from the rendered page.
+scheme: release-notes
+current_release: '4.07'
+api_changelog: null
+entries:
+- date: '2026-08-25'
+  title: PayPal now in India
+  type: addition
+- date: '2026-08-18'
+  version: '4.07'
+  title: Release Notes 4.07
+  type: addition
+  highlights:
+  - Custom Fields can be scoped to task types (visible in the API as the applied_objects array on GetAccessibleCustomFields)
+  - Import Slack history into Channels
+  - Connect MCP servers to Super Agents
+  - AI Notetaker captures meeting chat
+- date: '2026-07-02'
+  title: 'Brain squared: Release Notes Takeover'
+  type: addition
+  highlights: [artifact creation, multi-model access, autonomous agents, email and calendar automation]
+- date: '2026-06-23'
+  title: Brain squared launch
+  type: addition
+- date: '2026-05-05'
+  version: '4.04'
+  title: Release Notes 4.04
+  type: addition
+  highlights: [Gantt baselines, mobile Brain access, AI Notetaker customization, ChatGPT integration]
+breaking_changes_recorded: 0
+related:
+  roadmap: https://feedback.clickup.com/
+  api_docs_updated_stamps: >-
+    Each page at developer.clickup.com carries `updatedAt` in its .md frontmatter — e.g.
+    /docs/rate-limits.md updatedAt 2026-09-17, /docs/mcp-tools.md 2026-03-19,
+    /docs/open-api-spec.md 2026-02-24.

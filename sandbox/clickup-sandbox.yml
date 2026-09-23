@@ -1,0 +1,24 @@
+generated: '2026-09-17'
+method: searched
+source: https://developer.clickup.com/docs/trytheapi
+sandbox:
+  available: false
+  finding: >-
+    ClickUp publishes NO sandbox or test mode. There is no test-vs-live key prefix (a personal token is
+    always `pk_` and always points at a real Workspace), no test fixtures, no time simulation and no
+    magic test identifiers. The documentation states plainly that every Try It request runs against the
+    Workspace the token was generated from, so an integrator rehearses against live data. The usual
+    substitute is a throwaway free Workspace.
+console:
+  available: true
+  type: interactive-try-it
+  url: https://developer.clickup.com/docs/trytheapi
+  reference: https://developer.clickup.com/reference
+  credential: personal API token pasted into the reference page's Credentials panel
+  caveat: >-
+    OAuth tokens are not supported in Try It (stated on the Get Access Token reference page), and the Try
+    It modal cannot filter by a single List/Folder/Space on GetFilteredTeamTasks.
+  writes_against: live workspace
+webhook_testing:
+  tool: https://smee.io/
+  note: The webhooks guide recommends smee.io for receiving events during development, and `*` as an event wildcard.

@@ -4,42 +4,60 @@ schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main
 provider: ClickUp
 providerId: clickup
 created: '2026-05-04'
-# Provenance stamped 2026-08-11: this artifact was written by the API Evangelist
-# bulk sweep dated 2026-05-04, not harvested from the provider. See roadmap#35.
-method: generated
-modified: '2026-05-04'
+generated: '2026-09-17'
+method: searched
+modified: '2026-09-17'
 reconciled: true
 tags:
   - Rate Limiting
   - Project Management
-description: 'ClickUp v2 API: 100 req/min on Free, scales by tier.'
+description: >-
+  ClickUp rate-limits the public API PER TOKEN (personal and OAuth alike), and the ceiling is set by the
+  plan of the Workspace hosting the token. Read from the provider's own rate-limits page, which was last
+  updated 2026-09-17 — it CORRECTS the 2026-05-04 sweep that recorded 1,000/min for Unlimited and
+  Business: those tiers are 100/min, and 1,000/min begins at Business Plus.
 sources:
-  - https://clickup.com/pricing
-  - https://clickup.com/api/developer-portal/rate-limits/
+  - https://developer.clickup.com/docs/rate-limits
+  - https://developer.clickup.com/docs/connect-an-ai-assistant-to-clickups-mcp-server
 headers:
   limit: X-RateLimit-Limit
   remaining: X-RateLimit-Remaining
   reset: X-RateLimit-Reset
+resetFormat: unix-timestamp
 responseCodes:
   throttled: 429
+scope: per token (personal API token or OAuth access token)
 limits:
-  - name: REST API (Free)
-    scope: user
+  - name: REST API (Free Forever)
+    scope: token
     metric: requests_per_minute
     limit: 100
     timeFrame: minute
   - name: REST API (Unlimited)
-    scope: user
+    scope: token
     metric: requests_per_minute
-    limit: 1000
+    limit: 100
     timeFrame: minute
   - name: REST API (Business)
-    scope: user
+    scope: token
+    metric: requests_per_minute
+    limit: 100
+    timeFrame: minute
+  - name: REST API (Business Plus)
+    scope: token
     metric: requests_per_minute
     limit: 1000
     timeFrame: minute
-  - name: REST API (Enterprise)
-    scope: user
+  - name: REST API (Enterprise / Enterprise Plus)
+    scope: token
     metric: requests_per_minute
     limit: 10000
     timeFrame: minute
+notes:
+  - >-
+    MCP server limits are separate and depend on whether the Workspace has the Everything AI add-on;
+    with the add-on they match the public API limits for the plan. ClickUp states MCP limits are subject
+    to its AI fair-use policy (https://clickup.com/terms/ai) and may change.
+  - >-
+    429 is NOT declared as a response in either published OpenAPI document — the limit is documented in
+    prose only, so a generated client will not model it.

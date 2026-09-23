@@ -1,0 +1,49 @@
+generated: '2026-09-17'
+method: derived
+source: openapi/clickup-api-v2-reference-openapi.json, openapi/clickup-public-api-v3-openapi.json
+format: vendor-json
+note: >-
+  ClickUp does NOT use RFC 9457 problem+json. Every response in both specs is application/json, and the
+  error body is a ClickUp envelope. Error codes are alphanumeric strings (ECODE), not URIs. Counts below
+  are the declared 4xx/5xx responses across the two published specs: 400 x15, 401 x3, 403 x4, 404 x24,
+  500 x3, plus 24 `default` responses.
+envelope:
+  media_type: application/json
+  fields:
+    err: Human-readable error message.
+    ECODE: ClickUp error code string, e.g. OAUTH_017, OAUTH_023, OAUTH_171.
+    message: Present on some v2 responses alongside err.
+  example_schema_source: "openapi/clickup-api-v2-reference-openapi.json#/paths/~1v2~1task~1{task_id}~1field~1{field_id}/post/responses/400"
+problems:
+- status: 400
+  title: Bad Request
+  description: Invalid parameters, malformed body, or a Custom Field not applicable to the task's custom task type.
+  declared_responses: 15
+  source_operation: openapi/clickup-api-v2-reference-openapi.json#SetCustomFieldValue
+- status: 401
+  title: Unauthorized
+  description: Missing or invalid Authorization header (personal token or OAuth bearer).
+  declared_responses: 3
+  source_operation: openapi/clickup-api-v2-reference-openapi.json#CreateFolderFromTemplate
+- status: 403
+  title: Forbidden
+  description: The token is valid but the Workspace, plan or user permission does not allow the operation.
+  declared_responses: 4
+  source_operation: openapi/clickup-api-v2-reference-openapi.json#CreateFolderFromTemplate
+- status: 404
+  title: Not Found
+  description: The addressed task, List, Folder, Space, template, Doc or Workspace does not exist or is not visible to the token.
+  declared_responses: 24
+  source_operation: openapi/clickup-api-v2-reference-openapi.json#CreateFolderFromTemplate
+- status: 429
+  title: Rate limit reached
+  description: >-
+    Per-token rate limit exceeded. Documented at https://developer.clickup.com/docs/rate-limits and
+    https://developer.clickup.com/docs/common_errors; NOT declared as a response in either OpenAPI
+    document, which is a gap between the docs and the contract.
+  declared_responses: 0
+  source: https://developer.clickup.com/docs/common_errors
+- status: 500
+  title: Internal server error
+  declared_responses: 3
+  source_operation: openapi/clickup-api-v2-reference-openapi.json#CreateFolderFromTemplate

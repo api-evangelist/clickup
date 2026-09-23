@@ -1,0 +1,39 @@
+generated: '2026-09-17'
+method: searched
+source: >-
+  https://developer.clickup.com/docs/authentication and
+  well-known/clickup-mcp-oauth-authorization-server.json
+docs: https://developer.clickup.com/docs/authentication
+finding: >-
+  The ClickUp public API OAuth flow has NO scope parameter and NO scope reference page. Authorization is
+  granted per WORKSPACE, not per permission: the user picks which Workspaces an app may access, and the
+  resulting token carries whatever that user can do. Neither published OpenAPI declares an oauth2
+  securityScheme (both declare a single apiKey Authorization header), so derive-oauth-scopes.py has
+  nothing to read — the absence is the contract, not a harvesting gap. The only scoped surface ClickUp
+  operates is the MCP server, whose RFC 8414 metadata advertises two coarse scopes.
+schemes:
+- name: ClickUp OAuth 2.0 (public API)
+  authorization_url: https://app.clickup.com/api
+  token_url: https://api.clickup.com/api/v2/oauth/token
+  grant_types: [authorization_code]
+  scopes_supported: []
+  authorization_unit: workspace
+  note: Access tokens do not expire (documented in the developer FAQ).
+- name: ClickUp MCP server
+  source: https://mcp.clickup.com/.well-known/oauth-authorization-server
+  authorization_url: https://mcp.clickup.com/oauth/authorize
+  token_url: https://mcp.clickup.com/oauth/token
+  registration_url: https://mcp.clickup.com/oauth/register
+  grant_types: [authorization_code]
+  code_challenge_methods: [S256]
+scopes:
+- scope: read
+  description: Read access to the ClickUp MCP resource (tasks, documents, chat).
+  flows: [authorizationCode]
+  sources: [well-known/clickup-mcp-oauth-authorization-server.json, well-known/clickup-mcp-oauth-protected-resource.json]
+  surface: mcp
+- scope: write
+  description: Write access to the ClickUp MCP resource (tasks, documents, chat).
+  flows: [authorizationCode]
+  sources: [well-known/clickup-mcp-oauth-authorization-server.json, well-known/clickup-mcp-oauth-protected-resource.json]
+  surface: mcp

@@ -1,0 +1,35 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for ClickUp API v2 Reference
+  version: 1.0.0
+extends: openapi/clickup-api-v2-reference-openapi.json
+x-generated: '2026-09-17'
+x-method: generated
+x-source: >-
+  API Evangelist enrichment pass 2026-09-17. Captures OUR annotations over the provider's verbatim spec;
+  the original document is never mutated.
+actions:
+  - target: $.info
+    update:
+      x-apievangelist-provider: clickup
+      x-apievangelist-harvested-from: https://developer.clickup.com/openapi/clickup-api-v2-reference.json
+      x-apievangelist-discovered-via: https://developer.clickup.com/.well-known/api-catalog
+      x-apievangelist-artifacts:
+        authentication: authentication/clickup-authentication.yml
+        conventions: conventions/clickup-conventions.yml
+        errors: errors/clickup-error-codes.yml
+        rate_limits: rate-limits/clickup-rate-limits.yml
+        lifecycle: lifecycle/clickup-lifecycle.yml
+        data_model: data-model/clickup-data-model.yml
+        mcp: mcp/clickup-mcp.yml
+        tool_crosswalk: mcp/clickup-tool-crosswalk.yml
+      x-apievangelist-gaps:
+        - 429 is documented in prose but declared on no operation
+        - no Idempotency-Key parameter anywhere in the contract
+        - components.schemas is empty; every schema is inline, so nothing is reusable by $ref
+        - no deprecation or sunset policy, and the "Time Tracking (Legacy)" tag carries no removal date
+  - target: $.tags
+    update:
+      x-apievangelist-note: >-
+        Tag "Time Tracking (Legacy)" marks the four superseded per-task time operations; prefer the
+        Workspace-scoped Time Tracking operations.

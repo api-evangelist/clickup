@@ -1,7 +1,7 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: ClickUp Comments Authorization Lists API
-  description: The ClickUp Comments API provides endpoints for creating and retrieving comments on tasks, views, and lists. Comments support rich text formatting, mentions, and attachments. Developers can use this API to build integrations that synchronize discussions between ClickUp and other collaboration tools, or to programmatically add status updates and notes to tasks.
+  title: ClickUp Lists API
+  description: The ClickUp Lists API enables developers to manage Lists, which are containers that hold tasks within a Space or Folder. Lists define the workflow statuses available to tasks and serve as the primary grouping mechanism for related work items. The API supports creating, updating, and deleting Lists, as well as retrieving List details and the tasks they contain.
   version: '2.0'
   contact:
     name: ClickUp Support
@@ -220,91 +220,29 @@ paths:
         '404':
           description: List not found
 components:
+  parameters:
+    spaceId:
+      name: space_id
+      in: path
+      required: true
+      description: The unique identifier of the Space.
+      schema:
+        type: integer
+    listId:
+      name: list_id
+      in: path
+      required: true
+      description: The unique identifier of the List.
+      schema:
+        type: integer
+    folderId:
+      name: folder_id
+      in: path
+      required: true
+      description: The unique identifier of the Folder.
+      schema:
+        type: integer
   schemas:
-    Member:
-      type: object
-      description: A member with access to a List.
-      properties:
-        id:
-          type: integer
-          description: The user ID.
-        username:
-          type: string
-          description: The username.
-        email:
-          type: string
-          format: email
-          description: The email address.
-        color:
-          type: string
-          description: The user color.
-        profilePicture:
-          type: string
-          format: uri
-          nullable: true
-          description: URL of the profile picture.
-        initials:
-          type: string
-          description: The user initials.
-    UpdateListRequest:
-      type: object
-      description: Request body for updating an existing List.
-      properties:
-        name:
-          type: string
-          description: The updated name of the List.
-        content:
-          type: string
-          description: The updated content description.
-        due_date:
-          type: integer
-          format: int64
-          description: Updated due date as Unix timestamp in milliseconds.
-        due_date_time:
-          type: boolean
-          description: Whether the due date includes a time component.
-        priority:
-          type: integer
-          minimum: 1
-          maximum: 4
-          description: Updated priority level.
-        assignee:
-          type: integer
-          nullable: true
-          description: User ID to assign, or null to unassign.
-        unset_status:
-          type: boolean
-          description: Set to true to clear the List status.
-    CreateListRequest:
-      type: object
-      required:
-      - name
-      description: Request body for creating a new List.
-      properties:
-        name:
-          type: string
-          description: The name of the List.
-        content:
-          type: string
-          description: The content description of the List.
-        due_date:
-          type: integer
-          format: int64
-          description: Due date as Unix timestamp in milliseconds.
-        due_date_time:
-          type: boolean
-          description: Whether the due date includes a time component.
-        priority:
-          type: integer
-          minimum: 1
-          maximum: 4
-          description: Priority level. 1 is Urgent, 2 is High, 3 is Normal, 4 is Low.
-        assignee:
-          type: integer
-          description: User ID to assign to the List.
-        status:
-          type: string
-          description: The status to set on the List.
     List:
       type: object
       description: A List object representing a container for tasks within a Space or Folder.
@@ -422,33 +360,95 @@ components:
         permission_level:
           type: string
           description: The permission level of the List.
-  parameters:
-    folderId:
-      name: folder_id
-      in: path
-      required: true
-      description: The unique identifier of the Folder.
-      schema:
-        type: integer
-    spaceId:
-      name: space_id
-      in: path
-      required: true
-      description: The unique identifier of the Space.
-      schema:
-        type: integer
-    listId:
-      name: list_id
-      in: path
-      required: true
-      description: The unique identifier of the List.
-      schema:
-        type: integer
+    UpdateListRequest:
+      type: object
+      description: Request body for updating an existing List.
+      properties:
+        name:
+          type: string
+          description: The updated name of the List.
+        content:
+          type: string
+          description: The updated content description.
+        due_date:
+          type: integer
+          format: int64
+          description: Updated due date as Unix timestamp in milliseconds.
+        due_date_time:
+          type: boolean
+          description: Whether the due date includes a time component.
+        priority:
+          type: integer
+          minimum: 1
+          maximum: 4
+          description: Updated priority level.
+        assignee:
+          type: integer
+          nullable: true
+          description: User ID to assign, or null to unassign.
+        unset_status:
+          type: boolean
+          description: Set to true to clear the List status.
+    CreateListRequest:
+      type: object
+      required:
+      - name
+      description: Request body for creating a new List.
+      properties:
+        name:
+          type: string
+          description: The name of the List.
+        content:
+          type: string
+          description: The content description of the List.
+        due_date:
+          type: integer
+          format: int64
+          description: Due date as Unix timestamp in milliseconds.
+        due_date_time:
+          type: boolean
+          description: Whether the due date includes a time component.
+        priority:
+          type: integer
+          minimum: 1
+          maximum: 4
+          description: Priority level. 1 is Urgent, 2 is High, 3 is Normal, 4 is Low.
+        assignee:
+          type: integer
+          description: User ID to assign to the List.
+        status:
+          type: string
+          description: The status to set on the List.
+    Member:
+      type: object
+      description: A member with access to a List.
+      properties:
+        id:
+          type: integer
+          description: The user ID.
+        username:
+          type: string
+          description: The username.
+        email:
+          type: string
+          format: email
+          description: The email address.
+        color:
+          type: string
+          description: The user color.
+        profilePicture:
+          type: string
+          format: uri
+          nullable: true
+          description: URL of the profile picture.
+        initials:
+          type: string
+          description: The user initials.
   securitySchemes:
     bearerAuth:
       type: http
       scheme: bearer
       description: ClickUp personal API token or OAuth access token.
 externalDocs:
-  description: ClickUp Comments API Documentation
-  url: https://developer.clickup.com/reference/get-task-comments
+  description: ClickUp Lists API Documentation
+  url: https://developer.clickup.com/reference/get-lists

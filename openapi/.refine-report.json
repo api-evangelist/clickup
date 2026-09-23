@@ -1,27 +1,26 @@
 {
   "provider": "clickup",
   "sources": [
-    "clickup-authorization-api-openapi.yml",
-    "clickup-comments-api-openapi.yml",
-    "clickup-custom-fields-api-openapi.yml",
-    "clickup-folders-api-openapi.yml",
-    "clickup-goals-api-openapi.yml",
-    "clickup-lists-api-openapi.yml",
-    "clickup-oauth-api-openapi.yml",
-    "clickup-spaces-api-openapi.yml",
-    "clickup-tasks-api-openapi.yml",
-    "clickup-teams-api-openapi.yml",
-    "clickup-time-tracking-api-openapi.yml",
-    "clickup-views-api-openapi.yml",
-    "clickup-webhooks-api-openapi.yml"
+    "_original/clickup-comments-openapi.yml",
+    "_original/clickup-custom-fields-openapi.yml",
+    "_original/clickup-folders-openapi.yml",
+    "_original/clickup-goals-openapi.yml",
+    "_original/clickup-lists-openapi.yml",
+    "_original/clickup-oauth-openapi.yml",
+    "_original/clickup-spaces-openapi.yml",
+    "_original/clickup-tasks-openapi.yml",
+    "_original/clickup-teams-openapi.yml",
+    "_original/clickup-time-tracking-openapi.yml",
+    "_original/clickup-views-openapi.yml",
+    "_original/clickup-webhooks-openapi.yml"
   ],
   "outputs": [
-    "clickup-authorization-api-openapi.yml",
     "clickup-comments-api-openapi.yml",
     "clickup-custom-fields-api-openapi.yml",
     "clickup-folders-api-openapi.yml",
     "clickup-goals-api-openapi.yml",
     "clickup-lists-api-openapi.yml",
+    "clickup-authorization-api-openapi.yml",
     "clickup-oauth-api-openapi.yml",
     "clickup-spaces-api-openapi.yml",
     "clickup-tasks-api-openapi.yml",
@@ -30,9 +29,41 @@
     "clickup-views-api-openapi.yml",
     "clickup-webhooks-api-openapi.yml"
   ],
-  "archived": [],
+  "archived": [
+    "deleted 1 superseded output(s) from the previous generation"
+  ],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (12 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "clickup-comments-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "clickup-custom-fields-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "clickup-folders-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "clickup-goals-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "clickup-lists-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "clickup-oauth-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "clickup-spaces-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "clickup-tasks-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "clickup-teams-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "clickup-time-tracking-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "clickup-views-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "clickup-webhooks-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "superseded outputs removed: clickup-o-auth-api-openapi.yml",
+    "apis.yml register: written (+1 apis, 13 total)"
+  ],
+  "skipped": [
+    "clickup-authorization-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "clickup-comments-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "clickup-custom-fields-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "clickup-folders-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "clickup-goals-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "clickup-lists-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "clickup-o-auth-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "clickup-spaces-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "clickup-tasks-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "clickup-teams-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "clickup-time-tracking-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "clickup-views-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "clickup-webhooks-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

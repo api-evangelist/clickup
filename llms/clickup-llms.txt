@@ -2,6 +2,8 @@
 
 > ClickUp API empowers you to create custom workflows, integrate seamlessly with your favorite tools, and scale your processes by mapping them directly to ClickUp. Unlock endless possibilities for automation and efficiency.
 
+Append .md to any documentation page URL to get its markdown version.
+
 ## Guides
 - [Authentication](https://developer.clickup.com/docs/authentication.md): Authenticate to the ClickUp API using a personal token or OAuth.
 - [Try the API in your web browser](https://developer.clickup.com/docs/trytheapi.md): Use the ClickUp API right from your web browser!

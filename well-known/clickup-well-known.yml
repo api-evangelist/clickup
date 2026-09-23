@@ -1,0 +1,144 @@
+generated: '2026-09-17'
+method: probed
+source: live probes of every host this record knows (clickup.com, www.clickup.com, api.clickup.com,
+  developer.clickup.com, mcp.clickup.com, app.clickup.com)
+note: >-
+  Three hosts serve real documents. clickup.com serves an RFC 9116 security.txt naming
+  security@clickup.com and the https://clickup.com/security policy. developer.clickup.com serves a real
+  RFC 9727 /.well-known/api-catalog linkset whose service-desc entries point at the two first-party
+  OpenAPI documents (v2 reference JSON and Public API v3) -- that catalog is how this round found the
+  provider's real contracts. mcp.clickup.com serves RFC 8414 authorization-server metadata and RFC 9728
+  protected-resource metadata for the ClickUp MCP server. app.clickup.com is a single-page-app catch-all
+  that answers 200 with the same 139,486-byte HTML shell for EVERY /.well-known/* path including the
+  negative control, so none of its 200s is a document and no pointer is claimed from it. clickup.com
+  answers 403 (bot challenge) on every path other than security.txt.
+hit_count: 4
+soft_404_control:
+  host: https://app.clickup.com
+  path: /.well-known/clickup-negative-control-7f3ab91c.json
+  status: 200
+  bytes: 139486
+  verdict: catch-all -- every app.clickup.com hit discarded
+path_echo_control: passed
+hosts:
+- host: https://clickup.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 200
+    file: clickup-security.txt
+  - path: /.well-known/openid-configuration
+    status: 403
+  - path: /.well-known/oauth-authorization-server
+    status: 403
+  - path: /.well-known/oauth-protected-resource
+    status: 403
+  - path: /.well-known/api-catalog
+    status: 403
+  - path: /.well-known/ai-plugin.json
+    status: 403
+  - path: /.well-known/apis.json
+    status: 403
+  - path: /apis.json
+    status: 403
+  - path: /.well-known/agent-card.json
+    status: 403
+  - path: /.well-known/agent.json
+    status: 403
+  - path: /.well-known/aauth-resource.json
+    status: 403
+  - path: /.well-known/clickup-negative-control-7f3ab91c.json
+    status: 403
+- host: https://www.clickup.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 301
+    note: redirects to the apex clickup.com, which serves the document
+- host: https://api.clickup.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/oauth-protected-resource
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /.well-known/apis.json
+    status: 404
+  - path: /apis.json
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+  - path: /.well-known/aauth-resource.json
+    status: 404
+  - path: /.well-known/clickup-negative-control-7f3ab91c.json
+    status: 404
+- host: https://developer.clickup.com
+  documents:
+  - path: /.well-known/api-catalog
+    status: 200
+    file: clickup-api-catalog.json
+    note: RFC 9727 linkset; service-desc points at the v2 and v3 OpenAPI documents
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/oauth-protected-resource
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /.well-known/apis.json
+    status: 404
+  - path: /apis.json
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+  - path: /.well-known/aauth-resource.json
+    status: 404
+  - path: /.well-known/clickup-negative-control-7f3ab91c.json
+    status: 404
+- host: https://mcp.clickup.com
+  documents:
+  - path: /.well-known/oauth-authorization-server
+    status: 200
+    file: clickup-mcp-oauth-authorization-server.json
+    note: RFC 8414; PKCE S256, dynamic client registration, scopes read/write, mcp_authorization_spec_version 2026-07-28
+  - path: /.well-known/oauth-protected-resource
+    status: 200
+    file: clickup-mcp-oauth-protected-resource.json
+    note: RFC 9728; resource https://mcp.clickup.com, resource_server_origin https://api.clickup.com
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /.well-known/apis.json
+    status: 404
+  - path: /apis.json
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+  - path: /.well-known/aauth-resource.json
+    status: 404
+  - path: /.well-known/clickup-negative-control-7f3ab91c.json
+    status: 404
+- host: https://app.clickup.com
+  documents:
+  - path: /.well-known/clickup-negative-control-7f3ab91c.json
+    status: 200
+    note: SPA catch-all -- identical HTML shell returned for every path; all app.clickup.com 200s discarded

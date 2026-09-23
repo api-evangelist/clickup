@@ -1,21 +1,100 @@
-generated: '2026-09-11'
+generated: '2026-09-17'
 method: probed
-source: https://mcp.clickup.com/mcp
-status: gated
+source: https://developer.clickup.com/docs/connect-an-ai-assistant-to-clickups-mcp-server
+status: published
 server:
   name: clickup
   transport: http
   url: https://mcp.clickup.com/mcp
+  beta: true
+  note: >-
+    ClickUp's MCP server is in public beta and available on all plans. The endpoint is named in the
+    provider's own documentation and was probed on 2026-09-17.
 deployment:
   mode: remote
   endpoint: https://mcp.clickup.com/mcp
+  auth: oauth
   verified: probed
+  checked: '2026-09-17'
   probe: gated
-  checked: '2026-09-11'
-  source: docs-check 2026-09-11 (endpoint found in the provider's own documentation, then probed)
-  probe_why: docs-check
-tools_note: No tool list captured. This manifest records a PROBED, reachable endpoint only; anonymous
-  tools/list was auth-gated or the server requires an initialize handshake this reachability probe does
-  not perform. Run signals/audit_mcp_authorship.py --probe to enumerate tools and settle platform-vs-provider
-  authorship. Do NOT derive a tool list from the OpenAPI and store it here -- that is a candidate manifest,
-  and it belongs under an X-MCPServerCandidate pointer.
+  probe_detail: >-
+    POST tools/list and POST initialize both returned HTTP 401
+    {"error":"invalid_token","error_description":"Bearer token required",
+    "resource_metadata":"https://mcp.clickup.com/.well-known/oauth-protected-resource/mcp"}.
+    The live tool schemas therefore require an authenticated introspection; the tool list below is the
+    provider's PUBLISHED list from https://developer.clickup.com/docs/mcp-tools, names and descriptions
+    only, with no inputSchema.
+  source: provider documentation naming the endpoint, then a live anonymous probe
+oauth:
+  authorization_server: https://mcp.clickup.com
+  metadata:
+    authorization_server: well-known/clickup-mcp-oauth-authorization-server.json
+    protected_resource: well-known/clickup-mcp-oauth-protected-resource.json
+  authorization_endpoint: https://mcp.clickup.com/oauth/authorize
+  token_endpoint: https://mcp.clickup.com/oauth/token
+  registration_endpoint: https://mcp.clickup.com/oauth/register
+  grant_types: [authorization_code]
+  code_challenge_methods: [S256]
+  scopes: [read, write]
+  dynamic_client_registration: true
+  mcp_authorization_spec_version: '2026-07-28'
+  resource_server_origin: https://api.clickup.com
+tools_source: https://developer.clickup.com/docs/mcp-tools
+tools_schema_note: >-
+  Input schemas are NOT captured: anonymous tools/list is auth-gated (401). The crosswalk in
+  mcp/clickup-tool-crosswalk.yml binds each documented tool to the backing OpenAPI operation, whose
+  parameters/requestBody are the real input contract.
+tools:
+- {name: Search Workspace, category: Search, description: Searches for items across the entire ClickUp Workspace, including tasks, Lists, Folders, and Docs.}
+- {name: Search tasks by task type, category: Search, description: Retrieves tasks filtered by task type.}
+- {name: Search tasks by tag, category: Search, description: Retrieves tasks filtered by tags.}
+- {name: Create Task, category: Task management, description: Creates a new task in a specific List.}
+- {name: Get Task, category: Task management, description: Retrieves the full details of a single task using its unique task ID.}
+- {name: Update Task, category: Task management, description: Modifies the properties of an existing task.}
+- {name: Set Custom Fields, category: Task management, description: Set Custom Fields on tasks.}
+- {name: Delete task, category: Task management, description: Deletes a task or subtask.}
+- {name: Create Bulk Tasks, category: Task management, description: Creates multiple tasks in a specified List with a single API call.}
+- {name: Update Bulk Tasks, category: Task management, description: Modifies multiple tasks at once.}
+- {name: Attach File to Task, category: Task management, description: Uploads and attaches a file to a specific task.}
+- {name: Get Task Comments, category: Task management, description: Retrieves all comments from a specific task.}
+- {name: Get Threaded Replies, category: Task management, description: Retrieves threaded replies under a parent task comment.}
+- {name: Create Task Comment, category: Task management, description: Adds a new comment to a task.}
+- {name: Add Tag to Task, category: Task management, description: Applies an existing tag to a task for categorization.}
+- {name: Remove Tag from Task, category: Task management, description: Removes a specific tag from a task.}
+- {name: Add task link, category: Task management, description: Relate two tasks by linking them.}
+- {name: Remove task link, category: Task management, description: Remove links between tasks.}
+- {name: Add dependency, category: Task management, description: Create a dependency relationship between tasks.}
+- {name: Remove dependency, category: Task management, description: Remove a dependency relationship between tasks.}
+- {name: Move task to a new List, category: Task management, description: Move a task to a new home List.}
+- {name: Add task to another List, category: Task management, description: Add a task to another List.}
+- {name: Get Task Time Entries, category: Time tracking, description: Retrieves all time log entries for a specific task.}
+- {name: Get time entries for multiple tasks, category: Time tracking, description: Retrieves total time entries for tasks in a specific Space, Folder, or List.}
+- {name: Start Time Tracking, category: Time tracking, description: Starts a timer for a specific task for the current user.}
+- {name: Stop Time Tracking, category: Time tracking, description: Stops the currently active timer for the user.}
+- {name: Add Time Entry, category: Time tracking, description: Manually adds a block of time to a task.}
+- {name: Get Current Time Entry, category: Time tracking, description: Returns the details of the running timer, if any.}
+- {name: Get Workspace Hierarchy, category: Workspace Hierarchy, description: Retrieves the full structure of the Workspace, including all Spaces, Folders, and Lists.}
+- {name: Create List, category: Workspace Hierarchy, description: Creates a new List within a specific Folder or Space.}
+- {name: Create List in Folder, category: Workspace Hierarchy, description: Creates a new List specifically inside a designated Folder.}
+- {name: Get List, category: Workspace Hierarchy, description: Retrieves the details and settings for a single List.}
+- {name: Update List, category: Workspace Hierarchy, description: Modifies the settings of an existing List.}
+- {name: Get Folder, category: Workspace Hierarchy, description: Retrieves the details for a single Folder, including the Lists it contains.}
+- {name: Create Folder, category: Workspace Hierarchy, description: Creates a new Folder within a specific Space.}
+- {name: Update Folder, category: Workspace Hierarchy, description: Modifies the settings of an existing Folder.}
+- {name: Get Workspace Members, category: Members and assignees, description: Retrieves a list of all members and guests in the Workspace.}
+- {name: Find Member by Name, category: Members and assignees, description: Searches for a Workspace member using their name or email.}
+- {name: Resolve Assignees, category: Members and assignees, description: Confirms and retrieves the user objects for a list of potential assignees.}
+- {name: Get Chat Channels, category: Chat, description: Retrieves a list of all Chat channels in the Workspace.}
+- {name: Send Chat Message, category: Chat, description: Sends a message to a specific Chat channel.}
+- {name: Create Document, category: Docs, description: Creates a new Doc within the Workspace.}
+- {name: List Document Pages, category: Docs, description: Retrieves the structure or table of contents of a Doc.}
+- {name: Get Document Pages, category: Docs, description: Retrieves the content of one or more pages from a specific Doc.}
+- {name: Create Document Page, category: Docs, description: Adds a new page (or sub-page) to an existing Doc.}
+- {name: Update Document Page, category: Docs, description: Edits the content of an existing page within a Doc.}
+- {name: Get Time in Status for a task, category: Time in status reporting, description: Retrieve the amount of time a task has been in a status.}
+- {name: Get Time in Status for tasks in a List, category: Time in status reporting, description: Retrieve time in status metrics for multiple tasks.}
+rate_limits:
+  note: >-
+    MCP rate limits depend on whether the Workspace has the Everything AI add-on. With the add-on, MCP
+    limits match the Public API limits for the plan. Documented at
+    https://developer.clickup.com/docs/connect-an-ai-assistant-to-clickups-mcp-server

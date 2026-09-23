@@ -1,0 +1,107 @@
+generated: '2026-09-17'
+method: derived
+source: >-
+  mcp/clickup-mcp.yml (tool list published at https://developer.clickup.com/docs/mcp-tools) bound to
+  openapi/clickup-api-v2-reference-openapi.json and openapi/clickup-public-api-v3-openapi.json
+note: >-
+  Anonymous tools/list on https://mcp.clickup.com/mcp is OAuth-gated (401), so tools are bound by name
+  and documented behaviour, not by a fetched inputSchema. Where a tool maps cleanly onto one operationId
+  the confidence is high; where the MCP server composes or filters, it is medium or low and is said so.
+  Every operationId below was grepped out of the two specs — none is invented.
+surfaces:
+  openapi:
+  - file: openapi/clickup-api-v2-reference-openapi.json
+    version: 3.1.0
+    operations: 138
+    source: https://developer.clickup.com/openapi/clickup-api-v2-reference.json
+  - file: openapi/clickup-public-api-v3-openapi.json
+    version: 3.0.0
+    operations: 35
+    source: https://developer.clickup.com/openapi/ClickUp_PUBLIC_API_V3.yaml
+  graphql:
+    endpoint: null
+    note: ClickUp publishes no GraphQL API; graphql/clickup-schema.graphql in this repo is a conceptual model, not an executable endpoint.
+  mcp:
+    url: https://mcp.clickup.com/mcp
+    gated: true
+    note: OAuth bearer required; tools/list returns 401 anonymously.
+crosswalk:
+- {tool: Get Task, category: Task management, rest: [GetTask], binding: rest, confidence: high}
+- {tool: Create Task, category: Task management, rest: [CreateTask], binding: rest, confidence: high}
+- {tool: Update Task, category: Task management, rest: [UpdateTask], binding: rest, confidence: high}
+- {tool: Delete task, category: Task management, rest: [DeleteTask], binding: rest, confidence: high}
+- {tool: Set Custom Fields, category: Task management, rest: [SetCustomFieldValue, GetAccessibleCustomFields], binding: rest, confidence: high, note: "resolves the field by name via the List field listing, then sets the value"}
+- {tool: Attach File to Task, category: Task management, rest: [CreateTaskAttachment, postEntityAttachment], binding: rest, confidence: high, note: "v2 task attachment and the v3 entity attachment endpoint both apply"}
+- {tool: Get Task Comments, category: Task management, rest: [GetTaskComments], binding: rest, confidence: high}
+- {tool: Get Threaded Replies, category: Task management, rest: [GetThreadedComments], binding: rest, confidence: high}
+- {tool: Create Task Comment, category: Task management, rest: [CreateTaskComment], binding: rest, confidence: high}
+- {tool: Add Tag to Task, category: Task management, rest: [AddTagToTask], binding: rest, confidence: high}
+- {tool: Remove Tag from Task, category: Task management, rest: [RemoveTagFromTask], binding: rest, confidence: high}
+- {tool: Add task link, category: Task management, rest: [AddTaskLink], binding: rest, confidence: high}
+- {tool: Remove task link, category: Task management, rest: [DeleteTaskLink], binding: rest, confidence: high}
+- {tool: Add dependency, category: Task management, rest: [AddDependency], binding: rest, confidence: high}
+- {tool: Remove dependency, category: Task management, rest: [DeleteDependency], binding: rest, confidence: high}
+- {tool: Move task to a new List, category: Task management, rest: [moveTask], binding: rest, confidence: high, note: "v3 operation"}
+- {tool: Add task to another List, category: Task management, rest: [AddTaskToList], binding: rest, confidence: high}
+- {tool: Create Bulk Tasks, category: Task management, rest: [CreateTask], binding: rest, confidence: low, note: "no bulk-create operation exists in either spec - the server fans out N CreateTask calls"}
+- {tool: Update Bulk Tasks, category: Task management, rest: [UpdateTask], binding: rest, confidence: low, note: "no bulk-update operation exists - server-side fan-out over UpdateTask"}
+- {tool: Search tasks by task type, category: Search, rest: [GetFilteredTeamTasks, GetCustomItems], binding: rest, confidence: medium, note: "GetFilteredTeamTasks filters by custom_items[]; GetCustomItems resolves the type name to an id"}
+- {tool: Search tasks by tag, category: Search, rest: [GetFilteredTeamTasks, GetSpaceTags], binding: rest, confidence: medium, note: "GetFilteredTeamTasks accepts a tags[] filter"}
+- {tool: Get Task Time Entries, category: Time tracking, rest: [Gettrackedtime], binding: rest, confidence: medium, note: "v2 legacy per-task time endpoint"}
+- {tool: Get time entries for multiple tasks, category: Time tracking, rest: [Gettimeentrieswithinadaterange], binding: rest, confidence: medium, note: "Workspace-scoped range query filtered by space/folder/list id"}
+- {tool: Start Time Tracking, category: Time tracking, rest: [StartatimeEntry], binding: rest, confidence: high}
+- {tool: Stop Time Tracking, category: Time tracking, rest: [StopatimeEntry], binding: rest, confidence: high}
+- {tool: Add Time Entry, category: Time tracking, rest: [Createatimeentry], binding: rest, confidence: high}
+- {tool: Get Current Time Entry, category: Time tracking, rest: [Getrunningtimeentry], binding: rest, confidence: high}
+- {tool: Create List, category: Workspace Hierarchy, rest: [CreateList, CreateFolderlessList], binding: rest, confidence: high, note: "Folder-scoped or Space-scoped depending on the target"}
+- {tool: Create List in Folder, category: Workspace Hierarchy, rest: [CreateList], binding: rest, confidence: high}
+- {tool: Get List, category: Workspace Hierarchy, rest: [GetList], binding: rest, confidence: high}
+- {tool: Update List, category: Workspace Hierarchy, rest: [UpdateList], binding: rest, confidence: high}
+- {tool: Get Folder, category: Workspace Hierarchy, rest: [GetFolder], binding: rest, confidence: high}
+- {tool: Create Folder, category: Workspace Hierarchy, rest: [CreateFolder], binding: rest, confidence: high}
+- {tool: Update Folder, category: Workspace Hierarchy, rest: [UpdateFolder], binding: rest, confidence: high}
+- {tool: Get Workspace Hierarchy, category: Workspace Hierarchy, rest: [GetAuthorizedTeams, GetSpaces, GetFolders, GetLists, GetFolderlessLists], binding: rest, confidence: medium, note: "composite - no single hierarchy endpoint exists; the server walks Workspace to Space to Folder to List"}
+- {tool: Get Workspace Members, category: Members and assignees, rest: [GetAuthorizedTeams], binding: rest, confidence: medium, note: "the v2 Workspace object carries the members[] array; there is no standalone list-members operation"}
+- {tool: Get Chat Channels, category: Chat, rest: [getChatChannels], binding: rest, confidence: high, note: "v3 operation"}
+- {tool: Send Chat Message, category: Chat, rest: [createChatMessage], binding: rest, confidence: high, note: "v3 operation"}
+- {tool: Create Document, category: Docs, rest: [createDocPublic], binding: rest, confidence: high, note: "v3 operation"}
+- {tool: List Document Pages, category: Docs, rest: [getDocPageListingPublic], binding: rest, confidence: high, note: "v3 operation"}
+- {tool: Get Document Pages, category: Docs, rest: [getDocPagesPublic, getPagePublic], binding: rest, confidence: high, note: "v3 operations"}
+- {tool: Create Document Page, category: Docs, rest: [createPagePublic], binding: rest, confidence: high, note: "v3 operation"}
+- {tool: Update Document Page, category: Docs, rest: [editPagePublic], binding: rest, confidence: high, note: "v3 operation"}
+- {tool: Get Time in Status for a task, category: Time in status reporting, rest: ["GetTask'sTimeinStatus"], binding: rest, confidence: high}
+- {tool: Get Time in Status for tasks in a List, category: Time in status reporting, rest: ["GetBulkTasks'TimeinStatus"], binding: rest, confidence: high}
+mcp_only:
+- {tool: Search Workspace, reason: "No public cross-entity search operation exists in either spec. v3 searchDocsPublic covers Docs only; there is no published endpoint that searches tasks, Lists, Folders and Docs together."}
+- {tool: Find Member by Name, reason: "Name/email lookup is a server-side convenience over the Workspace members[] array; no lookup-by-name operation is published."}
+- {tool: Resolve Assignees, reason: "Utility that resolves free-text assignee references to user objects; no backing public operation."}
+rest_only:
+- capability: Goals and Key Results
+  operations: [GetGoals, CreateGoal, GetGoal, UpdateGoal, DeleteGoal, CreateKeyResult, EditKeyResult, DeleteKeyResult]
+- capability: Views
+  operations: [GetTeamViews, CreateTeamView, GetSpaceViews, CreateSpaceView, GetFolderViews, CreateFolderView, GetListViews, CreateListView, GetView, UpdateView, DeleteView, GetViewTasks]
+- capability: Webhooks
+  operations: [GetWebhooks, CreateWebhook, UpdateWebhook, DeleteWebhook]
+- capability: Spaces
+  operations: [GetSpaces, CreateSpace, GetSpace, UpdateSpace, DeleteSpace]
+- capability: Users and guests (Enterprise)
+  operations: [InviteUserToWorkspace, GetUser, EditUserOnWorkspace, RemoveUserFromWorkspace, InviteGuestToWorkspace, GetGuest, EditGuestOnWorkspace, RemoveGuestFromWorkspace, AddGuestToTask, RemoveGuestFromTask, AddGuestToList, RemoveGuestFromList, AddGuestToFolder, RemoveGuestFromFolder]
+- capability: Checklists
+  operations: [CreateChecklist, EditChecklist, DeleteChecklist, CreateChecklistItem, EditChecklistItem, DeleteChecklistItem]
+- capability: Templates
+  operations: [GetTaskTemplates, GetListTemplates, GetFolderTemplates, CreateTaskFromTemplate, CreateFolderFromTemplate, CreateFolderListFromTemplate, CreateSpaceListFromTemplate]
+- capability: User Groups and roles
+  operations: [CreateUserGroup, UpdateTeam, DeleteTeam, GetTeams1, GetCustomRoles]
+- capability: Audit logs and ACLs (v3)
+  operations: [queryAuditLog, publicPatchAcl]
+- capability: Workspace billing/plan
+  operations: [GetWorkspaceseats, GetWorkspaceplan]
+- capability: OAuth
+  operations: [GetAccessToken, GetAuthorizedUser]
+coverage:
+  tools_documented: 48
+  tools_bound: 45
+  mcp_only: 3
+  rest_operations_total: 173
+  rest_operations_with_a_tool: 52
+  rest_only_capability_groups: 11

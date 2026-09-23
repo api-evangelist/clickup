@@ -1,7 +1,7 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: ClickUp Comments Authorization Folders API
-  description: The ClickUp Comments API provides endpoints for creating and retrieving comments on tasks, views, and lists. Comments support rich text formatting, mentions, and attachments. Developers can use this API to build integrations that synchronize discussions between ClickUp and other collaboration tools, or to programmatically add status updates and notes to tasks.
+  title: ClickUp Folders API
+  description: The ClickUp Folders API provides endpoints for managing Folders, which are optional organizational containers that sit between Spaces and Lists in the ClickUp hierarchy. Folders group related Lists together and can be used to organize projects or workstreams within a Space. Developers can create, update, delete, and retrieve Folders and their associated Lists.
   version: '2.0'
   contact:
     name: ClickUp Support
@@ -137,7 +137,38 @@ paths:
         '404':
           description: Folder not found
 components:
+  parameters:
+    spaceId:
+      name: space_id
+      in: path
+      required: true
+      description: The unique identifier of the Space.
+      schema:
+        type: integer
+    folderId:
+      name: folder_id
+      in: path
+      required: true
+      description: The unique identifier of the Folder.
+      schema:
+        type: integer
   schemas:
+    CreateFolderRequest:
+      type: object
+      required:
+      - name
+      description: Request body for creating a new Folder.
+      properties:
+        name:
+          type: string
+          description: The name of the Folder.
+    UpdateFolderRequest:
+      type: object
+      description: Request body for updating an existing Folder.
+      properties:
+        name:
+          type: string
+          description: The updated name of the Folder.
     Folder:
       type: object
       description: A Folder object representing an organizational container within a Space.
@@ -251,42 +282,11 @@ components:
         permission_level:
           type: string
           description: The permission level of the Folder.
-    CreateFolderRequest:
-      type: object
-      required:
-      - name
-      description: Request body for creating a new Folder.
-      properties:
-        name:
-          type: string
-          description: The name of the Folder.
-    UpdateFolderRequest:
-      type: object
-      description: Request body for updating an existing Folder.
-      properties:
-        name:
-          type: string
-          description: The updated name of the Folder.
-  parameters:
-    folderId:
-      name: folder_id
-      in: path
-      required: true
-      description: The unique identifier of the Folder.
-      schema:
-        type: integer
-    spaceId:
-      name: space_id
-      in: path
-      required: true
-      description: The unique identifier of the Space.
-      schema:
-        type: integer
   securitySchemes:
     bearerAuth:
       type: http
       scheme: bearer
       description: ClickUp personal API token or OAuth access token.
 externalDocs:
-  description: ClickUp Comments API Documentation
-  url: https://developer.clickup.com/reference/get-task-comments
+  description: ClickUp Folders API Documentation
+  url: https://developer.clickup.com/reference/get-folders

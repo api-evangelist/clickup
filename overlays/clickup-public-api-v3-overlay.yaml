@@ -1,0 +1,25 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for ClickUp Public API v3
+  version: 1.0.0
+extends: openapi/clickup-public-api-v3-openapi.json
+x-generated: '2026-09-17'
+x-method: generated
+x-source: >-
+  API Evangelist enrichment pass 2026-09-17. Captures OUR annotations over the provider's verbatim spec;
+  the original document is never mutated.
+actions:
+  - target: $.info
+    update:
+      x-apievangelist-provider: clickup
+      x-apievangelist-harvested-from: https://developer.clickup.com/openapi/ClickUp_PUBLIC_API_V3.yaml
+      x-apievangelist-discovered-via: https://developer.clickup.com/.well-known/api-catalog
+      x-apievangelist-pagination: cursor + limit, following next_cursor (v2 uses page numbers and comment keyset paging)
+      x-apievangelist-artifacts:
+        conventions: conventions/clickup-conventions.yml
+        data_model: data-model/clickup-data-model.yml
+        skills: skills/clickup-work-with-docs-and-chat.md
+      x-apievangelist-gaps:
+        - info.version is the literal string "version" rather than a release identifier
+        - no deprecation metadata; v2 and v3 run concurrently with no stated migration path
+        - 228 component schemas, most of them per-operation wrappers rather than reusable domain objects

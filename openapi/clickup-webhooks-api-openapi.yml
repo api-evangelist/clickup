@@ -1,7 +1,7 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: ClickUp Comments Authorization Webhooks API
-  description: The ClickUp Comments API provides endpoints for creating and retrieving comments on tasks, views, and lists. Comments support rich text formatting, mentions, and attachments. Developers can use this API to build integrations that synchronize discussions between ClickUp and other collaboration tools, or to programmatically add status updates and notes to tasks.
+  title: ClickUp Webhooks API
+  description: The ClickUp Webhooks API enables developers to subscribe to real-time events within a Workspace. When subscribed events occur, ClickUp sends HTTP POST requests to a specified endpoint URL with event details. Webhooks support events for tasks, lists, folders, spaces, and goals. Each webhook payload is signed with a shared secret for verification, ensuring the event originated from ClickUp.
   version: '2.0'
   contact:
     name: ClickUp Support
@@ -120,21 +120,6 @@ paths:
         '404':
           description: Webhook not found
 components:
-  parameters:
-    webhookId:
-      name: webhook_id
-      in: path
-      required: true
-      description: The unique identifier of the webhook.
-      schema:
-        type: string
-    teamId:
-      name: team_id
-      in: path
-      required: true
-      description: The unique identifier of the Workspace (team).
-      schema:
-        type: integer
   schemas:
     Webhook:
       type: object
@@ -220,6 +205,25 @@ components:
         secret:
           type: string
           description: The shared secret for HMAC-SHA256 signature verification. Only returned when the webhook is first created.
+    UpdateWebhookRequest:
+      type: object
+      description: Request body for updating an existing webhook subscription.
+      properties:
+        endpoint:
+          type: string
+          format: uri
+          description: The updated endpoint URL.
+        events:
+          type: array
+          items:
+            type: string
+          description: Updated array of event names to subscribe to.
+        status:
+          type: string
+          enum:
+          - active
+          - inactive
+          description: Set the webhook status to active or inactive.
     CreateWebhookRequest:
       type: object
       required:
@@ -248,30 +252,26 @@ components:
         space_id:
           type: integer
           description: Optional space ID to scope webhook events to a specific space.
-    UpdateWebhookRequest:
-      type: object
-      description: Request body for updating an existing webhook subscription.
-      properties:
-        endpoint:
-          type: string
-          format: uri
-          description: The updated endpoint URL.
-        events:
-          type: array
-          items:
-            type: string
-          description: Updated array of event names to subscribe to.
-        status:
-          type: string
-          enum:
-          - active
-          - inactive
-          description: Set the webhook status to active or inactive.
+  parameters:
+    teamId:
+      name: team_id
+      in: path
+      required: true
+      description: The unique identifier of the Workspace (team).
+      schema:
+        type: integer
+    webhookId:
+      name: webhook_id
+      in: path
+      required: true
+      description: The unique identifier of the webhook.
+      schema:
+        type: string
   securitySchemes:
     bearerAuth:
       type: http
       scheme: bearer
       description: ClickUp personal API token or OAuth access token.
 externalDocs:
-  description: ClickUp Comments API Documentation
-  url: https://developer.clickup.com/reference/get-task-comments
+  description: ClickUp Webhooks Documentation
+  url: https://developer.clickup.com/docs/webhooks

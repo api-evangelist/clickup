@@ -1,0 +1,146 @@
+generated: '2026-09-17'
+method: searched
+source: >-
+  https://developer.clickup.com/docs/authentication, /docs/rate-limits, /docs/common_errors,
+  /docs/task-comments-pagination, /docs/faq, /docs/general-v2-v3-api, plus derivation from
+  openapi/clickup-api-v2-reference-openapi.json and openapi/clickup-public-api-v3-openapi.json
+authentication:
+  style: single Authorization header carrying either a personal token (pk_...) or an OAuth Bearer token
+  detail: authentication/clickup-authentication.yml
+content_type:
+  request: application/json
+  note: >-
+    The FAQ states form-encoded bodies are not fully supported and can produce unexpected results —
+    always send application/json. File upload is the exception (CreateTaskAttachment is multipart/form-data).
+  responses: application/json only (233 declared response media types across both specs, all application/json)
+versioning:
+  style: uri-path
+  values: [/api/v2, /api/v3]
+  detail: lifecycle/clickup-lifecycle.yml
+  terminology_shift: v2 "team" == v3 "workspace"; team_id is a Workspace id, group_id is a user group
+pagination:
+  styles:
+  - surface: v2 list endpoints
+    style: page-number
+    params: [page]
+    response_field: last_page
+    note: 0-indexed `page`; iterate until last_page is true. GetFilteredTeamTasks caps at 100 tasks per page.
+  - surface: v2 comments
+    style: keyset
+    params: [start, start_id]
+    note: >-
+      Comments return the 25 most recent by default; pass `start` and `start_id` TOGETHER, taken from the
+      last comment of the current response, to walk backwards. Documented at
+      https://developer.clickup.com/docs/task-comments-pagination
+  - surface: v3 (Chat, Docs)
+    style: cursor
+    params: [cursor, limit]
+    response_field: next_cursor
+    note: 9 v3 operations take cursor+limit and return next_cursor.
+  consistency: >-
+    Three different pagination idioms across one product — an agent cannot apply one loop to the whole
+    surface and must branch on version and resource.
+filtering_and_expansion:
+  custom_field_filters:
+    docs: https://developer.clickup.com/docs/taskfilters
+    note: JSON-encoded custom_fields filter array on GetTasks and GetFilteredTeamTasks, plus a range operator.
+  sparse_fields: false
+  expansion: false
+idempotency:
+  supported: false
+  coverage: none
+  mechanism: null
+  header: null
+  finding: >-
+    No idempotency mechanism exists. Neither published spec declares an Idempotency-Key parameter
+    (0 occurrences across 173 operations) and no docs page describes replay protection. A retried
+    CreateTask creates a second task; a retried CreateTaskComment posts a second comment. Agents must
+    de-duplicate client-side, typically by searching for the just-created entity before retrying.
+reversibility:
+  grade: documented
+  overall_note: >-
+    ClickUp ships reversal OPERATIONS for most relational writes but publishes NO window for any of
+    them, so this grades `documented`, not `verified`. No restore/undelete operation exists in either
+    contract: DeleteTask, DeleteList, DeleteFolder, DeleteSpace and DeleteView have no API-side undo.
+    Deleted items land in the Workspace Trash in the ClickUp UI, but the Trash is not exposed in either
+    published spec, so from an API consumer's point of view a delete is terminal. No window is asserted
+    here because the provider states none.
+  surfaces:
+  - write: CreateTask
+    reversal: DeleteTask
+    window: null
+    note: Deletes the task; no API restore path. Trash recovery is UI-only and undocumented in the API.
+  - write: AddTagToTask
+    reversal: RemoveTagFromTask
+    window: null
+  - write: AddDependency
+    reversal: DeleteDependency
+    window: null
+  - write: AddTaskLink
+    reversal: DeleteTaskLink
+    window: null
+  - write: AddTaskToList
+    reversal: RemoveTaskFromList
+    window: null
+  - write: SetCustomFieldValue
+    reversal: RemoveCustomFieldValue
+    window: null
+  - write: Createatimeentry
+    reversal: DeleteatimeEntry
+    window: null
+  - write: StartatimeEntry
+    reversal: StopatimeEntry
+    window: null
+    note: Stop ends the running timer; the entry itself is then removable with DeleteatimeEntry.
+  - write: CreateWebhook
+    reversal: DeleteWebhook
+    window: null
+  - write: AddGuestToTask
+    reversal: RemoveGuestFromTask
+    window: null
+  - write: InviteUserToWorkspace
+    reversal: RemoveUserFromWorkspace
+    window: null
+  irreversible:
+  - operation: mergeTasks
+    note: Merging tasks has no published unmerge operation.
+  - operation: DeleteTask
+    note: No restore operation in either spec.
+  - operation: DeleteList
+  - operation: DeleteFolder
+  - operation: DeleteSpace
+  - operation: deleteChatMessage
+dry_run_mode:
+  supported: false
+  note: No preview/validate-only parameter appears in either spec.
+metadata:
+  custom_fields: >-
+    Custom Fields are the metadata surface — read with GetAccessibleCustomFields (List),
+    getFolderAvailableFields, getSpaceAvailableFields, getTeamAvailableFields; written with
+    SetCustomFieldValue. Fields scoped to a custom task type carry an applied_objects array.
+request_tracing:
+  request_id_header: null
+  note: No request-id or correlation header is documented; support requests are filed through the help center.
+error_envelope:
+  media_type: application/json
+  shape: '{"err": "...", "ECODE": "..."} (some v2 responses add "message")'
+  rfc9457: false
+  detail: errors/clickup-problem-types.yml
+  codes: errors/clickup-error-codes.yml
+rate_limit_signaling:
+  status: 429
+  headers: [X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset]
+  reset_format: unix timestamp
+  scope: per token (personal or OAuth), varying by the Workspace plan hosting the token
+  detail: rate-limits/clickup-rate-limits.yml
+  docs: https://developer.clickup.com/docs/rate-limits
+webhooks:
+  signature: HMAC-SHA256 in X-Signature with a per-webhook secret
+  health: >-
+    Webhooks carry a health status and stop firing when the creating user is disabled; see
+    https://developer.clickup.com/docs/webhookhealth
+  dedicated_ips: false
+  detail: asyncapi/clickup-webhooks-asyncapi.yml
+cors:
+  browser_callable: false
+  note: Direct browser calls are blocked by CORS policy; ClickUp tells integrators to proxy server-side.

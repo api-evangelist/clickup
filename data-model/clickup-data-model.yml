@@ -1,0 +1,134 @@
+generated: '2026-09-17'
+method: derived
+source: >-
+  openapi/clickup-api-v2-reference-openapi.json (path structure and id parameters),
+  openapi/clickup-public-api-v3-openapi.json (228 component schemas),
+  https://developer.clickup.com/docs/general-v2-v3-api and /docs/faq for the hierarchy and id semantics
+note: >-
+  ClickUp's data model is a strict containment hierarchy that the URL paths encode directly, so the
+  relationships below are read off path nesting and id path-parameters rather than $ref graphs — the v2
+  document declares no components.schemas at all (inline schemas only), and the v3 document's 228
+  schemas are mostly per-operation request/response wrappers.
+id_conventions:
+  format: opaque numeric-or-alphanumeric strings
+  note: >-
+    ClickUp uses no typed id prefixes (no `task_`/`cus_` style). Ids are positional: team_id is a
+    Workspace id in v2, workspace_id in v3, group_id is a user group. Custom task type ids appear as
+    custom_item_id on a task and as object_id inside a Custom Field's applied_objects entry.
+entities:
+- name: Workspace
+  aka: [Team (v2)]
+  id_param: team_id (v2) / workspace_id (v3)
+  operations: [GetAuthorizedTeams, GetWorkspaceseats, GetWorkspaceplan]
+  relationships:
+  - {has_many: Space, via: team_id, operation: GetSpaces}
+  - {has_many: Goal, via: team_id, operation: GetGoals}
+  - {has_many: Webhook, via: team_id, operation: GetWebhooks}
+  - {has_many: UserGroup, via: team_id, operation: GetTeams1}
+  - {has_many: CustomTaskType, via: team_id, operation: GetCustomItems}
+  - {has_many: TimeEntry, via: team_id, operation: Gettimeentrieswithinadaterange}
+  - {has_many: View, via: team_id, operation: GetTeamViews}
+  - {has_many: User, via: team_id, operation: GetUser}
+  - {has_many: Doc, via: workspace_id, operation: searchDocsPublic}
+  - {has_many: ChatChannel, via: workspace_id, operation: getChatChannels}
+- name: Space
+  id_param: space_id
+  operations: [GetSpace, CreateSpace, UpdateSpace, DeleteSpace]
+  relationships:
+  - {belongs_to: Workspace, via: team_id}
+  - {has_many: Folder, via: space_id, operation: GetFolders}
+  - {has_many: List, via: space_id, operation: GetFolderlessLists, note: folderless Lists}
+  - {has_many: Tag, via: space_id, operation: GetSpaceTags}
+  - {has_many: View, via: space_id, operation: GetSpaceViews}
+- name: Folder
+  aka: [Project (legacy term)]
+  id_param: folder_id
+  operations: [GetFolder, CreateFolder, UpdateFolder, DeleteFolder, MoveFolder]
+  relationships:
+  - {belongs_to: Space, via: space_id}
+  - {has_many: List, via: folder_id, operation: GetLists}
+  - {has_many: View, via: folder_id, operation: GetFolderViews}
+- name: List
+  id_param: list_id
+  operations: [GetList, CreateList, CreateFolderlessList, UpdateList, DeleteList]
+  relationships:
+  - {belongs_to: Folder, via: folder_id, note: optional — a List can hang directly off a Space}
+  - {has_many: Task, via: list_id, operation: GetTasks}
+  - {has_many: CustomField, via: list_id, operation: GetAccessibleCustomFields}
+  - {has_many: Comment, via: list_id, operation: GetListComments}
+  - {has_many: View, via: list_id, operation: GetListViews}
+  - {has_many: Member, via: list_id, operation: GetListMembers}
+- name: Task
+  id_param: task_id
+  operations: [GetTask, CreateTask, UpdateTask, DeleteTask, GetFilteredTeamTasks, mergeTasks, moveTask]
+  relationships:
+  - {belongs_to: List, via: list_id, note: the "home List"; a task can be added to further Lists with AddTaskToList}
+  - {has_one: Task, via: parent, as: parent_task, note: a task with a non-null `parent` is a subtask}
+  - {has_many: Comment, via: task_id, operation: GetTaskComments}
+  - {has_many: Attachment, via: task_id, operation: CreateTaskAttachment}
+  - {has_many: Checklist, via: task_id, operation: CreateChecklist}
+  - {has_many: TimeEntry, via: task_id, operation: Gettrackedtime}
+  - {has_many: Tag, via: task_id, operation: AddTagToTask}
+  - {has_many: Dependency, via: task_id, operation: AddDependency}
+  - {has_many: TaskLink, via: links_to, operation: AddTaskLink}
+  - {has_one: CustomTaskType, via: custom_item_id}
+- name: Comment
+  id_param: comment_id
+  operations: [CreateTaskComment, CreateListComment, CreateChatViewComment, UpdateComment, DeleteComment]
+  relationships:
+  - {belongs_to: Task, via: task_id}
+  - {has_many: Comment, via: comment_id, as: threaded_replies, operation: GetThreadedComments}
+- name: Checklist
+  id_param: checklist_id
+  relationships:
+  - {belongs_to: Task, via: task_id}
+  - {has_many: ChecklistItem, via: checklist_id, operation: CreateChecklistItem}
+- name: CustomField
+  id_param: field_id
+  operations: [GetAccessibleCustomFields, getFolderAvailableFields, getSpaceAvailableFields, getTeamAvailableFields, SetCustomFieldValue, RemoveCustomFieldValue]
+  relationships:
+  - {belongs_to: List, via: list_id}
+  - {has_many: CustomTaskType, via: applied_objects, note: "object_type 19 identifies a custom task type; object_id matches custom_item_id on a task"}
+- name: Goal
+  id_param: goal_id
+  relationships:
+  - {belongs_to: Workspace, via: team_id}
+  - {has_many: KeyResult, via: goal_id, operation: CreateKeyResult}
+- name: TimeEntry
+  id_param: timer_id
+  operations: [Createatimeentry, StartatimeEntry, StopatimeEntry, Getrunningtimeentry, DeleteatimeEntry]
+  relationships:
+  - {belongs_to: Workspace, via: team_id}
+  - {belongs_to: Task, via: task_id}
+  - {has_many: Tag, via: team_id, operation: Getalltagsfromtimeentries}
+- name: View
+  id_param: view_id
+  relationships:
+  - {belongs_to: Workspace|Space|Folder|List, via: the creating level}
+  - {has_many: Task, via: view_id, operation: GetViewTasks}
+- name: Webhook
+  id_param: webhook_id
+  relationships:
+  - {belongs_to: Workspace, via: team_id}
+  - {has_one: Space|Folder|List|Task, via: location filter, note: one location per hierarchy level per webhook}
+- name: Doc
+  id_param: doc_id
+  version: v3
+  relationships:
+  - {belongs_to: Workspace, via: workspace_id}
+  - {has_many: Page, via: doc_id, operation: getDocPagesPublic}
+- name: ChatChannel
+  id_param: channel_id
+  version: v3
+  relationships:
+  - {belongs_to: Workspace, via: workspace_id}
+  - {has_one: Space|Folder|List, via: location, operation: createLocationChatChannel}
+  - {has_many: ChatMessage, via: channel_id, operation: getChatMessages}
+- name: ChatMessage
+  id_param: message_id
+  version: v3
+  relationships:
+  - {belongs_to: ChatChannel, via: channel_id}
+  - {has_many: ChatReaction, via: message_id, operation: getChatMessageReactions}
+  - {has_many: ChatMessage, via: message_id, as: replies, operation: getChatMessageReplies}
+hierarchy: Workspace > Space > Folder (optional) > List > Task > Subtask

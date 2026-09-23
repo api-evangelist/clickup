@@ -4,22 +4,28 @@ schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main
 provider: ClickUp
 providerId: clickup
 created: '2026-05-04'
-# Provenance stamped 2026-08-11: this artifact was written by the API Evangelist
-# bulk sweep dated 2026-05-04, not harvested from the provider. See roadmap#35.
-method: generated
-modified: '2026-05-04'
+generated: '2026-09-17'
+method: searched
+modified: '2026-09-17'
 reconciled: true
 tags:
   - Project Management
   - Productivity
-description: ClickUp per-user pricing across Free, Unlimited, Business, Enterprise (annual rates).
+description: >-
+  ClickUp seat pricing read from https://clickup.com/pricing on 2026-09-17. Four platform tiers (Free
+  Forever, Unlimited, Business, Enterprise) plus two AI add-ons priced per user. The API is included on
+  every plan — what the plan buys, API-side, is the per-token rate limit and a handful of Enterprise-only
+  endpoints (Users and Guests management), not access itself.
 sources:
   - https://clickup.com/pricing
+  - https://developer.clickup.com/docs/apis-available-by-plan
+  - https://developer.clickup.com/docs/rate-limits
+plan_count: 6
 plans:
   - id: clickup-free
     name: Free Forever
     type: freemium
-    description: 60MB storage; unlimited tasks.
+    description: 60MB storage, unlimited tasks and members, 5 active automation rules, 100 automation executions.
     entries:
       - label: Per user
         name: seat
@@ -38,23 +44,19 @@ plans:
         limit: 60
         timeFrame: month
         geo: global
-        unit: 1
-        price: '0.00'
-        userMultiplied: false
-    elements:
-      - name: Unlimited tasks
-      - name: Unlimited members
-      - name: 2FA
-      - name: Collaborative Docs
-      - name: Kanban
-      - name: Sprint Management
-      - name: 1 Form
+      - label: API rate limit
+        name: api_requests
+        type: quota
+        metric: requests_per_minute
+        limit: 100
+        timeFrame: minute
+        geo: global
   - id: clickup-unlimited
     name: Unlimited
-    type: paid
-    description: $7/user/month annual.
+    type: subscription
+    description: Unlimited storage, 500 active automation rules, 1,000 automation executions. $10/user month-to-month.
     entries:
-      - label: Per user
+      - label: Per user (annual)
         name: seat
         type: subscription
         metric: user
@@ -63,18 +65,67 @@ plans:
         geo: global
         unit: 1
         price: '7.00'
+        currency: USD
         userMultiplied: true
-    elements:
-      - name: Unlimited spaces/folders/forms
-      - name: Unlimited Gantt/integrations/storage/custom fields
-      - name: Native time tracking
-      - name: Goals & portfolio
-      - name: Resource management
-      - name: ClickUp Chat
+      - label: Per user (monthly)
+        name: seat-monthly
+        type: subscription
+        metric: user
+        limit: -1
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: '10.00'
+        currency: USD
+        userMultiplied: true
+      - label: API rate limit
+        name: api_requests
+        type: quota
+        metric: requests_per_minute
+        limit: 100
+        timeFrame: minute
+        geo: global
   - id: clickup-business
     name: Business
-    type: paid
-    description: $12/user/month annual.
+    type: subscription
+    description: Unlimited automation rules, 5,000 automation executions, unlimited dashboards with advanced cards. $19/user month-to-month.
+    entries:
+      - label: Per user (annual)
+        name: seat
+        type: subscription
+        metric: user
+        limit: -1
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: '12.00'
+        currency: USD
+        userMultiplied: true
+      - label: Per user (monthly)
+        name: seat-monthly
+        type: subscription
+        metric: user
+        limit: -1
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: '19.00'
+        currency: USD
+        userMultiplied: true
+      - label: API rate limit
+        name: api_requests
+        type: quota
+        metric: requests_per_minute
+        limit: 100
+        timeFrame: minute
+        geo: global
+  - id: clickup-enterprise
+    name: Enterprise
+    type: enterprise
+    description: >-
+      Custom priced (contact sales). 250,000 automation executions, SAML/SCIM provisioning, MSA/HIPAA
+      terms, data residency. Unlocks the Enterprise-only API surface — Users and Guests management — and
+      the 10,000 req/min token limit.
     entries:
       - label: Per user
         name: seat
@@ -84,22 +135,22 @@ plans:
         timeFrame: month
         geo: global
         unit: 1
-        price: '12.00'
+        price: null
+        currency: USD
         userMultiplied: true
-    elements:
-      - name: Unlimited dashboards/message history
-      - name: Unlimited activity/timeline views
-      - name: Webhooks & automation integrations
-      - name: 5K automations/month
-      - name: Mind mapping
-      - name: Custom exporting
-      - name: Google SSO
-  - id: clickup-enterprise
-    name: Enterprise
-    type: enterprise
-    description: Custom pricing.
+      - label: API rate limit
+        name: api_requests
+        type: quota
+        metric: requests_per_minute
+        limit: 10000
+        timeFrame: minute
+        geo: global
+  - id: clickup-brain-ai
+    name: Brain AI (add-on)
+    type: add-on
+    description: Per-user AI add-on layered on any plan.
     entries:
-      - label: Per user (custom)
+      - label: Per user
         name: seat
         type: subscription
         metric: user
@@ -107,15 +158,24 @@ plans:
         timeFrame: month
         geo: global
         unit: 1
-        price: custom
+        price: '9.00'
+        currency: USD
         userMultiplied: true
-    elements:
-      - name: Enterprise permissions/governance
-      - name: Unlimited custom roles
-      - name: SAML SSO + SCIM
-      - name: Audit log
-      - name: 250K automations/month
-      - name: Custom branding
-      - name: MSA & HIPAA
-      - name: Data residency
-      - name: CSM
+  - id: clickup-everything-ai
+    name: Everything AI (add-on)
+    type: add-on
+    description: >-
+      Per-user AI add-on. Materially changes the API posture: with Everything AI, MCP server rate limits
+      match the public API limits for the plan instead of the reduced no-add-on limits.
+    entries:
+      - label: Per user
+        name: seat
+        type: subscription
+        metric: user
+        limit: -1
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: '28.00'
+        currency: USD
+        userMultiplied: true
