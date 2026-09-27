@@ -1,21 +1,1053 @@
 openapi: 3.2.0
 info:
-  title: ClickUp Comments API
-  description: The ClickUp Comments API provides endpoints for creating and retrieving comments on tasks, views, and lists. Comments support rich text formatting, mentions, and attachments. Developers can use this API to build integrations that synchronize discussions between ClickUp and other collaboration tools, or to programmatically add status updates and notes to tasks.
-  version: '2.0'
-  contact:
-    name: ClickUp Support
-    url: https://help.clickup.com
-  termsOfService: https://clickup.com/terms
+  title: Clickup Comments API
+  version: '1.0'
+  description: 'Operations tagged Comments across 5 of this provider''s published API definitions: clickup-api-v2-reference-openapi.json, clickup-comments-openapi.yml, clickup-public-api-v3-openapi.json, clickup-api-v2-reference-openapi.json, clickup-public-api-v3-openapi.json. Each path carries the servers of the definition it was published in.'
 servers:
+- url: https://api.clickup.com/api
+  description: ClickUp
+  variables: {}
 - url: https://api.clickup.com/api/v2
   description: ClickUp API v2 Production Server
-security:
-- bearerAuth: []
+- url: https://api.clickup.com/
+  description: ClickUp
 tags:
 - name: Comments
-  description: Operations for managing comments on tasks, views, and lists.
 paths:
+  /v2/task/{task_id}/comment:
+    parameters: []
+    get:
+      summary: Get Task Comments
+      description: 'View task comments. \
+
+        \
+
+        Retrieve comments from a task. Results are returned in reverse chronological order (newest to oldest). By default, the request returns the 25 most recent comments.\
+
+        \
+
+        Pagination: To fetch the next page of history (older comments), you must use the `start` and `start_id` parameters together, using the data from the last comment of the current response.'
+      tags:
+      - Comments
+      operationId: GetTaskComments
+      parameters:
+      - name: task_id
+        in: path
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: string
+          examples:
+          - 9hz
+      - name: custom_task_ids
+        in: query
+        description: If you want to reference a task by it's custom task id, this value must be `true`.
+        style: form
+        explode: true
+        schema:
+          type: boolean
+          examples:
+          - true
+      - name: team_id
+        in: query
+        description: "When the `custom_task_ids` parameter is set to `true`, the Workspace ID must be provided using the `team_id` parameter.\n \\\nFor example: `custom_task_ids=true&team_id=123`."
+        style: form
+        explode: true
+        schema:
+          type: number
+          contentEncoding: double
+          examples:
+          - 123
+      - name: start
+        in: query
+        description: "The Unix timestamp (in milliseconds) of the reference comment. Required for pagination. Must be used in combination with `start_id`.\n\\\n Value should be the `date` of the last comment from the previous response."
+        style: form
+        explode: true
+        schema:
+          type: integer
+          contentEncoding: int32
+      - name: start_id
+        in: query
+        description: "The unique ID of the reference comment. Required for pagination. Must be used in combination with `start`. \n\\\n Value should be the `id` of the last comment from the previous response."
+        style: form
+        explode: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          headers: {}
+          content:
+            application/json:
+              schema:
+                title: GetTaskCommentsresponse
+                required:
+                - comments
+                type: object
+                properties:
+                  comments:
+                    type: array
+                    items:
+                      title: Comment
+                      required:
+                      - id
+                      - comment
+                      - comment_text
+                      - user
+                      - resolved
+                      - assignee
+                      - assigned_by
+                      - reactions
+                      - date
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        comment:
+                          type: array
+                          items:
+                            title: Comment1
+                            required:
+                            - text
+                            type: object
+                            properties:
+                              text:
+                                type: string
+                            examples:
+                            - text: Task comment content
+                          description: ''
+                        comment_text:
+                          type: string
+                        user:
+                          $ref: '#/paths/~1v2~1task~1{task_id}/get/responses/200/content/application~1json/schema/properties/attachments/items/properties/user'
+                        resolved:
+                          type: boolean
+                        assignee:
+                          title: Assignee
+                          required:
+                          - id
+                          - username
+                          - email
+                          - color
+                          - initials
+                          - profilePicture
+                          type: object
+                          properties:
+                            id:
+                              type: integer
+                              contentEncoding: int32
+                            username:
+                              type: string
+                            email:
+                              type: string
+                            color:
+                              type: string
+                            initials:
+                              type: string
+                            profilePicture:
+                              type: string
+                          examples:
+                          - id: 183
+                            username: John Doe
+                            email: example@email.com
+                            color: '#827718'
+                            initials: JD
+                            profilePicture: https://attachments.clickup.com/profilePictures/183_nx1.jpg
+                        assigned_by:
+                          title: AssignedBy
+                          required:
+                          - id
+                          - username
+                          - initials
+                          - email
+                          - color
+                          - profilePicture
+                          type: object
+                          properties:
+                            id:
+                              type: integer
+                              contentEncoding: int32
+                            username:
+                              type: string
+                            initials:
+                              type: string
+                            email:
+                              type: string
+                            color:
+                              type: string
+                            profilePicture:
+                              type: string
+                          examples:
+                          - id: 183
+                            username: John Doe
+                            initials: JD
+                            email: johndoe@gmail.com
+                            color: '#827718'
+                            profilePicture: https://attachments-public.clickup.com/profilePictures/183_abc.jpg
+                        reactions:
+                          type: array
+                          items:
+                            type: string
+                          description: ''
+                        date:
+                          type: string
+                        reply_count:
+                          type: string
+                          description: For threaded comments, `reply_count` is always 0.
+                      examples:
+                      - id: '458'
+                        comment:
+                        - text: Task comment content
+                        comment_text: Task comment content
+                        user:
+                          id: 183
+                          username: John Doe
+                          initials: JD
+                          email: johndoe@gmail.com
+                          color: '#827718'
+                          profilePicture: https://attachments-public.clickup.com/profilePictures/183_abc.jpg
+                        resolved: false
+                        assignee:
+                          id: 183
+                          username: John Doe
+                          initials: JD
+                          email: johndoe@gmail.com
+                          color: '#827718'
+                          profilePicture: https://attachments-public.clickup.com/profilePictures/183_abc.jpg
+                        assigned_by:
+                          id: 183
+                          username: John Doe
+                          initials: JD
+                          email: johndoe@gmail.com
+                          color: '#827718'
+                          profilePicture: https://attachments-public.clickup.com/profilePictures/183_abc.jpg
+                        reactions: []
+                        date: '1568036964079'
+                        reply_count: '1'
+                    description: ''
+                examples:
+                - comments:
+                  - id: '458'
+                    comment:
+                    - text: Task comment content
+                    comment_text: Task comment content
+                    user:
+                      id: 183
+                      username: John Doe
+                      initials: JD
+                      email: johndoe@gmail.com
+                      color: '#827718'
+                      profilePicture: https://attachments-public.clickup.com/profilePictures/183_abc.jpg
+                    resolved: false
+                    assignee:
+                      id: 183
+                      username: John Doe
+                      initials: JD
+                      email: johndoe@gmail.com
+                      color: '#827718'
+                      profilePicture: https://attachments-public.clickup.com/profilePictures/183_abc.jpg
+                    assigned_by:
+                      id: 183
+                      username: John Doe
+                      initials: JD
+                      email: johndoe@gmail.com
+                      color: '#827718'
+                      profilePicture: https://attachments-public.clickup.com/profilePictures/183_abc.jpg
+                    reactions: []
+                    date: '1568036964079'
+                    reply_count: '1'
+              example:
+                comments:
+                - id: '458'
+                  comment:
+                  - text: Task comment content
+                  comment_text: Task comment content
+                  user:
+                    id: 183
+                    username: John Doe
+                    initials: JD
+                    email: johndoe@gmail.com
+                    color: '#827718'
+                    profilePicture: https://attachments-public.clickup.com/profilePictures/183_abc.jpg
+                  resolved: false
+                  assignee:
+                    id: 183
+                    username: John Doe
+                    initials: JD
+                    email: johndoe@gmail.com
+                    color: '#827718'
+                    profilePicture: https://attachments-public.clickup.com/profilePictures/183_abc.jpg
+                  assigned_by:
+                    id: 183
+                    username: John Doe
+                    initials: JD
+                    email: johndoe@gmail.com
+                    color: '#827718'
+                    profilePicture: https://attachments-public.clickup.com/profilePictures/183_abc.jpg
+                  reactions: []
+                  date: '1568036964079'
+                  reply_count: '1'
+      deprecated: false
+      security:
+      - Authorization_Token: []
+    post:
+      summary: Create Task Comment
+      tags:
+      - Comments
+      description: Add a new comment to a task.
+      operationId: CreateTaskComment
+      parameters:
+      - name: task_id
+        in: path
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: string
+          examples:
+          - 9hz
+      - name: custom_task_ids
+        in: query
+        description: If you want to reference a task by it's custom task id, this value must be `true`.
+        style: form
+        explode: true
+        schema:
+          type: boolean
+          examples:
+          - true
+      - name: team_id
+        in: query
+        description: "When the `custom_task_ids` parameter is set to `true`, the Workspace ID must be provided using the `team_id` parameter.\n \\\nFor example: `custom_task_ids=true&team_id=123`."
+        style: form
+        explode: true
+        schema:
+          type: number
+          contentEncoding: double
+          examples:
+          - 123
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              title: CreateTaskCommentrequest
+              required:
+              - comment_text
+              - notify_all
+              type: object
+              properties:
+                comment_text:
+                  type: string
+                assignee:
+                  type: integer
+                  contentEncoding: int32
+                group_assignee:
+                  type: string
+                  contentEncoding: int32
+                  description: ''
+                notify_all:
+                  description: If `notify_all` is true, the creator of the comment will also be notified. Other assignees and watchers on the task are always notified regardless of this setting.
+                  type: boolean
+              examples:
+              - comment_text: Task comment content
+                assignee: 183
+                group_assignee: d01f92f-48ca-446d-88a1-0beb0e8f5f14
+                notify_all: true
+            example:
+              comment_text: Task comment content
+              assignee: 183
+              group_assignee: dd01f92f-48ca-446d-88a1-0beb0e8f5f14
+              notify_all: true
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+          content:
+            application/json:
+              schema:
+                title: CreateTaskCommentresponse
+                required:
+                - id
+                - hist_id
+                - date
+                type: object
+                properties:
+                  id:
+                    type: string
+                  hist_id:
+                    type: string
+                  date:
+                    type: integer
+                    contentEncoding: int64
+                examples:
+                - id: '458'
+                  hist_id: '26508'
+                  date: 1568036964079
+              example:
+                id: '458'
+                hist_id: '26508'
+                date: 1568036964079
+      deprecated: false
+      security:
+      - Authorization_Token: []
+    servers:
+    - url: https://api.clickup.com/api
+      description: ClickUp
+      variables: {}
+  /v2/view/{view_id}/comment:
+    parameters: []
+    get:
+      summary: Get Chat View Comments
+      description: 'View comments from a Chat view. \
+
+        \
+
+        If you do not include the `start` and `start_id` parameters, this endpoint will return the most recent 25 comments.\
+
+        \
+
+        Use the `start` and `start id` parameters of the oldest comment to retrieve the next 25 comments.'
+      tags:
+      - Comments
+      operationId: GetChatViewComments
+      parameters:
+      - name: view_id
+        in: path
+        description: 105 (string)
+        required: true
+        style: simple
+        schema:
+          type: string
+          examples:
+          - 3c
+      - name: start
+        in: query
+        description: Enter the `date` of a Chat view comment using Unix time in milliseconds.
+        style: form
+        explode: true
+        schema:
+          type: integer
+          contentEncoding: int32
+      - name: start_id
+        in: query
+        description: Enter the Comment `id` of a Chat view comment.
+        style: form
+        explode: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          headers: {}
+          content:
+            application/json:
+              schema:
+                title: GetChatViewCommentsresponse
+                required:
+                - comments
+                type: object
+                properties:
+                  comments:
+                    type: array
+                    items:
+                      title: Comment2
+                      required:
+                      - id
+                      - comment
+                      - comment_text
+                      - user
+                      - resolved
+                      - assignee
+                      - assigned_by
+                      - reactions
+                      - date
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        comment:
+                          type: array
+                          items:
+                            $ref: '#/paths/~1v2~1task~1{task_id}~1comment/get/responses/200/content/application~1json/schema/properties/comments/items/properties/comment/items'
+                          description: ''
+                        comment_text:
+                          type: string
+                        user:
+                          $ref: '#/paths/~1v2~1task~1{task_id}/get/responses/200/content/application~1json/schema/properties/attachments/items/properties/user'
+                        resolved:
+                          type: boolean
+                        assignee:
+                          type:
+                          - string
+                          - 'null'
+                        assigned_by:
+                          type:
+                          - string
+                          - 'null'
+                        reactions:
+                          type: array
+                          items:
+                            type: string
+                          description: ''
+                        date:
+                          type: string
+                        reply_count:
+                          type: string
+                      examples:
+                      - id: '459'
+                        comment:
+                        - text: View comment content
+                        comment_text: View comment content
+                        user:
+                          id: 183
+                          username: John Doe
+                          initials: JD
+                          email: johndoe@gmail.com
+                          color: '#827718'
+                          profilePicture: https://attachments-public.clickup.com/profilePictures/183_abc.jpg
+                        resolved: false
+                        assignee: null
+                        assigned_by: null
+                        reactions: []
+                        date: '1568036964079'
+                        reply_count: '1'
+                    description: ''
+                examples:
+                - comments:
+                  - id: '459'
+                    comment:
+                    - text: View comment content
+                    comment_text: View comment content
+                    user:
+                      id: 183
+                      username: John Doe
+                      initials: JD
+                      email: johndoe@gmail.com
+                      color: '#827718'
+                      profilePicture: https://attachments-public.clickup.com/profilePictures/183_abc.jpg
+                    resolved: false
+                    assignee: null
+                    assigned_by: null
+                    reactions: []
+                    date: '1568036964079'
+                    reply_count: '1'
+              example:
+                comments:
+                - id: '459'
+                  comment:
+                  - text: View comment content
+                  comment_text: View comment content
+                  user:
+                    id: 183
+                    username: John Doe
+                    initials: JD
+                    email: johndoe@gmail.com
+                    color: '#827718'
+                    profilePicture: https://attachments-public.clickup.com/profilePictures/183_abc.jpg
+                  resolved: false
+                  assignee: null
+                  assigned_by: null
+                  reactions: []
+                  date: '1568036964079'
+                  reply_count: '1'
+      deprecated: false
+      security:
+      - Authorization_Token: []
+    post:
+      summary: Create Chat View Comment
+      tags:
+      - Comments
+      description: Add a new comment to a Chat view.
+      operationId: CreateChatViewComment
+      parameters:
+      - name: view_id
+        in: path
+        description: 105 (string)
+        required: true
+        style: simple
+        schema:
+          type: string
+          examples:
+          - 3c
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              title: CreateChatViewCommentrequest
+              required:
+              - comment_text
+              - notify_all
+              type: object
+              properties:
+                comment_text:
+                  type: string
+                notify_all:
+                  description: If `notify_all` is true, the creator of the comment will also be notified. Other assignees and watchers on the view are always notified regardless of this setting.
+                  type: boolean
+              examples:
+              - comment_text: View comment content
+                notify_all: true
+            example:
+              comment_text: View comment content
+              notify_all: true
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+          content:
+            application/json:
+              schema:
+                title: CreateChatViewCommentresponse
+                required:
+                - id
+                - hist_id
+                - date
+                type: object
+                properties:
+                  id:
+                    type: string
+                  hist_id:
+                    type: string
+                  date:
+                    type: integer
+                    contentEncoding: int64
+                examples:
+                - id: '459'
+                  hist_id: 0a45e16e-4e2f-4a9e-99ec-3cf520b87eae
+                  date: 1568037065216
+              example:
+                id: '459'
+                hist_id: 0a45e16e-4e2f-4a9e-99ec-3cf520b87eae
+                date: 1568037065216
+      deprecated: false
+      security:
+      - Authorization_Token: []
+    servers:
+    - url: https://api.clickup.com/api
+      description: ClickUp
+      variables: {}
+  /v2/list/{list_id}/comment:
+    parameters: []
+    get:
+      summary: Get List Comments
+      description: 'View the comments added to a List. \
+
+        \
+
+        If you do not include the `start` and `start_id` parameters, this endpoint will return the most recent 25 comments.\
+
+        \
+
+        Use the `start` and `start id` parameters of the oldest comment to retrieve the next 25 comments.'
+      tags:
+      - Comments
+      operationId: GetListComments
+      parameters:
+      - name: list_id
+        in: path
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: number
+          contentEncoding: double
+          examples:
+          - 124
+      - name: start
+        in: query
+        description: Enter the `date` of a List info comment using Unix time in milliseconds.
+        style: form
+        explode: true
+        schema:
+          type: integer
+          contentEncoding: int32
+      - name: start_id
+        in: query
+        description: Enter the Comment `id` of a List info comment.
+        style: form
+        explode: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          headers: {}
+          content:
+            application/json:
+              schema:
+                title: GetListCommentsresponse
+                required:
+                - comments
+                type: object
+                properties:
+                  comments:
+                    type: array
+                    items:
+                      $ref: '#/paths/~1v2~1task~1{task_id}~1comment/get/responses/200/content/application~1json/schema/properties/comments/items'
+                    description: ''
+                examples:
+                - comments:
+                  - id: '462'
+                    comment:
+                    - text: List comment content
+                    comment_text: List comment content
+                    user:
+                      id: 183
+                      username: John Doe
+                      initials: JD
+                      email: johndoe@gmail.com
+                      color: '#827718'
+                      profilePicture: https://attachments-public.clickup.com/profilePictures/183_abc.jpg
+                    resolved: false
+                    assignee:
+                      id: 183
+                      username: John Doe
+                      initials: JD
+                      email: johndoe@gmail.com
+                      color: '#827718'
+                      profilePicture: https://attachments-public.clickup.com/profilePictures/183_abc.jpg
+                    assigned_by:
+                      id: 183
+                      username: John Doe
+                      initials: JD
+                      email: johndoe@gmail.com
+                      color: '#827718'
+                      profilePicture: https://attachments-public.clickup.com/profilePictures/183_abc.jpg
+                    reactions: []
+                    date: '1568036964079'
+                    reply_count: '1'
+              example:
+                comments:
+                - id: '462'
+                  comment:
+                  - text: List comment content
+                  comment_text: List comment content
+                  user:
+                    id: 183
+                    username: John Doe
+                    initials: JD
+                    email: johndoe@gmail.com
+                    color: '#827718'
+                    profilePicture: https://attachments-public.clickup.com/profilePictures/183_abc.jpg
+                  resolved: false
+                  assignee:
+                    id: 183
+                    username: John Doe
+                    initials: JD
+                    email: johndoe@gmail.com
+                    color: '#827718'
+                    profilePicture: https://attachments-public.clickup.com/profilePictures/183_abc.jpg
+                  assigned_by:
+                    id: 183
+                    username: John Doe
+                    initials: JD
+                    email: johndoe@gmail.com
+                    color: '#827718'
+                    profilePicture: https://attachments-public.clickup.com/profilePictures/183_abc.jpg
+                  reactions: []
+                  date: '1568036964079'
+                  reply_count: '1'
+      deprecated: false
+      security:
+      - Authorization_Token: []
+    post:
+      summary: Create List Comment
+      tags:
+      - Comments
+      description: Add a comment to a List.
+      operationId: CreateListComment
+      parameters:
+      - name: list_id
+        in: path
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: number
+          contentEncoding: double
+          examples:
+          - 124
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              title: CreateListCommentrequest
+              required:
+              - comment_text
+              - assignee
+              - notify_all
+              type: object
+              properties:
+                comment_text:
+                  type: string
+                assignee:
+                  type: integer
+                  contentEncoding: int32
+                notify_all:
+                  description: If `notify_all` is true, the creator of the comment will also be notified. Other assignees and watchers on the List are always notified regardless of this setting.
+                  type: boolean
+              examples:
+              - comment_text: List comment content
+                assignee: 183
+                notify_all: true
+            example:
+              comment_text: List comment content
+              assignee: 183
+              notify_all: true
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+          content:
+            application/json:
+              schema:
+                title: CreateListCommentresponse
+                required:
+                - id
+                - hist_id
+                - date
+                type: object
+                properties:
+                  id:
+                    type: string
+                  hist_id:
+                    type: string
+                  date:
+                    type: integer
+                    contentEncoding: int64
+                examples:
+                - id: '462'
+                  hist_id: 5bbea9ad-7cc3-4038-a8bb-a89ac1337c08
+                  date: 1568037341249
+              example:
+                id: '462'
+                hist_id: 5bbea9ad-7cc3-4038-a8bb-a89ac1337c08
+                date: 1568037341249
+      deprecated: false
+      security:
+      - Authorization_Token: []
+    servers:
+    - url: https://api.clickup.com/api
+      description: ClickUp
+      variables: {}
+  /v2/comment/{comment_id}:
+    parameters: []
+    put:
+      summary: Update Comment
+      tags:
+      - Comments
+      description: Replace the content of a task commment, assign a comment, and mark a comment as resolved.
+      operationId: UpdateComment
+      parameters:
+      - name: comment_id
+        in: path
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: number
+          contentEncoding: double
+          examples:
+          - 456
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              title: UpdateCommentrequest
+              required:
+              - comment_text
+              - assignee
+              - resolved
+              type: object
+              properties:
+                comment_text:
+                  type: string
+                assignee:
+                  type: integer
+                  contentEncoding: int32
+                group_assignee:
+                  type: integer
+                  contentEncoding: int32
+                  description: ''
+                resolved:
+                  description: ''
+                  type: boolean
+              examples:
+              - comment_text: Updated comment content
+                assignee: 183
+                resolved: true
+            example:
+              comment_text: Updated comment content
+              assignee: 183
+              group_assignee: dd01f92f-48ca-446d-88a1-0beb0e8f5f14
+              resolved: true
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+          content:
+            application/json:
+              schema:
+                type: object
+                examples:
+                - {}
+                contentMediaType: application/json
+              example: {}
+      deprecated: false
+      security:
+      - Authorization_Token: []
+    delete:
+      summary: Delete Comment
+      tags:
+      - Comments
+      description: Delete a task comment.
+      operationId: DeleteComment
+      parameters:
+      - name: comment_id
+        in: path
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: number
+          contentEncoding: double
+          examples:
+          - 456
+      responses:
+        '200':
+          description: ''
+          headers: {}
+          content:
+            application/json:
+              schema:
+                type: object
+                examples:
+                - {}
+                contentMediaType: application/json
+              example: {}
+      deprecated: false
+      security:
+      - Authorization_Token: []
+    servers:
+    - url: https://api.clickup.com/api
+      description: ClickUp
+      variables: {}
+  /v2/comment/{comment_id}/reply:
+    get:
+      summary: Get Threaded Comments
+      description: View threaded comments. The parent comment is not included in the response.
+      tags:
+      - Comments
+      operationId: GetThreadedComments
+      parameters:
+      - name: comment_id
+        in: path
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: number
+          contentEncoding: double
+          examples:
+          - 456
+      responses:
+        '200':
+          description: ''
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/paths/~1v2~1task~1{task_id}~1comment/get/responses/200/content/application~1json/schema'
+              example:
+                comments:
+                - id: '458'
+                  comment:
+                  - text: Task comment content
+                  comment_text: Task comment content
+                  user:
+                    id: 183
+                    username: John Doe
+                    initials: JD
+                    email: johndoe@gmail.com
+                    color: '#827718'
+                    profilePicture: https://attachments-public.clickup.com/profilePictures/183_abc.jpg
+                  resolved: false
+                  assignee:
+                    id: 183
+                    username: John Doe
+                    initials: JD
+                    email: johndoe@gmail.com
+                    color: '#827718'
+                    profilePicture: https://attachments-public.clickup.com/profilePictures/183_abc.jpg
+                  assigned_by:
+                    id: 183
+                    username: John Doe
+                    initials: JD
+                    email: johndoe@gmail.com
+                    color: '#827718'
+                    profilePicture: https://attachments-public.clickup.com/profilePictures/183_abc.jpg
+                  reactions: []
+                  date: '1568036964079'
+                  reply_count: '0'
+      deprecated: false
+      security:
+      - Authorization_Token: []
+    post:
+      summary: Create Threaded Comment
+      tags:
+      - Comments
+      description: Create a threaded comment.
+      operationId: CreateThreadedComment
+      parameters:
+      - name: comment_id
+        in: path
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: number
+          contentEncoding: double
+          examples:
+          - 456
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/paths/~1v2~1task~1{task_id}~1comment/post/requestBody/content/application~1json/schema'
+            example:
+              comment_text: Task comment content
+              assignee: 183
+              group_assignee: d01f92f-48ca-446d-88a1-0beb0e8f5f14
+              notify_all: true
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+          content:
+            application/json:
+              schema:
+                type: object
+                examples:
+                - {}
+                contentMediaType: application/json
+              example: {}
+      deprecated: false
+      security:
+      - Authorization_Token: []
+    servers:
+    - url: https://api.clickup.com/api
+      description: ClickUp
+      variables: {}
   /task/{task_id}/comment:
     get:
       operationId: getTaskComments
@@ -62,6 +1094,8 @@ paths:
           description: Unauthorized
         '404':
           description: Task not found
+      security:
+      - bearerAuth: []
     post:
       operationId: createTaskComment
       summary: Create a task comment
@@ -99,6 +1133,11 @@ paths:
           description: Unauthorized
         '404':
           description: Task not found
+      security:
+      - bearerAuth: []
+    servers:
+    - url: https://api.clickup.com/api/v2
+      description: ClickUp API v2 Production Server
   /view/{view_id}/comment:
     get:
       operationId: getViewComments
@@ -135,6 +1174,8 @@ paths:
           description: Unauthorized
         '404':
           description: View not found
+      security:
+      - bearerAuth: []
     post:
       operationId: createViewComment
       summary: Create a view comment
@@ -162,6 +1203,11 @@ paths:
           description: Unauthorized
         '404':
           description: View not found
+      security:
+      - bearerAuth: []
+    servers:
+    - url: https://api.clickup.com/api/v2
+      description: ClickUp API v2 Production Server
   /list/{list_id}/comment:
     get:
       operationId: getListComments
@@ -198,6 +1244,8 @@ paths:
           description: Unauthorized
         '404':
           description: List not found
+      security:
+      - bearerAuth: []
     post:
       operationId: createListComment
       summary: Create a list comment
@@ -225,6 +1273,11 @@ paths:
           description: Unauthorized
         '404':
           description: List not found
+      security:
+      - bearerAuth: []
+    servers:
+    - url: https://api.clickup.com/api/v2
+      description: ClickUp API v2 Production Server
   /comment/{comment_id}:
     put:
       operationId: updateComment
@@ -249,6 +1302,8 @@ paths:
           description: Unauthorized
         '404':
           description: Comment not found
+      security:
+      - bearerAuth: []
     delete:
       operationId: deleteComment
       summary: Delete a comment
@@ -264,8 +1319,75 @@ paths:
           description: Unauthorized
         '404':
           description: Comment not found
+      security:
+      - bearerAuth: []
+    servers:
+    - url: https://api.clickup.com/api/v2
+      description: ClickUp API v2 Production Server
+  /api/v3/workspaces/{workspace_id}/comments/types/{comment_type}/subtypes:
+    get:
+      operationId: getSubtypes
+      summary: Get Post Subtype IDs
+      description: 'Get the ID of each post subtype (Announcement, Discussion, Idea, and Update) for your Workspace, to use when sending a message with `type: post`. \
+
+        \
+
+        Subtype IDs are unique to each Workspace.'
+      parameters:
+      - name: workspace_id
+        in: path
+        description: ID of the logged-in user's Workspace.
+        required: true
+        schema:
+          $ref: '#/components/schemas/CommentPublicApiCommentsControllerGetSubtypesWorkspaceIdPath'
+      - name: comment_type
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/CommentPublicApiCommentsControllerGetSubtypesCommentTypePath'
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json: {}
+      tags:
+      - Comments
+      x-is-workspace-endpoint: true
+      security:
+      - authHeader: []
+    servers:
+    - url: https://api.clickup.com/
+      description: ClickUp
 components:
   schemas:
+    UpdateCommentRequest:
+      type: object
+      description: Request body for updating an existing comment.
+      properties:
+        comment_text:
+          type: string
+          description: The updated plain text content of the comment.
+        assignee:
+          type: integer
+          description: User ID to assign for follow-up.
+        resolved:
+          type: boolean
+          description: Whether to mark the comment as resolved.
+    CreateCommentRequest:
+      type: object
+      required:
+      - comment_text
+      description: Request body for creating a new comment.
+      properties:
+        comment_text:
+          type: string
+          description: The plain text content of the comment.
+        assignee:
+          type: integer
+          description: User ID to assign for follow-up.
+        notify_all:
+          type: boolean
+          description: Notify all members who have access to the resource.
     Comment:
       type: object
       description: A comment on a task, view, or list.
@@ -335,42 +1457,16 @@ components:
         date:
           type: string
           description: Unix timestamp when the comment was created.
-    UpdateCommentRequest:
-      type: object
-      description: Request body for updating an existing comment.
-      properties:
-        comment_text:
-          type: string
-          description: The updated plain text content of the comment.
-        assignee:
-          type: integer
-          description: User ID to assign for follow-up.
-        resolved:
-          type: boolean
-          description: Whether to mark the comment as resolved.
-    CreateCommentRequest:
-      type: object
-      required:
-      - comment_text
-      description: Request body for creating a new comment.
-      properties:
-        comment_text:
-          type: string
-          description: The plain text content of the comment.
-        assignee:
-          type: integer
-          description: User ID to assign for follow-up.
-        notify_all:
-          type: boolean
-          description: Notify all members who have access to the resource.
+    CommentPublicApiCommentsControllerGetSubtypesCommentTypePath:
+      type: string
+      enum:
+      - post
+      - ai
+      - syncup
+      - ai_via_brain
+    CommentPublicApiCommentsControllerGetSubtypesWorkspaceIdPath:
+      type: integer
   parameters:
-    commentId:
-      name: comment_id
-      in: path
-      required: true
-      description: The unique identifier of the comment.
-      schema:
-        type: integer
     viewId:
       name: view_id
       in: path
@@ -392,11 +1488,37 @@ components:
       description: The unique identifier of the task.
       schema:
         type: string
+    commentId:
+      name: comment_id
+      in: path
+      required: true
+      description: The unique identifier of the comment.
+      schema:
+        type: integer
   securitySchemes:
+    Authorization_Token:
+      name: Authorization
+      type: apiKey
+      in: header
+      description: 'API token required for authentication. Two types of tokens are supported:
+
+        **Personal API Key** Obtain from ClickUp''s settings page under ''Apps'' and add it to the header as `Authorization: pk_...`
+
+        **OAuth2 Access Token** Generated through the OAuth2 flow and add it to the header as `Authorization: Bearer {access_token}`'
     bearerAuth:
       type: http
       scheme: bearer
       description: ClickUp personal API token or OAuth access token.
+    authHeader:
+      in: header
+      type: apiKey
+      name: Authorization
 externalDocs:
   description: ClickUp Comments API Documentation
   url: https://developer.clickup.com/reference/get-task-comments
+x-refined-from:
+- clickup-api-v2-reference-openapi.json
+- clickup-comments-openapi.yml
+- clickup-public-api-v3-openapi.json
+- clickup-api-v2-reference-openapi.json
+- clickup-public-api-v3-openapi.json

@@ -1,0 +1,251 @@
+openapi: 3.2.0
+info:
+  title: Clickup Templates API
+  version: '2.0'
+  contact: {}
+  description: 'Operations tagged Templates across 2 of this provider''s published API definitions: clickup-api-v2-reference-openapi.json, clickup-api-v2-reference-openapi.json. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://api.clickup.com/api
+  description: ClickUp
+  variables: {}
+security:
+- Authorization_Token: []
+tags:
+- name: Templates
+paths:
+  /v2/team/{team_id}/taskTemplate:
+    parameters: []
+    get:
+      summary: Get Task Templates
+      tags:
+      - Templates
+      description: View the task templates available in a Workspace.
+      operationId: GetTaskTemplates
+      parameters:
+      - name: team_id
+        in: path
+        description: Workspace ID
+        required: true
+        style: simple
+        schema:
+          type: number
+          contentEncoding: double
+          examples:
+          - 123
+      - name: page
+        in: query
+        description: ''
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: integer
+          contentEncoding: int32
+          examples:
+          - 0
+      - name: Content-Type
+        in: header
+        description: ''
+        required: true
+        style: simple
+        schema:
+          const: application/json
+          type: string
+          examples:
+          - application/json
+      responses:
+        '200':
+          description: ''
+          headers: {}
+          content:
+            application/json:
+              schema:
+                title: GetTaskTemplatesresponse
+                required:
+                - templates
+                type: object
+                properties:
+                  templates:
+                    type: array
+                    items:
+                      type: string
+                    description: ''
+                examples:
+                - templates: []
+              example:
+                templates: []
+      deprecated: false
+    servers:
+    - url: https://api.clickup.com/api
+      description: ClickUp
+      variables: {}
+  /v2/team/{team_id}/list_template:
+    parameters: []
+    get:
+      summary: Get List Templates
+      tags:
+      - Templates
+      description: 'View the List templates available in a Workspace.
+
+
+        Use this endpoint to retrieve List template IDs for use with the Create List From Template in Folder and Create List From Template in Space endpoints.
+
+
+        Template IDs are returned with a `t-` prefix (e.g., `t-15363293`). Pass the full ID including the prefix as the `template_id` path parameter when creating a List from a template.'
+      operationId: GetListTemplates
+      parameters:
+      - name: team_id
+        in: path
+        description: Workspace ID
+        required: true
+        style: simple
+        schema:
+          type: number
+          contentEncoding: double
+          examples:
+          - 123
+      - name: Content-Type
+        in: header
+        description: ''
+        required: true
+        style: simple
+        schema:
+          const: application/json
+          type: string
+          examples:
+          - application/json
+      responses:
+        '200':
+          description: List templates retrieved successfully.
+          headers: {}
+          content:
+            application/json:
+              schema:
+                title: GetListTemplatesresponse
+                required:
+                - templates
+                type: object
+                properties:
+                  templates:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                          description: Name of the List template
+                        id:
+                          type: string
+                          description: 'Unique identifier of the List template. IDs are prefixed with `t-` (e.g., `t-15363293`). Use this ID as the `template_id` path parameter in the Create List From Template endpoints.
+
+                            '
+                    description: Array of List templates available in the Workspace.
+                examples:
+                - templates:
+                  - name: List Template 1
+                    id: t-15363293
+                  - name: List Template 2
+                    id: t-15363298
+              example:
+                templates:
+                - name: List Template 1
+                  id: t-15363293
+                - name: List Template 2
+                  id: t-15363298
+      deprecated: false
+    servers:
+    - url: https://api.clickup.com/api
+      description: ClickUp
+      variables: {}
+  /v2/team/{team_id}/folder_template:
+    parameters: []
+    get:
+      summary: Get Folder Templates
+      tags:
+      - Templates
+      description: 'View the Folder templates available in a Workspace.
+
+
+        Use this endpoint to retrieve Folder template IDs for use with the Create Folder From Template endpoint.
+
+
+        Template IDs are returned with a `t-` prefix (e.g., `t-7162342`). Pass the full ID including the prefix as the `template_id` path parameter when creating a Folder from a template.'
+      operationId: GetFolderTemplates
+      parameters:
+      - name: team_id
+        in: path
+        description: Workspace ID
+        required: true
+        style: simple
+        schema:
+          type: number
+          contentEncoding: double
+          examples:
+          - 123
+      - name: Content-Type
+        in: header
+        description: ''
+        required: true
+        style: simple
+        schema:
+          const: application/json
+          type: string
+          examples:
+          - application/json
+      responses:
+        '200':
+          description: Folder templates retrieved successfully.
+          headers: {}
+          content:
+            application/json:
+              schema:
+                title: GetFolderTemplatesresponse
+                required:
+                - templates
+                type: object
+                properties:
+                  templates:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                          description: Name of the Folder template
+                        id:
+                          type: string
+                          description: 'Unique identifier of the Folder template. IDs are prefixed with `t-` (e.g., `t-7162342`). Use this ID as the `template_id` path parameter in the Create Folder From Template endpoint.
+
+                            '
+                    description: Array of Folder templates available in the Workspace.
+                examples:
+                - templates:
+                  - name: Folder Template 1
+                    id: t-7162342
+                  - name: Folder Template 2
+                    id: t-42618842
+              example:
+                templates:
+                - name: Folder Template 1
+                  id: t-7162342
+                - name: Folder Template 2
+                  id: t-42618842
+      deprecated: false
+    servers:
+    - url: https://api.clickup.com/api
+      description: ClickUp
+      variables: {}
+components:
+  securitySchemes:
+    Authorization_Token:
+      name: Authorization
+      type: apiKey
+      in: header
+      description: 'API token required for authentication. Two types of tokens are supported:
+
+        **Personal API Key** Obtain from ClickUp''s settings page under ''Apps'' and add it to the header as `Authorization: pk_...`
+
+        **OAuth2 Access Token** Generated through the OAuth2 flow and add it to the header as `Authorization: Bearer {access_token}`'
+x-refined-from:
+- clickup-api-v2-reference-openapi.json
+- clickup-api-v2-reference-openapi.json

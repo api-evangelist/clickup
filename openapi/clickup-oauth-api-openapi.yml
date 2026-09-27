@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: ClickUp O Auth API
+  title: ClickUp OAuth API
   description: The ClickUp OAuth API implements the authorization code grant type, allowing third-party applications to authenticate users and access their ClickUp Workspaces. Workspace owners or admins can create OAuth apps, and users authorize access by granting permissions to specific Workspaces. The API provides endpoints for obtaining authorization codes, exchanging them for access tokens, and retrieving the authenticated user's information.
   version: '2.0'
   contact:

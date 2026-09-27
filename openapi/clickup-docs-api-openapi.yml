@@ -1,0 +1,823 @@
+openapi: 3.2.0
+info:
+  title: Clickup Docs API
+  version: version
+  description: 'Operations tagged Docs across 2 of this provider''s published API definitions: clickup-public-api-v3-openapi.json, clickup-public-api-v3-openapi.json. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://api.clickup.com/
+  description: ClickUp
+security:
+- authHeader: []
+tags:
+- description: Docs API
+  name: Docs
+paths:
+  /api/v3/workspaces/{workspace_id}/docs:
+    get:
+      operationId: searchDocsPublic
+      summary: Search for Docs
+      description: View the Docs in your Workspace. You can only view information of Docs you can access.
+      parameters:
+      - name: workspace_id
+        in: path
+        description: The ID of the Workspace.
+        required: true
+        schema:
+          $ref: '#/components/schemas/PublicDocsSearchDocsPublicWorkspaceIdPath'
+      - name: id
+        in: query
+        description: Filter results to Docs created by the user with the given Doc ID.
+        required: false
+        schema:
+          type: string
+      - name: creator
+        in: query
+        description: Filter results to Docs created by the user with the given user ID.
+        required: false
+        schema:
+          $ref: '#/components/schemas/PublicDocsSearchDocsPublicCreatorQuery'
+      - name: deleted
+        in: query
+        description: Filter results to return deleted Docs.
+        required: false
+        schema:
+          $ref: '#/components/schemas/PublicDocsSearchDocsPublicDeletedQuery'
+      - name: archived
+        in: query
+        description: Filter results to return archived Docs.
+        required: false
+        schema:
+          $ref: '#/components/schemas/PublicDocsSearchDocsPublicArchivedQuery'
+      - name: parent_id
+        in: query
+        description: Filter results to children of a parent Doc with the given parent Doc ID.
+        required: false
+        schema:
+          type: string
+      - name: parent_type
+        in: query
+        description: Filter results to children of the given parent Doc type. For example, `SPACE`, `FOLDER`, `LIST`, `EVERYTHING`, `WORKSPACE`.
+        required: false
+        schema:
+          $ref: '#/components/schemas/PublicDocsSearchDocsPublicParentTypeQuery'
+      - name: limit
+        in: query
+        description: The maximum number of results to fetch for this page.
+        required: false
+        schema:
+          $ref: '#/components/schemas/PublicDocsSearchDocsPublicLimitQuery'
+      - name: cursor
+        in: query
+        description: The cursor to use to fetch the next page of results.
+        required: false
+        schema:
+          type: string
+      - name: next_cursor
+        in: query
+        description: The cursor to use to fetch the next page of results. [deprecated]
+        required: false
+        schema:
+          type: string
+        deprecated: true
+      responses:
+        '200':
+          description: Search results
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublicDocsDocsSearchResultDto'
+      tags:
+      - Docs
+      x-is-workspace-endpoint: true
+    post:
+      operationId: createDocPublic
+      summary: Create a Doc
+      description: Create a new Doc.
+      parameters:
+      - name: workspace_id
+        in: path
+        description: The ID of the Workspace.
+        required: true
+        schema:
+          $ref: '#/components/schemas/PublicDocsCreateDocPublicWorkspaceIdPath'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PublicDocsCreateDocOptionsDto'
+      responses:
+        '201':
+          description: Doc created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublicDocsDocDto'
+      tags:
+      - Docs
+      x-is-workspace-endpoint: true
+    servers:
+    - url: https://api.clickup.com/
+      description: ClickUp
+  /api/v3/workspaces/{workspace_id}/docs/{doc_id}:
+    get:
+      operationId: getDocPublic
+      summary: Fetch a Doc
+      description: View information about a Doc.
+      parameters:
+      - name: workspace_id
+        in: path
+        description: The ID of the Workspace.
+        required: true
+        schema:
+          $ref: '#/components/schemas/PublicDocsGetDocPublicWorkspaceIdPath'
+      - name: doc_id
+        in: path
+        description: The ID of the doc.
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Doc found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublicDocsDocDto'
+        '404':
+          description: Doc not found
+          content:
+            application/json: {}
+      tags:
+      - Docs
+      x-is-workspace-endpoint: true
+    servers:
+    - url: https://api.clickup.com/
+      description: ClickUp
+  /api/v3/workspaces/{workspace_id}/docs/{doc_id}/page_listing:
+    get:
+      operationId: getDocPageListingPublic
+      summary: Fetch PageListing for a Doc
+      description: View the PageListing for a Doc.
+      parameters:
+      - name: workspace_id
+        in: path
+        description: The ID of the Workspace.
+        required: true
+        schema:
+          $ref: '#/components/schemas/PublicDocsGetDocPageListingPublicWorkspaceIdPath'
+      - name: doc_id
+        in: path
+        description: The ID of the doc.
+        required: true
+        schema:
+          type: string
+      - name: max_page_depth
+        in: query
+        description: The maximum depth to retrieve pages and subpages. Use `-1` to return pages and subpages with no depth limit.
+        required: false
+        schema:
+          $ref: '#/components/schemas/PublicDocsGetDocPageListingPublicMaxPageDepthQuery'
+      responses:
+        '200':
+          description: PageListing found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublicDocsGetDocPageListingPublic200Response'
+        '404':
+          description: PageListing not found
+          content:
+            application/json: {}
+      tags:
+      - Docs
+      x-is-workspace-endpoint: true
+    servers:
+    - url: https://api.clickup.com/
+      description: ClickUp
+  /api/v3/workspaces/{workspace_id}/docs/{doc_id}/pages:
+    get:
+      operationId: getDocPagesPublic
+      summary: Fetch Pages belonging to a Doc
+      description: View the pages belonging to a Doc.
+      parameters:
+      - name: workspace_id
+        in: path
+        description: The ID of the Workspace.
+        required: true
+        schema:
+          $ref: '#/components/schemas/PublicDocsGetDocPagesPublicWorkspaceIdPath'
+      - name: doc_id
+        in: path
+        description: The ID of the doc.
+        required: true
+        schema:
+          type: string
+      - name: max_page_depth
+        in: query
+        description: The maximum depth to retrieve pages and subpages. Use `-1` to return pages and subpages with no depth limit.
+        required: false
+        schema:
+          $ref: '#/components/schemas/PublicDocsGetDocPagesPublicMaxPageDepthQuery'
+      - name: content_format
+        in: query
+        description: The format to return the page content in. For example, `text/md` for markdown or `text/plain` for plain text.
+        required: false
+        schema:
+          $ref: '#/components/schemas/PublicDocsGetDocPagesPublicContentFormatQuery'
+      responses:
+        '200':
+          description: Pages found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublicDocsGetDocPagesPublic200Response'
+      tags:
+      - Docs
+      x-is-workspace-endpoint: true
+    post:
+      operationId: createPagePublic
+      summary: Create a Page
+      description: Create a page in a Doc.
+      parameters:
+      - name: workspace_id
+        in: path
+        description: The ID of the Workspace.
+        required: true
+        schema:
+          $ref: '#/components/schemas/PublicDocsCreatePagePublicWorkspaceIdPath'
+      - name: doc_id
+        in: path
+        description: The ID of the doc.
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PublicDocsPublicCreatePageOptionsDto'
+      responses:
+        '201':
+          description: Page created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublicDocsPageV3Dto'
+      tags:
+      - Docs
+      x-is-workspace-endpoint: true
+    servers:
+    - url: https://api.clickup.com/
+      description: ClickUp
+  /api/v3/workspaces/{workspace_id}/docs/{doc_id}/pages/{page_id}:
+    get:
+      operationId: getPagePublic
+      summary: Get page
+      description: View the information about a page in a Doc. Due to markdown format limitations, some content elements will not be displayed exactly as they appear in ClickUp.
+      parameters:
+      - name: workspace_id
+        in: path
+        description: The ID of the Workspace.
+        required: true
+        schema:
+          $ref: '#/components/schemas/PublicDocsGetPagePublicWorkspaceIdPath'
+      - name: doc_id
+        in: path
+        description: The ID of the doc.
+        required: true
+        schema:
+          type: string
+      - name: page_id
+        in: path
+        description: The ID of the page
+        required: true
+        schema:
+          type: string
+      - name: content_format
+        in: query
+        description: The format to return the page content in. For example, `text/md` for markdown or `text/plain` for plain text.
+        required: false
+        schema:
+          $ref: '#/components/schemas/PublicDocsGetPagePublicContentFormatQuery'
+      responses:
+        '200':
+          description: Page found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublicDocsPageV3Dto'
+        '404':
+          description: Page not found
+          content:
+            application/json: {}
+      tags:
+      - Docs
+      x-is-workspace-endpoint: true
+    put:
+      operationId: editPagePublic
+      summary: Edit a Page
+      description: Edit a page in a Doc.
+      parameters:
+      - name: workspace_id
+        in: path
+        description: The ID of the Workspace.
+        required: true
+        schema:
+          $ref: '#/components/schemas/PublicDocsEditPagePublicWorkspaceIdPath'
+      - name: doc_id
+        in: path
+        description: The ID of the doc.
+        required: true
+        schema:
+          type: string
+      - name: page_id
+        in: path
+        description: The ID of the page
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PublicDocsPublicEditPageOptionsDto'
+      responses:
+        '200':
+          description: Page updated
+          content:
+            application/json: {}
+      tags:
+      - Docs
+      x-is-workspace-endpoint: true
+    servers:
+    - url: https://api.clickup.com/
+      description: ClickUp
+components:
+  schemas:
+    PublicDocsPositionDto:
+      type: object
+      properties:
+        x:
+          type: number
+        y:
+          type: number
+      required:
+      - x
+      - y
+    PublicDocsGetDocPagesPublic200Response:
+      type: array
+      items:
+        $ref: '#/components/schemas/PublicDocsPageV3Dto'
+    PublicDocsGetDocPageListingPublicWorkspaceIdPath:
+      type: number
+    PublicDocsGetDocPagesPublicWorkspaceIdPath:
+      type: number
+    PublicDocsSearchDocsPublicArchivedQuery:
+      type: boolean
+      default: false
+    PublicDocsPublicEditPageOptionsDto:
+      type: object
+      properties:
+        name:
+          description: The updated name of the page.
+          type: string
+          default: ''
+        sub_title:
+          description: The updateds ubtitle of the page.
+          type: string
+        content:
+          default: ''
+          description: The updated content of the page.
+          type: string
+        content_edit_mode:
+          description: The strategy for updating content on the page. For example, `replace`, `append`, or `prepend`.
+          type: string
+          default: replace
+          enum:
+          - replace
+          - append
+          - prepend
+        content_format:
+          description: The format the page content is in. For example, `text/md` for markdown or `text/plain` for plain text.
+          type: string
+          default: text/md
+          enum:
+          - text/md
+          - text/plain
+    PublicDocsGetDocPageListingPublicMaxPageDepthQuery:
+      type: number
+      default: -1
+    PublicDocsSearchDocsPublicParentTypeQuery:
+      type: string
+      enum:
+      - '4'
+      - '5'
+      - '6'
+      - '7'
+      - '12'
+      - SPACE
+      - FOLDER
+      - LIST
+      - EVERYTHING
+      - WORKSPACE
+    PublicDocsCreatePagePublicWorkspaceIdPath:
+      type: number
+    PublicDocsPageV3Dto:
+      type: object
+      properties:
+        id:
+          type: string
+        doc_id:
+          type: string
+        parent_page_id:
+          type: string
+        workspace_id:
+          type: number
+        name:
+          type: string
+        pages:
+          type: array
+          items:
+            $ref: '#/components/schemas/PublicDocsPageV3Dto'
+        sub_title:
+          type: string
+        date_created:
+          type: number
+        date_updated:
+          type: number
+        content:
+          type: string
+        avatar:
+          $ref: '#/components/schemas/PublicDocsAvatarDto'
+        creator_id:
+          type: number
+        deleted:
+          type: boolean
+        deleted_by:
+          type: number
+        date_deleted:
+          type: number
+        date_edited:
+          type: number
+        edited_by:
+          type: number
+        archived:
+          type: boolean
+        archived_by:
+          type: number
+        date_archived:
+          type: number
+        authors:
+          type: array
+          items:
+            type: number
+        contributors:
+          type: array
+          items:
+            type: number
+        cover:
+          $ref: '#/components/schemas/PublicDocsPageCoverDto'
+        protected:
+          type: boolean
+        protected_by:
+          type: number
+        protected_note:
+          type: string
+        presentation_details:
+          $ref: '#/components/schemas/PublicDocsPresentationDetailsDto'
+      required:
+      - id
+      - doc_id
+      - workspace_id
+      - name
+      - date_created
+      - content
+      - creator_id
+      - authors
+    PublicDocsCreateDocOptionsDto:
+      type: object
+      properties:
+        name:
+          description: The name of the new Doc.
+          type: string
+          default: ''
+        parent:
+          description: The parent of the new Doc.
+          default: null
+          allOf:
+          - $ref: '#/components/schemas/PublicDocsParentDto'
+        visibility:
+          description: The visibility of the new Doc. For example, `PUBLIC` or `PRIVATE`.
+          oneOf:
+          - description: The visibility of the new Doc
+            enum:
+            - PUBLIC
+            - PRIVATE
+            - PERSONAL
+            - HIDDEN
+            type: string
+          - description: The visibility of the new Doc
+            enum:
+            - 1
+            - 2
+            - 3
+            - 4
+            type: number
+        create_page:
+          description: Create a new page when creating the Doc.
+          type: boolean
+          default: true
+    PublicDocsGetDocPagesPublicMaxPageDepthQuery:
+      type: number
+      default: -1
+    PublicDocsDocCoreDto:
+      type: object
+      properties:
+        id:
+          type: string
+        date_created:
+          type: number
+        date_updated:
+          type: number
+        name:
+          type: string
+        type:
+          type: number
+          enum:
+          - 1
+          - 2
+        parent:
+          $ref: '#/components/schemas/PublicDocsParentDto'
+        public:
+          type: boolean
+        workspace_id:
+          type: number
+        creator:
+          type: number
+        deleted:
+          type: boolean
+        date_deleted:
+          type: number
+        deleted_by:
+          type: number
+        archived:
+          type: boolean
+        archived_by:
+          type: number
+        date_archived:
+          type: number
+      required:
+      - id
+      - date_created
+      - name
+      - type
+      - parent
+      - public
+      - workspace_id
+      - creator
+      - deleted
+      - archived
+    PublicDocsGetDocPublicWorkspaceIdPath:
+      type: number
+    PublicDocsGetPagePublicContentFormatQuery:
+      type: string
+      default: text/md
+      enum:
+      - text/md
+      - text/plain
+    PublicDocsCreateDocPublicWorkspaceIdPath:
+      type: number
+    PublicDocsAvatarDto:
+      type: object
+      properties:
+        color:
+          type: string
+        value:
+          type: string
+        source:
+          type: string
+    PublicDocsDocDto:
+      type: object
+      properties:
+        id:
+          type: string
+        date_created:
+          type: number
+        date_updated:
+          type: number
+        name:
+          type: string
+        type:
+          type: number
+          enum:
+          - 1
+          - 2
+        parent:
+          $ref: '#/components/schemas/PublicDocsParentDto'
+        public:
+          type: boolean
+        workspace_id:
+          type: number
+        archived:
+          type: boolean
+        archived_by:
+          type: number
+        creator:
+          type: number
+        date_archived:
+          type: number
+        date_deleted:
+          type: number
+        deleted:
+          type: boolean
+        deleted_by:
+          type: number
+        page_defaults:
+          $ref: '#/components/schemas/PublicDocsPresentationDetailsDto'
+      required:
+      - id
+      - date_created
+      - name
+      - type
+      - parent
+      - public
+      - workspace_id
+      - creator
+    PublicDocsSearchDocsPublicDeletedQuery:
+      type: boolean
+      default: false
+    PublicDocsGetDocPageListingPublic200Response:
+      type: array
+      items:
+        $ref: '#/components/schemas/PublicDocsPageV3ReferenceDto'
+    PublicDocsGetDocPagesPublicContentFormatQuery:
+      type: string
+      default: text/md
+      enum:
+      - text/md
+      - text/plain
+    PublicDocsPresentationDetailsDto:
+      type: object
+      properties:
+        font:
+          type: string
+        font_size:
+          type: number
+        line_height:
+          type: number
+        page_width:
+          type: number
+        paragraph_spacing:
+          type: number
+        show_author_header:
+          type: boolean
+        show_contributor_header:
+          type: boolean
+        show_cover_header:
+          type: boolean
+        show_date_header:
+          type: boolean
+        show_page_outline:
+          type: boolean
+        show_sub_pages:
+          type: boolean
+        sub_page_size:
+          type: string
+        show_sub_title_header:
+          type: boolean
+        show_title_icon_header:
+          type: boolean
+        show_relationships:
+          type: boolean
+        show_relationships_compact:
+          type: boolean
+        show_sub_pages_author:
+          type: boolean
+        show_sub_pages_thumbnail:
+          type: boolean
+        show_sub_pages_compact:
+          type: boolean
+        sub_pages_style:
+          type: string
+    PublicDocsPublicCreatePageOptionsDto:
+      type: object
+      properties:
+        parent_page_id:
+          description: The ID of the parent page. If this is a root page in the Doc, `parent_page_id` will not be returned.
+          type: string
+        name:
+          description: The name of the new page.
+          type: string
+          default: ''
+        sub_title:
+          description: The subtitle of the new page.
+          type: string
+        content:
+          default: ''
+          description: The content of the new page.
+          type: string
+        content_format:
+          description: The format the page content is in. For example, `text/md` for markdown or `text/plain` for plain text.
+          type: string
+          default: text/md
+          enum:
+          - text/md
+          - text/plain
+    PublicDocsEditPagePublicWorkspaceIdPath:
+      type: number
+    PublicDocsSearchDocsPublicWorkspaceIdPath:
+      type: number
+    PublicDocsSearchDocsPublicCreatorQuery:
+      type: number
+    PublicDocsSearchDocsPublicLimitQuery:
+      type: number
+      default: 50
+      maximum: 100
+      minimum: 10
+    PublicDocsPageV3ReferenceDto:
+      type: object
+      properties:
+        id:
+          type: string
+        doc_id:
+          type: string
+        parent_page_id:
+          type: string
+        workspace_id:
+          type: number
+        name:
+          type: string
+        pages:
+          type: array
+          items:
+            $ref: '#/components/schemas/PublicDocsPageV3ReferenceDto'
+      example:
+      - id: 8cht190-271
+        doc_id: 8cht190-831
+        workspace_id: 9011234080
+        name: Fantastic Marketing doc
+      - id: 8cht190-311
+        doc_id: 8cht190-831
+        workspace_id: 9011234080
+        name: Another doc
+        pages:
+        - id: 8cht190-331
+          doc_id: 8cht190-831
+          parent_page_id: 8cht190-311
+          workspace_id: 9011234080
+          name: sub page
+          pages:
+          - id: 8cht190-351
+            doc_id: 8cht190-831
+            parent_page_id: 8cht190-331
+            workspace_id: 9011234080
+            name: 2nd sub page
+      required:
+      - id
+      - doc_id
+      - workspace_id
+      - name
+    PublicDocsGetPagePublicWorkspaceIdPath:
+      type: number
+    PublicDocsDocsSearchResultDto:
+      type: object
+      properties:
+        docs:
+          type: array
+          items:
+            $ref: '#/components/schemas/PublicDocsDocCoreDto'
+        next_cursor:
+          type: string
+      required:
+      - docs
+    PublicDocsParentDto:
+      type: object
+      properties:
+        id:
+          type: string
+        type:
+          description: The parent Doc type. Use `4` for Space, `5` for Folder, `6` for List, `7` for Everything, and `12` for Workspace.
+          type: number
+      required:
+      - id
+      - type
+    PublicDocsPageCoverDto:
+      type: object
+      properties:
+        color:
+          type: string
+        image_url:
+          type: string
+        position:
+          $ref: '#/components/schemas/PublicDocsPositionDto'
+  securitySchemes:
+    authHeader:
+      in: header
+      type: apiKey
+      name: Authorization
+x-refined-from:
+- clickup-public-api-v3-openapi.json
+- clickup-public-api-v3-openapi.json

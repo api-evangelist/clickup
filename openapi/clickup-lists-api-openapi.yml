@@ -1,21 +1,1636 @@
 openapi: 3.2.0
 info:
-  title: ClickUp Lists API
-  description: The ClickUp Lists API enables developers to manage Lists, which are containers that hold tasks within a Space or Folder. Lists define the workflow statuses available to tasks and serve as the primary grouping mechanism for related work items. The API supports creating, updating, and deleting Lists, as well as retrieving List details and the tasks they contain.
+  title: Clickup Lists API
   version: '2.0'
-  contact:
-    name: ClickUp Support
-    url: https://help.clickup.com
-  termsOfService: https://clickup.com/terms
+  description: 'Operations tagged Lists across 3 of this provider''s published API definitions: clickup-api-v2-reference-openapi.json, clickup-lists-openapi.yml, clickup-api-v2-reference-openapi.json. Each path carries the servers of the definition it was published in.'
 servers:
+- url: https://api.clickup.com/api
+  description: ClickUp
+  variables: {}
 - url: https://api.clickup.com/api/v2
   description: ClickUp API v2 Production Server
-security:
-- bearerAuth: []
 tags:
 - name: Lists
-  description: Operations for managing Lists within ClickUp Spaces and Folders.
 paths:
+  /v2/folder/{folder_id}/list:
+    parameters: []
+    get:
+      summary: Get Lists
+      tags:
+      - Lists
+      description: View the Lists within a Folder.
+      operationId: GetLists
+      parameters:
+      - name: folder_id
+        in: path
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: number
+          contentEncoding: double
+          examples:
+          - 456
+      - name: archived
+        in: query
+        description: ''
+        style: form
+        explode: true
+        schema:
+          type: boolean
+          examples:
+          - false
+      responses:
+        '200':
+          description: ''
+          headers: {}
+          content:
+            application/json:
+              schema:
+                title: GetListsresponse
+                required:
+                - lists
+                type: object
+                properties:
+                  lists:
+                    type: array
+                    items:
+                      $ref: '#/paths/~1v2~1space~1{space_id}~1list/get/responses/200/content/application~1json/schema/properties/lists/items'
+                    description: ''
+      deprecated: false
+      security:
+      - Authorization_Token: []
+    post:
+      summary: Create List
+      tags:
+      - Lists
+      description: Add a new List to a Folder.
+      operationId: CreateList
+      parameters:
+      - name: folder_id
+        in: path
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: number
+          contentEncoding: double
+          examples:
+          - 456
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              title: CreateListrequest
+              required:
+              - name
+              type: object
+              properties:
+                name:
+                  type: string
+                content:
+                  type: string
+                markdown_content:
+                  type: string
+                  description: Use `markdown_content` instead of `content` to format your List description.
+                due_date:
+                  type: integer
+                  contentEncoding: int64
+                due_date_time:
+                  type: boolean
+                priority:
+                  type: integer
+                  contentEncoding: int32
+                assignee:
+                  description: Include a `user_id` to assign this List.
+                  type: integer
+                  contentEncoding: int32
+                status:
+                  description: '**Status** refers to the List color rather than the task Statuses available in the List.'
+                  type: string
+              examples:
+              - name: New List Name
+                content: New List Content
+                markdown_content: "# This is markdown\n ***bold and italicized text***"
+                due_date: 1567780450202
+                due_date_time: false
+                priority: 1
+                assignee: 183
+                status: red
+            example:
+              name: New List Name
+              content: New List Content
+              markdown_content: "# This is markdown\n ***bold and italicized text***"
+              due_date: 1567780450202
+              due_date_time: false
+              priority: 1
+              assignee: 183
+              status: red
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+          content:
+            application/json:
+              schema:
+                title: CreateListresponse
+                type: object
+                properties:
+                  id:
+                    type: string
+                  name:
+                    type: string
+                  orderindex:
+                    type: integer
+                    contentEncoding: int32
+                  content:
+                    type: string
+                  status:
+                    $ref: '#/paths/~1v2~1list~1{list_id}/get/responses/200/content/application~1json/schema/properties/status'
+                  priority:
+                    $ref: '#/paths/~1v2~1list~1{list_id}/get/responses/200/content/application~1json/schema/properties/priority'
+                  assignee:
+                    $ref: '#/paths/~1v2~1space~1{space_id}~1list/post/responses/200/content/application~1json/schema/properties/assignee'
+                  task_count:
+                    type:
+                    - string
+                    - 'null'
+                  due_date:
+                    type: string
+                  due_date_time:
+                    type: boolean
+                  start_date:
+                    type:
+                    - string
+                    - 'null'
+                  start_date_time:
+                    type:
+                    - string
+                    - 'null'
+                  folder:
+                    $ref: '#/paths/~1v2~1list~1{list_id}/get/responses/200/content/application~1json/schema/properties/folder'
+                  space:
+                    $ref: '#/paths/~1v2~1list~1{list_id}/get/responses/200/content/application~1json/schema/properties/space'
+                  statuses:
+                    type: array
+                    items:
+                      $ref: '#/paths/~1v2~1task~1{task_id}/get/responses/200/content/application~1json/schema/properties/status'
+                    description: ''
+                  inbound_address:
+                    type: string
+                examples:
+                - id: '124'
+                  name: New List Name
+                  orderindex: 1
+                  content: New List Content
+                  status:
+                    status: red
+                    color: '#e50000'
+                    hide_label: true
+                  priority:
+                    priority: urgent
+                    color: '#f50000'
+                  assignee:
+                    id: 183
+                    color: '#827718'
+                    username: Jerry
+                    initials: J
+                    profilePicture: https://attachments.clickup.com/profilePictures/profile.jpg
+                  task_count: null
+                  due_date: '1567780450202'
+                  due_date_time: false
+                  start_date: null
+                  start_date_time: null
+                  folder:
+                    id: '456'
+                    name: Folder Name
+                    hidden: false
+                    access: true
+                  space:
+                    id: '789'
+                    name: Space Name
+                    access: true
+                  statuses:
+                  - status: to do
+                    orderindex: 0
+                    color: '#d3d3d3'
+                    type: open
+                  - status: complete
+                    orderindex: 1
+                    color: '#6bc950'
+                    type: closed
+                  inbound_address: add.task.1389.ac725f.31518a6a-05bb-4997-92a6-1dcfe2f527ca@tasks.clickup.com
+              example:
+                id: '124'
+                name: New List Name
+                orderindex: 1
+                content: New List Content
+                status:
+                  status: red
+                  color: '#e50000'
+                  hide_label: true
+                priority:
+                  priority: urgent
+                  color: '#f50000'
+                assignee:
+                  id: 183
+                  color: '#827718'
+                  username: Jerry
+                  initials: J
+                  profilePicture: https://attachments.clickup.com/profilePictures/profile.jpg
+                task_count: null
+                due_date: '1567780450202'
+                due_date_time: false
+                start_date: null
+                start_date_time: null
+                folder:
+                  id: '456'
+                  name: Folder Name
+                  hidden: false
+                  access: true
+                space:
+                  id: '789'
+                  name: Space Name
+                  access: true
+                statuses:
+                - status: to do
+                  orderindex: 0
+                  color: '#d3d3d3'
+                  type: open
+                - status: complete
+                  orderindex: 1
+                  color: '#6bc950'
+                  type: closed
+                inbound_address: add.task.1389.ac725f.31518a6a-05bb-4997-92a6-1dcfe2f527ca@tasks.clickup.com
+      deprecated: false
+      security:
+      - Authorization_Token: []
+    servers:
+    - url: https://api.clickup.com/api
+      description: ClickUp
+      variables: {}
+  /v2/space/{space_id}/list:
+    parameters: []
+    get:
+      summary: Get Folderless Lists
+      tags:
+      - Lists
+      description: View the Lists in a Space that aren't located in a Folder.
+      operationId: GetFolderlessLists
+      parameters:
+      - name: space_id
+        in: path
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: number
+          contentEncoding: double
+          examples:
+          - 789
+      - name: archived
+        in: query
+        description: ''
+        style: form
+        explode: true
+        schema:
+          type: boolean
+          examples:
+          - false
+      responses:
+        '200':
+          description: ''
+          headers: {}
+          content:
+            application/json:
+              schema:
+                title: GetFolderlessListsresponse
+                required:
+                - lists
+                type: object
+                properties:
+                  lists:
+                    type: array
+                    items:
+                      title: List4
+                      required:
+                      - id
+                      - name
+                      - orderindex
+                      - content
+                      - status
+                      - priority
+                      - assignee
+                      - task_count
+                      - due_date
+                      - start_date
+                      - folder
+                      - space
+                      - archived
+                      - override_statuses
+                      - permission_level
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        name:
+                          type: string
+                        orderindex:
+                          type: integer
+                          contentEncoding: int32
+                        content:
+                          type: string
+                        status:
+                          oneOf:
+                          - title: Status11
+                            type: object
+                            properties:
+                              status:
+                                type: string
+                              color:
+                                type: string
+                              hide_label:
+                                type: boolean
+                            examples:
+                            - status: red
+                              color: '#e50000'
+                              hide_label: true
+                          - type:
+                            - string
+                            - 'null'
+                          - {}
+                          examples:
+                          - status: red
+                            color: '#e50000'
+                            hide_label: true
+                        priority:
+                          oneOf:
+                          - title: Priority4
+                            type: object
+                            properties:
+                              priority:
+                                type: string
+                              color:
+                                type: string
+                            examples:
+                            - priority: high
+                              color: '#f50000'
+                          - type:
+                            - string
+                            - 'null'
+                          - {}
+                          examples:
+                          - priority: high
+                            color: '#f50000'
+                        assignee:
+                          type:
+                          - string
+                          - 'null'
+                        task_count:
+                          type:
+                          - string
+                          - 'null'
+                        due_date:
+                          type:
+                          - string
+                          - 'null'
+                        start_date:
+                          type:
+                          - string
+                          - 'null'
+                        folder:
+                          $ref: '#/paths/~1v2~1list~1{list_id}/get/responses/200/content/application~1json/schema/properties/folder'
+                        space:
+                          $ref: '#/paths/~1v2~1list~1{list_id}/get/responses/200/content/application~1json/schema/properties/space'
+                        archived:
+                          type: boolean
+                        override_statuses:
+                          type: boolean
+                        permission_level:
+                          type: string
+                      examples:
+                      - id: '124'
+                        name: Updated List Name
+                        orderindex: 1
+                        content: Updated List Content
+                        status:
+                          status: red
+                          color: '#e50000'
+                          hide_label: true
+                        priority:
+                          priority: high
+                          color: '#f50000'
+                        assignee: null
+                        task_count: null
+                        due_date: '1567780450202'
+                        start_date: null
+                        folder:
+                          id: '456'
+                          name: Folder Name
+                          hidden: false
+                          access: true
+                        space:
+                          id: '789'
+                          name: Space Name
+                          access: true
+                        archived: false
+                        override_statuses: false
+                        permission_level: create
+                    description: ''
+      deprecated: false
+      security:
+      - Authorization_Token: []
+    post:
+      summary: Create Folderless List
+      tags:
+      - Lists
+      description: Add a new List in a Space.
+      operationId: CreateFolderlessList
+      parameters:
+      - name: space_id
+        in: path
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: number
+          contentEncoding: double
+          examples:
+          - 789
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              title: CreateFolderlessListrequest
+              required:
+              - name
+              type: object
+              properties:
+                name:
+                  type: string
+                content:
+                  type: string
+                markdown_content:
+                  type: string
+                  description: Use `markdown_content` instead of `content` to format your List description.
+                due_date:
+                  type: integer
+                  contentEncoding: int64
+                due_date_time:
+                  type: boolean
+                priority:
+                  type: integer
+                  contentEncoding: int32
+                assignee:
+                  description: Include a `user_id` to add a List owner.
+                  type: integer
+                  contentEncoding: int32
+                status:
+                  description: '**Status** refers to the List color rather than the task Statuses available in the List.'
+                  type: string
+              examples:
+              - name: New List Name
+                content: New List Content
+                due_date: 1567780450202
+                due_date_time: false
+                priority: 1
+                assignee: 183
+                status: red
+            example:
+              name: New List Name
+              content: New List Content
+              markdown_content: "# This is markdown\n ***bold and italicized text***"
+              due_date: 1567780450202
+              due_date_time: false
+              priority: 1
+              assignee: 183
+              status: red
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+          content:
+            application/json:
+              schema:
+                title: CreateFolderlessListresponse
+                type: object
+                properties:
+                  id:
+                    type: string
+                  name:
+                    type: string
+                  orderindex:
+                    type: integer
+                    contentEncoding: int32
+                  content:
+                    type: string
+                  status:
+                    $ref: '#/paths/~1v2~1list~1{list_id}/get/responses/200/content/application~1json/schema/properties/status'
+                  priority:
+                    $ref: '#/paths/~1v2~1list~1{list_id}/get/responses/200/content/application~1json/schema/properties/priority'
+                  assignee:
+                    title: Assignee3
+                    required:
+                    - id
+                    - color
+                    - username
+                    - initials
+                    - profilePicture
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        contentEncoding: int32
+                      color:
+                        type: string
+                      username:
+                        type: string
+                      initials:
+                        type: string
+                      profilePicture:
+                        type: string
+                    examples:
+                    - id: 183
+                      color: '#827718'
+                      username: John Doe
+                      initials: J
+                      profilePicture: https://attachments.clickup.com/profilePictures/profile.jpg
+                  task_count:
+                    type:
+                    - string
+                    - 'null'
+                  due_date:
+                    type: string
+                  due_date_time:
+                    type: boolean
+                  start_date:
+                    type:
+                    - string
+                    - 'null'
+                  start_date_time:
+                    type:
+                    - string
+                    - 'null'
+                  folder:
+                    $ref: '#/paths/~1v2~1list~1{list_id}/get/responses/200/content/application~1json/schema/properties/folder'
+                  space:
+                    $ref: '#/paths/~1v2~1list~1{list_id}/get/responses/200/content/application~1json/schema/properties/space'
+                  statuses:
+                    type: array
+                    items:
+                      $ref: '#/paths/~1v2~1task~1{task_id}/get/responses/200/content/application~1json/schema/properties/status'
+                    description: ''
+                  inbound_address:
+                    type: string
+                examples:
+                - id: '124'
+                  name: New List Name
+                  orderindex: 1
+                  content: New List Content
+                  status:
+                    status: red
+                    color: '#e50000'
+                    hide_label: true
+                  priority:
+                    priority: urgent
+                    color: '#f50000'
+                  assignee:
+                    id: 183
+                    color: '#827718'
+                    username: Jerry
+                    initials: J
+                    profilePicture: https://attachments.clickup.com/profilePictures/profile.jpg
+                  task_count: null
+                  due_date: '1567780450202'
+                  due_date_time: false
+                  start_date: null
+                  start_date_time: null
+                  folder:
+                    id: '457'
+                    name: hidden
+                    hidden: true
+                    access: true
+                  space:
+                    id: '789'
+                    name: Space Name
+                    access: true
+                  statuses:
+                  - status: to do
+                    orderindex: 0
+                    color: '#d3d3d3'
+                    type: open
+                  - status: complete
+                    orderindex: 1
+                    color: '#6bc950'
+                    type: closed
+                  inbound_address: add.task.1389.ac725f.31518a6a-05bb-4997-92a6-1dcfe2f527ca@tasks.clickup.com
+              example:
+                id: '124'
+                name: New List Name
+                orderindex: 1
+                content: New List Content
+                status:
+                  status: red
+                  color: '#e50000'
+                  hide_label: true
+                priority:
+                  priority: urgent
+                  color: '#f50000'
+                assignee:
+                  id: 183
+                  color: '#827718'
+                  username: Jerry
+                  initials: J
+                  profilePicture: https://attachments.clickup.com/profilePictures/profile.jpg
+                task_count: null
+                due_date: '1567780450202'
+                due_date_time: false
+                start_date: null
+                start_date_time: null
+                folder:
+                  id: '457'
+                  name: hidden
+                  hidden: true
+                  access: true
+                space:
+                  id: '789'
+                  name: Space Name
+                  access: true
+                statuses:
+                - status: to do
+                  orderindex: 0
+                  color: '#d3d3d3'
+                  type: open
+                - status: complete
+                  orderindex: 1
+                  color: '#6bc950'
+                  type: closed
+                inbound_address: add.task.1389.ac725f.31518a6a-05bb-4997-92a6-1dcfe2f527ca@tasks.clickup.com
+      deprecated: false
+      security:
+      - Authorization_Token: []
+    servers:
+    - url: https://api.clickup.com/api
+      description: ClickUp
+      variables: {}
+  /v2/list/{list_id}:
+    parameters: []
+    get:
+      summary: Get List
+      tags:
+      - Lists
+      description: View information about a List.
+      operationId: GetList
+      parameters:
+      - name: list_id
+        in: path
+        description: The List ID. To find the List ID, right-click the List in your Sidebar, select Copy link, and paste the link in your URL. The last string in the URL is your List ID.
+        required: true
+        style: simple
+        schema:
+          type: number
+          contentEncoding: double
+          examples:
+          - 124
+      responses:
+        '200':
+          description: ''
+          headers: {}
+          content:
+            application/json:
+              schema:
+                title: GetListresponse
+                type: object
+                properties:
+                  id:
+                    type: string
+                  name:
+                    type: string
+                  orderindex:
+                    type: integer
+                    contentEncoding: int32
+                  content:
+                    type: string
+                  status:
+                    title: Status5
+                    required:
+                    - status
+                    - color
+                    - hide_label
+                    type: object
+                    properties:
+                      status:
+                        type: string
+                      color:
+                        type: string
+                      hide_label:
+                        type: boolean
+                    examples:
+                    - status: red
+                      color: '#e50000'
+                      hide_label: true
+                  priority:
+                    title: Priority1
+                    required:
+                    - priority
+                    - color
+                    type: object
+                    properties:
+                      priority:
+                        type: string
+                      color:
+                        type: string
+                    examples:
+                    - priority: urgent
+                      color: '#f50000'
+                  assignee:
+                    type:
+                    - string
+                    - 'null'
+                  task_count:
+                    type:
+                    - string
+                    - 'null'
+                  due_date:
+                    type: string
+                  due_date_time:
+                    type: boolean
+                  start_date:
+                    type:
+                    - string
+                    - 'null'
+                  start_date_time:
+                    type:
+                    - string
+                    - 'null'
+                  folder:
+                    title: Folder3
+                    required:
+                    - id
+                    - name
+                    - hidden
+                    - access
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                      name:
+                        type: string
+                      hidden:
+                        type: boolean
+                      access:
+                        type: boolean
+                    examples:
+                    - id: '1217'
+                      name: Shared with me
+                      hidden: false
+                      access: false
+                  space:
+                    title: Space2
+                    required:
+                    - id
+                    - name
+                    - access
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                      name:
+                        type: string
+                      access:
+                        type: boolean
+                    examples:
+                    - id: '789'
+                      name: Space Name
+                      access: true
+                  inbound_address:
+                    type: string
+                  archived:
+                    type: boolean
+                  override_statuses:
+                    type: boolean
+                  statuses:
+                    type: array
+                    items:
+                      $ref: '#/paths/~1v2~1task~1{task_id}/get/responses/200/content/application~1json/schema/properties/status'
+                    description: ''
+                  permission_level:
+                    type: string
+                examples:
+                - id: '124'
+                  name: Updated List Name
+                  orderindex: 1
+                  content: Updated List Content
+                  status:
+                    status: red
+                    color: '#e50000'
+                    hide_label: true
+                  priority:
+                    priority: high
+                    color: '#f50000'
+                  assignee: null
+                  due_date: '1567780450202'
+                  due_date_time: true
+                  start_date: null
+                  start_date_time: null
+                  folder:
+                    id: '456'
+                    name: Folder Name
+                    hidden: false
+                    access: true
+                  space:
+                    id: '789'
+                    name: Space Name
+                    access: true
+                  inbound_address: add.task.124.ac725f.31518a6a-05bb-4997-92a6-1dcfe2f527ca@tasks.clickup.com
+                  archived: false
+                  override_statuses: false
+                  statuses:
+                  - status: to do
+                    orderindex: 0
+                    color: '#d3d3d3'
+                    type: open
+                  - status: complete
+                    orderindex: 1
+                    color: '#6bc950'
+                    type: closed
+                  permission_level: create
+              example:
+                id: '124'
+                name: Updated List Name
+                orderindex: 1
+                content: Updated List Content
+                status:
+                  status: red
+                  color: '#e50000'
+                  hide_label: true
+                priority:
+                  priority: high
+                  color: '#f50000'
+                assignee: null
+                task_count: 10
+                due_date: '1567780450202'
+                due_date_time: true
+                start_date: null
+                start_date_time: null
+                folder:
+                  id: '456'
+                  name: Folder Name
+                  hidden: false
+                  access: true
+                space:
+                  id: '789'
+                  name: Space Name
+                  access: true
+                inbound_address: add.task.124.ac725f.31518a6a-05bb-4997-92a6-1dcfe2f527ca@tasks.clickup.com
+                archived: false
+                override_statuses: false
+                statuses:
+                - status: to do
+                  orderindex: 0
+                  color: '#d3d3d3'
+                  type: open
+                - status: complete
+                  orderindex: 1
+                  color: '#6bc950'
+                  type: closed
+                permission_level: create
+      deprecated: false
+      security:
+      - Authorization_Token: []
+    put:
+      summary: Update List
+      tags:
+      - Lists
+      description: Rename a List, update the List Info description, set a due date/time, set the List's priority, set an assignee, set or remove the List color.
+      operationId: UpdateList
+      parameters:
+      - name: list_id
+        in: path
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: string
+          examples:
+          - '124'
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              title: UpdateListrequest
+              required:
+              - name
+              type: object
+              properties:
+                name:
+                  type: string
+                content:
+                  type: string
+                markdown_content:
+                  type: string
+                  description: Use `markdown_content` instead of `content` to format your List description.
+                due_date:
+                  type: integer
+                  contentEncoding: int64
+                due_date_time:
+                  type: boolean
+                priority:
+                  type: integer
+                  contentEncoding: int32
+                assignee:
+                  type: string
+                status:
+                  description: '**Status** refers to the List color rather than the task Statuses available in the List.'
+                  type: string
+                unset_status:
+                  description: 'By default, this is `false.` To remove the List color use `unset_status: true`.'
+                  type: boolean
+              examples:
+              - name: Updated List Name
+                content: Updated List Content
+                markdown_content: "# This is markdown\n ***bold and italicized text***"
+                due_date: 1567780450202
+                due_date_time: true
+                priority: 2
+                assignee: none
+                status: red
+                unset_status: true
+            example:
+              name: Updated List Name
+              content: Updated List Content
+              markdown_content: "# This is markdown\n ***bold and italicized text***"
+              due_date: 1567780450202
+              due_date_time: true
+              priority: 2
+              assignee: none
+              status: red
+              unset_status: true
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+          content:
+            application/json:
+              schema:
+                title: UpdateListresponse
+                type: object
+                properties:
+                  id:
+                    type: string
+                  name:
+                    type: string
+                  orderindex:
+                    type: integer
+                    contentEncoding: int32
+                  content:
+                    type: string
+                  status:
+                    $ref: '#/paths/~1v2~1list~1{list_id}/get/responses/200/content/application~1json/schema/properties/status'
+                  priority:
+                    $ref: '#/paths/~1v2~1list~1{list_id}/get/responses/200/content/application~1json/schema/properties/priority'
+                  assignee:
+                    type:
+                    - string
+                    - 'null'
+                  task_count:
+                    type:
+                    - string
+                    - 'null'
+                  due_date:
+                    type: string
+                  due_date_time:
+                    type: boolean
+                  start_date:
+                    type:
+                    - string
+                    - 'null'
+                  start_date_time:
+                    type:
+                    - string
+                    - 'null'
+                  folder:
+                    $ref: '#/paths/~1v2~1list~1{list_id}/get/responses/200/content/application~1json/schema/properties/folder'
+                  space:
+                    $ref: '#/paths/~1v2~1list~1{list_id}/get/responses/200/content/application~1json/schema/properties/space'
+                  statuses:
+                    type: array
+                    items:
+                      $ref: '#/paths/~1v2~1task~1{task_id}/get/responses/200/content/application~1json/schema/properties/status'
+                    description: ''
+                  inbound_address:
+                    type: string
+                examples:
+                - id: '124'
+                  name: Updated List Name
+                  orderindex: 1
+                  content: Updated List Content
+                  status:
+                    status: red
+                    color: '#e50000'
+                    hide_label: true
+                  priority:
+                    priority: high
+                    color: '#f50000'
+                  assignee: null
+                  task_count: null
+                  due_date: '1567780450202'
+                  due_date_time: true
+                  start_date: null
+                  start_date_time: null
+                  folder:
+                    id: '456'
+                    name: Folder Name
+                    hidden: false
+                    access: true
+                  space:
+                    id: '789'
+                    name: Space Name
+                    access: true
+                  statuses:
+                  - status: to do
+                    orderindex: 0
+                    color: '#d3d3d3'
+                    type: open
+                  - status: complete
+                    orderindex: 1
+                    color: '#6bc950'
+                    type: closed
+                  inbound_address: add.task.1389.ac725f.31518a6a-05bb-4997-92a6-1dcfe2f527ca@tasks.clickup.com
+              example:
+                id: '124'
+                name: Updated List Name
+                orderindex: 1
+                content: Updated List Content
+                status:
+                  status: red
+                  color: '#e50000'
+                  hide_label: true
+                priority:
+                  priority: high
+                  color: '#f50000'
+                assignee: null
+                task_count: null
+                due_date: '1567780450202'
+                due_date_time: true
+                start_date: null
+                start_date_time: null
+                folder:
+                  id: '456'
+                  name: Folder Name
+                  hidden: false
+                  access: true
+                space:
+                  id: '789'
+                  name: Space Name
+                  access: true
+                statuses:
+                - status: to do
+                  orderindex: 0
+                  color: '#d3d3d3'
+                  type: open
+                - status: complete
+                  orderindex: 1
+                  color: '#6bc950'
+                  type: closed
+                inbound_address: add.task.1389.ac725f.31518a6a-05bb-4997-92a6-1dcfe2f527ca@tasks.clickup.com
+      deprecated: false
+      security:
+      - Authorization_Token: []
+    delete:
+      summary: Delete List
+      tags:
+      - Lists
+      description: Delete a List from your Workspace.
+      operationId: DeleteList
+      parameters:
+      - name: list_id
+        in: path
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: number
+          contentEncoding: double
+          examples:
+          - 124
+      - name: Content-Type
+        in: header
+        description: ''
+        required: true
+        style: simple
+        schema:
+          const: application/json
+          type: string
+          examples:
+          - application/json
+      responses:
+        '200':
+          description: ''
+          headers: {}
+          content:
+            application/json:
+              schema:
+                type: object
+                examples:
+                - {}
+                contentMediaType: application/json
+              example: {}
+      deprecated: false
+      security:
+      - Authorization_Token: []
+    servers:
+    - url: https://api.clickup.com/api
+      description: ClickUp
+      variables: {}
+  /v2/list/{list_id}/task/{task_id}:
+    parameters: []
+    post:
+      summary: Add Task To List
+      tags:
+      - Lists
+      description: 'Add a task to an additional List. \
+
+        \
+
+        ***Note:** This endpoint requires the Tasks in Multiple List ClickApp to be enabled.*'
+      operationId: AddTaskToList
+      parameters:
+      - name: list_id
+        in: path
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: number
+          contentEncoding: double
+          examples:
+          - 123
+      - name: task_id
+        in: path
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: string
+          examples:
+          - 9hz
+      responses:
+        '200':
+          description: ''
+          headers: {}
+          content:
+            application/json:
+              schema:
+                type: object
+                examples:
+                - {}
+                contentMediaType: application/json
+              example: {}
+      deprecated: false
+      security:
+      - Authorization_Token: []
+    delete:
+      summary: Remove Task From List
+      tags:
+      - Lists
+      description: 'Remove a task from an additional List. You can''t remove a task from its home List. \
+
+        \
+
+        ***Note:** This endpoint requires the Tasks in Multiple List ClickApp to be enabled.*'
+      operationId: RemoveTaskFromList
+      parameters:
+      - name: list_id
+        in: path
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: number
+          contentEncoding: double
+          examples:
+          - 123
+      - name: task_id
+        in: path
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: string
+          examples:
+          - 9hz
+      responses:
+        '200':
+          description: ''
+          headers: {}
+          content:
+            application/json:
+              schema:
+                type: object
+                examples:
+                - {}
+                contentMediaType: application/json
+              example: {}
+      deprecated: false
+      security:
+      - Authorization_Token: []
+    servers:
+    - url: https://api.clickup.com/api
+      description: ClickUp
+      variables: {}
+  /v2/folder/{folder_id}/list_template/{template_id}:
+    post:
+      summary: Create List From Template in Folder
+      tags:
+      - Lists
+      description: 'Create a new list using a list template in a Folder. Publicly shared templates must be added to your Workspace before you can use them with the public API.
+
+        This request runs synchronously by default with `return_immediately=true`.
+
+        The request returns the future List ID immediatly, but the List may not be created when the response is sent.
+
+        Small templates can be applied synchronously, which guarantees that all sub objects are created.
+
+        In case of a timeout on synchronous requests, the objects from the template will continue to be created past the timeout.'
+      operationId: CreateFolderListFromTemplate
+      parameters:
+      - in: path
+        name: folder_id
+        required: true
+        schema:
+          type: string
+        description: ID of the Folder where the List will be created
+      - in: path
+        name: template_id
+        required: true
+        schema:
+          type: string
+          examples:
+          - t-15363293
+        description: 'ID of the List template to use. Template IDs include a `t-` prefix (e.g., `t-15363293`). Retrieve available template IDs using the [Get List Templates](#tag/Templates/operation/GetListTemplates) endpoint.
+
+          '
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - name
+              properties:
+                name:
+                  type: string
+                  description: Name of the new List
+                options:
+                  $ref: '#/paths/~1v2~1space~1{space_id}~1list_template~1{template_id}/post/requestBody/content/application~1json/schema/properties/options'
+      responses:
+        '200':
+          description: List created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/paths/~1v2~1space~1{space_id}~1list_template~1{template_id}/post/responses/200/content/application~1json/schema'
+        '400':
+          description: Bad request - Name is required
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: Name is required
+                  ECODE:
+                    type: string
+                    example: OAUTH_117
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Template, folder, or space not found
+        '500':
+          description: Internal server error
+      security:
+      - Authorization_Token: []
+    servers:
+    - url: https://api.clickup.com/api
+      description: ClickUp
+      variables: {}
+  /v2/space/{space_id}/list_template/{template_id}:
+    post:
+      summary: Create List From Template in Space
+      tags:
+      - Lists
+      description: 'Create a new List using a List template within a Space. Publicly shared templates must be added to your Workspace before you can use them with the public API.
+
+        This request can be run asynchronously or synchronously via the `return_immediately` parameter.'
+      operationId: CreateSpaceListFromTemplate
+      parameters:
+      - in: path
+        name: space_id
+        required: true
+        schema:
+          type: string
+        description: ID of the Space where the List will be created
+      - in: path
+        name: template_id
+        required: true
+        schema:
+          type: string
+          examples:
+          - t-15363293
+        description: 'ID of the List template to use. Template IDs include a `t-` prefix (e.g., `t-15363293`). Retrieve available template IDs using the [Get List Templates](#tag/Templates/operation/GetListTemplates) endpoint.
+
+          '
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - name
+              properties:
+                name:
+                  type: string
+                  description: Name of the new List
+                options:
+                  type: object
+                  description: Options for creating the List
+                  properties:
+                    return_immediately:
+                      type: boolean
+                      description: 'Flag if newly created Object ID should be returned without waiting for the asset itself and all its nested assets to be applied. If set to true, access checks are performed before returning, but the object might not be fully created yet. In case of a timeout on syncronous requests, the of objects from the template will continue to be created past the timeout.
+
+                        '
+                      default: true
+                    content:
+                      type: string
+                      description: List description
+                    time_estimate:
+                      type: number
+                      description: Include time (hours, minutes and seconds)
+                    automation:
+                      type: boolean
+                      description: Import automation settings
+                    include_views:
+                      type: boolean
+                      description: Import views
+                    old_due_date:
+                      type: boolean
+                      description: Import tasks' due dates
+                    old_start_date:
+                      type: boolean
+                      description: Import tasks' start dates
+                    old_followers:
+                      type: boolean
+                      description: Import tasks' watchers
+                    comment_attachments:
+                      type: boolean
+                      description: Import tasks' comment attachments
+                    recur_settings:
+                      type: boolean
+                      description: Import tasks' recurring settings
+                    old_tags:
+                      type: boolean
+                      description: Import tasks' tags
+                    old_statuses:
+                      type: boolean
+                      description: Import tasks' status settings
+                    subtasks:
+                      type: boolean
+                      description: Import tasks' subtasks
+                    custom_type:
+                      type: boolean
+                      description: Import tasks' task types
+                    old_assignees:
+                      type: boolean
+                      description: Import tasks' assignees
+                    attachments:
+                      type: boolean
+                      description: Import tasks' attachments
+                    comment:
+                      type: boolean
+                      description: Import tasks' comments
+                    old_status:
+                      type: boolean
+                      description: Import tasks' current statuses
+                    external_dependencies:
+                      type: boolean
+                      description: Import tasks' external dependencies
+                    internal_dependencies:
+                      type: boolean
+                      description: Import tasks' internal dependencies
+                    priority:
+                      type: boolean
+                      description: Import tasks' priorities
+                    custom_fields:
+                      type: boolean
+                      description: Import tasks' Custom Fields
+                    old_checklists:
+                      type: boolean
+                      description: Import tasks' checklists
+                    relationships:
+                      type: boolean
+                      description: Import tasks' relationships
+                    old_subtask_assignees:
+                      type: boolean
+                      description: Import tasks' subtask assignees
+                    start_date:
+                      type: string
+                      format: date-time
+                      description: Project start date for remapping dates
+                    due_date:
+                      type: string
+                      format: date-time
+                      description: Project due date for remapping dates
+                    remap_start_date:
+                      type: boolean
+                      description: Remap start dates
+                    skip_weekends:
+                      type: boolean
+                      description: Skip weekends when remapping dates
+                    archived:
+                      type: integer
+                      enum:
+                      - 1
+                      - 2
+                      - null
+                      description: Include archived tasks
+      responses:
+        '200':
+          description: List created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                description: Response object returned when a new List is created from a template in a Folder or Space.
+                properties:
+                  id:
+                    type: string
+                    description: Unique identifier of the newly created List
+                    example: '901107394085'
+                  list:
+                    type: object
+                    description: Detailed information about the created List
+                    properties:
+                      id:
+                        type: string
+                        description: Unique identifier of the List (matches parent id)
+                        example: '901107394085'
+                      name:
+                        type: string
+                        description: Display name of the List
+                        example: API Folder in Space
+                      deleted:
+                        type: boolean
+                        description: Indicates if the List has been marked as deleted
+                        example: true
+                      orderindex:
+                        type: integer
+                        description: Position of the List relative to other Lists in the same container
+                        example: 0
+                      priority:
+                        type: string
+                        description: Priority level of the List, if applicable
+                        nullable: true
+                        example: null
+                      assignee:
+                        type: string
+                        description: Default assignee for the List, if applicable
+                        nullable: true
+                        example: null
+                      due_date:
+                        type: string
+                        format: date-time
+                        description: Default due date for tasks in the List
+                        nullable: true
+                        example: null
+                      start_date:
+                        type: string
+                        format: date-time
+                        description: Default start date for tasks in the List
+                        nullable: true
+                        example: null
+                      folder:
+                        type: object
+                        description: Information about the parent Folder containing this List, if applicable
+                        properties:
+                          id:
+                            type: string
+                            description: Unique identifier of the parent Folder
+                            example: '90114317916'
+                          name:
+                            type: string
+                            description: Display name of the parent Folder
+                            example: hidden
+                          hidden:
+                            type: boolean
+                            description: Indicates if the Folder is hidden from standard views
+                            example: true
+                          access:
+                            type: boolean
+                            description: Indicates if the current user has access to this Folder
+                            example: true
+                      space:
+                        type: object
+                        description: Information about the Workspace Space containing this List
+                        properties:
+                          id:
+                            type: string
+                            description: Unique identifier of the Space
+                            example: '90112667046'
+                          name:
+                            type: string
+                            description: Display name of the Space
+                            example: API Test Space
+                          access:
+                            type: boolean
+                            description: Indicates if the current user has access to this Space
+                            example: true
+                      inbound_address:
+                        type: string
+                        description: Email address that can be used to create tasks in this List via email
+                        example: abc-list@tasks.clickup.com
+                      archived:
+                        type: boolean
+                        description: Indicates if the List is archived
+                        example: false
+                      override_statuses:
+                        type: boolean
+                        description: Indicates if this List uses custom statuses instead of Space default statuses
+                        example: true
+                      statuses:
+                        type: array
+                        description: List of available statuses for tasks in this List
+                        items:
+                          type: object
+                          description: Status configuration object
+                          properties:
+                            id:
+                              type: string
+                              description: Unique identifier for the status
+                              example: sc901107394085_DCnaeiSB
+                            status:
+                              type: string
+                              description: Display name of the status
+                              example: to do
+                            orderindex:
+                              type: integer
+                              description: Position of this status in the status list
+                              example: 0
+                            color:
+                              type: string
+                              description: Color code associated with this status
+                              example: '#87909e'
+                            type:
+                              type: string
+                              description: Category of the status (e.g., open, closed, in progress)
+                              example: open
+                            status_group:
+                              type: string
+                              description: TODO - Identifier for grouping related statuses
+                              example: subcat_901107394085
+                      permission_level:
+                        type: string
+                        description: Access level the current user has for this List (e.g., create, edit, view)
+                        example: create
+        '400':
+          description: Bad request - Name is required, or is already taken
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: Name is required
+                  ECODE:
+                    type: string
+                    example: OAUTH_117
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Template, folder, or space not found
+        '500':
+          description: Internal server error
+      security:
+      - Authorization_Token: []
+    servers:
+    - url: https://api.clickup.com/api
+      description: ClickUp
+      variables: {}
   /folder/{folder_id}/list:
     get:
       operationId: getLists
@@ -47,6 +1662,8 @@ paths:
           description: Unauthorized
         '404':
           description: Folder not found
+      security:
+      - bearerAuth: []
     post:
       operationId: createList
       summary: Create a list in a folder
@@ -74,6 +1691,11 @@ paths:
           description: Unauthorized
         '404':
           description: Folder not found
+      security:
+      - bearerAuth: []
+    servers:
+    - url: https://api.clickup.com/api/v2
+      description: ClickUp API v2 Production Server
   /space/{space_id}/list:
     get:
       operationId: getFolderlessLists
@@ -105,6 +1727,8 @@ paths:
           description: Unauthorized
         '404':
           description: Space not found
+      security:
+      - bearerAuth: []
     post:
       operationId: createFolderlessList
       summary: Create a folderless list
@@ -132,6 +1756,11 @@ paths:
           description: Unauthorized
         '404':
           description: Space not found
+      security:
+      - bearerAuth: []
+    servers:
+    - url: https://api.clickup.com/api/v2
+      description: ClickUp API v2 Production Server
   /list/{list_id}:
     get:
       operationId: getList
@@ -152,6 +1781,8 @@ paths:
           description: Unauthorized
         '404':
           description: List not found
+      security:
+      - bearerAuth: []
     put:
       operationId: updateList
       summary: Update a list
@@ -179,6 +1810,8 @@ paths:
           description: Unauthorized
         '404':
           description: List not found
+      security:
+      - bearerAuth: []
     delete:
       operationId: deleteList
       summary: Delete a list
@@ -194,6 +1827,11 @@ paths:
           description: Unauthorized
         '404':
           description: List not found
+      security:
+      - bearerAuth: []
+    servers:
+    - url: https://api.clickup.com/api/v2
+      description: ClickUp API v2 Production Server
   /list/{list_id}/member:
     get:
       operationId: getListMembers
@@ -219,30 +1857,67 @@ paths:
           description: Unauthorized
         '404':
           description: List not found
+      security:
+      - bearerAuth: []
+    servers:
+    - url: https://api.clickup.com/api/v2
+      description: ClickUp API v2 Production Server
 components:
-  parameters:
-    spaceId:
-      name: space_id
-      in: path
-      required: true
-      description: The unique identifier of the Space.
-      schema:
-        type: integer
-    listId:
-      name: list_id
-      in: path
-      required: true
-      description: The unique identifier of the List.
-      schema:
-        type: integer
-    folderId:
-      name: folder_id
-      in: path
-      required: true
-      description: The unique identifier of the Folder.
-      schema:
-        type: integer
   schemas:
+    Member:
+      type: object
+      description: A member with access to a List.
+      properties:
+        id:
+          type: integer
+          description: The user ID.
+        username:
+          type: string
+          description: The username.
+        email:
+          type: string
+          format: email
+          description: The email address.
+        color:
+          type: string
+          description: The user color.
+        profilePicture:
+          type: string
+          format: uri
+          nullable: true
+          description: URL of the profile picture.
+        initials:
+          type: string
+          description: The user initials.
+    UpdateListRequest:
+      type: object
+      description: Request body for updating an existing List.
+      properties:
+        name:
+          type: string
+          description: The updated name of the List.
+        content:
+          type: string
+          description: The updated content description.
+        due_date:
+          type: integer
+          format: int64
+          description: Updated due date as Unix timestamp in milliseconds.
+        due_date_time:
+          type: boolean
+          description: Whether the due date includes a time component.
+        priority:
+          type: integer
+          minimum: 1
+          maximum: 4
+          description: Updated priority level.
+        assignee:
+          type: integer
+          nullable: true
+          description: User ID to assign, or null to unassign.
+        unset_status:
+          type: boolean
+          description: Set to true to clear the List status.
     List:
       type: object
       description: A List object representing a container for tasks within a Space or Folder.
@@ -360,35 +2035,6 @@ components:
         permission_level:
           type: string
           description: The permission level of the List.
-    UpdateListRequest:
-      type: object
-      description: Request body for updating an existing List.
-      properties:
-        name:
-          type: string
-          description: The updated name of the List.
-        content:
-          type: string
-          description: The updated content description.
-        due_date:
-          type: integer
-          format: int64
-          description: Updated due date as Unix timestamp in milliseconds.
-        due_date_time:
-          type: boolean
-          description: Whether the due date includes a time component.
-        priority:
-          type: integer
-          minimum: 1
-          maximum: 4
-          description: Updated priority level.
-        assignee:
-          type: integer
-          nullable: true
-          description: User ID to assign, or null to unassign.
-        unset_status:
-          type: boolean
-          description: Set to true to clear the List status.
     CreateListRequest:
       type: object
       required:
@@ -419,32 +2065,38 @@ components:
         status:
           type: string
           description: The status to set on the List.
-    Member:
-      type: object
-      description: A member with access to a List.
-      properties:
-        id:
-          type: integer
-          description: The user ID.
-        username:
-          type: string
-          description: The username.
-        email:
-          type: string
-          format: email
-          description: The email address.
-        color:
-          type: string
-          description: The user color.
-        profilePicture:
-          type: string
-          format: uri
-          nullable: true
-          description: URL of the profile picture.
-        initials:
-          type: string
-          description: The user initials.
+  parameters:
+    listId:
+      name: list_id
+      in: path
+      required: true
+      description: The unique identifier of the List.
+      schema:
+        type: integer
+    spaceId:
+      name: space_id
+      in: path
+      required: true
+      description: The unique identifier of the Space.
+      schema:
+        type: integer
+    folderId:
+      name: folder_id
+      in: path
+      required: true
+      description: The unique identifier of the Folder.
+      schema:
+        type: integer
   securitySchemes:
+    Authorization_Token:
+      name: Authorization
+      type: apiKey
+      in: header
+      description: 'API token required for authentication. Two types of tokens are supported:
+
+        **Personal API Key** Obtain from ClickUp''s settings page under ''Apps'' and add it to the header as `Authorization: pk_...`
+
+        **OAuth2 Access Token** Generated through the OAuth2 flow and add it to the header as `Authorization: Bearer {access_token}`'
     bearerAuth:
       type: http
       scheme: bearer
@@ -452,3 +2104,7 @@ components:
 externalDocs:
   description: ClickUp Lists API Documentation
   url: https://developer.clickup.com/reference/get-lists
+x-refined-from:
+- clickup-api-v2-reference-openapi.json
+- clickup-lists-openapi.yml
+- clickup-api-v2-reference-openapi.json

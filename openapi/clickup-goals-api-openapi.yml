@@ -1,21 +1,1829 @@
 openapi: 3.2.0
 info:
-  title: ClickUp Goals API
-  description: The ClickUp Goals API allows developers to create and manage goals within a Workspace. Goals can track progress toward objectives using targets based on numbers, currency, percentages, or task completion. The API supports creating goals, adding key results and targets, updating progress, and retrieving goal details. This is useful for building OKR tracking and reporting integrations.
+  title: Clickup Goals API
   version: '2.0'
-  contact:
-    name: ClickUp Support
-    url: https://help.clickup.com
-  termsOfService: https://clickup.com/terms
+  description: 'Operations tagged Goals across 3 of this provider''s published API definitions: clickup-api-v2-reference-openapi.json, clickup-goals-openapi.yml, clickup-api-v2-reference-openapi.json. Each path carries the servers of the definition it was published in.'
 servers:
+- url: https://api.clickup.com/api
+  description: ClickUp
+  variables: {}
 - url: https://api.clickup.com/api/v2
   description: ClickUp API v2 Production Server
-security:
-- bearerAuth: []
 tags:
 - name: Goals
-  description: Operations for managing Goals and Key Results within a ClickUp Workspace.
 paths:
+  /v2/team/{team_id}/goal:
+    parameters: []
+    get:
+      summary: Get Goals
+      tags:
+      - Goals
+      description: View the Goals available in a Workspace.
+      operationId: GetGoals
+      parameters:
+      - name: team_id
+        in: path
+        description: Workspace ID
+        required: true
+        style: simple
+        schema:
+          type: number
+          contentEncoding: double
+          examples:
+          - 123
+      - name: include_completed
+        in: query
+        description: ''
+        style: form
+        explode: true
+        schema:
+          type: boolean
+          examples:
+          - true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+          content:
+            application/json:
+              schema:
+                title: GetGoalsresponse
+                required:
+                - goals
+                - folders
+                type: object
+                properties:
+                  goals:
+                    type: array
+                    items:
+                      title: Goal2
+                      required:
+                      - id
+                      - pretty_id
+                      - name
+                      - team_id
+                      - creator
+                      - owner
+                      - color
+                      - date_created
+                      - start_date
+                      - due_date
+                      - description
+                      - private
+                      - archived
+                      - multiple_owners
+                      - editor_token
+                      - date_updated
+                      - last_update
+                      - folder_id
+                      - pinned
+                      - owners
+                      - key_result_count
+                      - members
+                      - group_members
+                      - percent_completed
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        pretty_id:
+                          type: string
+                        name:
+                          type: string
+                        team_id:
+                          type: string
+                        creator:
+                          type: integer
+                          contentEncoding: int32
+                        owner:
+                          type:
+                          - string
+                          - 'null'
+                        color:
+                          type: string
+                        date_created:
+                          type: string
+                        start_date:
+                          type:
+                          - string
+                          - 'null'
+                        due_date:
+                          type: string
+                        description:
+                          type: string
+                        private:
+                          type: boolean
+                        archived:
+                          type: boolean
+                        multiple_owners:
+                          type: boolean
+                        editor_token:
+                          type: string
+                        date_updated:
+                          type: string
+                        last_update:
+                          type: string
+                        folder_id:
+                          type:
+                          - string
+                          - 'null'
+                        pinned:
+                          type: boolean
+                        owners:
+                          type: array
+                          items:
+                            type: string
+                          description: ''
+                        key_result_count:
+                          type: integer
+                          contentEncoding: int32
+                        members:
+                          type: array
+                          items:
+                            title: Member1
+                            required:
+                            - id
+                            - username
+                            - email
+                            - color
+                            - permission_level
+                            - profilePicture
+                            - initials
+                            - isCreator
+                            type: object
+                            properties:
+                              id:
+                                type: integer
+                                contentEncoding: int32
+                              username:
+                                type: string
+                              email:
+                                type: string
+                              color:
+                                type: string
+                              permission_level:
+                                type: string
+                              profilePicture:
+                                type: string
+                              initials:
+                                type: string
+                              isCreator:
+                                type: boolean
+                            examples:
+                            - id: 182
+                              username: Jane Doe
+                              email: janedoe@gmail.com
+                              color: '#827718'
+                              permission_level: edit
+                              profilePicture: https://attachments-public.clickup.com/profilePictures/profile.jpg
+                              initials: JD
+                              isCreator: true
+                          description: ''
+                        group_members:
+                          type: array
+                          items:
+                            type: string
+                          description: ''
+                        percent_completed:
+                          type: integer
+                          contentEncoding: int32
+                      examples:
+                      - id: e53a033c-900e-462d-a849-4a216b06d930
+                        pretty_id: '6'
+                        name: Goal ABC
+                        team_id: '512'
+                        creator: 182
+                        owner: null
+                        color: '#32a852'
+                        date_created: '1568044355026'
+                        start_date: null
+                        due_date: '1568036964079'
+                        description: Updated Goal Description
+                        private: false
+                        archived: false
+                        multiple_owners: true
+                        editor_token: goal:792c3027-83a2-45de-be96-2f623b5f9078:1626303240249:38fd99e8-f989-4125-9a05-19ead0ed83a6:57bdc749-4ca6-4082-a78e-3485ed15e675
+                        date_updated: '1626130440221'
+                        last_update: '1626132992152'
+                        folder_id: null
+                        pinned: false
+                        owners: []
+                        key_result_count: 1
+                        members:
+                        - id: 182
+                          username: Jane Doe
+                          email: janedoe@gmail.com
+                          color: '#827718'
+                          permission_level: edit
+                          profilePicture: https://attachments-public.clickup.com/profilePictures/profile.jpg
+                          initials: JD
+                          isCreator: true
+                        group_members: []
+                        percent_completed: 0
+                    description: ''
+                  folders:
+                    type: array
+                    items:
+                      title: Folder2
+                      required:
+                      - id
+                      - name
+                      - team_id
+                      - private
+                      - date_created
+                      - creator
+                      - goal_count
+                      - members
+                      - goals
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        name:
+                          type: string
+                        team_id:
+                          type: string
+                        private:
+                          type: boolean
+                        date_created:
+                          type: string
+                        creator:
+                          type: integer
+                          contentEncoding: int32
+                        goal_count:
+                          type: integer
+                          contentEncoding: int32
+                        members:
+                          type: array
+                          items:
+                            title: Member2
+                            required:
+                            - id
+                            - email
+                            - username
+                            - color
+                            - permission_level
+                            - date_added
+                            - added_by
+                            - initials
+                            - profilePicture
+                            type: object
+                            properties:
+                              id:
+                                type: integer
+                                contentEncoding: int32
+                              email:
+                                type: string
+                              username:
+                                type: string
+                              color:
+                                type: string
+                              permission_level:
+                                type: string
+                              date_added:
+                                type: integer
+                                contentEncoding: int64
+                              added_by:
+                                type: integer
+                                contentEncoding: int32
+                              initials:
+                                type: string
+                              profilePicture:
+                                type: string
+                            examples:
+                            - id: 182
+                              email: janedoe@gmail.com
+                              username: Jane Doe
+                              color: '#827718'
+                              permission_level: read
+                              date_added: 1631599941928
+                              added_by: 183
+                              initials: JD
+                              profilePicture: https://attachments-public.clickup.com/profilePictures/profile.jpg
+                          description: ''
+                        goals:
+                          type: array
+                          items:
+                            title: Goal3
+                            required:
+                            - id
+                            - pretty_id
+                            - name
+                            - team_id
+                            - creator
+                            - owner
+                            - color
+                            - date_created
+                            - start_date
+                            - due_date
+                            - description
+                            - private
+                            - archived
+                            - multiple_owners
+                            - editor_token
+                            - date_updated
+                            - last_update
+                            - folder_id
+                            - folder_access
+                            - pinned
+                            - owners
+                            - key_result_count
+                            - members
+                            - group_members
+                            - percent_completed
+                            type: object
+                            properties:
+                              id:
+                                type: string
+                              pretty_id:
+                                type: string
+                              name:
+                                type: string
+                              team_id:
+                                type: string
+                              creator:
+                                type: integer
+                                contentEncoding: int32
+                              owner:
+                                type:
+                                - string
+                                - 'null'
+                              color:
+                                type: string
+                              date_created:
+                                type: string
+                              start_date:
+                                type:
+                                - string
+                                - 'null'
+                              due_date:
+                                type: string
+                              description:
+                                type: string
+                              private:
+                                type: boolean
+                              archived:
+                                type: boolean
+                              multiple_owners:
+                                type: boolean
+                              editor_token:
+                                type: string
+                              date_updated:
+                                type: string
+                              last_update:
+                                type: string
+                              folder_id:
+                                type: string
+                              folder_access:
+                                type: boolean
+                              pinned:
+                                type: boolean
+                              owners:
+                                type: array
+                                items:
+                                  type: string
+                                description: ''
+                              key_result_count:
+                                type: integer
+                                contentEncoding: int32
+                              members:
+                                type: array
+                                items:
+                                  $ref: '#/paths/~1v2~1team~1{team_id}~1goal/get/responses/200/content/application~1json/schema/properties/goals/items/properties/members/items'
+                                description: ''
+                              group_members:
+                                type: array
+                                items:
+                                  type: string
+                                description: ''
+                              percent_completed:
+                                type: integer
+                                contentEncoding: int32
+                            examples:
+                            - id: e53a033c-900e-462d-a849-4a216b06d930
+                              pretty_id: '8'
+                              name: Q1 Goals
+                              team_id: '512'
+                              creator: 182
+                              owner: null
+                              color: '#32a852'
+                              date_created: '1568044355026'
+                              start_date: null
+                              due_date: '1568036964079'
+                              description: Goal for Q1
+                              private: false
+                              archived: false
+                              multiple_owners: true
+                              editor_token: goal:792c3027-83b5-45de-be96-2f623b5f9078:1626303240249:38fd99e8-f989-4125-9a05-19ead0ed83a6:57bdc749-4ca6-4082-a78e-3485fc22d477
+                              date_updated: '1626130440221'
+                              last_update: '1626132992152'
+                              folder_id: 05921253-7737-44af-a1aa-36fd11244e6f
+                              folder_access: true
+                              pinned: false
+                              owners: []
+                              key_result_count: 1
+                              members:
+                              - id: 182
+                                username: Jane Doe
+                                email: janedoe@gmail.com
+                                color: '#827718'
+                                permission_level: edit
+                                profilePicture: https://attachments-public.clickup.com/profilePictures/profile.jpg
+                                initials: JD
+                                isCreator: true
+                              group_members: []
+                              percent_completed: 1
+                          description: ''
+                      examples:
+                      - id: 05921253-7737-44af-a1aa-36fd11244e6f
+                        name: Quarterly Goals
+                        team_id: '512'
+                        private: true
+                        date_created: '1548802674671'
+                        creator: 182
+                        goal_count: 1
+                        members:
+                        - id: 182
+                          email: janedoe@gmail.com
+                          username: Jane Doe
+                          color: '#827718'
+                          permission_level: read
+                          date_added: 1631599941928
+                          added_by: 183
+                          initials: JD
+                          profilePicture: https://attachments-public.clickup.com/profilePictures/profile.jpg
+                        goals:
+                        - id: e53a033c-900e-462d-a849-4a216b06d930
+                          pretty_id: '8'
+                          name: Q1 Goals
+                          team_id: '512'
+                          creator: 182
+                          owner: null
+                          color: '#32a852'
+                          date_created: '1568044355026'
+                          start_date: null
+                          due_date: '1568036964079'
+                          description: Goal for Q1
+                          private: false
+                          archived: false
+                          multiple_owners: true
+                          editor_token: goal:792c3027-83b5-45de-be96-2f623b5f9078:1626303240249:38fd99e8-f989-4125-9a05-19ead0ed83a6:57bdc749-4ca6-4082-a78e-3485fc22d477
+                          date_updated: '1626130440221'
+                          last_update: '1626132992152'
+                          folder_id: 05921253-7737-44af-a1aa-36fd11244e6f
+                          folder_access: true
+                          pinned: false
+                          owners: []
+                          key_result_count: 1
+                          members:
+                          - id: 182
+                            username: Jane Doe
+                            email: janedoe@gmail.com
+                            color: '#827718'
+                            permission_level: edit
+                            profilePicture: https://attachments-public.clickup.com/profilePictures/profile.jpg
+                            initials: JD
+                            isCreator: true
+                          group_members: []
+                          percent_completed: 1
+                    description: ''
+                examples:
+                - goals:
+                  - id: e53a033c-900e-462d-a849-4a216b06d930
+                    pretty_id: '6'
+                    name: Goal ABC
+                    team_id: '512'
+                    creator: 182
+                    owner: null
+                    color: '#32a852'
+                    date_created: '1568044355026'
+                    start_date: null
+                    due_date: '1568036964079'
+                    description: Updated Goal Description
+                    private: false
+                    archived: false
+                    multiple_owners: true
+                    editor_token: goal:792c3027-83a2-45de-be96-2f623b5f9078:1626303240249:38fd99e8-f989-4125-9a05-19ead0ed83a6:57bdc749-4ca6-4082-a78e-3485ed15e675
+                    date_updated: '1626130440221'
+                    last_update: '1626132992152'
+                    folder_id: null
+                    pinned: false
+                    owners: []
+                    key_result_count: 1
+                    members:
+                    - id: 182
+                      username: Jane Doe
+                      email: janedoe@gmail.com
+                      color: '#827718'
+                      permission_level: edit
+                      profilePicture: https://attachments-public.clickup.com/profilePictures/profile.jpg
+                      initials: JD
+                      isCreator: true
+                    group_members: []
+                    percent_completed: 0
+                  folders:
+                  - id: 05921253-7737-44af-a1aa-36fd11244e6f
+                    name: Quarterly Goals
+                    team_id: '512'
+                    private: true
+                    date_created: '1548802674671'
+                    creator: 182
+                    goal_count: 1
+                    members:
+                    - id: 182
+                      email: janedoe@gmail.com
+                      username: Jane Doe
+                      color: '#827718'
+                      permission_level: read
+                      date_added: 1631599941928
+                      added_by: 183
+                      initials: JD
+                      profilePicture: https://attachments-public.clickup.com/profilePictures/profile.jpg
+                    goals:
+                    - id: e53a033c-900e-462d-a849-4a216b06d930
+                      pretty_id: '8'
+                      name: Q1 Goals
+                      team_id: '512'
+                      creator: 182
+                      owner: null
+                      color: '#32a852'
+                      date_created: '1568044355026'
+                      start_date: null
+                      due_date: '1568036964079'
+                      description: Goal for Q1
+                      private: false
+                      archived: false
+                      multiple_owners: true
+                      editor_token: goal:792c3027-83b5-45de-be96-2f623b5f9078:1626303240249:38fd99e8-f989-4125-9a05-19ead0ed83a6:57bdc749-4ca6-4082-a78e-3485fc22d477
+                      date_updated: '1626130440221'
+                      last_update: '1626132992152'
+                      folder_id: 05921253-7737-44af-a1aa-36fd11244e6f
+                      folder_access: true
+                      pinned: false
+                      owners: []
+                      key_result_count: 1
+                      members:
+                      - id: 182
+                        username: Jane Doe
+                        email: janedoe@gmail.com
+                        color: '#827718'
+                        permission_level: edit
+                        profilePicture: https://attachments-public.clickup.com/profilePictures/profile.jpg
+                        initials: JD
+                        isCreator: true
+                      group_members: []
+                      percent_completed: 1
+              example:
+                goals:
+                - id: e53a033c-900e-462d-a849-4a216b06d930
+                  pretty_id: '6'
+                  name: Goal ABC
+                  team_id: '512'
+                  creator: 182
+                  owner: null
+                  color: '#32a852'
+                  date_created: '1568044355026'
+                  start_date: null
+                  due_date: '1568036964079'
+                  description: Updated Goal Description
+                  private: false
+                  archived: false
+                  multiple_owners: true
+                  editor_token: goal:792c3027-83a2-45de-be96-2f623b5f9078:1626303240249:38fd99e8-f989-4125-9a05-19ead0ed83a6:57bdc749-4ca6-4082-a78e-3485ed15e675
+                  date_updated: '1626130440221'
+                  last_update: '1626132992152'
+                  folder_id: null
+                  pinned: false
+                  owners: []
+                  key_result_count: 1
+                  members:
+                  - id: 182
+                    username: Jane Doe
+                    email: janedoe@gmail.com
+                    color: '#827718'
+                    permission_level: edit
+                    profilePicture: https://attachments-public.clickup.com/profilePictures/profile.jpg
+                    initials: JD
+                    isCreator: true
+                  group_members: []
+                  percent_completed: 0
+                folders:
+                - id: 05921253-7737-44af-a1aa-36fd11244e6f
+                  name: Quarterly Goals
+                  team_id: '512'
+                  private: true
+                  date_created: '1548802674671'
+                  creator: 182
+                  goal_count: 1
+                  members:
+                  - id: 182
+                    email: janedoe@gmail.com
+                    username: Jane Doe
+                    color: '#827718'
+                    permission_level: read
+                    date_added: 1631599941928
+                    added_by: 183
+                    initials: JD
+                    profilePicture: https://attachments-public.clickup.com/profilePictures/profile.jpg
+                  goals:
+                  - id: e53a033c-900e-462d-a849-4a216b06d930
+                    pretty_id: '8'
+                    name: Q1 Goals
+                    team_id: '512'
+                    creator: 182
+                    owner: null
+                    color: '#32a852'
+                    date_created: '1568044355026'
+                    start_date: null
+                    due_date: '1568036964079'
+                    description: Goal for Q1
+                    private: false
+                    archived: false
+                    multiple_owners: true
+                    editor_token: goal:792c3027-83b5-45de-be96-2f623b5f9078:1626303240249:38fd99e8-f989-4125-9a05-19ead0ed83a6:57bdc749-4ca6-4082-a78e-3485fc22d477
+                    date_updated: '1626130440221'
+                    last_update: '1626132992152'
+                    folder_id: 05921253-7737-44af-a1aa-36fd11244e6f
+                    folder_access: true
+                    pinned: false
+                    owners: []
+                    key_result_count: 1
+                    members:
+                    - id: 182
+                      username: Jane Doe
+                      email: janedoe@gmail.com
+                      color: '#827718'
+                      permission_level: edit
+                      profilePicture: https://attachments-public.clickup.com/profilePictures/profile.jpg
+                      initials: JD
+                      isCreator: true
+                    group_members: []
+                    percent_completed: 1
+      deprecated: false
+      security:
+      - Authorization_Token: []
+    post:
+      summary: Create Goal
+      tags:
+      - Goals
+      description: Add a new Goal to a Workspace.
+      operationId: CreateGoal
+      parameters:
+      - name: team_id
+        in: path
+        description: Workspace ID
+        required: true
+        style: simple
+        schema:
+          type: number
+          contentEncoding: double
+          examples:
+          - 123
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              title: CreateGoalrequest
+              required:
+              - name
+              - due_date
+              - description
+              - multiple_owners
+              - owners
+              - color
+              type: object
+              properties:
+                name:
+                  type: string
+                due_date:
+                  type: integer
+                  contentEncoding: int64
+                description:
+                  type: string
+                multiple_owners:
+                  type: boolean
+                owners:
+                  type: array
+                  items:
+                    type: integer
+                    contentEncoding: int32
+                  description: Array of user IDs.
+                color:
+                  type: string
+              examples:
+              - name: Goal Name
+                due_date: 1568036964079
+                description: Goal Description
+                multiple_owners: true
+                owners:
+                - 183
+                color: '#32a852'
+            example:
+              name: Goal Name
+              due_date: 1568036964079
+              description: Goal Description
+              multiple_owners: true
+              owners:
+              - 183
+              color: '#32a852'
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+          content:
+            application/json:
+              schema:
+                title: CreateGoalresponse
+                required:
+                - goal
+                type: object
+                properties:
+                  goal:
+                    $ref: '#/paths/~1v2~1goal~1{goal_id}/get/responses/200/content/application~1json/schema/properties/goal'
+                examples:
+                - goal:
+                    id: e53a033c-900e-462d-a849-4a216b06d930
+                    name: Goal Name
+                    team_id: '512'
+                    date_created: '1568044355026'
+                    start_date: null
+                    due_date: '1568036964079'
+                    description: Goal Description
+                    private: false
+                    archived: false
+                    creator: 183
+                    color: '#32a852'
+                    pretty_id: '6'
+                    multiple_owners: true
+                    folder_id: null
+                    members: []
+                    owners:
+                    - id: 183
+                      username: John Doe
+                      initials: JD
+                      email: johndoe@gmail.com
+                      color: '#827718'
+                      profilePicture: https://attachments-public.clickup.com/profilePictures/183_abc.jpg
+                    key_results: []
+                    percent_completed: 0
+                    history: []
+                    pretty_url: https://app.clickup.com/512/goals/6
+              example:
+                goal:
+                  id: e53a033c-900e-462d-a849-4a216b06d930
+                  name: Goal Name
+                  team_id: '512'
+                  date_created: '1568044355026'
+                  start_date: null
+                  due_date: '1568036964079'
+                  description: Goal Description
+                  private: false
+                  archived: false
+                  creator: 183
+                  color: '#32a852'
+                  pretty_id: '6'
+                  multiple_owners: true
+                  folder_id: null
+                  members: []
+                  owners:
+                  - id: 183
+                    username: John Doe
+                    initials: JD
+                    email: johndoe@gmail.com
+                    color: '#827718'
+                    profilePicture: https://attachments-public.clickup.com/profilePictures/183_abc.jpg
+                  key_results: []
+                  percent_completed: 0
+                  history: []
+                  pretty_url: https://app.clickup.com/512/goals/6
+      deprecated: false
+      security:
+      - Authorization_Token: []
+    servers:
+    - url: https://api.clickup.com/api
+      description: ClickUp
+      variables: {}
+  /v2/goal/{goal_id}:
+    parameters: []
+    get:
+      summary: Get Goal
+      tags:
+      - Goals
+      description: View the details of a Goal including its Targets.
+      operationId: GetGoal
+      parameters:
+      - name: goal_id
+        in: path
+        description: 900e-462d-a849-4a216b06d930 (uuid)
+        required: true
+        style: simple
+        schema:
+          type: string
+          examples:
+          - e53a033c
+      responses:
+        '200':
+          description: ''
+          headers: {}
+          content:
+            application/json:
+              schema:
+                title: GetGoalresponse
+                required:
+                - goal
+                type: object
+                properties:
+                  goal:
+                    title: Goal
+                    required:
+                    - id
+                    - name
+                    - team_id
+                    - date_created
+                    - start_date
+                    - due_date
+                    - description
+                    - private
+                    - archived
+                    - creator
+                    - color
+                    - pretty_id
+                    - multiple_owners
+                    - folder_id
+                    - members
+                    - owners
+                    - key_results
+                    - percent_completed
+                    - history
+                    - pretty_url
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                      name:
+                        type: string
+                      team_id:
+                        type: string
+                      date_created:
+                        type: string
+                      start_date:
+                        type:
+                        - string
+                        - 'null'
+                      due_date:
+                        type: string
+                      description:
+                        type: string
+                      private:
+                        type: boolean
+                      archived:
+                        type: boolean
+                      creator:
+                        type: integer
+                        contentEncoding: int32
+                      color:
+                        type: string
+                      pretty_id:
+                        type: string
+                      multiple_owners:
+                        type: boolean
+                      folder_id:
+                        type:
+                        - string
+                        - 'null'
+                      members:
+                        type: array
+                        items:
+                          type: string
+                        description: ''
+                      owners:
+                        type: array
+                        items:
+                          title: Owner
+                          required:
+                          - id
+                          - username
+                          - initials
+                          - email
+                          - color
+                          - profilePicture
+                          type: object
+                          properties:
+                            id:
+                              type: integer
+                              contentEncoding: int32
+                            username:
+                              type: string
+                            initials:
+                              type: string
+                            email:
+                              type: string
+                            color:
+                              type: string
+                            profilePicture:
+                              type: string
+                          examples:
+                          - id: 183
+                            username: John Doe
+                            initials: JD
+                            email: johndoe@gmail.com
+                            color: '#827718'
+                            profilePicture: https://attachments-public.clickup.com/profilePictures/183_abc.jpg
+                        description: ''
+                      key_results:
+                        type: array
+                        items:
+                          type: string
+                        description: ''
+                      percent_completed:
+                        type: integer
+                        contentEncoding: int32
+                      history:
+                        type: array
+                        items:
+                          type: string
+                        description: ''
+                      pretty_url:
+                        type: string
+                    examples:
+                    - id: e53a033c-900e-462d-a849-4a216b06d930
+                      name: Goal Name
+                      team_id: '512'
+                      date_created: '1568044355026'
+                      start_date: null
+                      due_date: '1568036964079'
+                      description: Goal Description
+                      private: false
+                      archived: false
+                      creator: 183
+                      color: '#32a852'
+                      pretty_id: '6'
+                      multiple_owners: true
+                      folder_id: null
+                      members: []
+                      owners:
+                      - id: 183
+                        username: John Doe
+                        initials: JD
+                        email: johndoe@gmail.com
+                        color: '#827718'
+                        profilePicture: https://attachments-public.clickup.com/profilePictures/183_abc.jpg
+                      key_results: []
+                      percent_completed: 0
+                      history: []
+                      pretty_url: https://app.clickup.com/512/goals/6
+                examples:
+                - goal:
+                    id: e53a033c-900e-462d-a849-4a216b06d930
+                    name: Updated Goal Name
+                    team_id: '512'
+                    date_created: '1568044355026'
+                    start_date: null
+                    due_date: '1568036964079'
+                    description: Updated Goal Description
+                    private: false
+                    archived: false
+                    creator: 183
+                    color: '#32a852'
+                    pretty_id: '6'
+                    multiple_owners: true
+                    folder_id: null
+                    members: []
+                    owners:
+                    - id: 182
+                      username: Jane Doe
+                      initials: JD
+                      email: janedoe@gmail.com
+                      color: '#827718'
+                      profilePicture: https://attachments-public.clickup.com/profilePictures/182_abc.jpg
+                    key_results: []
+                    percent_completed: 0
+                    history: []
+                    pretty_url: https://app.clickup.com/512/goals/6
+              example:
+                goal:
+                  id: e53a033c-900e-462d-a849-4a216b06d930
+                  name: Updated Goal Name
+                  team_id: '512'
+                  date_created: '1568044355026'
+                  start_date: null
+                  due_date: '1568036964079'
+                  description: Updated Goal Description
+                  private: false
+                  archived: false
+                  creator: 183
+                  color: '#32a852'
+                  pretty_id: '6'
+                  multiple_owners: true
+                  folder_id: null
+                  members: []
+                  owners:
+                  - id: 182
+                    username: Jane Doe
+                    initials: JD
+                    email: janedoe@gmail.com
+                    color: '#827718'
+                    profilePicture: https://attachments-public.clickup.com/profilePictures/182_abc.jpg
+                  key_results: []
+                  percent_completed: 0
+                  history: []
+                  pretty_url: https://app.clickup.com/512/goals/6
+      deprecated: false
+      security:
+      - Authorization_Token: []
+    put:
+      summary: Update Goal
+      tags:
+      - Goals
+      description: Rename a Goal, set the due date, replace the description, add or remove owners, and set the Goal color.
+      operationId: UpdateGoal
+      parameters:
+      - name: goal_id
+        in: path
+        description: 900e-462d-a849-4a216b06d930 (uuid)
+        required: true
+        style: simple
+        schema:
+          type: string
+          examples:
+          - e53a033c
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              title: UpdateGoalrequest
+              required:
+              - name
+              - due_date
+              - description
+              - rem_owners
+              - add_owners
+              - color
+              type: object
+              properties:
+                name:
+                  type: string
+                due_date:
+                  type: integer
+                  contentEncoding: int64
+                description:
+                  type: string
+                rem_owners:
+                  type: array
+                  items:
+                    type: integer
+                    contentEncoding: int32
+                  description: Array of user IDs.
+                add_owners:
+                  type: array
+                  items:
+                    type: integer
+                    contentEncoding: int32
+                  description: Array of user IDs.
+                color:
+                  type: string
+              examples:
+              - name: Updated Goal Name
+                due_date: 1568036964079
+                description: Updated Goal Description
+                rem_owners:
+                - 183
+                add_owners:
+                - 184
+                color: '#32a852'
+            example:
+              name: Updated Goal Name
+              due_date: 1568036964079
+              description: Updated Goal Description
+              rem_owners:
+              - 183
+              add_owners:
+              - 184
+              color: '#32a852'
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+          content:
+            application/json:
+              schema:
+                title: UpdateGoalresponse
+                required:
+                - goal
+                type: object
+                properties:
+                  goal:
+                    $ref: '#/paths/~1v2~1goal~1{goal_id}/get/responses/200/content/application~1json/schema/properties/goal'
+                examples:
+                - goal:
+                    id: e53a033c-900e-462d-a849-4a216b06d930
+                    name: Updated Goal Name
+                    team_id: '512'
+                    date_created: '1568044355026'
+                    start_date: null
+                    due_date: '1568036964079'
+                    description: Updated Goal Description
+                    private: false
+                    archived: false
+                    creator: 183
+                    color: '#32a852'
+                    pretty_id: '6'
+                    multiple_owners: true
+                    folder_id: null
+                    members: []
+                    owners:
+                    - id: 182
+                      username: Jane Doe
+                      initials: JD
+                      email: janedoe@gmail.com
+                      color: '#827718'
+                      profilePicture: https://attachments-public.clickup.com/profilePictures/182_abc.jpg
+                    key_results: []
+                    percent_completed: 0
+                    history: []
+                    pretty_url: https://app.clickup.com/512/goals/6
+              example:
+                goal:
+                  id: e53a033c-900e-462d-a849-4a216b06d930
+                  name: Updated Goal Name
+                  team_id: '512'
+                  date_created: '1568044355026'
+                  start_date: null
+                  due_date: '1568036964079'
+                  description: Updated Goal Description
+                  private: false
+                  archived: false
+                  creator: 183
+                  color: '#32a852'
+                  pretty_id: '6'
+                  multiple_owners: true
+                  folder_id: null
+                  members: []
+                  owners:
+                  - id: 182
+                    username: Jane Doe
+                    initials: JD
+                    email: janedoe@gmail.com
+                    color: '#827718'
+                    profilePicture: https://attachments-public.clickup.com/profilePictures/182_abc.jpg
+                  key_results: []
+                  percent_completed: 0
+                  history: []
+                  pretty_url: https://app.clickup.com/512/goals/6
+      deprecated: false
+      security:
+      - Authorization_Token: []
+    delete:
+      summary: Delete Goal
+      tags:
+      - Goals
+      description: Remove a Goal from your Workspace.
+      operationId: DeleteGoal
+      parameters:
+      - name: goal_id
+        in: path
+        description: 900e-462d-a849-4a216b06d930 (uuid)
+        required: true
+        style: simple
+        schema:
+          type: string
+          examples:
+          - e53a033c
+      - name: Content-Type
+        in: header
+        description: ''
+        required: true
+        style: simple
+        schema:
+          const: application/json
+          type: string
+          examples:
+          - application/json
+      responses:
+        '200':
+          description: ''
+          headers: {}
+          content:
+            application/json:
+              schema:
+                type: object
+                examples:
+                - {}
+                contentMediaType: application/json
+              example: {}
+      deprecated: false
+      security:
+      - Authorization_Token: []
+    servers:
+    - url: https://api.clickup.com/api
+      description: ClickUp
+      variables: {}
+  /v2/goal/{goal_id}/key_result:
+    parameters: []
+    post:
+      summary: Create Key Result
+      tags:
+      - Goals
+      description: Add a Target to a Goal.
+      operationId: CreateKeyResult
+      parameters:
+      - name: goal_id
+        in: path
+        description: 900e-462d-a849-4a216b06d930 (uuid)
+        required: true
+        style: simple
+        schema:
+          type: string
+          examples:
+          - e53a033c
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              title: CreateKeyResultrequest
+              required:
+              - name
+              - owners
+              - type
+              - steps_start
+              - steps_end
+              - unit
+              - task_ids
+              - list_ids
+              type: object
+              properties:
+                name:
+                  type: string
+                owners:
+                  type: array
+                  items:
+                    type: integer
+                    contentEncoding: int32
+                  description: ''
+                type:
+                  description: 'Target (key result) types include: `number`, `currency`, `boolean`, `percentage`, or `automatic`.'
+                  type: string
+                steps_start:
+                  type: integer
+                  contentEncoding: int32
+                steps_end:
+                  type: integer
+                  contentEncoding: int32
+                unit:
+                  type: string
+                task_ids:
+                  description: Enter an array of task IDs to link this target with one or more tasks.
+                  type: array
+                  items:
+                    type: string
+                list_ids:
+                  type: array
+                  items:
+                    type: string
+                  description: Enter an array of List IDs to link this target with one or more Lists.
+              examples:
+              - name: New Target Name
+                owners:
+                - 183
+                type: number
+                steps_start: 0
+                steps_end: 10
+                unit: km
+                task_ids: []
+                list_ids: []
+            example:
+              name: New Key Result Name
+              owners:
+              - 183
+              type: number
+              steps_start: 0
+              steps_end: 10
+              unit: km
+              task_ids: []
+              list_ids: []
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+          content:
+            application/json:
+              schema:
+                title: CreateKeyResultresponse
+                required:
+                - key_result
+                type: object
+                properties:
+                  key_result:
+                    title: KeyResult
+                    required:
+                    - id
+                    - goal_id
+                    - name
+                    - type
+                    - unit
+                    - creator
+                    - date_created
+                    - goal_pretty_id
+                    - percent_completed
+                    - completed
+                    - task_ids
+                    - subcategory_ids
+                    - owners
+                    - last_action
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                      goal_id:
+                        type: string
+                      name:
+                        type: string
+                      type:
+                        type: string
+                      unit:
+                        type: string
+                      creator:
+                        type: integer
+                        contentEncoding: int32
+                      date_created:
+                        type: string
+                      goal_pretty_id:
+                        type: string
+                      percent_completed:
+                        type:
+                        - string
+                        - 'null'
+                      completed:
+                        type: boolean
+                      task_ids:
+                        type: array
+                        items:
+                          type: string
+                        description: ''
+                      subcategory_ids:
+                        type: array
+                        items:
+                          type: string
+                        description: ''
+                      owners:
+                        type: array
+                        items:
+                          $ref: '#/paths/~1v2~1goal~1{goal_id}/get/responses/200/content/application~1json/schema/properties/goal/properties/owners/items'
+                        description: ''
+                      last_action:
+                        title: LastAction
+                        required:
+                        - id
+                        - key_result_id
+                        - userid
+                        - date_modified
+                        - steps_taken
+                        - note
+                        - steps_before
+                        - steps_current
+                        type: object
+                        properties:
+                          id:
+                            type: string
+                          key_result_id:
+                            type: string
+                          userid:
+                            type: integer
+                            contentEncoding: int32
+                          date_modified:
+                            type: string
+                          steps_taken:
+                            type:
+                            - string
+                            - 'null'
+                          note:
+                            type: string
+                          steps_before:
+                            type:
+                            - string
+                            - 'null'
+                          steps_current:
+                            type:
+                            - string
+                            - 'null'
+                        examples:
+                        - id: d3183d0f-5cbd-4158-b015-71465f1df269
+                          key_result_id: 947d46ed-8480-49bc-8c57-e569747efe93
+                          userid: 183
+                          date_modified: '1568062902048'
+                          steps_taken: null
+                          note: Created Key Result
+                          steps_before: null
+                          steps_current: null
+                    examples:
+                    - id: 947d46ed-8480-49bc-8c57-e569747efe93
+                      goal_id: e53a033c-900e-462d-a849-4a216b06d930
+                      name: New Key Result Name
+                      type: number
+                      unit: km
+                      creator: 183
+                      date_created: '1568062902048'
+                      goal_pretty_id: '6'
+                      percent_completed: null
+                      completed: false
+                      task_ids: []
+                      subcategory_ids: []
+                      owners:
+                      - id: 183
+                        username: John Doe
+                        email: example@email.com
+                        color: '#827718'
+                        profilePicture: https://attachments.clickup.com/profilePictures/183_nx1.jpg
+                        initials: JK
+                      last_action:
+                        id: d3183d0f-5cbd-4158-b015-71465f1df269
+                        key_result_id: 947d46ed-8480-49bc-8c57-e569747efe93
+                        userid: 183
+                        date_modified: '1568062902048'
+                        steps_taken: null
+                        note: Created Key Result
+                        steps_before: null
+                        steps_current: null
+                examples:
+                - key_result:
+                    id: 947d46ed-8480-49bc-8c57-e569747efe93
+                    goal_id: e53a033c-900e-462d-a849-4a216b06d930
+                    name: New Key Result Name
+                    type: number
+                    unit: km
+                    creator: 183
+                    date_created: '1568062902048'
+                    goal_pretty_id: '6'
+                    percent_completed: null
+                    completed: false
+                    task_ids: []
+                    subcategory_ids: []
+                    owners:
+                    - id: 183
+                      username: John Doe
+                      email: example@email.com
+                      color: '#827718'
+                      profilePicture: https://attachments.clickup.com/profilePictures/183_nx1.jpg
+                      initials: JK
+                    last_action:
+                      id: d3183d0f-5cbd-4158-b015-71465f1df269
+                      key_result_id: 947d46ed-8480-49bc-8c57-e569747efe93
+                      userid: 183
+                      date_modified: '1568062902048'
+                      steps_taken: null
+                      note: Created Key Result
+                      steps_before: null
+                      steps_current: null
+              example:
+                key_result:
+                  id: 947d46ed-8480-49bc-8c57-e569747efe93
+                  goal_id: e53a033c-900e-462d-a849-4a216b06d930
+                  name: New Key Result Name
+                  type: number
+                  unit: km
+                  creator: 183
+                  date_created: '1568062902048'
+                  goal_pretty_id: '6'
+                  percent_completed: null
+                  completed: false
+                  task_ids: []
+                  subcategory_ids: []
+                  owners:
+                  - id: 183
+                    username: John Doe
+                    email: example@email.com
+                    color: '#827718'
+                    profilePicture: https://attachments.clickup.com/profilePictures/183_nx1.jpg
+                    initials: JK
+                  last_action:
+                    id: d3183d0f-5cbd-4158-b015-71465f1df269
+                    key_result_id: 947d46ed-8480-49bc-8c57-e569747efe93
+                    userid: 183
+                    date_modified: '1568062902048'
+                    steps_taken: null
+                    note: Created Key Result
+                    steps_before: null
+                    steps_current: null
+      deprecated: false
+      security:
+      - Authorization_Token: []
+    servers:
+    - url: https://api.clickup.com/api
+      description: ClickUp
+      variables: {}
+  /v2/key_result/{key_result_id}:
+    parameters: []
+    put:
+      summary: Edit Key Result
+      tags:
+      - Goals
+      description: Update a Target.
+      operationId: EditKeyResult
+      parameters:
+      - name: key_result_id
+        in: path
+        description: 8480-49bc-8c57-e569747efe93 (uuid)
+        required: true
+        style: simple
+        schema:
+          type: string
+          examples:
+          - 947d46ed
+      requestBody:
+        description: All properties available in the Create Key Result endpoint may also be used along with the additional properties below.
+        content:
+          application/json:
+            schema:
+              title: EditKeyResultrequest
+              required:
+              - steps_current
+              - note
+              type: object
+              properties:
+                steps_current:
+                  type: integer
+                  contentEncoding: int32
+                note:
+                  type: string
+              examples:
+              - steps_current: 5
+                note: Target achieved
+            example:
+              steps_current: 5
+              note: Target achieved
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+          content:
+            application/json:
+              schema:
+                title: EditKeyResultresponse
+                required:
+                - key_result
+                type: object
+                properties:
+                  key_result:
+                    title: KeyResult1
+                    required:
+                    - id
+                    - goal_id
+                    - name
+                    - type
+                    - unit
+                    - creator
+                    - date_created
+                    - goal_pretty_id
+                    - percent_completed
+                    - completed
+                    - task_ids
+                    - subcategory_ids
+                    - owners
+                    - last_action
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                      goal_id:
+                        type: string
+                      name:
+                        type: string
+                      type:
+                        type: string
+                      unit:
+                        type: string
+                      creator:
+                        type: integer
+                        contentEncoding: int32
+                      date_created:
+                        type: string
+                      goal_pretty_id:
+                        type: string
+                      percent_completed:
+                        type:
+                        - string
+                        - 'null'
+                      completed:
+                        type: boolean
+                      task_ids:
+                        type: array
+                        items:
+                          type: string
+                        description: ''
+                      subcategory_ids:
+                        type: array
+                        items:
+                          type: string
+                        description: ''
+                      owners:
+                        type: array
+                        items:
+                          $ref: '#/paths/~1v2~1goal~1{goal_id}/get/responses/200/content/application~1json/schema/properties/goal/properties/owners/items'
+                        description: ''
+                      last_action:
+                        title: LastAction1
+                        required:
+                        - id
+                        - key_result_id
+                        - userid
+                        - date_modified
+                        - steps_taken
+                        - note
+                        - steps_before
+                        - steps_current
+                        - steps_before_float
+                        - steps_taken_float
+                        - steps_current_float
+                        type: object
+                        properties:
+                          id:
+                            type: string
+                          key_result_id:
+                            type: string
+                          userid:
+                            type: integer
+                            contentEncoding: int32
+                          date_modified:
+                            type: string
+                          steps_taken:
+                            type:
+                            - string
+                            - 'null'
+                          note:
+                            type: string
+                          steps_before:
+                            type:
+                            - string
+                            - 'null'
+                          steps_current:
+                            type:
+                            - string
+                            - 'null'
+                          steps_before_float:
+                            type: integer
+                            contentEncoding: int32
+                          steps_taken_float:
+                            type: integer
+                            contentEncoding: int32
+                          steps_current_float:
+                            type:
+                            - string
+                            - 'null'
+                        examples:
+                        - id: e889858b-a023-46cc-968a-cac32fd04c1e
+                          key_result_id: 19c7a55e-537e-4bc9-b741-08df05a5bda8
+                          userid: 183
+                          date_modified: '1568122776851'
+                          steps_taken: null
+                          note: Target achieved
+                          steps_before: null
+                          steps_current: null
+                          steps_before_float: 0
+                          steps_taken_float: 5
+                          steps_current_float: null
+                    examples:
+                    - id: 947d46ed-8480-49bc-8c57-e569747efe93
+                      goal_id: e53a033c-900e-462d-a849-4a216b06d930
+                      name: New Key Result Name
+                      type: number
+                      unit: km
+                      creator: 183
+                      date_created: '1568062902048'
+                      goal_pretty_id: '6'
+                      percent_completed: null
+                      completed: false
+                      task_ids: []
+                      subcategory_ids: []
+                      owners:
+                      - id: 183
+                        username: John Doe
+                        email: example@email.com
+                        color: '#827718'
+                        profilePicture: https://attachments.clickup.com/profilePictures/183_nx1.jpg
+                        initials: JK
+                      last_action:
+                        id: e889858b-a023-46cc-968a-cac32fd04c1e
+                        key_result_id: 19c7a55e-537e-4bc9-b741-08df05a5bda8
+                        userid: 183
+                        date_modified: '1568122776851'
+                        steps_taken: null
+                        note: Target achieved
+                        steps_before: null
+                        steps_current: null
+                        steps_before_float: 0
+                        steps_taken_float: 5
+                        steps_current_float: null
+                examples:
+                - key_result:
+                    id: 947d46ed-8480-49bc-8c57-e569747efe93
+                    goal_id: e53a033c-900e-462d-a849-4a216b06d930
+                    name: New Key Result Name
+                    type: number
+                    unit: km
+                    creator: 183
+                    date_created: '1568062902048'
+                    goal_pretty_id: '6'
+                    percent_completed: null
+                    completed: false
+                    task_ids: []
+                    subcategory_ids: []
+                    owners:
+                    - id: 183
+                      username: John Doe
+                      email: example@email.com
+                      color: '#827718'
+                      profilePicture: https://attachments.clickup.com/profilePictures/183_nx1.jpg
+                      initials: JK
+                    last_action:
+                      id: e889858b-a023-46cc-968a-cac32fd04c1e
+                      key_result_id: 19c7a55e-537e-4bc9-b741-08df05a5bda8
+                      userid: 183
+                      date_modified: '1568122776851'
+                      steps_taken: null
+                      note: Target achieved
+                      steps_before: null
+                      steps_current: null
+                      steps_before_float: 0
+                      steps_taken_float: 5
+                      steps_current_float: null
+              example:
+                key_result:
+                  id: 947d46ed-8480-49bc-8c57-e569747efe93
+                  goal_id: e53a033c-900e-462d-a849-4a216b06d930
+                  name: New Key Result Name
+                  type: number
+                  unit: km
+                  creator: 183
+                  date_created: '1568062902048'
+                  goal_pretty_id: '6'
+                  percent_completed: null
+                  completed: false
+                  task_ids: []
+                  subcategory_ids: []
+                  owners:
+                  - id: 183
+                    username: John Doe
+                    email: example@email.com
+                    color: '#827718'
+                    profilePicture: https://attachments.clickup.com/profilePictures/183_nx1.jpg
+                    initials: JK
+                  last_action:
+                    id: e889858b-a023-46cc-968a-cac32fd04c1e
+                    key_result_id: 19c7a55e-537e-4bc9-b741-08df05a5bda8
+                    userid: 183
+                    date_modified: '1568122776851'
+                    steps_taken: null
+                    note: Target achieved
+                    steps_before: null
+                    steps_current: null
+                    steps_before_float: 0
+                    steps_taken_float: 5
+                    steps_current_float: null
+      deprecated: false
+      security:
+      - Authorization_Token: []
+    delete:
+      summary: Delete Key Result
+      tags:
+      - Goals
+      description: Delete a target from a Goal.
+      operationId: DeleteKeyResult
+      parameters:
+      - name: key_result_id
+        in: path
+        description: 8480-49bc-8c57-e569747efe93 (uuid)
+        required: true
+        style: simple
+        schema:
+          type: string
+          examples:
+          - 947d46ed
+      responses:
+        '200':
+          description: ''
+          headers: {}
+          content:
+            application/json:
+              schema:
+                type: object
+                examples:
+                - {}
+                contentMediaType: application/json
+              example: {}
+      deprecated: false
+      security:
+      - Authorization_Token: []
+    servers:
+    - url: https://api.clickup.com/api
+      description: ClickUp
+      variables: {}
   /team/{team_id}/goal:
     get:
       operationId: getGoals
@@ -49,6 +1857,8 @@ paths:
                       $ref: '#/components/schemas/GoalFolder'
         '401':
           description: Unauthorized
+      security:
+      - bearerAuth: []
     post:
       operationId: createGoal
       summary: Create a goal
@@ -77,6 +1887,11 @@ paths:
           description: Bad request
         '401':
           description: Unauthorized
+      security:
+      - bearerAuth: []
+    servers:
+    - url: https://api.clickup.com/api/v2
+      description: ClickUp API v2 Production Server
   /goal/{goal_id}:
     get:
       operationId: getGoal
@@ -100,6 +1915,8 @@ paths:
           description: Unauthorized
         '404':
           description: Goal not found
+      security:
+      - bearerAuth: []
     put:
       operationId: updateGoal
       summary: Update a goal
@@ -130,6 +1947,8 @@ paths:
           description: Unauthorized
         '404':
           description: Goal not found
+      security:
+      - bearerAuth: []
     delete:
       operationId: deleteGoal
       summary: Delete a goal
@@ -145,6 +1964,11 @@ paths:
           description: Unauthorized
         '404':
           description: Goal not found
+      security:
+      - bearerAuth: []
+    servers:
+    - url: https://api.clickup.com/api/v2
+      description: ClickUp API v2 Production Server
   /goal/{goal_id}/key_result:
     post:
       operationId: createKeyResult
@@ -176,6 +2000,11 @@ paths:
           description: Unauthorized
         '404':
           description: Goal not found
+      security:
+      - bearerAuth: []
+    servers:
+    - url: https://api.clickup.com/api/v2
+      description: ClickUp API v2 Production Server
   /key_result/{key_result_id}:
     put:
       operationId: editKeyResult
@@ -207,6 +2036,8 @@ paths:
           description: Unauthorized
         '404':
           description: Key result not found
+      security:
+      - bearerAuth: []
     delete:
       operationId: deleteKeyResult
       summary: Delete a key result
@@ -222,8 +2053,50 @@ paths:
           description: Unauthorized
         '404':
           description: Key result not found
+      security:
+      - bearerAuth: []
+    servers:
+    - url: https://api.clickup.com/api/v2
+      description: ClickUp API v2 Production Server
 components:
   schemas:
+    UpdateKeyResultRequest:
+      type: object
+      description: Request body for updating an existing Key Result.
+      properties:
+        steps_current:
+          type: number
+          description: The current progress value.
+        note:
+          type: string
+          description: A note to add with the update.
+    UpdateGoalRequest:
+      type: object
+      description: Request body for updating an existing Goal.
+      properties:
+        name:
+          type: string
+          description: The updated name of the Goal.
+        due_date:
+          type: integer
+          format: int64
+          description: Updated due date as Unix timestamp in milliseconds.
+        description:
+          type: string
+          description: The updated description.
+        rem_owners:
+          type: array
+          items:
+            type: integer
+          description: User IDs to remove as owners.
+        add_owners:
+          type: array
+          items:
+            type: integer
+          description: User IDs to add as owners.
+        color:
+          type: string
+          description: The updated hex color code.
     KeyResult:
       type: object
       description: A Key Result (target) within a Goal.
@@ -472,43 +2345,6 @@ components:
           type: string
           format: uri
           description: The URL to the Goal in the ClickUp web application.
-    UpdateKeyResultRequest:
-      type: object
-      description: Request body for updating an existing Key Result.
-      properties:
-        steps_current:
-          type: number
-          description: The current progress value.
-        note:
-          type: string
-          description: A note to add with the update.
-    UpdateGoalRequest:
-      type: object
-      description: Request body for updating an existing Goal.
-      properties:
-        name:
-          type: string
-          description: The updated name of the Goal.
-        due_date:
-          type: integer
-          format: int64
-          description: Updated due date as Unix timestamp in milliseconds.
-        description:
-          type: string
-          description: The updated description.
-        rem_owners:
-          type: array
-          items:
-            type: integer
-          description: User IDs to remove as owners.
-        add_owners:
-          type: array
-          items:
-            type: integer
-          description: User IDs to add as owners.
-        color:
-          type: string
-          description: The updated hex color code.
   parameters:
     teamId:
       name: team_id
@@ -517,13 +2353,6 @@ components:
       description: The unique identifier of the Workspace (team).
       schema:
         type: integer
-    keyResultId:
-      name: key_result_id
-      in: path
-      required: true
-      description: The unique identifier of the Key Result.
-      schema:
-        type: string
     goalId:
       name: goal_id
       in: path
@@ -531,7 +2360,23 @@ components:
       description: The unique identifier of the Goal.
       schema:
         type: string
+    keyResultId:
+      name: key_result_id
+      in: path
+      required: true
+      description: The unique identifier of the Key Result.
+      schema:
+        type: string
   securitySchemes:
+    Authorization_Token:
+      name: Authorization
+      type: apiKey
+      in: header
+      description: 'API token required for authentication. Two types of tokens are supported:
+
+        **Personal API Key** Obtain from ClickUp''s settings page under ''Apps'' and add it to the header as `Authorization: pk_...`
+
+        **OAuth2 Access Token** Generated through the OAuth2 flow and add it to the header as `Authorization: Bearer {access_token}`'
     bearerAuth:
       type: http
       scheme: bearer
@@ -539,3 +2384,7 @@ components:
 externalDocs:
   description: ClickUp Goals API Documentation
   url: https://developer.clickup.com/reference/get-goals
+x-refined-from:
+- clickup-api-v2-reference-openapi.json
+- clickup-goals-openapi.yml
+- clickup-api-v2-reference-openapi.json

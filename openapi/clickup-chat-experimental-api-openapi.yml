@@ -1,0 +1,64 @@
+openapi: 3.2.0
+info:
+  title: Clickup Chat (Experimental) API
+  version: version
+  description: 'Operations tagged Chat (Experimental) across 2 of this provider''s published API definitions: clickup-public-api-v3-openapi.json, clickup-public-api-v3-openapi.json. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://api.clickup.com/
+  description: ClickUp
+security:
+- authHeader: []
+tags:
+- name: Chat (Experimental)
+paths:
+  /api/v3/workspaces/{workspace_id}/comments/types/{comment_type}/subtypes:
+    get:
+      operationId: getSubtypes
+      summary: Get Post Subtype IDs
+      description: 'Get the ID of each post subtype (Announcement, Discussion, Idea, and Update) for your Workspace, to use when sending a message with `type: post`. \
+
+        \
+
+        Subtype IDs are unique to each Workspace.'
+      parameters:
+      - name: workspace_id
+        in: path
+        description: ID of the logged-in user's Workspace.
+        required: true
+        schema:
+          $ref: '#/components/schemas/CommentPublicApiCommentsControllerGetSubtypesWorkspaceIdPath'
+      - name: comment_type
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/CommentPublicApiCommentsControllerGetSubtypesCommentTypePath'
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json: {}
+      tags:
+      - Chat (Experimental)
+      x-is-workspace-endpoint: true
+    servers:
+    - url: https://api.clickup.com/
+      description: ClickUp
+components:
+  schemas:
+    CommentPublicApiCommentsControllerGetSubtypesCommentTypePath:
+      type: string
+      enum:
+      - post
+      - ai
+      - syncup
+      - ai_via_brain
+    CommentPublicApiCommentsControllerGetSubtypesWorkspaceIdPath:
+      type: integer
+  securitySchemes:
+    authHeader:
+      in: header
+      type: apiKey
+      name: Authorization
+x-refined-from:
+- clickup-public-api-v3-openapi.json
+- clickup-public-api-v3-openapi.json

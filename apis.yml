@@ -258,9 +258,11 @@ apis:
   humanURL: https://developer.clickup.com/docs/tasks
   baseURL: https://api.clickup.com
   tags:
+  - Spaces
   - Space
   tags_raw:
   - Spaces
+  - Space
   properties:
   - type: OpenAPI
     url: openapi/clickup-spaces-api-openapi.yml
@@ -515,59 +517,305 @@ apis:
     url: https://developer.clickup.com/reference/get-views
   - type: Documentation
     url: https://developer.clickup.com/docs/authentication
-- aid: clickup:clickup-api-v2
-  name: ClickUp API v2
-  description: 'The complete first-party ClickUp public API v2 contract as ClickUp publishes it: 138 operations across 83 paths covering Tasks, Lists, Folders, Spaces, Workspaces, Goals, Views, Comments, Custom Fields, Checklists, Tags, Templates, Time Tracking, Guests, Users, User Groups and Webhooks.'
-  humanURL: https://developer.clickup.com/reference
-  baseURL: https://api.clickup.com/api
+- aid: clickup:clickup-acls-api
+  name: Clickup Acls API
+  description: Acls API
+  humanURL: https://developer.clickup.com/docs/tasks
+  baseURL: https://api.clickup.com
   tags:
-  - Project Management
-  - Task
-  - Productivity
-  - Work Management
-  - Collaboration
-  tags_raw:
-  - Project Management
-  - Tasks
-  - Productivity
-  - Work Management
-  - Collaboration
+  - Acls
   properties:
   - type: OpenAPI
-    url: openapi/clickup-api-v2-reference-openapi.json
-  - type: OpenAPI
-    name: OpenAPI (provider-hosted)
-    url: https://developer.clickup.com/openapi/clickup-api-v2-reference.json
-  - type: Overlay
-    url: overlays/clickup-api-v2-reference-overlay.yaml
+    url: openapi/clickup-acls-api-openapi.yml
   - type: APIReference
     url: https://developer.clickup.com/reference
   - type: Documentation
     url: https://developer.clickup.com/docs
-- aid: clickup:clickup-api-v3
-  name: ClickUp Public API v3
-  description: 'The first-party ClickUp Public API v3 contract: 35 operations covering Chat channels and messages, Docs and pages, entity Attachments, Workspace audit logs, object ACLs, task moves and per-user time estimates. Runs alongside v2 and renames v2 "Team" to "Workspace".'
-  humanURL: https://developer.clickup.com/reference
-  baseURL: https://api.clickup.com/
+- aid: clickup:clickup-attachments-api
+  name: Clickup Attachments API
+  description: The Attachments API from Clickup — 2 operation(s) for attachments.
+  humanURL: https://developer.clickup.com/docs/tasks
+  baseURL: https://api.clickup.com
   tags:
-  - Chat
-  - Documents
-  - Collaboration
-  - Audit Logs
-  - Work Management
+  - Attachments
   properties:
   - type: OpenAPI
-    url: openapi/clickup-public-api-v3-openapi.json
+    url: openapi/clickup-attachments-api-openapi.yml
+  - type: APIReference
+    url: https://developer.clickup.com/reference
+  - type: Documentation
+    url: https://developer.clickup.com/docs
+- aid: clickup:clickup-audit-logs-api
+  name: Clickup Audit Logs API
+  description: The Audit Logs API from Clickup — 1 operation(s) for audit logs.
+  humanURL: https://developer.clickup.com/docs/tasks
+  baseURL: https://api.clickup.com
+  tags:
+  - Audit Logs
+  properties:
   - type: OpenAPI
-    name: OpenAPI (provider-hosted)
-    url: https://developer.clickup.com/openapi/ClickUp_PUBLIC_API_V3.yaml
-  - type: Overlay
-    url: overlays/clickup-public-api-v3-overlay.yaml
+    url: openapi/clickup-audit-logs-api-openapi.yml
+  - type: APIReference
+    url: https://developer.clickup.com/reference
+  - type: Documentation
+    url: https://developer.clickup.com/docs
+- aid: clickup:clickup-auditlogs-api
+  name: Clickup Auditlogs API
+  description: Auditlogs API
+  humanURL: https://developer.clickup.com/docs/tasks
+  baseURL: https://api.clickup.com
+  tags:
+  - Auditlogs
+  properties:
+  - type: OpenAPI
+    url: openapi/clickup-auditlogs-api-openapi.yml
+  - type: APIReference
+    url: https://developer.clickup.com/reference
+  - type: Documentation
+    url: https://developer.clickup.com/docs
+- aid: clickup:clickup-chat-api
+  name: Clickup Chat API
+  description: Chat API
+  humanURL: https://developer.clickup.com/docs/tasks
+  baseURL: https://api.clickup.com
+  tags:
+  - Chat
+  properties:
+  - type: OpenAPI
+    url: openapi/clickup-chat-api-openapi.yml
+  - type: APIReference
+    url: https://developer.clickup.com/reference
+  - type: Documentation
+    url: https://developer.clickup.com/docs
+- aid: clickup:clickup-chat-experimental-api
+  name: Clickup Chat (Experimental) API
+  description: The Chat (Experimental) API from Clickup — 1 operation(s) for chat (experimental).
+  humanURL: https://developer.clickup.com/docs/tasks
+  baseURL: https://api.clickup.com
+  tags:
+  - Chat (Experimental)
+  properties:
+  - type: OpenAPI
+    url: openapi/clickup-chat-experimental-api-openapi.yml
+  - type: APIReference
+    url: https://developer.clickup.com/reference
+  - type: Documentation
+    url: https://developer.clickup.com/docs
+- aid: clickup:clickup-custom-task-types-api
+  name: Clickup Custom Task Types API
+  description: The Custom Task Types API from Clickup — 1 operation(s) for custom task types.
+  humanURL: https://developer.clickup.com/docs/tasks
+  baseURL: https://api.clickup.com
+  tags:
+  - Custom Task Types
+  properties:
+  - type: OpenAPI
+    url: openapi/clickup-custom-task-types-api-openapi.yml
+  - type: APIReference
+    url: https://developer.clickup.com/reference
+  - type: Documentation
+    url: https://developer.clickup.com/docs
+- aid: clickup:clickup-docs-api
+  name: Clickup Docs API
+  description: Docs API
+  humanURL: https://developer.clickup.com/docs/tasks
+  baseURL: https://api.clickup.com
+  tags:
+  - Docs
+  properties:
+  - type: OpenAPI
+    url: openapi/clickup-docs-api-openapi.yml
+  - type: APIReference
+    url: https://developer.clickup.com/reference
+  - type: Documentation
+    url: https://developer.clickup.com/docs
+- aid: clickup:clickup-guests-api
+  name: Clickup Guests API
+  description: The Guests API from Clickup — 5 operation(s) for guests.
+  humanURL: https://developer.clickup.com/docs/tasks
+  baseURL: https://api.clickup.com
+  tags:
+  - Guests
+  properties:
+  - type: OpenAPI
+    url: openapi/clickup-guests-api-openapi.yml
+  - type: APIReference
+    url: https://developer.clickup.com/reference
+  - type: Documentation
+    url: https://developer.clickup.com/docs
+- aid: clickup:clickup-members-api
+  name: Clickup Members API
+  description: The Members API from Clickup — 2 operation(s) for members.
+  humanURL: https://developer.clickup.com/docs/tasks
+  baseURL: https://api.clickup.com
+  tags:
+  - Members
+  properties:
+  - type: OpenAPI
+    url: openapi/clickup-members-api-openapi.yml
+  - type: APIReference
+    url: https://developer.clickup.com/reference
+  - type: Documentation
+    url: https://developer.clickup.com/docs
+- aid: clickup:clickup-privacy-and-access-api
+  name: Clickup Privacy and access API
+  description: The Privacy and access API from Clickup — 1 operation(s) for privacy and access.
+  humanURL: https://developer.clickup.com/docs/tasks
+  baseURL: https://api.clickup.com
+  tags:
+  - Privacy and access
+  properties:
+  - type: OpenAPI
+    url: openapi/clickup-privacy-and-access-api-openapi.yml
+  - type: APIReference
+    url: https://developer.clickup.com/reference
+  - type: Documentation
+    url: https://developer.clickup.com/docs
+- aid: clickup:clickup-roles-api
+  name: Clickup Roles API
+  description: The Roles API from Clickup — 1 operation(s) for roles.
+  humanURL: https://developer.clickup.com/docs/tasks
+  baseURL: https://api.clickup.com
+  tags:
+  - Roles
+  properties:
+  - type: OpenAPI
+    url: openapi/clickup-roles-api-openapi.yml
+  - type: APIReference
+    url: https://developer.clickup.com/reference
+  - type: Documentation
+    url: https://developer.clickup.com/docs
+- aid: clickup:clickup-shared-hierarchy-api
+  name: Clickup Shared Hierarchy API
+  description: The Shared Hierarchy API from Clickup — 1 operation(s) for shared hierarchy.
+  humanURL: https://developer.clickup.com/docs/tasks
+  baseURL: https://api.clickup.com
+  tags:
+  - Shared Hierarchy
+  properties:
+  - type: OpenAPI
+    url: openapi/clickup-shared-hierarchy-api-openapi.yml
+  - type: APIReference
+    url: https://developer.clickup.com/reference
+  - type: Documentation
+    url: https://developer.clickup.com/docs
+- aid: clickup:clickup-tags-api
+  name: Clickup Tags API
+  description: The Tags API from Clickup — 3 operation(s) for tags.
+  humanURL: https://developer.clickup.com/docs/tasks
+  baseURL: https://api.clickup.com
+  tags:
+  - Tags
+  properties:
+  - type: OpenAPI
+    url: openapi/clickup-tags-api-openapi.yml
+  - type: APIReference
+    url: https://developer.clickup.com/reference
+  - type: Documentation
+    url: https://developer.clickup.com/docs
+- aid: clickup:clickup-task-checklists-api
+  name: Clickup Task Checklists API
+  description: The Task Checklists API from Clickup — 4 operation(s) for task checklists.
+  humanURL: https://developer.clickup.com/docs/tasks
+  baseURL: https://api.clickup.com
+  tags:
+  - Task Checklists
+  properties:
+  - type: OpenAPI
+    url: openapi/clickup-task-checklists-api-openapi.yml
+  - type: APIReference
+    url: https://developer.clickup.com/reference
+  - type: Documentation
+    url: https://developer.clickup.com/docs
+- aid: clickup:clickup-task-relationships-api
+  name: Clickup Task Relationships API
+  description: The Task Relationships API from Clickup — 2 operation(s) for task relationships.
+  humanURL: https://developer.clickup.com/docs/tasks
+  baseURL: https://api.clickup.com
+  tags:
+  - Task Relationships
+  properties:
+  - type: OpenAPI
+    url: openapi/clickup-task-relationships-api-openapi.yml
+  - type: APIReference
+    url: https://developer.clickup.com/reference
+  - type: Documentation
+    url: https://developer.clickup.com/docs
+- aid: clickup:clickup-templates-api
+  name: Clickup Templates API
+  description: The Templates API from Clickup — 3 operation(s) for templates.
+  humanURL: https://developer.clickup.com/docs/tasks
+  baseURL: https://api.clickup.com
+  tags:
+  - Templates
+  properties:
+  - type: OpenAPI
+    url: openapi/clickup-templates-api-openapi.yml
+  - type: APIReference
+    url: https://developer.clickup.com/reference
+  - type: Documentation
+    url: https://developer.clickup.com/docs
+- aid: clickup:clickup-time-tracking-legacy-api
+  name: Clickup Time Tracking (Legacy) API
+  description: The Time Tracking (Legacy) API from Clickup — 2 operation(s) for time tracking (legacy).
+  humanURL: https://developer.clickup.com/docs/tasks
+  baseURL: https://api.clickup.com
+  tags:
+  - Time Tracking (Legacy)
+  properties:
+  - type: OpenAPI
+    url: openapi/clickup-time-tracking-legacy-api-openapi.yml
+  - type: APIReference
+    url: https://developer.clickup.com/reference
+  - type: Documentation
+    url: https://developer.clickup.com/docs
+- aid: clickup:clickup-user-groups-api
+  name: Clickup User Groups API
+  description: The User Groups API from Clickup — 3 operation(s) for user groups.
+  humanURL: https://developer.clickup.com/docs/tasks
+  baseURL: https://api.clickup.com
+  tags:
+  - User Groups
+  properties:
+  - type: OpenAPI
+    url: openapi/clickup-user-groups-api-openapi.yml
+  - type: APIReference
+    url: https://developer.clickup.com/reference
+  - type: Documentation
+    url: https://developer.clickup.com/docs
+- aid: clickup:clickup-users-api
+  name: Clickup Users API
+  description: The Users API from Clickup — 2 operation(s) for users.
+  humanURL: https://developer.clickup.com/docs/tasks
+  baseURL: https://api.clickup.com
+  tags:
+  - Users
+  properties:
+  - type: OpenAPI
+    url: openapi/clickup-users-api-openapi.yml
+  - type: APIReference
+    url: https://developer.clickup.com/reference
+  - type: Documentation
+    url: https://developer.clickup.com/docs
+- aid: clickup:clickup-workspaces-api
+  name: Clickup Workspaces API
+  description: The Workspaces API from Clickup — 3 operation(s) for workspaces.
+  humanURL: https://developer.clickup.com/docs/tasks
+  baseURL: https://api.clickup.com
+  tags:
+  - Workspaces
+  properties:
+  - type: OpenAPI
+    url: openapi/clickup-workspaces-api-openapi.yml
   - type: APIReference
     url: https://developer.clickup.com/reference
   - type: Documentation
     url: https://developer.clickup.com/docs
 common:
+- type: Overlay
+  url: overlays/clickup-api-v2-reference-overlay.yaml
+- type: Overlay
+  url: overlays/clickup-public-api-v3-overlay.yaml
 - type: VulnerabilityDisclosure
   url: security/clickup-vulnerability-disclosure.yml
 - type: Website

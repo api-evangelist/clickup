@@ -1,0 +1,457 @@
+openapi: 3.2.0
+info:
+  title: Clickup Tags API
+  version: '2.0'
+  contact: {}
+  description: 'Operations tagged Tags across 2 of this provider''s published API definitions: clickup-api-v2-reference-openapi.json, clickup-api-v2-reference-openapi.json. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://api.clickup.com/api
+  description: ClickUp
+  variables: {}
+security:
+- Authorization_Token: []
+tags:
+- name: Tags
+paths:
+  /v2/space/{space_id}/tag:
+    parameters: []
+    get:
+      summary: Get Space Tags
+      tags:
+      - Tags
+      description: View the task Tags available in a Space.
+      operationId: GetSpaceTags
+      parameters:
+      - name: space_id
+        in: path
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: number
+          contentEncoding: double
+          examples:
+          - 512
+      - name: Content-Type
+        in: header
+        description: ''
+        required: true
+        style: simple
+        schema:
+          const: application/json
+          type: string
+          examples:
+          - application/json
+      responses:
+        '200':
+          description: ''
+          headers: {}
+          content:
+            application/json:
+              schema:
+                title: GetSpaceTagsresponse
+                required:
+                - tags
+                type: object
+                properties:
+                  tags:
+                    type: array
+                    items:
+                      $ref: '#/paths/~1v2~1team~1{team_Id}~1time_entries/post/requestBody/content/application~1json/schema/properties/tags/items'
+                    description: ''
+                examples:
+                - tags:
+                  - name: Tag name
+                    tag_fg: '#000000'
+                    tag_bg: '#000000'
+              example:
+                tags:
+                - name: Tag name
+                  tag_fg: '#000000'
+                  tag_bg: '#000000'
+      deprecated: false
+    post:
+      summary: Create Space Tag
+      tags:
+      - Tags
+      description: Add a new task Tag to a Space.
+      operationId: CreateSpaceTag
+      parameters:
+      - name: space_id
+        in: path
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: number
+          contentEncoding: double
+          examples:
+          - 512
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              title: CreateSpaceTagrequest
+              required:
+              - tag
+              type: object
+              properties:
+                tag:
+                  title: Tag
+                  required:
+                  - name
+                  - tag_fg
+                  - tag_bg
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                    tag_fg:
+                      type: string
+                    tag_bg:
+                      type: string
+                  examples:
+                  - name: Tag Name
+                    tag_fg: '#000000'
+                    tag_bg: '#000000'
+              examples:
+              - tag:
+                  name: Tag Name
+                  tag_fg: '#000000'
+                  tag_bg: '#000000'
+            example:
+              tag:
+                name: Tag Name
+                tag_fg: '#000000'
+                tag_bg: '#000000'
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+          content:
+            application/json:
+              schema:
+                type: object
+                examples:
+                - {}
+                contentMediaType: application/json
+              example: {}
+      deprecated: false
+    servers:
+    - url: https://api.clickup.com/api
+      description: ClickUp
+      variables: {}
+  /v2/space/{space_id}/tag/{tag_name}:
+    parameters: []
+    put:
+      summary: Edit Space Tag
+      tags:
+      - Tags
+      description: Update a task Tag.
+      operationId: EditSpaceTag
+      parameters:
+      - name: space_id
+        in: path
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: number
+          contentEncoding: double
+          examples:
+          - 512
+      - name: tag_name
+        in: path
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: string
+          examples:
+          - name
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              title: EditSpaceTagrequest
+              required:
+              - tag
+              type: object
+              properties:
+                tag:
+                  title: Tag1
+                  required:
+                  - name
+                  - fg_color
+                  - bg_color
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                    fg_color:
+                      type: string
+                    bg_color:
+                      type: string
+                  examples:
+                  - name: Updated Tag
+                    fg_color: '#ffffff'
+                    bg_color: '#ffffff'
+              examples:
+              - tag:
+                  name: Updated Tag
+                  fg_color: '#ffffff'
+                  bg_color: '#ffffff'
+            example:
+              tag:
+                name: Tag name
+                tag_fg: '#000000'
+                tag_bg: '#000000'
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+          content:
+            application/json:
+              schema:
+                title: EditSpaceTagresponse
+                required:
+                - tag
+                type: object
+                properties:
+                  tag:
+                    $ref: '#/paths/~1v2~1space~1{space_id}~1tag~1{tag_name}/put/requestBody/content/application~1json/schema/properties/tag'
+                examples:
+                - tag:
+                    name: Updated Tag
+                    fg_color: '#ffffff'
+                    bg_color: '#ffffff'
+              example:
+                tag:
+                  name: Updated Tag
+                  fg_color: '#ffffff'
+                  bg_color: '#ffffff'
+      deprecated: false
+    delete:
+      summary: Delete Space Tag
+      tags:
+      - Tags
+      description: Delete a task Tag from a Space.
+      operationId: DeleteSpaceTag
+      parameters:
+      - name: space_id
+        in: path
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: number
+          contentEncoding: double
+          examples:
+          - 512
+      - name: tag_name
+        in: path
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: string
+          examples:
+          - name
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              title: DeleteSpaceTagrequest
+              required:
+              - tag
+              type: object
+              properties:
+                tag:
+                  $ref: '#/paths/~1v2~1space~1{space_id}~1tag/post/requestBody/content/application~1json/schema/properties/tag'
+              examples:
+              - tag:
+                  name: Tag name
+                  tag_fg: '#000000'
+                  tag_bg: '#000000'
+            example:
+              tag:
+                name: Tag name
+                tag_fg: '#000000'
+                tag_bg: '#000000'
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+          content:
+            application/json:
+              schema:
+                type: object
+                examples:
+                - {}
+                contentMediaType: application/json
+              example: {}
+      deprecated: false
+    servers:
+    - url: https://api.clickup.com/api
+      description: ClickUp
+      variables: {}
+  /v2/task/{task_id}/tag/{tag_name}:
+    parameters: []
+    post:
+      summary: Add Tag To Task
+      tags:
+      - Tags
+      description: Add a Tag to a task.
+      operationId: AddTagToTask
+      parameters:
+      - name: task_id
+        in: path
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: string
+          examples:
+          - abc
+      - name: tag_name
+        in: path
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: string
+          examples:
+          - name
+      - name: custom_task_ids
+        in: query
+        description: If you want to reference a task by it's custom task id, this value must be `true`.
+        style: form
+        explode: true
+        schema:
+          type: boolean
+          examples:
+          - true
+      - name: team_id
+        in: query
+        description: "When the `custom_task_ids` parameter is set to `true`, the Workspace ID must be provided using the `team_id` parameter.\n \\\nFor example: `custom_task_ids=true&team_id=123`."
+        style: form
+        explode: true
+        schema:
+          type: number
+          contentEncoding: double
+          examples:
+          - 123
+      - name: Content-Type
+        in: header
+        description: ''
+        required: true
+        style: simple
+        schema:
+          const: application/json
+          type: string
+          examples:
+          - application/json
+      responses:
+        '200':
+          description: ''
+          headers: {}
+          content:
+            application/json:
+              schema:
+                type: object
+                examples:
+                - {}
+                contentMediaType: application/json
+              example: {}
+      deprecated: false
+    delete:
+      summary: Remove Tag From Task
+      tags:
+      - Tags
+      description: Remove a Tag from a task. This does not delete the Tag from the Space.
+      operationId: RemoveTagFromTask
+      parameters:
+      - name: task_id
+        in: path
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: string
+          examples:
+          - abc
+      - name: tag_name
+        in: path
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: string
+          examples:
+          - name
+      - name: custom_task_ids
+        in: query
+        description: If you want to reference a task by it's custom task id, this value must be `true`.
+        style: form
+        explode: true
+        schema:
+          type: boolean
+          examples:
+          - true
+      - name: team_id
+        in: query
+        description: "When the `custom_task_ids` parameter is set to `true`, the Workspace ID must be provided using the `team_id` parameter.\n \\\nFor example: `custom_task_ids=true&team_id=123`."
+        style: form
+        explode: true
+        schema:
+          type: number
+          contentEncoding: double
+          examples:
+          - 123
+      - name: Content-Type
+        in: header
+        description: ''
+        required: true
+        style: simple
+        schema:
+          const: application/json
+          type: string
+          examples:
+          - application/json
+      responses:
+        '200':
+          description: ''
+          headers: {}
+          content:
+            application/json:
+              schema:
+                type: object
+                examples:
+                - {}
+                contentMediaType: application/json
+              example: {}
+      deprecated: false
+    servers:
+    - url: https://api.clickup.com/api
+      description: ClickUp
+      variables: {}
+components:
+  securitySchemes:
+    Authorization_Token:
+      name: Authorization
+      type: apiKey
+      in: header
+      description: 'API token required for authentication. Two types of tokens are supported:
+
+        **Personal API Key** Obtain from ClickUp''s settings page under ''Apps'' and add it to the header as `Authorization: pk_...`
+
+        **OAuth2 Access Token** Generated through the OAuth2 flow and add it to the header as `Authorization: Bearer {access_token}`'
+x-refined-from:
+- clickup-api-v2-reference-openapi.json
+- clickup-api-v2-reference-openapi.json

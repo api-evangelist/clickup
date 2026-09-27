@@ -1,21 +1,1168 @@
 openapi: 3.2.0
 info:
-  title: ClickUp Folders API
-  description: The ClickUp Folders API provides endpoints for managing Folders, which are optional organizational containers that sit between Spaces and Lists in the ClickUp hierarchy. Folders group related Lists together and can be used to organize projects or workstreams within a Space. Developers can create, update, delete, and retrieve Folders and their associated Lists.
+  title: Clickup Folders API
   version: '2.0'
-  contact:
-    name: ClickUp Support
-    url: https://help.clickup.com
-  termsOfService: https://clickup.com/terms
+  description: 'Operations tagged Folders across 3 of this provider''s published API definitions: clickup-api-v2-reference-openapi.json, clickup-folders-openapi.yml, clickup-api-v2-reference-openapi.json. Each path carries the servers of the definition it was published in.'
 servers:
+- url: https://api.clickup.com/api
+  description: ClickUp
+  variables: {}
 - url: https://api.clickup.com/api/v2
   description: ClickUp API v2 Production Server
-security:
-- bearerAuth: []
 tags:
 - name: Folders
-  description: Operations for managing Folders within ClickUp Spaces.
 paths:
+  /v2/space/{space_id}/folder:
+    parameters: []
+    get:
+      summary: Get Folders
+      tags:
+      - Folders
+      description: View the Folders in a Space. Subfolders are returned in the same flat list as top-level Folders, each with a `parent_folder` field holding the ID of the Folder it is nested inside of. This endpoint does not nest them; to get a Folder's subfolder tree, use Get Folder with `include_subfolders=true`.
+      operationId: GetFolders
+      parameters:
+      - name: space_id
+        in: path
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: number
+          contentEncoding: double
+          examples:
+          - 789
+      - name: archived
+        in: query
+        description: ''
+        style: form
+        explode: true
+        schema:
+          type: boolean
+          examples:
+          - false
+      responses:
+        '200':
+          description: ''
+          headers: {}
+          content:
+            application/json:
+              schema:
+                title: GetFoldersresponse
+                required:
+                - folders
+                type: object
+                properties:
+                  folders:
+                    type: array
+                    description: 'The Folders in the Space. Subfolders are included in this flat list alongside top-level Folders, each with a `parent_folder` field identifying the Folder it is nested inside of. This endpoint does not nest them; to get a Folder''s subfolder tree, use [Get Folder](#tag/Folders/operation/GetFolder) with `include_subfolders=true`.
+
+                      '
+                    items:
+                      title: Folder5
+                      required:
+                      - id
+                      - name
+                      - orderindex
+                      - override_statuses
+                      - hidden
+                      - space
+                      - task_count
+                      - lists
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        name:
+                          type: string
+                        orderindex:
+                          type: integer
+                          contentEncoding: int32
+                        override_statuses:
+                          type: boolean
+                        hidden:
+                          type: boolean
+                        space:
+                          $ref: '#/paths/~1v2~1list~1{list_id}/get/responses/200/content/application~1json/schema/properties/space'
+                        task_count:
+                          type: string
+                        archived:
+                          type: boolean
+                          description: Whether the Folder is archived.
+                        statuses:
+                          type: array
+                          description: 'Statuses defined on this Folder. Only populated when `override_statuses` is `true`. A Folder that inherits its statuses returns an empty array here; its effective statuses are those of its nearest ancestor Folder that overrides them, or of the Space when no ancestor does. To get the resolved statuses for a Folder, request it with [Get Folder](#tag/Folders/operation/GetFolder).
+
+                            '
+                          items:
+                            $ref: '#/paths/~1v2~1folder~1{folder_id}/get/responses/200/content/application~1json/schema/properties/statuses/items'
+                        lists:
+                          type: array
+                          items:
+                            type: string
+                        parent_folder:
+                          type: string
+                          description: 'ID of the parent Folder if this Folder is a subfolder. Only present when the Folder is nested inside another Folder.
+
+                            '
+                      examples:
+                      - id: '1057'
+                        name: Folder Name
+                        orderindex: 5
+                        override_statuses: true
+                        hidden: false
+                        space:
+                          id: '789'
+                          name: Space Name
+                          access: true
+                        task_count: '20'
+                        statuses:
+                        - id: c1057_Xv4bNr9T
+                          status: to do
+                          orderindex: 0
+                          color: '#87909e'
+                          type: open
+                        lists: []
+                examples:
+                - folders:
+                  - id: '457'
+                    name: Updated Folder Name
+                    orderindex: 0
+                    override_statuses: false
+                    hidden: false
+                    space:
+                      id: '789'
+                      name: Space Name
+                      access: true
+                    task_count: '0'
+                    statuses: []
+                    lists: []
+                  - id: '458'
+                    name: Second Folder Name
+                    orderindex: 1
+                    override_statuses: false
+                    hidden: false
+                    space:
+                      id: '789'
+                      name: Space Name
+                      access: true
+                    task_count: '0'
+                    statuses: []
+                    lists: []
+                    parent_folder: '457'
+              example:
+                folders:
+                - id: '457'
+                  name: Updated Folder Name
+                  orderindex: 0
+                  override_statuses: false
+                  hidden: false
+                  space:
+                    id: '789'
+                    name: Space Name
+                    access: true
+                  task_count: '0'
+                  statuses: []
+                  lists: []
+                - id: '458'
+                  name: Second Folder Name
+                  orderindex: 1
+                  override_statuses: false
+                  hidden: false
+                  space:
+                    id: '789'
+                    name: Space Name
+                    access: true
+                  task_count: '0'
+                  statuses: []
+                  lists: []
+                  parent_folder: '457'
+      deprecated: false
+      security:
+      - Authorization_Token: []
+    post:
+      summary: Create Folder
+      tags:
+      - Folders
+      description: Add a new Folder to a Space. You can optionally create the Folder as a subfolder within an existing Folder by providing `parent_folder_id` in the request body. Subfolder support must be enabled for the Workspace.
+      operationId: CreateFolder
+      parameters:
+      - name: space_id
+        in: path
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: number
+          contentEncoding: double
+          examples:
+          - 789
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              title: CreateFolderrequest
+              required:
+              - name
+              type: object
+              properties:
+                name:
+                  type: string
+                parent_folder_id:
+                  type: string
+                  description: 'ID of an existing Folder to create this Folder inside of as a subfolder. The parent Folder must belong to the same Space specified in the path. Subfolder support must be enabled for the Workspace.
+
+                    '
+              examples:
+              - name: New Folder Name
+              - name: New Subfolder Name
+                parent_folder_id: '457'
+            example:
+              name: New Subfolder Name
+              parent_folder_id: '457'
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+          content:
+            application/json:
+              schema:
+                title: CreateFolderresponse
+                required:
+                - id
+                - name
+                - orderindex
+                - override_statuses
+                - hidden
+                - space
+                - task_count
+                type: object
+                properties:
+                  id:
+                    type: string
+                  name:
+                    type: string
+                  orderindex:
+                    type: integer
+                    contentEncoding: int32
+                  override_statuses:
+                    type: boolean
+                  hidden:
+                    type: boolean
+                  space:
+                    $ref: '#/paths/~1v2~1list~1{list_id}/get/responses/200/content/application~1json/schema/properties/space'
+                  task_count:
+                    type: string
+                  archived:
+                    type: boolean
+                    description: Whether the Folder is archived.
+                  statuses:
+                    type: array
+                    description: 'Statuses defined on this Folder. A newly created Folder inherits its statuses, so this is an empty array unless the Folder overrides them. Entries do not include the status `id` on this response. To get the resolved statuses for the new Folder, request it with [Get Folder](#tag/Folders/operation/GetFolder).
+
+                      '
+                    items:
+                      $ref: '#/paths/~1v2~1folder~1{folder_id}/get/responses/200/content/application~1json/schema/properties/statuses/items'
+                  parent_folder:
+                    type: string
+                    description: 'ID of the parent Folder if this Folder is a subfolder. Only present when the Folder was created inside another Folder.
+
+                      '
+                examples:
+                - id: '457'
+                  name: New Folder Name
+                  orderindex: 0
+                  override_statuses: false
+                  hidden: false
+                  space:
+                    id: '789'
+                    name: Space Name
+                    access: true
+                  task_count: '0'
+                  statuses: []
+              examples:
+                top-level-folder:
+                  summary: Create a top-level Folder
+                  value:
+                    id: '457'
+                    name: New Folder Name
+                    orderindex: 0
+                    override_statuses: false
+                    hidden: false
+                    space:
+                      id: '789'
+                      name: Space Name
+                      access: true
+                    task_count: '0'
+                subfolder:
+                  summary: Create a subfolder within an existing Folder
+                  value:
+                    id: '460'
+                    name: New Subfolder Name
+                    orderindex: 0
+                    override_statuses: false
+                    hidden: false
+                    space:
+                      id: '789'
+                      name: Space Name
+                      access: true
+                    task_count: '0'
+                    parent_folder: '457'
+      deprecated: false
+      security:
+      - Authorization_Token: []
+    servers:
+    - url: https://api.clickup.com/api
+      description: ClickUp
+      variables: {}
+  /v2/folder/{folder_id}:
+    parameters: []
+    get:
+      summary: Get Folder
+      tags:
+      - Folders
+      description: 'View the Lists within a Folder. If the Folder is a subfolder, the response includes a `parent_folder` field with the parent Folder ID.
+
+
+        Use the `include_subfolders` query parameter to include a `folders` array in the response. Each entry is a complete Folder object with the same fields as the Folder you requested, including its own `folders` array, so the response contains the whole subfolder tree down to the Workspace''s subfolder nesting limit. Subfolders the requesting user cannot access are excluded.'
+      operationId: GetFolder
+      parameters:
+      - name: folder_id
+        in: path
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: number
+          contentEncoding: double
+          examples:
+          - 457
+      - name: include_subfolders
+        in: query
+        description: 'Set to `true` to include the nested subfolder tree in the response as a `folders` array of complete Folder objects. Subfolder support must be enabled for the Workspace.
+
+          '
+        required: false
+        schema:
+          type: boolean
+          default: false
+      responses:
+        '200':
+          description: ''
+          headers: {}
+          content:
+            application/json:
+              schema:
+                title: GetFolderresponse
+                required:
+                - id
+                - name
+                - orderindex
+                - override_statuses
+                - hidden
+                - space
+                - task_count
+                - lists
+                type: object
+                properties:
+                  id:
+                    type: string
+                  name:
+                    type: string
+                  orderindex:
+                    type: integer
+                    contentEncoding: int32
+                  override_statuses:
+                    type: boolean
+                  hidden:
+                    type: boolean
+                  space:
+                    $ref: '#/paths/~1v2~1list~1{list_id}/get/responses/200/content/application~1json/schema/properties/space'
+                  task_count:
+                    type: string
+                  archived:
+                    type: boolean
+                    description: Whether the Folder is archived.
+                  statuses:
+                    type: array
+                    description: 'The statuses that apply to this Folder. Inherited statuses are resolved, so this is populated whether or not `override_statuses` is `true`: a Folder that does not override its statuses returns the statuses of its nearest ancestor Folder that does, or of the Space when no ancestor does.
+
+                      '
+                    items:
+                      title: FolderStatus
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                          description: 'Unique identifier of the status. Not returned on the Create Folder response.
+
+                            '
+                        status:
+                          type: string
+                          description: Name of the status.
+                        orderindex:
+                          type: integer
+                          description: Position of the status within its status group.
+                        color:
+                          type: string
+                          description: Hex color code for the status.
+                        type:
+                          type: string
+                          description: Type of the status (`open`, `custom`, `closed`, or `done`).
+                      examples:
+                      - id: c457_Kq7mZa2P
+                        status: to do
+                        orderindex: 0
+                        color: '#87909e'
+                        type: open
+                  permission_level:
+                    type: string
+                    description: 'The requesting user''s permission level on this Folder (`read`, `comment`, `edit`, or `create`).
+
+                      '
+                  lists:
+                    type: array
+                    items:
+                      type: string
+                    description: ''
+                  parent_folder:
+                    type: string
+                    description: 'ID of the parent Folder if this Folder is a subfolder. Only present when the Folder is nested inside another Folder.
+
+                      '
+                  folders:
+                    type: array
+                    description: 'The subfolder tree beneath this Folder. Each entry is a complete Folder object with the same fields as this Folder, including its own `folders` array, so the whole tree is returned down to the Workspace''s subfolder nesting limit. Leaf Folders have an empty `folders` array.
+
+
+                      Only present when the `include_subfolders=true` query parameter is set and subfolder support is enabled for the Workspace. Subfolders the requesting user cannot access are excluded.
+
+                      '
+                    items:
+                      title: Subfolder
+                      description: 'A Folder nested inside another Folder, as returned in the `folders` array of a Folder response. Subfolders carry the same fields as the Folder they are nested in, including their own `folders` array, so the response describes the whole subfolder tree.
+
+
+                        The `space` object is not repeated on nested entries: a subfolder always belongs to the same Space as the Folder you requested.
+
+                        '
+                      required:
+                      - id
+                      - name
+                      - orderindex
+                      - override_statuses
+                      - hidden
+                      - task_count
+                      - parent_folder
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        name:
+                          type: string
+                        orderindex:
+                          type: integer
+                          contentEncoding: int32
+                        override_statuses:
+                          type: boolean
+                        hidden:
+                          type: boolean
+                        task_count:
+                          type: string
+                        archived:
+                          type: boolean
+                          description: Whether the Folder is archived.
+                        statuses:
+                          type: array
+                          description: 'The statuses that apply to this subfolder. Inherited statuses are resolved, so this is populated whether or not `override_statuses` is `true`, and matches what a direct [Get Folder](#tag/Folders/operation/GetFolder) request for this subfolder returns.
+
+                            '
+                          items:
+                            $ref: '#/paths/~1v2~1folder~1{folder_id}/get/responses/200/content/application~1json/schema/properties/statuses/items'
+                        lists:
+                          type: array
+                          description: Lists contained in this Folder.
+                          items:
+                            type: object
+                        parent_folder:
+                          type: string
+                          description: 'ID of the Folder this Folder is nested inside of.
+
+                            '
+                        folders:
+                          type: array
+                          description: 'Subfolders nested inside this Folder, using this same shape. Empty when the Folder has no subfolders, so the array terminates the tree at every leaf.
+
+                            '
+                          items:
+                            $ref: '#/paths/~1v2~1folder~1{folder_id}/get/responses/200/content/application~1json/schema/properties/folders/items'
+                      examples:
+                      - id: '460'
+                        name: Child Folder Name
+                        orderindex: 0
+                        override_statuses: false
+                        hidden: false
+                        task_count: '0'
+                        statuses:
+                        - id: p789_87Rq2Yzk
+                          status: to do
+                          orderindex: 0
+                          color: '#87909e'
+                          type: open
+                        lists: []
+                        parent_folder: '457'
+                        folders: []
+                examples:
+                - id: '457'
+                  name: Updated Folder Name
+                  orderindex: 0
+                  override_statuses: false
+                  hidden: false
+                  space:
+                    id: '789'
+                    name: Space Name
+                    access: true
+                  task_count: '0'
+                  statuses:
+                  - id: p789_87Rq2Yzk
+                    status: to do
+                    orderindex: 0
+                    color: '#87909e'
+                    type: open
+                  lists: []
+              examples:
+                subfolder:
+                  summary: A Folder nested inside another Folder
+                  value:
+                    id: '457'
+                    name: Updated Folder Name
+                    orderindex: 0
+                    override_statuses: false
+                    hidden: false
+                    space:
+                      id: '789'
+                      name: Space Name
+                      access: true
+                    task_count: '0'
+                    lists: []
+                    parent_folder: '456'
+                nested-tree:
+                  summary: 'With include_subfolders=true, returning the nested subfolder tree. None of these Folders override their statuses, so each one resolves to the statuses of the Space.
+
+                    '
+                  value:
+                    id: '457'
+                    name: Parent Folder Name
+                    orderindex: 0
+                    override_statuses: false
+                    hidden: false
+                    space:
+                      id: '789'
+                      name: Space Name
+                      access: true
+                    task_count: '0'
+                    statuses:
+                    - id: p789_87Rq2Yzk
+                      status: to do
+                      orderindex: 0
+                      color: '#87909e'
+                      type: open
+                    lists: []
+                    folders:
+                    - id: '460'
+                      name: Child Folder Name
+                      orderindex: 0
+                      override_statuses: false
+                      hidden: false
+                      task_count: '0'
+                      statuses:
+                      - id: p789_87Rq2Yzk
+                        status: to do
+                        orderindex: 0
+                        color: '#87909e'
+                        type: open
+                      lists: []
+                      parent_folder: '457'
+                      folders:
+                      - id: '461'
+                        name: Grandchild Folder Name
+                        orderindex: 0
+                        override_statuses: false
+                        hidden: false
+                        task_count: '0'
+                        statuses:
+                        - id: p789_87Rq2Yzk
+                          status: to do
+                          orderindex: 0
+                          color: '#87909e'
+                          type: open
+                        lists: []
+                        parent_folder: '460'
+                        folders: []
+      deprecated: false
+      security:
+      - Authorization_Token: []
+    put:
+      summary: Update Folder
+      tags:
+      - Folders
+      description: 'Rename a Folder. Renaming a subfolder leaves it nested inside its parent Folder, and the response includes the `parent_folder` field.
+
+
+        This endpoint only renames a Folder. To nest a Folder inside another Folder or move it to another Space, use the Move Folder endpoint; a `parent_folder_id` sent to this endpoint is ignored.'
+      operationId: UpdateFolder
+      parameters:
+      - name: folder_id
+        in: path
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: number
+          contentEncoding: double
+          examples:
+          - 457
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              title: UpdateFolderrequest
+              required:
+              - name
+              type: object
+              properties:
+                name:
+                  type: string
+              examples:
+              - name: Updated Folder Name
+            example:
+              name: Updated Folder Name
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+          content:
+            application/json:
+              schema:
+                title: UpdateFolderresponse
+                required:
+                - id
+                - name
+                - orderindex
+                - override_statuses
+                - hidden
+                - space
+                - task_count
+                type: object
+                properties:
+                  id:
+                    type: string
+                  name:
+                    type: string
+                  orderindex:
+                    type: integer
+                    contentEncoding: int32
+                  override_statuses:
+                    type: boolean
+                  hidden:
+                    type: boolean
+                  space:
+                    $ref: '#/paths/~1v2~1list~1{list_id}/get/responses/200/content/application~1json/schema/properties/space'
+                  task_count:
+                    type: string
+                  archived:
+                    type: boolean
+                    description: Whether the Folder is archived.
+                  statuses:
+                    type: array
+                    description: 'Statuses defined on this Folder. Only populated when `override_statuses` is `true`. A Folder that inherits its statuses returns an empty array here; its effective statuses are those of its nearest ancestor Folder that overrides them, or of the Space when no ancestor does. To get the resolved statuses for the Folder, request it with [Get Folder](#tag/Folders/operation/GetFolder).
+
+                      '
+                    items:
+                      $ref: '#/paths/~1v2~1folder~1{folder_id}/get/responses/200/content/application~1json/schema/properties/statuses/items'
+                  parent_folder:
+                    type: string
+                    description: 'ID of the parent Folder if this Folder is a subfolder. Only present when the Folder is nested inside another Folder.
+
+                      '
+                examples:
+                - id: '457'
+                  name: Updated Folder Name
+                  orderindex: 0
+                  override_statuses: false
+                  hidden: false
+                  space:
+                    id: '789'
+                    name: Space Name
+                    access: true
+                  task_count: '0'
+                  statuses: []
+              example:
+                id: '457'
+                name: Updated Folder Name
+                orderindex: 0
+                override_statuses: false
+                hidden: false
+                space:
+                  id: '789'
+                  name: Space Name
+                  access: true
+                task_count: '0'
+                parent_folder: '456'
+      deprecated: false
+      security:
+      - Authorization_Token: []
+    delete:
+      summary: Delete Folder
+      tags:
+      - Folders
+      description: Delete a Folder from your Workspace.
+      operationId: DeleteFolder
+      parameters:
+      - name: folder_id
+        in: path
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: number
+          contentEncoding: double
+          examples:
+          - 457
+      responses:
+        '200':
+          description: ''
+          headers: {}
+          content:
+            application/json:
+              schema:
+                type: object
+                examples:
+                - {}
+                contentMediaType: application/json
+              example: {}
+      deprecated: false
+      security:
+      - Authorization_Token: []
+    servers:
+    - url: https://api.clickup.com/api
+      description: ClickUp
+      variables: {}
+  /v2/folder/{folder_id}/position:
+    parameters: []
+    put:
+      summary: Move Folder
+      tags:
+      - Folders
+      description: 'Move a Folder, either by nesting it inside another Folder as a subfolder or by moving it to another Space as a top-level Folder.
+
+
+        Provide `parent_folder_id` to nest the Folder inside another Folder, or `space_id` to move it to another Space as a top-level Folder. If both are provided, `parent_folder_id` takes precedence and `space_id` is ignored, so the Folder inherits the Space of its new parent Folder. Use `position` to control placement among siblings in the destination; the Folder is placed at the top when `position` is omitted.
+
+
+        Nesting a Folder requires subfolder support to be enabled for the Workspace. Lists and tasks in the Folder move with it. To rename a Folder instead, use the Update Folder endpoint.'
+      operationId: MoveFolder
+      parameters:
+      - name: folder_id
+        in: path
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: number
+          contentEncoding: double
+          examples:
+          - 457
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              title: MoveFolderrequest
+              type: object
+              properties:
+                parent_folder_id:
+                  type: string
+                  description: 'ID of the Folder to nest this Folder inside of, making it a subfolder. The destination Folder must be in the same Workspace. Subfolder support must be enabled for the Workspace.
+
+                    '
+                space_id:
+                  type: string
+                  description: 'ID of the Space to move this Folder to as a top-level Folder. Ignored when `parent_folder_id` is also provided, in which case the Folder inherits the Space of its new parent Folder.
+
+                    '
+                position:
+                  type: integer
+                  contentEncoding: int32
+                  description: 'Position of the Folder among its siblings in the destination. Defaults to the top of the destination when omitted.
+
+                    '
+                custom_type_map:
+                  type: object
+                  description: 'Map of task type IDs in the Folder to the task type IDs to use after the move, as `{"<source_type_id>": <destination_type_id>}`. Required when moving to a destination where a task type used in the Folder is unavailable.
+
+                    '
+                  additionalProperties:
+                    type: integer
+                    contentEncoding: int32
+              examples:
+              - parent_folder_id: '457'
+              - space_id: '790'
+                position: 0
+            examples:
+              nest-as-subfolder:
+                summary: Nest the Folder inside another Folder
+                value:
+                  parent_folder_id: '457'
+              move-to-space:
+                summary: Move the Folder to another Space as a top-level Folder
+                value:
+                  space_id: '790'
+                  position: 0
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+          content:
+            application/json:
+              schema:
+                type: object
+                examples:
+                - {}
+                contentMediaType: application/json
+              example: {}
+        '400':
+          description: 'The move is not allowed. `ECODE` identifies the reason:
+
+            * `CAT_147` - a Folder cannot be its own parent.
+
+            * `CAT_148` - the destination Folder is a subfolder of the Folder being moved, which would create a circular reference.
+
+            * `CAT_137` - the move would exceed the Workspace''s subfolder nesting limit.
+
+            * `CAT_158` - the move would exceed the nesting limit because of archived subfolders.
+
+            * `CAT_159` - a Folder cannot be nested inside a hidden Folder.
+
+            * `CAT_140` - a Sprint Folder already exists in the destination''s parent chain.
+
+            * `CAT_141` - a Sprint Folder cannot be moved into a Folder that contains a Sprint Folder.
+
+            '
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  err:
+                    type: string
+                  ECODE:
+                    type: string
+              example:
+                err: A folder cannot be its own parent
+                ECODE: CAT_147
+      deprecated: false
+      security:
+      - Authorization_Token: []
+    servers:
+    - url: https://api.clickup.com/api
+      description: ClickUp
+      variables: {}
+  /v2/space/{space_id}/folder_template/{template_id}:
+    post:
+      summary: Create Folder from template
+      description: 'Create a new Folder using a Folder template within a Space. This endpoint allows you to create a folder with all its nested assets (lists, tasks, etc.) from a predefined template available in your Workspace. Publicly shared templates must be added to your Workspace before you can use them with the public API.
+
+        You can optionally create the Folder as a subfolder within an existing Folder by providing `parent_folder_id` in the request body. Subfolder support must be enabled for the Workspace.
+
+        This request can be run asynchronously or synchronously via the `return_immediately` parameter.'
+      operationId: CreateFolderFromTemplate
+      tags:
+      - Folders
+      parameters:
+      - in: path
+        name: space_id
+        required: true
+        schema:
+          type: string
+        description: ID of the Space where the Folder will be created
+      - in: path
+        name: template_id
+        required: true
+        schema:
+          type: string
+          examples:
+          - t-7162342
+        description: 'ID of the Folder template to use. Template IDs include a `t-` prefix (e.g., `t-7162342`). Retrieve available template IDs using the [Get Folder Templates](#tag/Templates/operation/GetFolderTemplates) endpoint.
+
+          '
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - name
+              properties:
+                name:
+                  type: string
+                  description: Name of the new Folder
+                parent_folder_id:
+                  type: string
+                  description: 'ID of an existing Folder to create this Folder inside of as a subfolder. The parent Folder must belong to the same Space specified in the path. Subfolder support must be enabled for the Workspace.
+
+                    '
+                options:
+                  type: object
+                  description: Options for creating the Folder
+                  properties:
+                    return_immediately:
+                      type: boolean
+                      description: 'Flag if newly created Object ID should be returned without waiting for the asset itself and all its nested assets to be applied. If set to true, access checks are performed before returning, but the object might not be fully created yet. In case of a timeout on syncronous requests, the of objects from the template will continue to be created past the timeout.
+
+                        '
+                      default: true
+                    content:
+                      type: string
+                      description: List description
+                    time_estimate:
+                      type: boolean
+                      description: Include time (hours, minutes and seconds)
+                    automation:
+                      type: boolean
+                      description: Import automation options
+                    include_views:
+                      type: boolean
+                      description: Import views
+                    old_due_date:
+                      type: boolean
+                      description: Import tasks due dates
+                    old_start_date:
+                      type: boolean
+                      description: Import tasks start dates
+                    old_followers:
+                      type: boolean
+                      description: Import tasks watchers
+                    comment_attachments:
+                      type: boolean
+                      description: Import tasks comment attachments
+                    recur_settings:
+                      type: boolean
+                      description: Import tasks recurring settings
+                    old_tags:
+                      type: boolean
+                      description: Import tasks tags
+                    old_statuses:
+                      type: boolean
+                      description: Import tasks status settings
+                    subtasks:
+                      type: boolean
+                      description: Import tasks subtasks
+                    custom_type:
+                      type: boolean
+                      description: Import tasks types
+                    old_assignees:
+                      type: boolean
+                      description: Import tasks assignees
+                    attachments:
+                      type: boolean
+                      description: Import tasks attachments
+                    comment:
+                      type: boolean
+                      description: Import tasks comments
+                    old_status:
+                      type: boolean
+                      description: Import tasks current statuses
+                    external_dependencies:
+                      type: boolean
+                      description: Import tasks external dependencies
+                    internal_dependencies:
+                      type: boolean
+                      description: Import tasks internal dependencies
+                    priority:
+                      type: boolean
+                      description: Import tasks priority
+                    custom_fields:
+                      type: boolean
+                      description: Import tasks Custom Fields
+                    old_checklists:
+                      type: boolean
+                      description: Import tasks checklists
+                    relationships:
+                      type: boolean
+                      description: Import tasks relationships
+                    old_subtask_assignees:
+                      type: boolean
+                      description: Import tasks subtasks and assignees combination
+                    start_date:
+                      type: string
+                      format: date-time
+                      description: Project start date for remapping dates
+                    due_date:
+                      type: string
+                      format: date-time
+                      description: Project due date for remapping dates
+                    remap_start_date:
+                      type: boolean
+                      description: Remap start dates
+                    skip_weekends:
+                      type: boolean
+                      description: Skip weekends when remapping dates
+                    archived:
+                      type: integer
+                      enum:
+                      - 1
+                      - 2
+                      - null
+                      description: Include archived tasks (1 or 2 or null)
+      responses:
+        '200':
+          description: Folder created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    description: ID of the created Folder
+                  folder:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        description: Unique identifier of the Folder
+                      name:
+                        type: string
+                        description: Name of the Folder
+                      orderindex:
+                        type: integer
+                        description: Order index of the Folder
+                      override_statuses:
+                        type: boolean
+                        description: Whether the Folder overrides default statuses
+                      hidden:
+                        type: boolean
+                        description: Whether the Folder is hidden
+                      space:
+                        type: object
+                        properties:
+                          id:
+                            type: string
+                            description: ID of the Space containing the Folder
+                          name:
+                            type: string
+                            description: Name of the Space
+                          access:
+                            type: boolean
+                            description: Whether the user has access to the Space
+                      task_count:
+                        type: string
+                        description: Number of tasks in the Folder
+                      archived:
+                        type: boolean
+                        description: Whether the Folder is archived
+                      statuses:
+                        type: array
+                        description: 'Statuses defined on the Folder. Only populated when `override_statuses` is `true`, which is the case when the template brings its own statuses. A Folder that inherits its statuses returns an empty array here; to get the resolved statuses, request it with [Get Folder](#tag/Folders/operation/GetFolder).
+
+                          '
+                        items:
+                          type: object
+                          properties:
+                            id:
+                              type: string
+                              description: Unique identifier of the status
+                            status:
+                              type: string
+                              description: Name of the status
+                            orderindex:
+                              type: integer
+                              description: Order index of the status
+                            color:
+                              type: string
+                              description: Color code for the status
+                            type:
+                              type: string
+                              description: Type of the status (closed, custom, open)
+                      lists:
+                        type: array
+                        description: Lists contained in the Folder
+                        items:
+                          type: object
+                      parent_folder:
+                        type: string
+                        description: 'ID of the parent Folder if this Folder is a subfolder. Echoes the `parent_folder_id` sent in the request; note the response field is named `parent_folder`, not `parent_folder_id`. Only present when the Folder was created inside another Folder.
+
+                          '
+                      permission_level:
+                        type: string
+                        description: Permission level for the current user
+                example:
+                  id: 90114316773
+                  folder:
+                    id: '90114316773'
+                    name: Projects
+                    orderindex: 0
+                    override_statuses: true
+                    hidden: false
+                    space:
+                      id: '90112667046'
+                      name: Client Facing
+                      access: true
+                    task_count: '0'
+                    archived: false
+                    statuses:
+                    - id: c90114316773_syqLtYOY
+                      status: complete
+                      orderindex: 2
+                      color: '#008844'
+                      type: closed
+                    - id: c90114316773_g9uxhsQM
+                      status: in progress
+                      orderindex: 1
+                      color: '#1090e0'
+                      type: custom
+                    - id: c90114316773_DCnaeiSB
+                      status: to do
+                      orderindex: 0
+                      color: '#87909e'
+                      type: open
+                    lists: []
+                    parent_folder: '90114316772'
+                    permission_level: create
+        '400':
+          description: Bad request - Name is required
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: Name is required
+                  ECODE:
+                    type: string
+                    example: OAUTH_119
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Template or space not found
+        '500':
+          description: Internal server error
+      security:
+      - Authorization_Token: []
+    servers:
+    - url: https://api.clickup.com/api
+      description: ClickUp
+      variables: {}
   /space/{space_id}/folder:
     get:
       operationId: getFolders
@@ -47,6 +1194,8 @@ paths:
           description: Unauthorized
         '404':
           description: Space not found
+      security:
+      - bearerAuth: []
     post:
       operationId: createFolder
       summary: Create a folder
@@ -74,6 +1223,11 @@ paths:
           description: Unauthorized
         '404':
           description: Space not found
+      security:
+      - bearerAuth: []
+    servers:
+    - url: https://api.clickup.com/api/v2
+      description: ClickUp API v2 Production Server
   /folder/{folder_id}:
     get:
       operationId: getFolder
@@ -94,6 +1248,8 @@ paths:
           description: Unauthorized
         '404':
           description: Folder not found
+      security:
+      - bearerAuth: []
     put:
       operationId: updateFolder
       summary: Update a folder
@@ -121,6 +1277,8 @@ paths:
           description: Unauthorized
         '404':
           description: Folder not found
+      security:
+      - bearerAuth: []
     delete:
       operationId: deleteFolder
       summary: Delete a folder
@@ -136,32 +1294,13 @@ paths:
           description: Unauthorized
         '404':
           description: Folder not found
+      security:
+      - bearerAuth: []
+    servers:
+    - url: https://api.clickup.com/api/v2
+      description: ClickUp API v2 Production Server
 components:
-  parameters:
-    spaceId:
-      name: space_id
-      in: path
-      required: true
-      description: The unique identifier of the Space.
-      schema:
-        type: integer
-    folderId:
-      name: folder_id
-      in: path
-      required: true
-      description: The unique identifier of the Folder.
-      schema:
-        type: integer
   schemas:
-    CreateFolderRequest:
-      type: object
-      required:
-      - name
-      description: Request body for creating a new Folder.
-      properties:
-        name:
-          type: string
-          description: The name of the Folder.
     UpdateFolderRequest:
       type: object
       description: Request body for updating an existing Folder.
@@ -282,7 +1421,40 @@ components:
         permission_level:
           type: string
           description: The permission level of the Folder.
+    CreateFolderRequest:
+      type: object
+      required:
+      - name
+      description: Request body for creating a new Folder.
+      properties:
+        name:
+          type: string
+          description: The name of the Folder.
+  parameters:
+    spaceId:
+      name: space_id
+      in: path
+      required: true
+      description: The unique identifier of the Space.
+      schema:
+        type: integer
+    folderId:
+      name: folder_id
+      in: path
+      required: true
+      description: The unique identifier of the Folder.
+      schema:
+        type: integer
   securitySchemes:
+    Authorization_Token:
+      name: Authorization
+      type: apiKey
+      in: header
+      description: 'API token required for authentication. Two types of tokens are supported:
+
+        **Personal API Key** Obtain from ClickUp''s settings page under ''Apps'' and add it to the header as `Authorization: pk_...`
+
+        **OAuth2 Access Token** Generated through the OAuth2 flow and add it to the header as `Authorization: Bearer {access_token}`'
     bearerAuth:
       type: http
       scheme: bearer
@@ -290,3 +1462,7 @@ components:
 externalDocs:
   description: ClickUp Folders API Documentation
   url: https://developer.clickup.com/reference/get-folders
+x-refined-from:
+- clickup-api-v2-reference-openapi.json
+- clickup-folders-openapi.yml
+- clickup-api-v2-reference-openapi.json

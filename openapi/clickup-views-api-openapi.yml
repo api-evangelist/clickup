@@ -1,21 +1,2884 @@
 openapi: 3.2.0
 info:
-  title: ClickUp Views API
-  description: The ClickUp Views API enables developers to create and manage views at the team, space, folder, and list levels. Views define how tasks are displayed and filtered, supporting formats such as list, board, calendar, gantt, and table. The API allows programmatic creation of saved views with specific filters, groupings, and sort configurations.
+  title: Clickup Views API
   version: '2.0'
-  contact:
-    name: ClickUp Support
-    url: https://help.clickup.com
-  termsOfService: https://clickup.com/terms
+  description: 'Operations tagged Views across 3 of this provider''s published API definitions: clickup-api-v2-reference-openapi.json, clickup-views-openapi.yml, clickup-api-v2-reference-openapi.json. Each path carries the servers of the definition it was published in.'
 servers:
+- url: https://api.clickup.com/api
+  description: ClickUp
+  variables: {}
 - url: https://api.clickup.com/api/v2
   description: ClickUp API v2 Production Server
-security:
-- bearerAuth: []
 tags:
 - name: Views
-  description: Operations for managing views at various levels of the ClickUp hierarchy.
 paths:
+  /v2/team/{team_id}/view:
+    parameters: []
+    get:
+      summary: Get Workspace (Everything level) Views
+      tags:
+      - Views
+      description: View the task and page views available at the Everything Level of a Workspace.
+      operationId: GetTeamViews
+      parameters:
+      - name: team_id
+        in: path
+        description: Workspace ID
+        required: true
+        style: simple
+        schema:
+          type: number
+          contentEncoding: double
+          examples:
+          - 123
+      responses:
+        '200':
+          description: ''
+          headers: {}
+          content:
+            application/json:
+              schema:
+                title: GetTeamViewsresponse
+                type: object
+                properties:
+                  views:
+                    type: array
+                    items:
+                      $ref: '#/paths/~1v2~1view~1{view_id}/get/responses/200/content/application~1json/schema/oneOf/0'
+                    description: ''
+                examples:
+                - views:
+                  - id: 3c-105
+                    name: New View Name
+                    type: list
+                    parent:
+                      id: '512'
+                      type: 7
+                    grouping:
+                      field: status
+                      dir: 1
+                      collapsed: []
+                      ignore: false
+                    divide:
+                      field: null
+                      dir: null
+                      collapsed: []
+                    sorting:
+                      fields: []
+                    filters:
+                      op: AND
+                      fields: []
+                      search: ''
+                      show_closed: false
+                    columns:
+                      fields: []
+                    team_sidebar:
+                      assignees: []
+                      assigned_comments: false
+                      unassigned_tasks: false
+                    settings:
+                      show_task_locations: false
+                      show_subtasks: 3
+                      show_subtask_parent_names: false
+                      show_closed_subtasks: false
+                      show_assignees: true
+                      show_images: true
+                      collapse_empty_columns: null
+                      me_comments: true
+                      me_subtasks: true
+                      me_checklists: true
+              example:
+                views:
+                - id: 3c-105
+                  name: New View Name
+                  type: list
+                  parent:
+                    id: '512'
+                    type: 7
+                  grouping:
+                    field: status
+                    dir: 1
+                    collapsed: []
+                    ignore: false
+                  divide:
+                    field: null
+                    dir: null
+                    collapsed: []
+                  sorting:
+                    fields:
+                    - field: cf_624a423a-c1d1-4467-99e2-63e225658cb2
+                      dir: -1
+                      idx: 0
+                  filters:
+                    op: AND
+                    field:
+                    - field: cf_624a423a-c1d1-4467-99e2-63e225658cb2
+                      op: EQ
+                      determinor: null
+                      idx: 0
+                      values: '123'
+                    search: ''
+                    show_closed: false
+                  columns:
+                    fields:
+                    - field: assignee
+                      idx: 0
+                      width: 160
+                      hidden: true
+                      name: null
+                      display: null
+                  team_sidebar:
+                    assignees: []
+                    assigned_comments: false
+                    unassigned_tasks: false
+                  settings:
+                    show_task_locations: false
+                    show_subtasks: 3
+                    show_subtask_parent_names: false
+                    show_closed_subtasks: false
+                    show_assignees: true
+                    show_images: true
+                    collapse_empty_columns: null
+                    me_comments: true
+                    me_subtasks: true
+                    me_checklists: true
+      deprecated: false
+      security:
+      - Authorization_Token: []
+    post:
+      summary: Create Workspace (Everything level) View
+      tags:
+      - Views
+      description: Add a List, Board, Calendar, Table, Timeline, Workload, Activity, Map, Chat, or Gantt view at the Everything Level of a Workspace.
+      operationId: CreateTeamView
+      parameters:
+      - name: team_id
+        in: path
+        description: Workspace ID
+        required: true
+        style: simple
+        schema:
+          type: number
+          contentEncoding: double
+          examples:
+          - 123
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              title: CreateTeamViewrequest
+              required:
+              - name
+              - type
+              - grouping
+              - divide
+              - sorting
+              - filters
+              - columns
+              - team_sidebar
+              - settings
+              type: object
+              properties:
+                name:
+                  type: string
+                type:
+                  type: string
+                  description: 'The type of view to create. Options include: `list`, `board`, `calendar`, `table`, `timeline`, `workload`, `activity`, `map`, `conversation`, or `gantt`.'
+                grouping:
+                  $ref: '#/paths/~1v2~1view~1{view_id}/put/requestBody/content/application~1json/schema/properties/grouping'
+                divide:
+                  $ref: '#/paths/~1v2~1view~1{view_id}/put/requestBody/content/application~1json/schema/properties/divide'
+                sorting:
+                  $ref: '#/paths/~1v2~1view~1{view_id}/put/requestBody/content/application~1json/schema/properties/sorting'
+                filters:
+                  $ref: '#/paths/~1v2~1view~1{view_id}/put/requestBody/content/application~1json/schema/properties/filters'
+                columns:
+                  $ref: '#/paths/~1v2~1view~1{view_id}/put/requestBody/content/application~1json/schema/properties/columns'
+                team_sidebar:
+                  $ref: '#/paths/~1v2~1view~1{view_id}/put/requestBody/content/application~1json/schema/properties/team_sidebar'
+                settings:
+                  $ref: '#/paths/~1v2~1view~1{view_id}/put/requestBody/content/application~1json/schema/properties/settings'
+              examples:
+              - name: New Team View Name
+                type: list
+                grouping:
+                  field: status
+                  dir: 1
+                  collapsed: []
+                  ignore: false
+                divide:
+                  field: null
+                  dir: null
+                  collapsed: []
+                sorting:
+                  fields: []
+                filters:
+                  op: AND
+                  fields: []
+                  search: ''
+                  show_closed: false
+                columns:
+                  fields: []
+                team_sidebar:
+                  assignees: []
+                  assigned_comments: false
+                  unassigned_tasks: false
+                settings:
+                  show_task_locations: false
+                  show_subtasks: 3
+                  show_subtask_parent_names: false
+                  show_closed_subtasks: false
+                  show_assignees: true
+                  show_images: true
+                  collapse_empty_columns: null
+                  me_comments: true
+                  me_subtasks: true
+                  me_checklists: true
+            example:
+              name: New Everything level View
+              type: list
+              grouping:
+                field: status
+                dir: 1
+                collapsed: []
+                ignore: false
+              divide:
+                field: null
+                dir: null
+                collapsed: []
+              sorting:
+                fields:
+                - field: cf_624a423a-c1d1-4467-99e2-63e225658cb2
+                  dir: -1
+                  idx: 0
+              filters:
+                op: AND
+                field:
+                - field: cf_624a423a-c1d1-4467-99e2-63e225658cb2
+                  op: EQ
+                  determinor: null
+                  idx: 0
+                  values: '123'
+                search: ''
+                show_closed: false
+              columns:
+                fields:
+                - field: assignee
+                  idx: 0
+                  width: 160
+                  hidden: true
+                  name: null
+                  display: null
+              team_sidebar:
+                assignees: []
+                assigned_comments: false
+                unassigned_tasks: false
+              settings:
+                show_task_locations: false
+                show_subtasks: 3
+                show_subtask_parent_names: false
+                show_closed_subtasks: false
+                show_assignees: true
+                show_images: true
+                collapse_empty_columns: null
+                me_comments: true
+                me_subtasks: true
+                me_checklists: true
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+          content:
+            application/json:
+              schema:
+                title: CreateTeamViewresponse
+                required:
+                - view
+                type: object
+                properties:
+                  view:
+                    $ref: '#/paths/~1v2~1view~1{view_id}/put/responses/200/content/application~1json/schema/properties/view'
+                examples:
+                - view:
+                    id: 3c-105
+                    name: New Team View Name
+                    type: list
+                    parent:
+                      id: '512'
+                      type: 7
+                    grouping:
+                      field: status
+                      dir: 1
+                      collapsed: []
+                      ignore: false
+                    divide:
+                      field: null
+                      dir: null
+                      collapsed: []
+                    sorting:
+                      fields: []
+                    filters:
+                      op: AND
+                      fields: []
+                      search: ''
+                      show_closed: false
+                    columns:
+                      fields: []
+                    team_sidebar:
+                      assignees: []
+                      assigned_comments: false
+                      unassigned_tasks: false
+                    settings:
+                      show_task_locations: false
+                      show_subtasks: 3
+                      show_subtask_parent_names: false
+                      show_closed_subtasks: false
+                      show_assignees: true
+                      show_images: true
+                      collapse_empty_columns: null
+                      me_comments: true
+                      me_subtasks: true
+                      me_checklists: true
+              example:
+                view:
+                  id: 3c-105
+                  name: New Team View Name
+                  type: list
+                  parent:
+                    id: '512'
+                    type: 7
+                  grouping:
+                    field: status
+                    dir: 1
+                    collapsed: []
+                    ignore: false
+                  divide:
+                    field: null
+                    dir: null
+                    collapsed: []
+                  sorting:
+                    fields:
+                    - field: cf_624a423a-c1d1-4467-99e2-63e225658cb2
+                      dir: -1
+                      idx: 0
+                  filters:
+                    op: AND
+                    field:
+                    - field: cf_624a423a-c1d1-4467-99e2-63e225658cb2
+                      op: EQ
+                      determinor: null
+                      idx: 0
+                      values: '123'
+                    search: ''
+                    show_closed: false
+                  columns:
+                    fields:
+                    - field: assignee
+                      idx: 0
+                      width: 160
+                      hidden: true
+                      name: null
+                      display: null
+                  team_sidebar:
+                    assignees: []
+                    assigned_comments: false
+                    unassigned_tasks: false
+                  settings:
+                    show_task_locations: false
+                    show_subtasks: 3
+                    show_subtask_parent_names: false
+                    show_closed_subtasks: false
+                    show_assignees: true
+                    show_images: true
+                    collapse_empty_columns: null
+                    me_comments: true
+                    me_subtasks: true
+                    me_checklists: true
+      deprecated: false
+      security:
+      - Authorization_Token: []
+    servers:
+    - url: https://api.clickup.com/api
+      description: ClickUp
+      variables: {}
+  /v2/space/{space_id}/view:
+    parameters: []
+    get:
+      summary: Get Space Views
+      tags:
+      - Views
+      description: View the task and page views available for a Space.
+      operationId: GetSpaceViews
+      parameters:
+      - name: space_id
+        in: path
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: number
+          contentEncoding: double
+          examples:
+          - 790
+      responses:
+        '200':
+          description: ''
+          headers: {}
+          content:
+            application/json:
+              schema:
+                title: GetSpaceViewsresponse
+                type: object
+                properties:
+                  views:
+                    type: array
+                    items:
+                      $ref: '#/paths/~1v2~1view~1{view_id}/get/responses/200/content/application~1json/schema/oneOf/0'
+                    description: ''
+                examples:
+                - views:
+                  - id: 3c-106
+                    name: New Space View Name
+                    type: list
+                    parent:
+                      id: '790'
+                      type: 4
+                    grouping:
+                      field: status
+                      dir: 1
+                      collapsed: []
+                      ignore: false
+                    divide:
+                      field: null
+                      dir: null
+                      collapsed: []
+                    sorting:
+                      fields: []
+                    filters:
+                      op: AND
+                      fields: []
+                      search: ''
+                      show_closed: false
+                    columns:
+                      fields: []
+                    team_sidebar:
+                      assignees: []
+                      assigned_comments: false
+                      unassigned_tasks: false
+                    settings:
+                      show_task_locations: false
+                      show_subtasks: 3
+                      show_subtask_parent_names: false
+                      show_closed_subtasks: false
+                      show_assignees: true
+                      show_images: true
+                      collapse_empty_columns: null
+                      me_comments: true
+                      me_subtasks: true
+                      me_checklists: true
+              example:
+                views:
+                - id: 3c-106
+                  name: New Space View Name
+                  type: list
+                  parent:
+                    id: '790'
+                    type: 4
+                  grouping:
+                    field: status
+                    dir: 1
+                    collapsed: []
+                    ignore: false
+                  divide:
+                    field: null
+                    dir: null
+                    collapsed: []
+                  sorting:
+                    fields:
+                    - field: cf_624a423a-c1d1-4467-99e2-63e225658cb2
+                      dir: -1
+                      idx: 0
+                  filters:
+                    op: AND
+                    fields:
+                    - field: cf_624a423a-c1d1-4467-99e2-63e225658cb2
+                      op: EQ
+                      determinor: null
+                      idx: 0
+                      values: '123'
+                    search: ''
+                    show_closed: false
+                  columns:
+                    fields:
+                    - field: assignee
+                      idx: 0
+                      width: 160
+                      hidden: true
+                      name: null
+                      display: null
+                  team_sidebar:
+                    assignees: []
+                    assigned_comments: false
+                    unassigned_tasks: false
+                  settings:
+                    show_task_locations: false
+                    show_subtasks: 3
+                    show_subtask_parent_names: false
+                    show_closed_subtasks: false
+                    show_assignees: true
+                    show_images: true
+                    collapse_empty_columns: null
+                    me_comments: true
+                    me_subtasks: true
+                    me_checklists: true
+      deprecated: false
+      security:
+      - Authorization_Token: []
+    post:
+      summary: Create Space View
+      tags:
+      - Views
+      description: Add a List, Board, Calendar, Table, Timeline, Workload, Activity, Map, Chat, or Gantt view to a Space.
+      operationId: CreateSpaceView
+      parameters:
+      - name: space_id
+        in: path
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: number
+          contentEncoding: double
+          examples:
+          - 790
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              title: CreateSpaceViewrequest
+              required:
+              - name
+              - type
+              - grouping
+              - divide
+              - sorting
+              - filters
+              - columns
+              - team_sidebar
+              - settings
+              type: object
+              properties:
+                name:
+                  type: string
+                type:
+                  type: string
+                  description: 'The type of view to create. Options include: `list`, `board`, `calendar`, `table`, `timeline`, `workload`, `activity`, `map`, `conversation`, or `gantt`.'
+                grouping:
+                  $ref: '#/paths/~1v2~1view~1{view_id}/put/requestBody/content/application~1json/schema/properties/grouping'
+                divide:
+                  $ref: '#/paths/~1v2~1view~1{view_id}/put/requestBody/content/application~1json/schema/properties/divide'
+                sorting:
+                  $ref: '#/paths/~1v2~1view~1{view_id}/put/requestBody/content/application~1json/schema/properties/sorting'
+                filters:
+                  $ref: '#/paths/~1v2~1view~1{view_id}/put/requestBody/content/application~1json/schema/properties/filters'
+                columns:
+                  $ref: '#/paths/~1v2~1view~1{view_id}/put/requestBody/content/application~1json/schema/properties/columns'
+                team_sidebar:
+                  $ref: '#/paths/~1v2~1view~1{view_id}/put/requestBody/content/application~1json/schema/properties/team_sidebar'
+                settings:
+                  $ref: '#/paths/~1v2~1view~1{view_id}/put/requestBody/content/application~1json/schema/properties/settings'
+              examples:
+              - name: New Space View Name
+                type: list
+                grouping:
+                  field: status
+                  dir: 1
+                  collapsed: []
+                  ignore: false
+                divide:
+                  field: null
+                  dir: null
+                  collapsed: []
+                sorting:
+                  fields: []
+                filters:
+                  op: AND
+                  fields: []
+                  search: ''
+                  show_closed: false
+                columns:
+                  fields: []
+                team_sidebar:
+                  assignees: []
+                  assigned_comments: false
+                  unassigned_tasks: false
+                settings:
+                  show_task_locations: false
+                  show_subtasks: 3
+                  show_subtask_parent_names: false
+                  show_closed_subtasks: false
+                  show_assignees: true
+                  show_images: true
+                  collapse_empty_columns: null
+                  me_comments: true
+                  me_subtasks: true
+                  me_checklists: true
+            example:
+              name: New Space View Name
+              type: list
+              grouping:
+                field: status
+                dir: 1
+                collapsed: []
+                ignore: false
+              divide:
+                field: null
+                dir: null
+                collapsed: []
+              sorting:
+                fields:
+                - field: cf_624a423a-c1d1-4467-99e2-63e225658cb2
+                  dir: -1
+                  idx: 0
+              filters:
+                op: AND
+                fields:
+                - field: cf_624a423a-c1d1-4467-99e2-63e225658cb2
+                  op: EQ
+                  determinor: null
+                  idx: 0
+                  values: '123'
+                search: ''
+                show_closed: false
+              columns:
+                fields:
+                - field: assignee
+                  idx: 0
+                  width: 160
+                  hidden: true
+                  name: null
+                  display: null
+              team_sidebar:
+                assignees: []
+                assigned_comments: false
+                unassigned_tasks: false
+              settings:
+                show_task_locations: false
+                show_subtasks: 3
+                show_subtask_parent_names: false
+                show_closed_subtasks: false
+                show_assignees: true
+                show_images: true
+                collapse_empty_columns: null
+                me_comments: true
+                me_subtasks: true
+                me_checklists: true
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+          content:
+            application/json:
+              schema:
+                title: CreateSpaceViewresponse
+                required:
+                - view
+                type: object
+                properties:
+                  view:
+                    $ref: '#/paths/~1v2~1view~1{view_id}/put/responses/200/content/application~1json/schema/properties/view'
+                examples:
+                - view:
+                    id: 3c-106
+                    name: New Space View Name
+                    type: list
+                    parent:
+                      id: '790'
+                      type: 4
+                    grouping:
+                      field: status
+                      dir: 1
+                      collapsed: []
+                      ignore: false
+                    divide:
+                      field: null
+                      dir: null
+                      collapsed: []
+                    sorting:
+                      fields:
+                        field: cf_624a423a-c1d1-4467-99e2-63e225658cb2
+                        dir: -1
+                        idx: 0
+                    filters:
+                      op: AND
+                      fields: []
+                      search: ''
+                      show_closed: false
+                    columns:
+                      fields: []
+                    team_sidebar:
+                      assignees: []
+                      assigned_comments: false
+                      unassigned_tasks: false
+                    settings:
+                      show_task_locations: false
+                      show_subtasks: 3
+                      show_subtask_parent_names: false
+                      show_closed_subtasks: false
+                      show_assignees: true
+                      show_images: true
+                      collapse_empty_columns: null
+                      me_comments: true
+                      me_subtasks: true
+                      me_checklists: true
+              example:
+                view:
+                  id: 3c-106
+                  name: New Space View Name
+                  type: list
+                  parent:
+                    id: '790'
+                    type: 4
+                  grouping:
+                    field: status
+                    dir: 1
+                    collapsed: []
+                    ignore: false
+                  divide:
+                    field: null
+                    dir: null
+                    collapsed: []
+                  sorting:
+                    fields:
+                    - field: cf_624a423a-c1d1-4467-99e2-63e225658cb2
+                      dir: -1
+                      idx: 0
+                  filters:
+                    op: AND
+                    fields:
+                    - field: cf_624a423a-c1d1-4467-99e2-63e225658cb2
+                      op: EQ
+                      determinor: null
+                      idx: 0
+                      values: '123'
+                    search: ''
+                    show_closed: false
+                  columns:
+                    fields:
+                    - field: assignee
+                      idx: 0
+                      width: 160
+                      hidden: true
+                      name: null
+                      display: null
+                  team_sidebar:
+                    assignees: []
+                    assigned_comments: false
+                    unassigned_tasks: false
+                  settings:
+                    show_task_locations: false
+                    show_subtasks: 3
+                    show_subtask_parent_names: false
+                    show_closed_subtasks: false
+                    show_assignees: true
+                    show_images: true
+                    collapse_empty_columns: null
+                    me_comments: true
+                    me_subtasks: true
+                    me_checklists: true
+      deprecated: false
+      security:
+      - Authorization_Token: []
+    servers:
+    - url: https://api.clickup.com/api
+      description: ClickUp
+      variables: {}
+  /v2/folder/{folder_id}/view:
+    parameters: []
+    get:
+      summary: Get Folder Views
+      tags:
+      - Views
+      description: View the task and page views available for a Folder.
+      operationId: GetFolderViews
+      parameters:
+      - name: folder_id
+        in: path
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: number
+          contentEncoding: double
+          examples:
+          - 457
+      responses:
+        '200':
+          description: ''
+          headers: {}
+          content:
+            application/json:
+              schema:
+                title: GetFolderViewsresponse
+                type: object
+                properties:
+                  views:
+                    type: array
+                    items:
+                      $ref: '#/paths/~1v2~1view~1{view_id}/get/responses/200/content/application~1json/schema/oneOf/0'
+                    description: ''
+                examples:
+                - views:
+                  - id: 3c-107
+                    name: New Folder View Name
+                    type: list
+                    parent:
+                      id: '457'
+                      type: 5
+                    grouping:
+                      field: status
+                      dir: 1
+                      collapsed: []
+                      ignore: false
+                    divide:
+                      field: null
+                      dir: null
+                      collapsed: []
+                    sorting:
+                      fields: []
+                    filters:
+                      op: AND
+                      fields: []
+                      search: ''
+                      show_closed: false
+                    columns:
+                      fields: []
+                    team_sidebar:
+                      assignees: []
+                      assigned_comments: false
+                      unassigned_tasks: false
+                    settings:
+                      show_task_locations: false
+                      show_subtasks: 3
+                      show_subtask_parent_names: false
+                      show_closed_subtasks: false
+                      show_assignees: true
+                      show_images: true
+                      collapse_empty_columns: null
+                      me_comments: true
+                      me_subtasks: true
+                      me_checklists: true
+              example:
+                views:
+                - id: 3c-107
+                  name: New Folder View Name
+                  type: list
+                  parent:
+                    id: '457'
+                    type: 5
+                  grouping:
+                    field: status
+                    dir: 1
+                    collapsed: []
+                    ignore: false
+                  divide:
+                    field: null
+                    dir: null
+                    collapsed: []
+                  sorting:
+                    fields:
+                    - field: cf_624a423a-c1d1-4467-99e2-63e225658cb2
+                      dir: -1
+                      idx: 0
+                  filters:
+                    op: AND
+                    fields:
+                    - field: cf_624a423a-c1d1-4467-99e2-63e225658cb2
+                      op: EQ
+                      determinor: null
+                      idx: 0
+                      values: '123'
+                    search: ''
+                    show_closed: false
+                  columns:
+                    fields:
+                    - field: assignee
+                      idx: 0
+                      width: 160
+                      hidden: true
+                      name: null
+                      display: null
+                  team_sidebar:
+                    assignees: []
+                    assigned_comments: false
+                    unassigned_tasks: false
+                  settings:
+                    show_task_locations: false
+                    show_subtasks: 3
+                    show_subtask_parent_names: false
+                    show_closed_subtasks: false
+                    show_assignees: true
+                    show_images: true
+                    collapse_empty_columns: null
+                    me_comments: true
+                    me_subtasks: true
+                    me_checklists: true
+      deprecated: false
+      security:
+      - Authorization_Token: []
+    post:
+      summary: Create Folder View
+      tags:
+      - Views
+      description: Add a List, Board, Calendar, Table, Timeline, Workload, Activity, Map, Chat, or Gantt view to a Folder.
+      operationId: CreateFolderView
+      parameters:
+      - name: folder_id
+        in: path
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: number
+          contentEncoding: double
+          examples:
+          - 457
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              title: CreateFolderViewrequest
+              required:
+              - name
+              - type
+              - grouping
+              - divide
+              - sorting
+              - filters
+              - columns
+              - team_sidebar
+              - settings
+              type: object
+              properties:
+                name:
+                  type: string
+                type:
+                  type: string
+                  description: 'The type of view to create. Options include: `list`, `board`, `calendar`, `table`, `timeline`, `workload`, `activity`, `map`, `conversation`, or `gantt`.'
+                grouping:
+                  $ref: '#/paths/~1v2~1view~1{view_id}/put/requestBody/content/application~1json/schema/properties/grouping'
+                divide:
+                  $ref: '#/paths/~1v2~1view~1{view_id}/put/requestBody/content/application~1json/schema/properties/divide'
+                sorting:
+                  $ref: '#/paths/~1v2~1view~1{view_id}/put/requestBody/content/application~1json/schema/properties/sorting'
+                filters:
+                  $ref: '#/paths/~1v2~1view~1{view_id}/put/requestBody/content/application~1json/schema/properties/filters'
+                columns:
+                  $ref: '#/paths/~1v2~1view~1{view_id}/put/requestBody/content/application~1json/schema/properties/columns'
+                team_sidebar:
+                  $ref: '#/paths/~1v2~1view~1{view_id}/put/requestBody/content/application~1json/schema/properties/team_sidebar'
+                settings:
+                  $ref: '#/paths/~1v2~1view~1{view_id}/put/requestBody/content/application~1json/schema/properties/settings'
+              examples:
+              - name: New Folder View Name
+                type: list
+                grouping:
+                  field: status
+                  dir: 1
+                  collapsed: []
+                  ignore: false
+                divide:
+                  field: null
+                  dir: null
+                  collapsed: []
+                sorting:
+                  fields: []
+                filters:
+                  op: AND
+                  fields: []
+                  search: ''
+                  show_closed: false
+                columns:
+                  fields: []
+                team_sidebar:
+                  assignees: []
+                  assigned_comments: false
+                  unassigned_tasks: false
+                settings:
+                  show_task_locations: false
+                  show_subtasks: 3
+                  show_subtask_parent_names: false
+                  show_closed_subtasks: false
+                  show_assignees: true
+                  show_images: true
+                  collapse_empty_columns: null
+                  me_comments: true
+                  me_subtasks: true
+                  me_checklists: true
+            example:
+              name: New Folder View Name
+              type: list
+              grouping:
+                field: status
+                dir: 1
+                collapsed: []
+                ignore: false
+              divide:
+                field: null
+                dir: null
+                collapsed: []
+              sorting:
+                fields:
+                - field: cf_624a423a-c1d1-4467-99e2-63e225658cb2
+                  dir: -1
+                  idx: 0
+              filters:
+                op: AND
+                fields:
+                - field: cf_624a423a-c1d1-4467-99e2-63e225658cb2
+                  op: EQ
+                  determinor: null
+                  idx: 0
+                  values: '123'
+                search: ''
+                show_closed: false
+              columns:
+                fields:
+                - field: assignee
+                  idx: 0
+                  width: 160
+                  hidden: true
+                  name: null
+                  display: null
+              team_sidebar:
+                assignees: []
+                assigned_comments: false
+                unassigned_tasks: false
+              settings:
+                show_task_locations: false
+                show_subtasks: 3
+                show_subtask_parent_names: false
+                show_closed_subtasks: false
+                show_assignees: true
+                show_images: true
+                collapse_empty_columns: null
+                me_comments: true
+                me_subtasks: true
+                me_checklists: true
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+          content:
+            application/json:
+              schema:
+                title: CreateFolderViewresponse
+                required:
+                - view
+                type: object
+                properties:
+                  view:
+                    $ref: '#/paths/~1v2~1view~1{view_id}/put/responses/200/content/application~1json/schema/properties/view'
+                examples:
+                - view:
+                    id: 3c-107
+                    name: New Folder View Name
+                    type: list
+                    parent:
+                      id: '457'
+                      type: 5
+                    grouping:
+                      field: status
+                      dir: 1
+                      collapsed: []
+                      ignore: false
+                    divide:
+                      field: null
+                      dir: null
+                      collapsed: []
+                    sorting:
+                      fields: []
+                    filters:
+                      op: AND
+                      fields: []
+                      search: ''
+                      show_closed: false
+                    columns:
+                      fields: []
+                    team_sidebar:
+                      assignees: []
+                      assigned_comments: false
+                      unassigned_tasks: false
+                    settings:
+                      show_task_locations: false
+                      show_subtasks: 3
+                      show_subtask_parent_names: false
+                      show_closed_subtasks: false
+                      show_assignees: true
+                      show_images: true
+                      collapse_empty_columns: null
+                      me_comments: true
+                      me_subtasks: true
+                      me_checklists: true
+              example:
+                view:
+                  id: 3c-107
+                  name: New Folder View Name
+                  type: list
+                  parent:
+                    id: '457'
+                    type: 5
+                  grouping:
+                    field: status
+                    dir: 1
+                    collapsed: []
+                    ignore: false
+                  divide:
+                    field: null
+                    dir: null
+                    collapsed: []
+                  sorting:
+                    fields:
+                    - field: cf_624a423a-c1d1-4467-99e2-63e225658cb2
+                      dir: -1
+                      idx: 0
+                  filters:
+                    op: AND
+                    fields:
+                    - field: cf_624a423a-c1d1-4467-99e2-63e225658cb2
+                      op: EQ
+                      determinor: null
+                      idx: 0
+                      values: '123'
+                    search: ''
+                    show_closed: false
+                  columns:
+                    fields:
+                    - field: assignee
+                      idx: 0
+                      width: 160
+                      hidden: true
+                      name: null
+                      display: null
+                  team_sidebar:
+                    assignees: []
+                    assigned_comments: false
+                    unassigned_tasks: false
+                  settings:
+                    show_task_locations: false
+                    show_subtasks: 3
+                    show_subtask_parent_names: false
+                    show_closed_subtasks: false
+                    show_assignees: true
+                    show_images: true
+                    collapse_empty_columns: null
+                    me_comments: true
+                    me_subtasks: true
+                    me_checklists: true
+      deprecated: false
+      security:
+      - Authorization_Token: []
+    servers:
+    - url: https://api.clickup.com/api
+      description: ClickUp
+      variables: {}
+  /v2/list/{list_id}/view:
+    parameters: []
+    get:
+      summary: Get List Views
+      tags:
+      - Views
+      description: 'View the task and page views available for a List.\
+
+        \
+
+        Views and required views are separate responses.'
+      operationId: GetListViews
+      parameters:
+      - name: list_id
+        in: path
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: number
+          contentEncoding: double
+          examples:
+          - 124
+      responses:
+        '200':
+          description: ''
+          headers: {}
+          content:
+            application/json:
+              schema:
+                title: GetListViewsresponse
+                type: object
+                properties:
+                  views:
+                    type: array
+                    items:
+                      $ref: '#/paths/~1v2~1view~1{view_id}/get/responses/200/content/application~1json/schema/oneOf/0'
+                    description: ''
+                examples:
+                - views:
+                  - id: 3c-107
+                    name: New List View Name
+                    type: list
+                    parent:
+                      id: '124'
+                      type: 6
+                    grouping:
+                      field: status
+                      dir: 1
+                      collapsed: []
+                      ignore: false
+                    divide:
+                      field: null
+                      dir: null
+                      collapsed: []
+                    sorting:
+                      fields: []
+                    filters:
+                      op: AND
+                      fields: []
+                      search: ''
+                      show_closed: false
+                    columns:
+                      fields: []
+                    team_sidebar:
+                      assignees: []
+                      assigned_comments: false
+                      unassigned_tasks: false
+                    settings:
+                      show_task_locations: false
+                      show_subtasks: 3
+                      show_subtask_parent_names: false
+                      show_closed_subtasks: false
+                      show_assignees: true
+                      show_images: true
+                      collapse_empty_columns: null
+                      me_comments: true
+                      me_subtasks: true
+                      me_checklists: true
+              example:
+                views:
+                - id: 3c-107
+                  name: New List View Name
+                  type: list
+                  parent:
+                    id: '124'
+                    type: 6
+                  grouping:
+                    field: status
+                    dir: 1
+                    collapsed: []
+                    ignore: false
+                  divide:
+                    field: null
+                    dir: null
+                    collapsed: []
+                  sorting:
+                    fields:
+                    - field: cf_624a423a-c1d1-4467-99e2-63e225658cb2
+                      dir: -1
+                      idx: 0
+                  filters:
+                    op: AND
+                    fields:
+                    - field: cf_624a423a-c1d1-4467-99e2-63e225658cb2
+                      op: EQ
+                      determinor: null
+                      idx: 0
+                      values: '123'
+                    search: ''
+                    show_closed: false
+                  columns:
+                    fields:
+                    - field: assignee
+                      idx: 0
+                      width: 160
+                      hidden: true
+                      name: null
+                      display: null
+                  team_sidebar:
+                    assignees: []
+                    assigned_comments: false
+                    unassigned_tasks: false
+                  settings:
+                    show_task_locations: false
+                    show_subtasks: 3
+                    show_subtask_parent_names: false
+                    show_closed_subtasks: false
+                    show_assignees: true
+                    show_images: true
+                    collapse_empty_columns: null
+                    me_comments: true
+                    me_subtasks: true
+                    me_checklists: true
+      deprecated: false
+      security:
+      - Authorization_Token: []
+    post:
+      summary: Create List View
+      tags:
+      - Views
+      description: Add a List, Board, Calendar, Table, Timeline, Workload, Activity, Map, Chat, or Gantt view to a List.
+      operationId: CreateListView
+      parameters:
+      - name: list_id
+        in: path
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: number
+          contentEncoding: double
+          examples:
+          - 124
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              title: CreateListViewrequest
+              required:
+              - name
+              - type
+              - grouping
+              - divide
+              - sorting
+              - filters
+              - columns
+              - team_sidebar
+              - settings
+              type: object
+              properties:
+                name:
+                  type: string
+                type:
+                  type: string
+                  description: 'The type of view to create. Options include: `list`, `board`, `calendar`, `table`, `timeline`, `workload`, `activity`, `map`, `conversation`, or `gantt`.'
+                grouping:
+                  $ref: '#/paths/~1v2~1view~1{view_id}/put/requestBody/content/application~1json/schema/properties/grouping'
+                divide:
+                  $ref: '#/paths/~1v2~1view~1{view_id}/put/requestBody/content/application~1json/schema/properties/divide'
+                sorting:
+                  $ref: '#/paths/~1v2~1view~1{view_id}/put/requestBody/content/application~1json/schema/properties/sorting'
+                filters:
+                  $ref: '#/paths/~1v2~1view~1{view_id}/put/requestBody/content/application~1json/schema/properties/filters'
+                columns:
+                  $ref: '#/paths/~1v2~1view~1{view_id}/put/requestBody/content/application~1json/schema/properties/columns'
+                team_sidebar:
+                  $ref: '#/paths/~1v2~1view~1{view_id}/put/requestBody/content/application~1json/schema/properties/team_sidebar'
+                settings:
+                  $ref: '#/paths/~1v2~1view~1{view_id}/put/requestBody/content/application~1json/schema/properties/settings'
+              examples:
+              - name: New List View Name
+                type: list
+                grouping:
+                  field: status
+                  dir: 1
+                  collapsed: []
+                  ignore: false
+                divide:
+                  field: null
+                  dir: null
+                  collapsed: []
+                sorting:
+                  fields: []
+                filters:
+                  op: AND
+                  fields: []
+                  search: ''
+                  show_closed: false
+                columns:
+                  fields: []
+                team_sidebar:
+                  assignees: []
+                  assigned_comments: false
+                  unassigned_tasks: false
+                settings:
+                  show_task_locations: false
+                  show_subtasks: 3
+                  show_subtask_parent_names: false
+                  show_closed_subtasks: false
+                  show_assignees: true
+                  show_images: true
+                  collapse_empty_columns: null
+                  me_comments: true
+                  me_subtasks: true
+                  me_checklists: true
+            example:
+              name: New List View Name
+              type: list
+              grouping:
+                field: status
+                dir: 1
+                collapsed: []
+                ignore: false
+              divide:
+                field: null
+                dir: null
+                collapsed: []
+              sorting:
+                fields:
+                - field: cf_624a423a-c1d1-4467-99e2-63e225658cb2
+                  dir: -1
+                  idx: 0
+              filters:
+                op: AND
+                fields:
+                - field: cf_624a423a-c1d1-4467-99e2-63e225658cb2
+                  op: EQ
+                  determinor: null
+                  idx: 0
+                  values: '123'
+                search: ''
+                show_closed: false
+              columns:
+                fields:
+                - field: assignee
+                  idx: 0
+                  width: 160
+                  hidden: true
+                  name: null
+                  display: null
+              team_sidebar:
+                assignees: []
+                assigned_comments: false
+                unassigned_tasks: false
+              settings:
+                show_task_locations: false
+                show_subtasks: 3
+                show_subtask_parent_names: false
+                show_closed_subtasks: false
+                show_assignees: true
+                show_images: true
+                collapse_empty_columns: null
+                me_comments: true
+                me_subtasks: true
+                me_checklists: true
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+          content:
+            application/json:
+              schema:
+                title: CreateListViewresponse
+                required:
+                - view
+                type: object
+                properties:
+                  view:
+                    $ref: '#/paths/~1v2~1view~1{view_id}/put/responses/200/content/application~1json/schema/properties/view'
+                examples:
+                - view:
+                    id: 3c-108
+                    name: New List View Name
+                    type: list
+                    parent:
+                      id: '124'
+                      type: 6
+                    grouping:
+                      field: status
+                      dir: 1
+                      collapsed: []
+                      ignore: false
+                    divide:
+                      field: null
+                      dir: null
+                      collapsed: []
+                    sorting:
+                      fields: []
+                    filters:
+                      op: AND
+                      fields: []
+                      search: ''
+                      show_closed: false
+                    columns:
+                      fields: []
+                    team_sidebar:
+                      assignees: []
+                      assigned_comments: false
+                      unassigned_tasks: false
+                    settings:
+                      show_task_locations: false
+                      show_subtasks: 3
+                      show_subtask_parent_names: false
+                      show_closed_subtasks: false
+                      show_assignees: true
+                      show_images: true
+                      collapse_empty_columns: null
+                      me_comments: true
+                      me_subtasks: true
+                      me_checklists: true
+              example:
+                view:
+                  id: 3c-108
+                  name: New List View Name
+                  type: list
+                  parent:
+                    id: '124'
+                    type: 6
+                  grouping:
+                    field: status
+                    dir: 1
+                    collapsed: []
+                    ignore: false
+                  divide:
+                    field: null
+                    dir: null
+                    collapsed: []
+                  sorting:
+                    fields:
+                    - field: cf_624a423a-c1d1-4467-99e2-63e225658cb2
+                      dir: -1
+                      idx: 0
+                  filters:
+                    op: AND
+                    fields:
+                    - field: cf_624a423a-c1d1-4467-99e2-63e225658cb2
+                      op: EQ
+                      determinor: null
+                      idx: 0
+                      values: '123'
+                    search: ''
+                    show_closed: false
+                  columns:
+                    fields:
+                    - field: assignee
+                      idx: 0
+                      width: 160
+                      hidden: true
+                      name: null
+                      display: null
+                  team_sidebar:
+                    assignees: []
+                    assigned_comments: false
+                    unassigned_tasks: false
+                  settings:
+                    show_task_locations: false
+                    show_subtasks: 3
+                    show_subtask_parent_names: false
+                    show_closed_subtasks: false
+                    show_assignees: true
+                    show_images: true
+                    collapse_empty_columns: null
+                    me_comments: true
+                    me_subtasks: true
+                    me_checklists: true
+      deprecated: false
+      security:
+      - Authorization_Token: []
+    servers:
+    - url: https://api.clickup.com/api
+      description: ClickUp
+      variables: {}
+  /v2/view/{view_id}:
+    parameters: []
+    get:
+      summary: Get View
+      tags:
+      - Views
+      description: View information about a specific task or page view. The information returned about a view varies by the type of view.
+      operationId: GetView
+      parameters:
+      - name: view_id
+        in: path
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: string
+          examples:
+          - 3c-105
+      responses:
+        '200':
+          description: ''
+          headers: {}
+          content:
+            application/json:
+              schema:
+                title: GetViewresponse
+                oneOf:
+                - title: List View
+                  type: object
+                  properties:
+                    view:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        name:
+                          type: string
+                        type:
+                          type: string
+                          enum:
+                          - list
+                        parent:
+                          $ref: '#/paths/~1v2~1view~1{view_id}/put/requestBody/content/application~1json/schema/properties/parent'
+                        grouping:
+                          $ref: '#/paths/~1v2~1view~1{view_id}/put/requestBody/content/application~1json/schema/properties/grouping'
+                        divide:
+                          $ref: '#/paths/~1v2~1view~1{view_id}/put/requestBody/content/application~1json/schema/properties/divide'
+                        sorting:
+                          $ref: '#/paths/~1v2~1view~1{view_id}/put/requestBody/content/application~1json/schema/properties/sorting'
+                        filters:
+                          $ref: '#/paths/~1v2~1view~1{view_id}/put/requestBody/content/application~1json/schema/properties/filters'
+                      columns:
+                        $ref: '#/paths/~1v2~1view~1{view_id}/put/requestBody/content/application~1json/schema/properties/columns'
+                      team_sidebar:
+                        $ref: '#/paths/~1v2~1view~1{view_id}/put/requestBody/content/application~1json/schema/properties/team_sidebar'
+                      settings:
+                        $ref: '#/paths/~1v2~1view~1{view_id}/put/requestBody/content/application~1json/schema/properties/settings'
+                  examples:
+                  - view: null
+                    id: 3c-105
+                    name: New Team View Name
+                    type: list
+                    parent:
+                      id: '512'
+                      type: 7
+                    grouping:
+                      field: status
+                      dir: 1
+                      collapsed: []
+                      ignore: false
+                    divide:
+                      field: null
+                      dir: null
+                      collapsed: []
+                    sorting:
+                      fields:
+                        field: cf_624a423a-c1d1-4467-99e2-63e225658cb2
+                        dir: -1
+                        idx: 0
+                    filters:
+                      op: AND
+                      fields: []
+                      search: ''
+                      show_closed: false
+                    columns:
+                      fields: []
+                    team_sidebar:
+                      assignees: []
+                      assigned_comments: false
+                      unassigned_tasks: false
+                    settings:
+                      show_task_locations: false
+                      show_subtasks: 3
+                      show_subtask_parent_names: false
+                      show_closed_subtasks: false
+                      show_assignees: true
+                      show_images: true
+                      collapse_empty_columns: null
+                      me_comments: true
+                      me_subtasks: true
+                      me_checklists: true
+                - title: Form View
+                  type: object
+                  properties:
+                    view:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        name:
+                          type: string
+                        type:
+                          type: string
+                          enum:
+                          - form
+                        parent:
+                          type: object
+                          properties:
+                            id:
+                              type: string
+                            type:
+                              type: integer
+                          additionalProperties: false
+                        date_created:
+                          type: string
+                        creator:
+                          type: integer
+                        visibility:
+                          type: string
+                        protected:
+                          type: boolean
+                        protected_note:
+                          type: 'null'
+                        protected_by:
+                          type: 'null'
+                        date_protected:
+                          type: 'null'
+                        orderindex:
+                          type: integer
+                        public:
+                          type: boolean
+                        public_url:
+                          type: string
+                          format: url
+                  examples:
+                  - view: null
+                    id: 6kgye-11235
+                    name: Project Intake Form
+                    type: form
+                    parent:
+                      id: 900902118235
+                      type: 6
+                    date_created: 1762302043575
+                    creator: 1234
+                    visibility: public
+                    protected: false
+                    protected_note: null
+                    protected_by: null
+                    date_protected: null
+                    orderindex: 9
+                    public: true
+                    public_url: https://forms.clickup.com/1234/f/6kgye-11896/KA64ABC123
+              example:
+              - view:
+                  id: 3c-105
+                  name: New View Name
+                  type: list
+                  parent:
+                    id: '512'
+                    type: 7
+                  grouping:
+                    field: status
+                    dir: 1
+                    collapsed: []
+                    ignore: false
+                  divide:
+                    field: null
+                    dir: null
+                    collapsed: []
+                  sorting:
+                    fields:
+                    - field: cf_624a423a-c1d1-4467-99e2-63e225658cb2
+                      dir: -1
+                      idx: 0
+                  filters:
+                    op: AND
+                    fields:
+                    - field: cf_624a423a-c1d1-4467-99e2-63e225658cb2
+                      op: EQ
+                      determinor: null
+                      idx: 0
+                      values: '123'
+                    search: ''
+                    show_closed: false
+                  columns:
+                    fields:
+                    - field: assignee
+                      idx: 0
+                      width: 160
+                      hidden: true
+                      name: null
+                      display: null
+                  team_sidebar:
+                    assignees: []
+                    assigned_comments: false
+                    unassigned_tasks: false
+                  settings:
+                    show_task_locations: false
+                    show_subtasks: 3
+                    show_subtask_parent_names: false
+                    show_closed_subtasks: false
+                    show_assignees: true
+                    show_images: true
+                    collapse_empty_columns: null
+                    me_comments: true
+                    me_subtasks: true
+                    me_checklists: true
+              - view: null
+                id: 6kgye-11234
+                name: Project Intake Form
+                type: form
+                parent:
+                  id: 900902118235
+                  type: 6
+                date_created: 1762302043575
+                creator: 1234
+                visibility: public
+                protected: false
+                protected_note: null
+                protected_by: null
+                date_protected: null
+                orderindex: 9
+                public: true
+                public_url: https://forms.clickup.com/1234/f/6kgye-11896/KA64ABC123
+      deprecated: false
+      security:
+      - Authorization_Token: []
+    put:
+      summary: Update View
+      tags:
+      - Views
+      description: Rename a view, update the grouping, sorting, filters, columns, and settings of a view.
+      operationId: UpdateView
+      parameters:
+      - name: view_id
+        in: path
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: string
+          examples:
+          - 3c
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              title: UpdateViewrequest
+              required:
+              - name
+              - type
+              - parent
+              - grouping
+              - divide
+              - sorting
+              - filters
+              - columns
+              - team_sidebar
+              - settings
+              type: object
+              properties:
+                name:
+                  type: string
+                type:
+                  type: string
+                parent:
+                  title: Parent
+                  description: "The parent parameter specifies where the view is located in the ClickUp Hierarchy. Both `id` and `type` are required. \\\n \\\nThe `id` is the id of the Workspace, Space, Folder, or List where the view is located. \\\n \\\nThe `type` value indciates the level of the Hierarchy where the view is located."
+                  required:
+                  - id
+                  - type
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                      description: The id of the Workspace, Space, Folder, or List where the view is located.
+                    type:
+                      type: integer
+                      description: "The level of the Hierarchy where the view is created. \\\n \\\nOptions include: \\\n \\\nWorkspace (Everything Level): `7` \\\n \\\nSpace: `4` \\\n \\\nFolder: `5` \\\n \\\nList: `6`"
+                      contentEncoding: int32
+                  examples:
+                  - id: '512'
+                    type: 7
+                grouping:
+                  title: Grouping
+                  required:
+                  - field
+                  - dir
+                  - collapsed
+                  - ignore
+                  type: object
+                  properties:
+                    field:
+                      type: string
+                      description: "Set the field to group by.\\\n \\\nOptions include: `none`, `status`, `priority`, `assignee`, `tag`, or `dueDate`."
+                    dir:
+                      description: "Set a group sort order using `1` or `-1`.\\\n \\\nFor example, use `1`show tasks with urgent priority at the top of your view, and tasks with no priority at the bottom.\\\n \\\nUse `-1` to reverse the order to show tasks with no priority at the top of your view."
+                      type: integer
+                      contentEncoding: int32
+                    collapsed:
+                      type: array
+                      items:
+                        type: string
+                      description: ''
+                    ignore:
+                      type: boolean
+                  examples:
+                  - field: status
+                    dir: 1
+                    collapsed: []
+                    ignore: false
+                divide:
+                  title: Divide
+                  required:
+                  - collapsed
+                  type: object
+                  properties:
+                    field:
+                      type:
+                      - 'null'
+                    dir:
+                      type:
+                      - 'null'
+                    collapsed:
+                      type: array
+                      items:
+                        type: string
+                  examples:
+                  - field: null
+                    dir: null
+                    collapsed: []
+                sorting:
+                  title: Sorting
+                  required:
+                  - fields
+                  type: object
+                  properties:
+                    fields:
+                      type: array
+                      items:
+                        type: string
+                      description: "Include an array of fields to sort by.\\\n \\\n You can sort by the same fields available when [filtering a view](doc:filter-views)."
+                  examples:
+                  - fields:
+                    - field: cf_624a423a-c1d1-4467-99e2-63e225658cb2
+                      dir: -1
+                      idx: 0
+                filters:
+                  title: Filters
+                  required:
+                  - op
+                  - fields
+                  - search
+                  - show_closed
+                  type: object
+                  properties:
+                    op:
+                      type: string
+                      description: The available operator (`op``) values are `AND`` and `OR``.
+                    fields:
+                      type: array
+                      items:
+                        type: string
+                      description: View the list of [fields available](doc:filter-views) to filter by.
+                    search:
+                      type: string
+                    show_closed:
+                      type: boolean
+                  examples:
+                  - op: AND
+                    fields: []
+                    search: ''
+                    show_closed: false
+                columns:
+                  title: Columns
+                  description: Custom Fields added to a view at the Everything level will be added to all tasks in your Workspace. Once Custom Fields are added to one of these views, you cannot move it to another level of the Hierarchy.
+                  required:
+                  - fields
+                  type: object
+                  properties:
+                    fields:
+                      description: 'Custom Fields require the `cf_` prefix and must be formatted as a JSON object. Example: `cf_eb1234567890-c676-4c10-9012-345678901234`'
+                      type: array
+                      items:
+                        type: string
+                  examples:
+                  - fields: []
+                team_sidebar:
+                  title: TeamSidebar
+                  required:
+                  - assignees
+                  - assigned_comments
+                  - unassigned_tasks
+                  type: object
+                  properties:
+                    assignees:
+                      type: array
+                      items:
+                        type: string
+                      description: ''
+                    assigned_comments:
+                      type: boolean
+                    unassigned_tasks:
+                      type: boolean
+                  examples:
+                  - assignees: []
+                    assigned_comments: false
+                    unassigned_tasks: false
+                settings:
+                  title: Settings
+                  required:
+                  - show_task_locations
+                  - show_subtasks
+                  - show_subtask_parent_names
+                  - show_closed_subtasks
+                  - show_assignees
+                  - show_images
+                  - collapse_empty_columns
+                  - me_comments
+                  - me_subtasks
+                  - me_checklists
+                  type: object
+                  properties:
+                    show_task_locations:
+                      type: boolean
+                    show_subtasks:
+                      description: Acceptable values are `1`, `2`, or `3`, which show subtasks separate, expanded, or collapsed.
+                      type: integer
+                      contentEncoding: int32
+                    show_subtask_parent_names:
+                      type: boolean
+                    show_closed_subtasks:
+                      type: boolean
+                    show_assignees:
+                      type: boolean
+                    show_images:
+                      type: boolean
+                    collapse_empty_columns:
+                      type:
+                      - string
+                      - 'null'
+                    me_comments:
+                      type: boolean
+                    me_subtasks:
+                      type: boolean
+                    me_checklists:
+                      type: boolean
+                  examples:
+                  - show_task_locations: false
+                    show_subtasks: 3
+                    show_subtask_parent_names: false
+                    show_closed_subtasks: false
+                    show_assignees: true
+                    show_images: true
+                    collapse_empty_columns: null
+                    me_comments: true
+                    me_subtasks: true
+                    me_checklists: true
+              examples:
+              - name: New View Name
+                type: list
+                parent:
+                  id: '512'
+                  type: 7
+                grouping:
+                  field: status
+                  dir: 1
+                  collapsed: []
+                  ignore: false
+                divide:
+                  field: null
+                  dir: null
+                  collapsed: []
+                sorting:
+                  fields: []
+                filters:
+                  op: AND
+                  fields: []
+                  search: ''
+                  show_closed: false
+                columns:
+                  fields: []
+                team_sidebar:
+                  assignees: []
+                  assigned_comments: false
+                  unassigned_tasks: false
+                settings:
+                  show_task_locations: false
+                  show_subtasks: 3
+                  show_subtask_parent_names: false
+                  show_closed_subtasks: false
+                  show_assignees: true
+                  show_images: true
+                  collapse_empty_columns: null
+                  me_comments: true
+                  me_subtasks: true
+                  me_checklists: true
+            example:
+              name: New View Name
+              type: list
+              parent:
+                id: '512'
+                type: 7
+              grouping:
+                field: status
+                dir: 1
+                collapsed: []
+                ignore: false
+              divide:
+                field: null
+                dir: null
+                collapsed: []
+              sorting:
+                fields:
+                - field: cf_624a423a-c1d1-4467-99e2-63e225658cb2
+                  dir: -1
+                  idx: 0
+              filters:
+                op: AND
+                fields:
+                - field: cf_624a423a-c1d1-4467-99e2-63e225658cb2
+                  op: EQ
+                  determinor: null
+                  idx: 0
+                  values: '123'
+                search: ''
+                show_closed: false
+              columns:
+                fields:
+                - field: assignee
+                  idx: 0
+                  width: 160
+                  hidden: true
+                  name: null
+                  display: null
+              team_sidebar:
+                assignees: []
+                assigned_comments: false
+                unassigned_tasks: false
+              settings:
+                show_task_locations: false
+                show_subtasks: 3
+                show_subtask_parent_names: false
+                show_closed_subtasks: false
+                show_assignees: true
+                show_images: true
+                collapse_empty_columns: null
+                me_comments: true
+                me_subtasks: true
+                me_checklists: true
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+          content:
+            application/json:
+              schema:
+                title: UpdateViewresponse
+                required:
+                - view
+                type: object
+                properties:
+                  view:
+                    title: View
+                examples:
+                - view:
+                    id: 3c-105
+                    name: New View Name
+                    type: list
+                    parent:
+                      id: '512'
+                      type: 7
+                    grouping:
+                      field: status
+                      dir: 1
+                      collapsed: []
+                      ignore: false
+                    divide:
+                      field: null
+                      dir: null
+                      collapsed: []
+                    sorting:
+                      fields: []
+                    filters:
+                      op: AND
+                      fields: []
+                      search: ''
+                      show_closed: false
+                    columns:
+                      fields: []
+                    team_sidebar:
+                      assignees: []
+                      assigned_comments: false
+                      unassigned_tasks: false
+                    settings:
+                      show_task_locations: false
+                      show_subtasks: 3
+                      show_subtask_parent_names: false
+                      show_closed_subtasks: false
+                      show_assignees: true
+                      show_images: true
+                      collapse_empty_columns: null
+                      me_comments: true
+                      me_subtasks: true
+                      me_checklists: true
+              example:
+                view:
+                  id: 3c-105
+                  name: New View Name
+                  type: list
+                  parent:
+                    id: '512'
+                    type: 7
+                  grouping:
+                    field: status
+                    dir: 1
+                    collapsed: []
+                    ignore: false
+                  divide:
+                    field: null
+                    dir: null
+                    collapsed: []
+                  sorting:
+                    fields:
+                    - field: cf_624a423a-c1d1-4467-99e2-63e225658cb2
+                      dir: -1
+                      idx: 0
+                  filters:
+                    op: AND
+                    fields:
+                    - field: cf_624a423a-c1d1-4467-99e2-63e225658cb2
+                      op: EQ
+                      determinor: null
+                      idx: 0
+                      values: '123'
+                    search: ''
+                    show_closed: false
+                  columns:
+                    fields:
+                    - field: assignee
+                      idx: 0
+                      width: 160
+                      hidden: true
+                      name: null
+                      display: null
+                  team_sidebar:
+                    assignees: []
+                    assigned_comments: false
+                    unassigned_tasks: false
+                  settings:
+                    show_task_locations: false
+                    show_subtasks: 3
+                    show_subtask_parent_names: false
+                    show_closed_subtasks: false
+                    show_assignees: true
+                    show_images: true
+                    collapse_empty_columns: null
+                    me_comments: true
+                    me_subtasks: true
+                    me_checklists: true
+      deprecated: false
+      security:
+      - Authorization_Token: []
+    delete:
+      summary: Delete View
+      tags:
+      - Views
+      operationId: DeleteView
+      parameters:
+      - name: view_id
+        in: path
+        description: 105 (string)
+        required: true
+        style: simple
+        schema:
+          type: string
+          examples:
+          - 3c
+      responses:
+        '200':
+          description: ''
+          headers: {}
+          content:
+            application/json:
+              schema:
+                type: object
+                examples:
+                - {}
+                contentMediaType: application/json
+              example: {}
+      deprecated: false
+      security:
+      - Authorization_Token: []
+    servers:
+    - url: https://api.clickup.com/api
+      description: ClickUp
+      variables: {}
+  /v2/view/{view_id}/task:
+    parameters: []
+    get:
+      summary: Get View Tasks
+      tags:
+      - Views
+      description: See all visible tasks in a view in ClickUp.
+      operationId: GetViewTasks
+      parameters:
+      - name: view_id
+        in: path
+        description: 105 (string)
+        required: true
+        style: simple
+        schema:
+          type: string
+          examples:
+          - 3c
+      - name: page
+        in: query
+        description: ''
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: integer
+          contentEncoding: int32
+          examples:
+          - 0
+      responses:
+        '200':
+          description: ''
+          headers: {}
+          content:
+            application/json:
+              schema:
+                title: GetViewTasksresponse
+                required:
+                - tasks
+                - last_page
+                type: object
+                properties:
+                  tasks:
+                    type: array
+                    items:
+                      title: Task9
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        custom_item_id:
+                          type:
+                          - number
+                          - 'null'
+                        name:
+                          type: string
+                        status:
+                          $ref: '#/paths/~1v2~1task~1{task_id}/get/responses/200/content/application~1json/schema/properties/status'
+                        markdown_description:
+                          type: string
+                        orderindex:
+                          type: string
+                        date_created:
+                          type: string
+                        date_updated:
+                          type: string
+                        date_closed:
+                          type:
+                          - string
+                          - 'null'
+                        date_done:
+                          type:
+                          - string
+                          - 'null'
+                        creator:
+                          $ref: '#/paths/~1v2~1task~1{task_id}/get/responses/200/content/application~1json/schema/properties/creator'
+                        assignees:
+                          type: array
+                          items:
+                            type: string
+                          description: ''
+                        watchers:
+                          type: array
+                          items:
+                            type: string
+                          description: ''
+                        checklists:
+                          type: array
+                          items:
+                            type: string
+                          description: ''
+                        tags:
+                          type: array
+                          items:
+                            type: string
+                          description: ''
+                        parent:
+                          type:
+                          - string
+                          - 'null'
+                        priority:
+                          $ref: '#/paths/~1v2~1task~1{task_id}/get/responses/200/content/application~1json/schema/properties/priority'
+                        due_date:
+                          type:
+                          - string
+                          - 'null'
+                        start_date:
+                          type:
+                          - string
+                          - 'null'
+                        points:
+                          type:
+                          - number
+                        time_estimate:
+                          type:
+                          - string
+                          - 'null'
+                        time_spent:
+                          type:
+                          - string
+                        custom_fields:
+                          $ref: '#/paths/~1v2~1task~1{task_id}/get/responses/200/content/application~1json/schema/properties/custom_fields/items'
+                        locations:
+                          type: array
+                          items:
+                            $ref: '#/paths/~1v2~1task~1{task_id}/get/responses/200/content/application~1json/schema/properties/locations/items'
+                          description: Array of Lists where the task has been added.
+                        list:
+                          $ref: '#/paths/~1v2~1task~1{task_id}/get/responses/200/content/application~1json/schema/properties/list'
+                        folder:
+                          $ref: '#/paths/~1v2~1task~1{task_id}/get/responses/200/content/application~1json/schema/properties/folder'
+                        space:
+                          $ref: '#/paths/~1v2~1task~1{task_id}/get/responses/200/content/application~1json/schema/properties/space'
+                        url:
+                          type: string
+                      examples:
+                      - id: 9hx
+                        name: New Task Name
+                        custom_item_id: null
+                        status:
+                          status: Open
+                          color: '#d3d3d3'
+                          orderindex: 0
+                          type: open
+                        markdown_description: Task description
+                        orderindex: '1.00000000000000000000000000000000'
+                        date_created: '1567780450202'
+                        date_updated: '1567780450202'
+                        date_closed: null
+                        date_done: null
+                        creator:
+                          id: 183
+                          username: John Doe
+                          color: '#827718'
+                          profilePicture: https://attachments-public.clickup.com/profilePictures/183_abc.jpg
+                        assignees: []
+                        watchers: []
+                        checklists: []
+                        tags: []
+                        parent: null
+                        priority:
+                          color: '#f8ae00'
+                          id: '3'
+                          orderindex: '3'
+                          priority: normal
+                        due_date: null
+                        start_date: null
+                        time_estimate: null
+                        time_spent: 7200000
+                        locations:
+                        - id: '123456'
+                          name: Secondary List
+                        list:
+                          id: '123'
+                        folder:
+                          id: '456'
+                        space:
+                          id: '789'
+                        url: https://app.clickup.com/t/9hx
+                    description: ''
+                  last_page:
+                    type: boolean
+                example:
+                  tasks:
+                  - id: 9hx
+                    custom_id: null
+                    custom_item_id: 0
+                    name: Fix login bug
+                    text_content: Users are unable to log in when SSO is enabled.
+                    description: Users are unable to log in when SSO is enabled.
+                    status:
+                      id: p7001234_FxGmgrnk
+                      status: in progress
+                      color: '#d3d3d3'
+                      orderindex: 1
+                      type: custom
+                    orderindex: '1.00000000000000000000000000000000'
+                    date_created: '1567780450202'
+                    date_updated: '1567780450202'
+                    date_closed: null
+                    date_done: null
+                    archived: false
+                    creator:
+                      id: 183
+                      username: Alex Johnson
+                      color: '#827718'
+                      profilePicture: https://attachments-public.clickup.com/profilePictures/183_abc.jpg
+                    assignees: []
+                    group_assignees: []
+                    watchers: []
+                    checklists:
+                    - id: 595495f8-4557-41b7-a527-f808664816a0
+                      task_id: 9hx
+                      name: Checklist on a task
+                      date_created: '1714661812846'
+                      orderindex: '1'
+                      creator: 183
+                      resolved: 0
+                      unresolved: 2
+                      items: []
+                    tags: []
+                    parent: null
+                    top_level_parent: null
+                    priority:
+                      color: '#f8ae00'
+                      id: '3'
+                      orderindex: '3'
+                      priority: normal
+                    due_date: '1508369194377'
+                    start_date: null
+                    points: 3
+                    time_estimate: '8640000'
+                    time_spent: 7200000
+                    custom_fields:
+                    - id: d2ab17e0-41d3-4d28-bdbb-f3f0f2c62f8b
+                      name: Sprint Goal
+                      type: short_text
+                      type_config: {}
+                      date_created: '1621915186877'
+                      hide_from_guests: false
+                      value: Fix critical auth issues
+                      value_richtext: ''
+                      required: false
+                    - id: 1f3cc395-3448-4264-bedd-590a3b3fa178
+                      name: Story Points
+                      type: number
+                      type_config: {}
+                      date_created: '1627004071219'
+                      hide_from_guests: false
+                      value: '8'
+                      value_richtext: ''
+                      required: false
+                    - id: f4d2a20d-6759-4420-b897-222dbe2587d4
+                      name: Assigned Reviewer
+                      type: users
+                      type_config:
+                        include_guests: false
+                        include_team_members: true
+                        single_user: false
+                      date_created: '1618440378816'
+                      hide_from_guests: false
+                      value:
+                      - id: 2772463
+                        username: Alex Johnson
+                        email: user@company.com
+                        color: '#FC575E'
+                        initials: AJ
+                        profilePicture: null
+                      value_richtext: ''
+                      required: false
+                    - id: b2e4be70-c4d3-4726-985b-46ac25375b28
+                      name: Marketing Requirements
+                      type: drop_down
+                      type_config:
+                        sorting: manual
+                        new_drop_down: true
+                        options:
+                        - id: f8249998-9c0a-4b1d-a8b7-67a072aca05a
+                          name: No Marketing Needed
+                          color: '#b5bcc2'
+                          orderindex: 0
+                        - id: 97704092-e5aa-4005-a87f-677b764d2e4c
+                          name: Internal Announcement
+                          color: '#02BCD4'
+                          orderindex: 1
+                        - id: c3d4e5f6-a7b8-4c9d-0e1f-a2b3c4d5e6f7
+                          name: Release Notes Only
+                          color: '#7b68ee'
+                          orderindex: 2
+                        - id: b32b5b93-1839-431e-b9b0-8c4f9de9a84d
+                          name: Social Media Post
+                          color: '#2ecd6f'
+                          orderindex: 3
+                        - id: 87b3c808-a335-4284-a671-e2f9bce66713
+                          name: Blog Post
+                          color: '#f9ae27'
+                          orderindex: 4
+                        - id: a1c2d3e4-f5a6-7b8c-9d0e-f1a2b3c4d5e6
+                          name: Dedicated Campaign with Press
+                          color: '#e50000'
+                          orderindex: 5
+                      date_created: '1762838079415'
+                      hide_from_guests: false
+                      value: 2
+                      value_richtext: ''
+                      required: false
+                    dependencies: []
+                    linked_tasks: []
+                    locations:
+                    - id: '123456789'
+                      name: Bug Triage
+                    team_id: '7002367'
+                    url: https://app.clickup.com/t/9hx
+                    sharing:
+                      public: false
+                      public_share_expires_on: null
+                      public_fields:
+                      - assignees
+                      - priority
+                      - due_date
+                      - content
+                      - comments
+                      - attachments
+                      - customFields
+                      - subtasks
+                      - tags
+                      - checklists
+                      - coverimage
+                      token: null
+                      seo_optimized: false
+                    permission_level: create
+                    list:
+                      id: '15505202'
+                      name: Sprint Backlog
+                      access: true
+                    project:
+                      id: '6992470'
+                      name: Mobile Squad
+                      hidden: false
+                      access: true
+                    folder:
+                      id: '6992470'
+                      name: Mobile Squad
+                      hidden: false
+                      access: true
+                    space:
+                      id: '7002367'
+                  - id: 9hz
+                    custom_id: null
+                    custom_item_id: 0
+                    name: Update onboarding docs
+                    text_content: ''
+                    description: ''
+                    status:
+                      id: p7002367_HxJmgqni
+                      status: to do
+                      color: '#f8ae00'
+                      orderindex: 0
+                      type: open
+                    orderindex: '2.00000000000000000000000000000000'
+                    date_created: '1567780450202'
+                    date_updated: '1567780450202'
+                    date_closed: null
+                    date_done: null
+                    archived: false
+                    creator:
+                      id: 183
+                      username: Alex Johnson
+                      color: '#827718'
+                      profilePicture: https://attachments-public.clickup.com/profilePictures/183_abc.jpg
+                    assignees: []
+                    group_assignees: []
+                    watchers: []
+                    checklists: []
+                    tags: []
+                    parent: null
+                    top_level_parent: null
+                    priority: null
+                    due_date: null
+                    start_date: null
+                    points: null
+                    time_estimate: null
+                    custom_fields:
+                    - id: d2ab17e0-41d3-4d28-bdbb-f3f0f2c62f8b
+                      name: Sprint Goal
+                      type: short_text
+                      type_config: {}
+                      date_created: '1621915186877'
+                      hide_from_guests: false
+                      required: false
+                    - id: 1f3cc395-3448-4264-bedd-590a3b3fa178
+                      name: Story Points
+                      type: number
+                      type_config: {}
+                      date_created: '1627004071219'
+                      hide_from_guests: false
+                      required: false
+                    - id: f4d2a20d-6759-4420-b897-222dbe2587d4
+                      name: Assigned Reviewer
+                      type: users
+                      type_config:
+                        include_guests: false
+                        include_team_members: true
+                        single_user: false
+                      date_created: '1618440378816'
+                      hide_from_guests: false
+                      required: false
+                    - id: b2e4be70-c4d3-4726-985b-46ac25375b28
+                      name: Marketing Requirements
+                      type: drop_down
+                      type_config:
+                        sorting: manual
+                        new_drop_down: true
+                        options:
+                        - id: f8249998-9c0a-4b1d-a8b7-67a072aca05a
+                          name: No Marketing Needed
+                          color: '#b5bcc2'
+                          orderindex: 0
+                        - id: 97704092-e5aa-4005-a87f-677b764d2e4c
+                          name: Internal Announcement
+                          color: '#02BCD4'
+                          orderindex: 1
+                        - id: c3d4e5f6-a7b8-4c9d-0e1f-a2b3c4d5e6f7
+                          name: Release Notes Only
+                          color: '#7b68ee'
+                          orderindex: 2
+                        - id: b32b5b93-1839-431e-b9b0-8c4f9de9a84d
+                          name: Social Media Post
+                          color: '#2ecd6f'
+                          orderindex: 3
+                        - id: 87b3c808-a335-4284-a671-e2f9bce66713
+                          name: Blog Post
+                          color: '#f9ae27'
+                          orderindex: 4
+                        - id: a1c2d3e4-f5a6-7b8c-9d0e-f1a2b3c4d5e6
+                          name: Dedicated Campaign with Press
+                          color: '#e50000'
+                          orderindex: 5
+                      date_created: '1762838079415'
+                      hide_from_guests: false
+                      required: false
+                    dependencies: []
+                    linked_tasks: []
+                    locations: []
+                    team_id: '7002367'
+                    url: https://app.clickup.com/t/9hz
+                    sharing:
+                      public: false
+                      public_share_expires_on: null
+                      public_fields:
+                      - assignees
+                      - priority
+                      - due_date
+                      - content
+                      - comments
+                      - attachments
+                      - customFields
+                      - subtasks
+                      - tags
+                      - checklists
+                      - coverimage
+                      token: null
+                      seo_optimized: false
+                    permission_level: create
+                    list:
+                      id: '15505202'
+                      name: Sprint Backlog
+                      access: true
+                    project:
+                      id: '6992470'
+                      name: Mobile Squad
+                      hidden: false
+                      access: true
+                    folder:
+                      id: '6992470'
+                      name: Mobile Squad
+                      hidden: false
+                      access: true
+                    space:
+                      id: '7002367'
+                  last_page: true
+              example:
+                tasks:
+                - id: 9hx
+                  name: New Task Name
+                  status:
+                    status: Open
+                    color: '#d3d3d3'
+                    orderindex: 0
+                    type: open
+                  orderindex: '1.00000000000000000000000000000000'
+                  date_created: '1567780450202'
+                  date_updated: '1567780450202'
+                  date_closed: null
+                  date_done: null
+                  creator:
+                    id: 183
+                    username: John Doe
+                    color: '#827718'
+                    profilePicture: https://attachments-public.clickup.com/profilePictures/183_abc.jpg
+                  assignees: []
+                  checklists: []
+                  tags: []
+                  parent: null
+                  priority:
+                    color: '#f8ae00'
+                    id: '3'
+                    orderindex: '3'
+                    priority: normal
+                  due_date: null
+                  start_date: null
+                  points: 3
+                  time_estimate: null
+                  time_spent: null
+                  custom_fields:
+                    id: 0a52c486-5f05-403b-b4fd-c512ff05131c
+                    name: My Text Custom field
+                    type: text
+                    type_config: {}
+                    date_created: '1622176979540'
+                    hide_from_guests: false
+                    value:
+                      value: This is a string of text added to a Custom Field.
+                    required: true
+                  locations:
+                  - id: '123456'
+                    name: Secondary List
+                  list:
+                    id: '123'
+                  folder:
+                    id: '456'
+                  space:
+                    id: '789'
+                  url: https://app.clickup.com/t/9hx
+                - id: 9hz
+                  name: Second task
+                  status:
+                    status: Open
+                    color: '#d3d3d3'
+                    orderindex: 0
+                    type: open
+                  orderindex: '2.00000000000000000000000000000000'
+                  date_created: '1567780450202'
+                  date_updated: '1567780450202'
+                  date_closed: null
+                  date_done: null
+                  creator:
+                    id: 183
+                    username: John Doe
+                    color: '#827718'
+                    profilePicture: https://attachments-public.clickup.com/profilePictures/183_abc.jpg
+                  assignees: []
+                  checklists: []
+                  tags: []
+                  parent: null
+                  priority: null
+                  due_date: null
+                  start_date: null
+                  points: 3
+                  time_estimate: null
+                  time_spent: null
+                  custom_fields:
+                    id: 0a52c486-5f05-403b-b4fd-c512ff05131c
+                    name: My Text Custom field
+                    type: text
+                    type_config: {}
+                    date_created: '1622176979540'
+                    hide_from_guests: false
+                    value:
+                      value: This is a string of text added to a Custom Field.
+                    required: true
+                  locations: []
+                  list:
+                    id: '123'
+                  folder:
+                    id: '456'
+                  space:
+                    id: '789'
+                  url: https://app.clickup.com/t/9hz
+                last_page: true
+      deprecated: false
+      security:
+      - Authorization_Token: []
+    servers:
+    - url: https://api.clickup.com/api
+      description: ClickUp
+      variables: {}
   /team/{team_id}/view:
     get:
       operationId: getTeamViews
@@ -39,6 +2902,11 @@ paths:
                       $ref: '#/components/schemas/View'
         '401':
           description: Unauthorized
+      security:
+      - bearerAuth: []
+    servers:
+    - url: https://api.clickup.com/api/v2
+      description: ClickUp API v2 Production Server
   /space/{space_id}/view:
     get:
       operationId: getSpaceViews
@@ -64,6 +2932,11 @@ paths:
           description: Unauthorized
         '404':
           description: Space not found
+      security:
+      - bearerAuth: []
+    servers:
+    - url: https://api.clickup.com/api/v2
+      description: ClickUp API v2 Production Server
   /folder/{folder_id}/view:
     get:
       operationId: getFolderViews
@@ -89,6 +2962,11 @@ paths:
           description: Unauthorized
         '404':
           description: Folder not found
+      security:
+      - bearerAuth: []
+    servers:
+    - url: https://api.clickup.com/api/v2
+      description: ClickUp API v2 Production Server
   /list/{list_id}/view:
     get:
       operationId: getListViews
@@ -114,6 +2992,11 @@ paths:
           description: Unauthorized
         '404':
           description: List not found
+      security:
+      - bearerAuth: []
+    servers:
+    - url: https://api.clickup.com/api/v2
+      description: ClickUp API v2 Production Server
   /view/{view_id}:
     get:
       operationId: getView
@@ -137,6 +3020,8 @@ paths:
           description: Unauthorized
         '404':
           description: View not found
+      security:
+      - bearerAuth: []
     put:
       operationId: updateView
       summary: Update a view
@@ -167,6 +3052,8 @@ paths:
           description: Unauthorized
         '404':
           description: View not found
+      security:
+      - bearerAuth: []
     delete:
       operationId: deleteView
       summary: Delete a view
@@ -182,6 +3069,11 @@ paths:
           description: Unauthorized
         '404':
           description: View not found
+      security:
+      - bearerAuth: []
+    servers:
+    - url: https://api.clickup.com/api/v2
+      description: ClickUp API v2 Production Server
   /view/{view_id}/task:
     get:
       operationId: getViewTasks
@@ -217,13 +3109,18 @@ paths:
           description: Unauthorized
         '404':
           description: View not found
+      security:
+      - bearerAuth: []
+    servers:
+    - url: https://api.clickup.com/api/v2
+      description: ClickUp API v2 Production Server
 components:
   parameters:
-    spaceId:
-      name: space_id
+    teamId:
+      name: team_id
       in: path
       required: true
-      description: The unique identifier of the Space.
+      description: The unique identifier of the Workspace (team).
       schema:
         type: integer
     viewId:
@@ -233,11 +3130,11 @@ components:
       description: The unique identifier of the View.
       schema:
         type: string
-    teamId:
-      name: team_id
+    folderId:
+      name: folder_id
       in: path
       required: true
-      description: The unique identifier of the Workspace (team).
+      description: The unique identifier of the Folder.
       schema:
         type: integer
     listId:
@@ -247,14 +3144,58 @@ components:
       description: The unique identifier of the List.
       schema:
         type: integer
-    folderId:
-      name: folder_id
+    spaceId:
+      name: space_id
       in: path
       required: true
-      description: The unique identifier of the Folder.
+      description: The unique identifier of the Space.
       schema:
         type: integer
   schemas:
+    UpdateViewRequest:
+      type: object
+      description: Request body for updating a view.
+      properties:
+        name:
+          type: string
+          description: The updated name of the view.
+        type:
+          type: string
+          enum:
+          - list
+          - board
+          - calendar
+          - gantt
+          - table
+          description: The updated view type.
+        parent:
+          type: object
+          properties:
+            id:
+              type: string
+              description: The parent object ID.
+            type:
+              type: integer
+              description: The parent type code.
+          description: The updated parent object.
+        grouping:
+          type: object
+          description: Updated grouping configuration.
+        divide:
+          type: object
+          description: Updated divide configuration.
+        sorting:
+          type: object
+          description: Updated sorting configuration.
+        filters:
+          type: object
+          description: Updated filter configuration.
+        columns:
+          type: object
+          description: Updated column configuration.
+        settings:
+          type: object
+          description: Updated display settings.
     View:
       type: object
       description: A view object defining how tasks are displayed and filtered.
@@ -431,51 +3372,16 @@ components:
         orderindex:
           type: number
           description: The order index of the view.
-    UpdateViewRequest:
-      type: object
-      description: Request body for updating a view.
-      properties:
-        name:
-          type: string
-          description: The updated name of the view.
-        type:
-          type: string
-          enum:
-          - list
-          - board
-          - calendar
-          - gantt
-          - table
-          description: The updated view type.
-        parent:
-          type: object
-          properties:
-            id:
-              type: string
-              description: The parent object ID.
-            type:
-              type: integer
-              description: The parent type code.
-          description: The updated parent object.
-        grouping:
-          type: object
-          description: Updated grouping configuration.
-        divide:
-          type: object
-          description: Updated divide configuration.
-        sorting:
-          type: object
-          description: Updated sorting configuration.
-        filters:
-          type: object
-          description: Updated filter configuration.
-        columns:
-          type: object
-          description: Updated column configuration.
-        settings:
-          type: object
-          description: Updated display settings.
   securitySchemes:
+    Authorization_Token:
+      name: Authorization
+      type: apiKey
+      in: header
+      description: 'API token required for authentication. Two types of tokens are supported:
+
+        **Personal API Key** Obtain from ClickUp''s settings page under ''Apps'' and add it to the header as `Authorization: pk_...`
+
+        **OAuth2 Access Token** Generated through the OAuth2 flow and add it to the header as `Authorization: Bearer {access_token}`'
     bearerAuth:
       type: http
       scheme: bearer
@@ -483,3 +3389,7 @@ components:
 externalDocs:
   description: ClickUp Views API Documentation
   url: https://developer.clickup.com/reference/get-views
+x-refined-from:
+- clickup-api-v2-reference-openapi.json
+- clickup-views-openapi.yml
+- clickup-api-v2-reference-openapi.json
