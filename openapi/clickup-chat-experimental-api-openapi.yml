@@ -1,8 +1,8 @@
 openapi: 3.2.0
 info:
-  title: Clickup Chat (Experimental) API
+  title: ClickUp Public API v3 Chat (Experimental) API
   version: version
-  description: 'Operations tagged Chat (Experimental) across 2 of this provider''s published API definitions: clickup-public-api-v3-openapi.json, clickup-public-api-v3-openapi.json. Each path carries the servers of the definition it was published in.'
+  description: This API is exposed to the public internet and is meant to be accessed by third-party integrations.
 servers:
 - url: https://api.clickup.com/
   description: ClickUp
@@ -40,9 +40,6 @@ paths:
       tags:
       - Chat (Experimental)
       x-is-workspace-endpoint: true
-    servers:
-    - url: https://api.clickup.com/
-      description: ClickUp
 components:
   schemas:
     CommentPublicApiCommentsControllerGetSubtypesCommentTypePath:
@@ -59,6 +56,3 @@ components:
       in: header
       type: apiKey
       name: Authorization
-x-refined-from:
-- clickup-public-api-v3-openapi.json
-- clickup-public-api-v3-openapi.json

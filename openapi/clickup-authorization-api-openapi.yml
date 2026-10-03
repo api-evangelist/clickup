@@ -2,7 +2,7 @@ openapi: 3.2.0
 info:
   title: Clickup Authorization API
   version: '2.0'
-  description: 'Operations tagged Authorization across 3 of this provider''s published API definitions: clickup-api-v2-reference-openapi.json, clickup-oauth-openapi.yml, clickup-api-v2-reference-openapi.json. Each path carries the servers of the definition it was published in.'
+  description: 'Operations tagged Authorization across 2 of this provider''s published API definitions: clickup-api-v2-reference-openapi.json, clickup-oauth-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://api.clickup.com/api
   description: ClickUp
@@ -252,4 +252,3 @@ externalDocs:
 x-refined-from:
 - clickup-api-v2-reference-openapi.json
 - clickup-oauth-openapi.yml
-- clickup-api-v2-reference-openapi.json

@@ -2,7 +2,7 @@ openapi: 3.2.0
 info:
   title: Clickup Goals API
   version: '2.0'
-  description: 'Operations tagged Goals across 3 of this provider''s published API definitions: clickup-api-v2-reference-openapi.json, clickup-goals-openapi.yml, clickup-api-v2-reference-openapi.json. Each path carries the servers of the definition it was published in.'
+  description: 'Operations tagged Goals across 2 of this provider''s published API definitions: clickup-api-v2-reference-openapi.json, clickup-goals-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://api.clickup.com/api
   description: ClickUp
@@ -2059,214 +2059,29 @@ paths:
     - url: https://api.clickup.com/api/v2
       description: ClickUp API v2 Production Server
 components:
+  parameters:
+    keyResultId:
+      name: key_result_id
+      in: path
+      required: true
+      description: The unique identifier of the Key Result.
+      schema:
+        type: string
+    teamId:
+      name: team_id
+      in: path
+      required: true
+      description: The unique identifier of the Workspace (team).
+      schema:
+        type: integer
+    goalId:
+      name: goal_id
+      in: path
+      required: true
+      description: The unique identifier of the Goal.
+      schema:
+        type: string
   schemas:
-    UpdateKeyResultRequest:
-      type: object
-      description: Request body for updating an existing Key Result.
-      properties:
-        steps_current:
-          type: number
-          description: The current progress value.
-        note:
-          type: string
-          description: A note to add with the update.
-    UpdateGoalRequest:
-      type: object
-      description: Request body for updating an existing Goal.
-      properties:
-        name:
-          type: string
-          description: The updated name of the Goal.
-        due_date:
-          type: integer
-          format: int64
-          description: Updated due date as Unix timestamp in milliseconds.
-        description:
-          type: string
-          description: The updated description.
-        rem_owners:
-          type: array
-          items:
-            type: integer
-          description: User IDs to remove as owners.
-        add_owners:
-          type: array
-          items:
-            type: integer
-          description: User IDs to add as owners.
-        color:
-          type: string
-          description: The updated hex color code.
-    KeyResult:
-      type: object
-      description: A Key Result (target) within a Goal.
-      properties:
-        id:
-          type: string
-          description: The unique identifier of the Key Result.
-        goal_id:
-          type: string
-          description: The Goal ID this Key Result belongs to.
-        name:
-          type: string
-          description: The name of the Key Result.
-        creator:
-          type: integer
-          description: The user ID of the Key Result creator.
-        type:
-          type: string
-          enum:
-          - number
-          - currency
-          - boolean
-          - percentage
-          - automatic
-          description: The type of the Key Result target.
-        date_created:
-          type: string
-          description: Unix timestamp when the Key Result was created.
-        goal_pretty_id:
-          type: string
-          description: The human-readable ID of the parent Goal.
-        percent_completed:
-          type: integer
-          minimum: 0
-          maximum: 100
-          description: The completion percentage of the Key Result.
-        completed:
-          type: boolean
-          description: Whether the Key Result is completed.
-        task_ids:
-          type: array
-          items:
-            type: string
-          description: Task IDs linked to this Key Result for automatic tracking.
-        list_ids:
-          type: array
-          items:
-            type: string
-          description: List IDs linked to this Key Result for automatic tracking.
-        owners:
-          type: array
-          items:
-            type: object
-          description: Owners of the Key Result.
-        steps_start:
-          type: number
-          description: The starting value of the Key Result.
-        steps_end:
-          type: number
-          description: The target end value of the Key Result.
-        steps_current:
-          type: number
-          description: The current value of the Key Result.
-        unit:
-          type: string
-          description: The unit of measurement for currency type Key Results.
-        last_action:
-          type: object
-          description: Details of the last action performed on the Key Result.
-    CreateKeyResultRequest:
-      type: object
-      required:
-      - name
-      - type
-      description: Request body for creating a new Key Result.
-      properties:
-        name:
-          type: string
-          description: The name of the Key Result.
-        owners:
-          type: array
-          items:
-            type: integer
-          description: User IDs to set as owners.
-        type:
-          type: string
-          enum:
-          - number
-          - currency
-          - boolean
-          - percentage
-          - automatic
-          description: The type of the Key Result target.
-        steps_start:
-          type: number
-          description: The starting value.
-        steps_end:
-          type: number
-          description: The target end value.
-        unit:
-          type: string
-          description: The unit of measurement for currency type.
-        task_ids:
-          type: array
-          items:
-            type: string
-          description: Task IDs to link for automatic tracking.
-        list_ids:
-          type: array
-          items:
-            type: string
-          description: List IDs to link for automatic tracking.
-    GoalFolder:
-      type: object
-      description: A folder for organizing Goals.
-      properties:
-        id:
-          type: string
-          description: The folder ID.
-        name:
-          type: string
-          description: The folder name.
-        team_id:
-          type: string
-          description: The Workspace ID.
-        private:
-          type: boolean
-          description: Whether the folder is private.
-        date_created:
-          type: string
-          description: Unix timestamp when the folder was created.
-        creator:
-          type: integer
-          description: The user ID of the folder creator.
-        goal_count:
-          type: integer
-          description: The number of Goals in the folder.
-        goals:
-          type: array
-          items:
-            $ref: '#/components/schemas/Goal'
-          description: Goals within the folder.
-    CreateGoalRequest:
-      type: object
-      required:
-      - name
-      - due_date
-      description: Request body for creating a new Goal.
-      properties:
-        name:
-          type: string
-          description: The name of the Goal.
-        due_date:
-          type: integer
-          format: int64
-          description: Due date as Unix timestamp in milliseconds.
-        description:
-          type: string
-          description: The description of the Goal.
-        multiple_owners:
-          type: boolean
-          description: Whether the Goal has multiple owners.
-        owners:
-          type: array
-          items:
-            type: integer
-          description: Array of user IDs to set as owners.
-        color:
-          type: string
-          description: The hex color code of the Goal.
     Goal:
       type: object
       description: A Goal object representing an objective with trackable key results.
@@ -2345,28 +2160,213 @@ components:
           type: string
           format: uri
           description: The URL to the Goal in the ClickUp web application.
-  parameters:
-    teamId:
-      name: team_id
-      in: path
-      required: true
-      description: The unique identifier of the Workspace (team).
-      schema:
-        type: integer
-    goalId:
-      name: goal_id
-      in: path
-      required: true
-      description: The unique identifier of the Goal.
-      schema:
-        type: string
-    keyResultId:
-      name: key_result_id
-      in: path
-      required: true
-      description: The unique identifier of the Key Result.
-      schema:
-        type: string
+    CreateGoalRequest:
+      type: object
+      required:
+      - name
+      - due_date
+      description: Request body for creating a new Goal.
+      properties:
+        name:
+          type: string
+          description: The name of the Goal.
+        due_date:
+          type: integer
+          format: int64
+          description: Due date as Unix timestamp in milliseconds.
+        description:
+          type: string
+          description: The description of the Goal.
+        multiple_owners:
+          type: boolean
+          description: Whether the Goal has multiple owners.
+        owners:
+          type: array
+          items:
+            type: integer
+          description: Array of user IDs to set as owners.
+        color:
+          type: string
+          description: The hex color code of the Goal.
+    CreateKeyResultRequest:
+      type: object
+      required:
+      - name
+      - type
+      description: Request body for creating a new Key Result.
+      properties:
+        name:
+          type: string
+          description: The name of the Key Result.
+        owners:
+          type: array
+          items:
+            type: integer
+          description: User IDs to set as owners.
+        type:
+          type: string
+          enum:
+          - number
+          - currency
+          - boolean
+          - percentage
+          - automatic
+          description: The type of the Key Result target.
+        steps_start:
+          type: number
+          description: The starting value.
+        steps_end:
+          type: number
+          description: The target end value.
+        unit:
+          type: string
+          description: The unit of measurement for currency type.
+        task_ids:
+          type: array
+          items:
+            type: string
+          description: Task IDs to link for automatic tracking.
+        list_ids:
+          type: array
+          items:
+            type: string
+          description: List IDs to link for automatic tracking.
+    UpdateGoalRequest:
+      type: object
+      description: Request body for updating an existing Goal.
+      properties:
+        name:
+          type: string
+          description: The updated name of the Goal.
+        due_date:
+          type: integer
+          format: int64
+          description: Updated due date as Unix timestamp in milliseconds.
+        description:
+          type: string
+          description: The updated description.
+        rem_owners:
+          type: array
+          items:
+            type: integer
+          description: User IDs to remove as owners.
+        add_owners:
+          type: array
+          items:
+            type: integer
+          description: User IDs to add as owners.
+        color:
+          type: string
+          description: The updated hex color code.
+    GoalFolder:
+      type: object
+      description: A folder for organizing Goals.
+      properties:
+        id:
+          type: string
+          description: The folder ID.
+        name:
+          type: string
+          description: The folder name.
+        team_id:
+          type: string
+          description: The Workspace ID.
+        private:
+          type: boolean
+          description: Whether the folder is private.
+        date_created:
+          type: string
+          description: Unix timestamp when the folder was created.
+        creator:
+          type: integer
+          description: The user ID of the folder creator.
+        goal_count:
+          type: integer
+          description: The number of Goals in the folder.
+        goals:
+          type: array
+          items:
+            $ref: '#/components/schemas/Goal'
+          description: Goals within the folder.
+    KeyResult:
+      type: object
+      description: A Key Result (target) within a Goal.
+      properties:
+        id:
+          type: string
+          description: The unique identifier of the Key Result.
+        goal_id:
+          type: string
+          description: The Goal ID this Key Result belongs to.
+        name:
+          type: string
+          description: The name of the Key Result.
+        creator:
+          type: integer
+          description: The user ID of the Key Result creator.
+        type:
+          type: string
+          enum:
+          - number
+          - currency
+          - boolean
+          - percentage
+          - automatic
+          description: The type of the Key Result target.
+        date_created:
+          type: string
+          description: Unix timestamp when the Key Result was created.
+        goal_pretty_id:
+          type: string
+          description: The human-readable ID of the parent Goal.
+        percent_completed:
+          type: integer
+          minimum: 0
+          maximum: 100
+          description: The completion percentage of the Key Result.
+        completed:
+          type: boolean
+          description: Whether the Key Result is completed.
+        task_ids:
+          type: array
+          items:
+            type: string
+          description: Task IDs linked to this Key Result for automatic tracking.
+        list_ids:
+          type: array
+          items:
+            type: string
+          description: List IDs linked to this Key Result for automatic tracking.
+        owners:
+          type: array
+          items:
+            type: object
+          description: Owners of the Key Result.
+        steps_start:
+          type: number
+          description: The starting value of the Key Result.
+        steps_end:
+          type: number
+          description: The target end value of the Key Result.
+        steps_current:
+          type: number
+          description: The current value of the Key Result.
+        unit:
+          type: string
+          description: The unit of measurement for currency type Key Results.
+        last_action:
+          type: object
+          description: Details of the last action performed on the Key Result.
+    UpdateKeyResultRequest:
+      type: object
+      description: Request body for updating an existing Key Result.
+      properties:
+        steps_current:
+          type: number
+          description: The current progress value.
+        note:
+          type: string
+          description: A note to add with the update.
   securitySchemes:
     Authorization_Token:
       name: Authorization
@@ -2387,4 +2387,3 @@ externalDocs:
 x-refined-from:
 - clickup-api-v2-reference-openapi.json
 - clickup-goals-openapi.yml
-- clickup-api-v2-reference-openapi.json

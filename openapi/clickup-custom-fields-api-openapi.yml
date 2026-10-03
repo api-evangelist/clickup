@@ -2,7 +2,7 @@ openapi: 3.2.0
 info:
   title: Clickup Custom Fields API
   version: '2.0'
-  description: 'Operations tagged Custom Fields across 3 of this provider''s published API definitions: clickup-api-v2-reference-openapi.json, clickup-custom-fields-openapi.yml, clickup-api-v2-reference-openapi.json. Each path carries the servers of the definition it was published in.'
+  description: 'Operations tagged Custom Fields across 2 of this provider''s published API definitions: clickup-api-v2-reference-openapi.json, clickup-custom-fields-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://api.clickup.com/api
   description: ClickUp
@@ -950,6 +950,28 @@ paths:
     - url: https://api.clickup.com/api/v2
       description: ClickUp API v2 Production Server
 components:
+  parameters:
+    listId:
+      name: list_id
+      in: path
+      required: true
+      description: The unique identifier of the list.
+      schema:
+        type: integer
+    fieldId:
+      name: field_id
+      in: path
+      required: true
+      description: The unique identifier of the custom field.
+      schema:
+        type: string
+    taskId:
+      name: task_id
+      in: path
+      required: true
+      description: The unique identifier of the task.
+      schema:
+        type: string
   schemas:
     CustomFieldDefinition:
       type: object
@@ -1048,28 +1070,6 @@ components:
         required:
           type: boolean
           description: Whether the field is required on tasks.
-  parameters:
-    listId:
-      name: list_id
-      in: path
-      required: true
-      description: The unique identifier of the list.
-      schema:
-        type: integer
-    fieldId:
-      name: field_id
-      in: path
-      required: true
-      description: The unique identifier of the custom field.
-      schema:
-        type: string
-    taskId:
-      name: task_id
-      in: path
-      required: true
-      description: The unique identifier of the task.
-      schema:
-        type: string
   securitySchemes:
     Authorization_Token:
       name: Authorization
@@ -1090,4 +1090,3 @@ externalDocs:
 x-refined-from:
 - clickup-api-v2-reference-openapi.json
 - clickup-custom-fields-openapi.yml
-- clickup-api-v2-reference-openapi.json

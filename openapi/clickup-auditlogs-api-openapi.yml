@@ -1,8 +1,8 @@
 openapi: 3.2.0
 info:
-  title: Clickup Auditlogs API
+  title: ClickUp Public API v3 Auditlogs API
   version: version
-  description: 'Operations tagged Auditlogs across 2 of this provider''s published API definitions: clickup-public-api-v3-openapi.json, clickup-public-api-v3-openapi.json. Each path carries the servers of the definition it was published in.'
+  description: This API is exposed to the public internet and is meant to be accessed by third-party integrations.
 servers:
 - url: https://api.clickup.com/
   description: ClickUp
@@ -63,11 +63,29 @@ paths:
       tags:
       - Auditlogs
       x-is-workspace-endpoint: true
-    servers:
-    - url: https://api.clickup.com/
-      description: ClickUp
 components:
   schemas:
+    AutoAuditlogAuditLogQueryRequest:
+      type: object
+      properties:
+        filter:
+          description: A filter containing the criteria to filter logs by.
+          allOf:
+          - $ref: '#/components/schemas/AutoAuditlogAuditEventFilterRequest'
+        applicability:
+          description: Type of logs to filter by. Options include `auth-and-security`, `custom-fields`, `hierarchy-activity` and `user-activity`. Most use cases will use `auth-and-security`.
+          type: string
+          enum:
+          - agent-settings-activity
+          - auth-and-security
+          - custom-fields
+          - hierarchy-activity
+          - user-activity
+          - other-activity
+        pagination:
+          description: The pagination request determines where logs should start and how many to return.
+          allOf:
+          - $ref: '#/components/schemas/AutoAuditlogAuditLogPaginationRequest'
     AutoAuditlogWorkspaceAuditLogPublicControllerQueryAuditLogWorkspaceIdPath:
       description: The ID of the Workspace.
       type: number
@@ -171,27 +189,6 @@ components:
         endTime:
           description: The end time to begin paginating your logs.
           type: number
-    AutoAuditlogAuditLogQueryRequest:
-      type: object
-      properties:
-        filter:
-          description: A filter containing the criteria to filter logs by.
-          allOf:
-          - $ref: '#/components/schemas/AutoAuditlogAuditEventFilterRequest'
-        applicability:
-          description: Type of logs to filter by. Options include `auth-and-security`, `custom-fields`, `hierarchy-activity` and `user-activity`. Most use cases will use `auth-and-security`.
-          type: string
-          enum:
-          - agent-settings-activity
-          - auth-and-security
-          - custom-fields
-          - hierarchy-activity
-          - user-activity
-          - other-activity
-        pagination:
-          description: The pagination request determines where logs should start and how many to return.
-          allOf:
-          - $ref: '#/components/schemas/AutoAuditlogAuditLogPaginationRequest'
     AutoAuditlogAuditLogPaginationRequest:
       type: object
       properties:
@@ -208,6 +205,3 @@ components:
       in: header
       type: apiKey
       name: Authorization
-x-refined-from:
-- clickup-public-api-v3-openapi.json
-- clickup-public-api-v3-openapi.json

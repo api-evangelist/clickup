@@ -2,7 +2,7 @@ openapi: 3.2.0
 info:
   title: Clickup Attachments API
   version: '1.0'
-  description: 'Operations tagged Attachments across 4 of this provider''s published API definitions: clickup-api-v2-reference-openapi.json, clickup-public-api-v3-openapi.json, clickup-api-v2-reference-openapi.json, clickup-public-api-v3-openapi.json. Each path carries the servers of the definition it was published in.'
+  description: 'Operations tagged Attachments across 2 of this provider''s published API definitions: clickup-api-v2-reference-openapi.json, clickup-public-api-v3-openapi.json. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://api.clickup.com/api
   description: ClickUp
@@ -265,6 +265,41 @@ paths:
       description: ClickUp
 components:
   schemas:
+    AttachmentsPublicApiErrorResponse:
+      type: object
+      properties:
+        status:
+          description: The HTTP Status code for the error
+          type: integer
+        message:
+          description: The message describing the error
+          type: string
+          example: Generic error message
+        trace_id:
+          description: Unique trace ID for tracking the request. Used for troubleshooting errors
+          type:
+          - integer
+          - 'null'
+          example: 123456789
+        timestamp:
+          description: The time of the error (Unix epoch milliseconds timestamp).
+          type: integer
+          example: 1671534256138
+      required:
+      - status
+      - message
+      - trace_id
+      - timestamp
+    AttachmentsPaginatedResponse:
+      type: object
+      properties:
+        next_cursor:
+          description: The next cursor to use for pagination.
+          type: string
+      required:
+      - next_cursor
+    AttachmentsPublicApiAttachmentsControllerGetParentEntityAttachmentsWorkspaceIdPath:
+      type: integer
     AttachmentsAttachment:
       type: object
       properties:
@@ -352,6 +387,27 @@ components:
       - title
       - url
       - user_id
+    AttachmentsPublicApiAttachmentsControllerPostEntityAttachmentEntityTypePath:
+      type: string
+      enum:
+      - attachments
+      - custom_fields
+    AttachmentsPublicPostAttachmentBodyParamsDto:
+      type: object
+      properties:
+        filename:
+          description: Override the filename of the attachment
+          type: string
+    AttachmentsPublicApiAttachmentsControllerGetParentEntityAttachmentsEntityTypePath:
+      type: string
+      enum:
+      - attachments
+      - custom_fields
+    AttachmentsPublicApiAttachmentsControllerGetParentEntityAttachmentsLimitQuery:
+      type: integer
+      default: 50
+      maximum: 100
+      minimum: 1
     AttachmentsPublicApiAttachmentsControllerGetParentEntityAttachments200Response:
       allOf:
       - $ref: '#/components/schemas/AttachmentsPaginatedResponse'
@@ -362,64 +418,8 @@ components:
             type: array
             items:
               $ref: '#/components/schemas/AttachmentsAttachment'
-    AttachmentsPublicApiAttachmentsControllerGetParentEntityAttachmentsLimitQuery:
-      type: integer
-      default: 50
-      maximum: 100
-      minimum: 1
-    AttachmentsPaginatedResponse:
-      type: object
-      properties:
-        next_cursor:
-          description: The next cursor to use for pagination.
-          type: string
-      required:
-      - next_cursor
-    AttachmentsPublicPostAttachmentBodyParamsDto:
-      type: object
-      properties:
-        filename:
-          description: Override the filename of the attachment
-          type: string
     AttachmentsPublicApiAttachmentsControllerPostEntityAttachmentWorkspaceIdPath:
       type: integer
-    AttachmentsPublicApiAttachmentsControllerGetParentEntityAttachmentsWorkspaceIdPath:
-      type: integer
-    AttachmentsPublicApiErrorResponse:
-      type: object
-      properties:
-        status:
-          description: The HTTP Status code for the error
-          type: integer
-        message:
-          description: The message describing the error
-          type: string
-          example: Generic error message
-        trace_id:
-          description: Unique trace ID for tracking the request. Used for troubleshooting errors
-          type:
-          - integer
-          - 'null'
-          example: 123456789
-        timestamp:
-          description: The time of the error (Unix epoch milliseconds timestamp).
-          type: integer
-          example: 1671534256138
-      required:
-      - status
-      - message
-      - trace_id
-      - timestamp
-    AttachmentsPublicApiAttachmentsControllerPostEntityAttachmentEntityTypePath:
-      type: string
-      enum:
-      - attachments
-      - custom_fields
-    AttachmentsPublicApiAttachmentsControllerGetParentEntityAttachmentsEntityTypePath:
-      type: string
-      enum:
-      - attachments
-      - custom_fields
   securitySchemes:
     Authorization_Token:
       name: Authorization
@@ -435,7 +435,5 @@ components:
       type: apiKey
       name: Authorization
 x-refined-from:
-- clickup-api-v2-reference-openapi.json
-- clickup-public-api-v3-openapi.json
 - clickup-api-v2-reference-openapi.json
 - clickup-public-api-v3-openapi.json

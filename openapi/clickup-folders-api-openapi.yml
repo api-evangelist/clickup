@@ -2,7 +2,7 @@ openapi: 3.2.0
 info:
   title: Clickup Folders API
   version: '2.0'
-  description: 'Operations tagged Folders across 3 of this provider''s published API definitions: clickup-api-v2-reference-openapi.json, clickup-folders-openapi.yml, clickup-api-v2-reference-openapi.json. Each path carries the servers of the definition it was published in.'
+  description: 'Operations tagged Folders across 2 of this provider''s published API definitions: clickup-api-v2-reference-openapi.json, clickup-folders-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://api.clickup.com/api
   description: ClickUp
@@ -1300,6 +1300,21 @@ paths:
     - url: https://api.clickup.com/api/v2
       description: ClickUp API v2 Production Server
 components:
+  parameters:
+    spaceId:
+      name: space_id
+      in: path
+      required: true
+      description: The unique identifier of the Space.
+      schema:
+        type: integer
+    folderId:
+      name: folder_id
+      in: path
+      required: true
+      description: The unique identifier of the Folder.
+      schema:
+        type: integer
   schemas:
     UpdateFolderRequest:
       type: object
@@ -1430,21 +1445,6 @@ components:
         name:
           type: string
           description: The name of the Folder.
-  parameters:
-    spaceId:
-      name: space_id
-      in: path
-      required: true
-      description: The unique identifier of the Space.
-      schema:
-        type: integer
-    folderId:
-      name: folder_id
-      in: path
-      required: true
-      description: The unique identifier of the Folder.
-      schema:
-        type: integer
   securitySchemes:
     Authorization_Token:
       name: Authorization
@@ -1465,4 +1465,3 @@ externalDocs:
 x-refined-from:
 - clickup-api-v2-reference-openapi.json
 - clickup-folders-openapi.yml
-- clickup-api-v2-reference-openapi.json

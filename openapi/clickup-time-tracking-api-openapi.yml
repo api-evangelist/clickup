@@ -2,7 +2,7 @@ openapi: 3.2.0
 info:
   title: Clickup Time Tracking API
   version: '2.0'
-  description: 'Operations tagged Time Tracking across 3 of this provider''s published API definitions: clickup-api-v2-reference-openapi.json, clickup-time-tracking-openapi.yml, clickup-api-v2-reference-openapi.json. Each path carries the servers of the definition it was published in.'
+  description: 'Operations tagged Time Tracking across 2 of this provider''s published API definitions: clickup-api-v2-reference-openapi.json, clickup-time-tracking-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://api.clickup.com/api
   description: ClickUp
@@ -2579,21 +2579,6 @@ paths:
     - url: https://api.clickup.com/api/v2
       description: ClickUp API v2 Production Server
 components:
-  parameters:
-    teamId:
-      name: team_id
-      in: path
-      required: true
-      description: The unique identifier of the Workspace (team).
-      schema:
-        type: integer
-    timerId:
-      name: timer_id
-      in: path
-      required: true
-      description: The unique identifier of the time entry.
-      schema:
-        type: string
   schemas:
     CreateTimeEntryRequest:
       type: object
@@ -2801,6 +2786,21 @@ components:
           items:
             type: object
           description: Tags from the associated task.
+  parameters:
+    timerId:
+      name: timer_id
+      in: path
+      required: true
+      description: The unique identifier of the time entry.
+      schema:
+        type: string
+    teamId:
+      name: team_id
+      in: path
+      required: true
+      description: The unique identifier of the Workspace (team).
+      schema:
+        type: integer
   securitySchemes:
     Authorization_Token:
       name: Authorization
@@ -2821,4 +2821,3 @@ externalDocs:
 x-refined-from:
 - clickup-api-v2-reference-openapi.json
 - clickup-time-tracking-openapi.yml
-- clickup-api-v2-reference-openapi.json

@@ -1,9 +1,9 @@
 openapi: 3.2.0
 info:
-  title: Clickup Custom Task Types API
-  version: '2.0'
+  title: ClickUp API v2 Reference Custom Task Types API
+  description: The ClickUp API enables you to programmatically access and manage your ClickUp resources.
   contact: {}
-  description: 'Operations tagged Custom Task Types across 2 of this provider''s published API definitions: clickup-api-v2-reference-openapi.json, clickup-api-v2-reference-openapi.json. Each path carries the servers of the definition it was published in.'
+  version: '2.0'
 servers:
 - url: https://api.clickup.com/api
   description: ClickUp
@@ -79,10 +79,6 @@ paths:
                   name_plural: Bugs
                   description: Custom item type for bugs.
       deprecated: false
-    servers:
-    - url: https://api.clickup.com/api
-      description: ClickUp
-      variables: {}
 components:
   securitySchemes:
     Authorization_Token:
@@ -94,6 +90,3 @@ components:
         **Personal API Key** Obtain from ClickUp''s settings page under ''Apps'' and add it to the header as `Authorization: pk_...`
 
         **OAuth2 Access Token** Generated through the OAuth2 flow and add it to the header as `Authorization: Bearer {access_token}`'
-x-refined-from:
-- clickup-api-v2-reference-openapi.json
-- clickup-api-v2-reference-openapi.json

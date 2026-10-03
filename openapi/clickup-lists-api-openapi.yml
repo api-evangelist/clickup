@@ -2,7 +2,7 @@ openapi: 3.2.0
 info:
   title: Clickup Lists API
   version: '2.0'
-  description: 'Operations tagged Lists across 3 of this provider''s published API definitions: clickup-api-v2-reference-openapi.json, clickup-lists-openapi.yml, clickup-api-v2-reference-openapi.json. Each path carries the servers of the definition it was published in.'
+  description: 'Operations tagged Lists across 2 of this provider''s published API definitions: clickup-api-v2-reference-openapi.json, clickup-lists-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://api.clickup.com/api
   description: ClickUp
@@ -1863,61 +1863,29 @@ paths:
     - url: https://api.clickup.com/api/v2
       description: ClickUp API v2 Production Server
 components:
+  parameters:
+    spaceId:
+      name: space_id
+      in: path
+      required: true
+      description: The unique identifier of the Space.
+      schema:
+        type: integer
+    folderId:
+      name: folder_id
+      in: path
+      required: true
+      description: The unique identifier of the Folder.
+      schema:
+        type: integer
+    listId:
+      name: list_id
+      in: path
+      required: true
+      description: The unique identifier of the List.
+      schema:
+        type: integer
   schemas:
-    Member:
-      type: object
-      description: A member with access to a List.
-      properties:
-        id:
-          type: integer
-          description: The user ID.
-        username:
-          type: string
-          description: The username.
-        email:
-          type: string
-          format: email
-          description: The email address.
-        color:
-          type: string
-          description: The user color.
-        profilePicture:
-          type: string
-          format: uri
-          nullable: true
-          description: URL of the profile picture.
-        initials:
-          type: string
-          description: The user initials.
-    UpdateListRequest:
-      type: object
-      description: Request body for updating an existing List.
-      properties:
-        name:
-          type: string
-          description: The updated name of the List.
-        content:
-          type: string
-          description: The updated content description.
-        due_date:
-          type: integer
-          format: int64
-          description: Updated due date as Unix timestamp in milliseconds.
-        due_date_time:
-          type: boolean
-          description: Whether the due date includes a time component.
-        priority:
-          type: integer
-          minimum: 1
-          maximum: 4
-          description: Updated priority level.
-        assignee:
-          type: integer
-          nullable: true
-          description: User ID to assign, or null to unassign.
-        unset_status:
-          type: boolean
-          description: Set to true to clear the List status.
     List:
       type: object
       description: A List object representing a container for tasks within a Space or Folder.
@@ -2065,28 +2033,60 @@ components:
         status:
           type: string
           description: The status to set on the List.
-  parameters:
-    listId:
-      name: list_id
-      in: path
-      required: true
-      description: The unique identifier of the List.
-      schema:
-        type: integer
-    spaceId:
-      name: space_id
-      in: path
-      required: true
-      description: The unique identifier of the Space.
-      schema:
-        type: integer
-    folderId:
-      name: folder_id
-      in: path
-      required: true
-      description: The unique identifier of the Folder.
-      schema:
-        type: integer
+    Member:
+      type: object
+      description: A member with access to a List.
+      properties:
+        id:
+          type: integer
+          description: The user ID.
+        username:
+          type: string
+          description: The username.
+        email:
+          type: string
+          format: email
+          description: The email address.
+        color:
+          type: string
+          description: The user color.
+        profilePicture:
+          type: string
+          format: uri
+          nullable: true
+          description: URL of the profile picture.
+        initials:
+          type: string
+          description: The user initials.
+    UpdateListRequest:
+      type: object
+      description: Request body for updating an existing List.
+      properties:
+        name:
+          type: string
+          description: The updated name of the List.
+        content:
+          type: string
+          description: The updated content description.
+        due_date:
+          type: integer
+          format: int64
+          description: Updated due date as Unix timestamp in milliseconds.
+        due_date_time:
+          type: boolean
+          description: Whether the due date includes a time component.
+        priority:
+          type: integer
+          minimum: 1
+          maximum: 4
+          description: Updated priority level.
+        assignee:
+          type: integer
+          nullable: true
+          description: User ID to assign, or null to unassign.
+        unset_status:
+          type: boolean
+          description: Set to true to clear the List status.
   securitySchemes:
     Authorization_Token:
       name: Authorization
@@ -2107,4 +2107,3 @@ externalDocs:
 x-refined-from:
 - clickup-api-v2-reference-openapi.json
 - clickup-lists-openapi.yml
-- clickup-api-v2-reference-openapi.json

@@ -2,7 +2,7 @@ openapi: 3.2.0
 info:
   title: Clickup Spaces API
   version: '2.0'
-  description: 'Operations tagged Spaces across 3 of this provider''s published API definitions: clickup-api-v2-reference-openapi.json, clickup-spaces-openapi.yml, clickup-api-v2-reference-openapi.json. Each path carries the servers of the definition it was published in.'
+  description: 'Operations tagged Spaces across 2 of this provider''s published API definitions: clickup-api-v2-reference-openapi.json, clickup-spaces-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://api.clickup.com/api
   description: ClickUp
@@ -1387,28 +1387,58 @@ paths:
       description: ClickUp API v2 Production Server
 components:
   schemas:
-    UpdateSpaceRequest:
+    CreateSpaceRequest:
       type: object
-      description: Request body for updating an existing Space.
+      required:
+      - name
+      description: Request body for creating a new Space.
       properties:
         name:
           type: string
-          description: The updated name of the Space.
-        color:
-          type: string
-          description: The updated hex color code.
-        private:
-          type: boolean
-          description: Whether the Space should be private.
-        admin_can_manage:
-          type: boolean
-          description: Whether admins can manage the Space.
+          description: The name of the Space.
         multiple_assignees:
           type: boolean
           description: Whether to enable multiple assignees.
         features:
           type: object
-          description: Updated features configuration.
+          description: Features to enable for the Space.
+          properties:
+            due_dates:
+              type: object
+              properties:
+                enabled:
+                  type: boolean
+                start_date:
+                  type: boolean
+                remap_due_dates:
+                  type: boolean
+                remap_closed_due_date:
+                  type: boolean
+            time_tracking:
+              type: object
+              properties:
+                enabled:
+                  type: boolean
+            tags:
+              type: object
+              properties:
+                enabled:
+                  type: boolean
+            time_estimates:
+              type: object
+              properties:
+                enabled:
+                  type: boolean
+            checklists:
+              type: object
+              properties:
+                enabled:
+                  type: boolean
+            custom_fields:
+              type: object
+              properties:
+                enabled:
+                  type: boolean
     Space:
       type: object
       description: A Space object representing a top-level organizational container within a ClickUp Workspace.
@@ -1557,71 +1587,41 @@ components:
                 enabled:
                   type: boolean
                   description: Whether portfolios are enabled.
-    CreateSpaceRequest:
+    UpdateSpaceRequest:
       type: object
-      required:
-      - name
-      description: Request body for creating a new Space.
+      description: Request body for updating an existing Space.
       properties:
         name:
           type: string
-          description: The name of the Space.
+          description: The updated name of the Space.
+        color:
+          type: string
+          description: The updated hex color code.
+        private:
+          type: boolean
+          description: Whether the Space should be private.
+        admin_can_manage:
+          type: boolean
+          description: Whether admins can manage the Space.
         multiple_assignees:
           type: boolean
           description: Whether to enable multiple assignees.
         features:
           type: object
-          description: Features to enable for the Space.
-          properties:
-            due_dates:
-              type: object
-              properties:
-                enabled:
-                  type: boolean
-                start_date:
-                  type: boolean
-                remap_due_dates:
-                  type: boolean
-                remap_closed_due_date:
-                  type: boolean
-            time_tracking:
-              type: object
-              properties:
-                enabled:
-                  type: boolean
-            tags:
-              type: object
-              properties:
-                enabled:
-                  type: boolean
-            time_estimates:
-              type: object
-              properties:
-                enabled:
-                  type: boolean
-            checklists:
-              type: object
-              properties:
-                enabled:
-                  type: boolean
-            custom_fields:
-              type: object
-              properties:
-                enabled:
-                  type: boolean
+          description: Updated features configuration.
   parameters:
-    teamId:
-      name: team_id
-      in: path
-      required: true
-      description: The unique identifier of the Workspace (team).
-      schema:
-        type: integer
     spaceId:
       name: space_id
       in: path
       required: true
       description: The unique identifier of the Space.
+      schema:
+        type: integer
+    teamId:
+      name: team_id
+      in: path
+      required: true
+      description: The unique identifier of the Workspace (team).
       schema:
         type: integer
   securitySchemes:
@@ -1644,4 +1644,3 @@ externalDocs:
 x-refined-from:
 - clickup-api-v2-reference-openapi.json
 - clickup-spaces-openapi.yml
-- clickup-api-v2-reference-openapi.json

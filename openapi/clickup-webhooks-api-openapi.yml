@@ -2,7 +2,7 @@ openapi: 3.2.0
 info:
   title: Clickup Webhooks API
   version: '2.0'
-  description: 'Operations tagged Webhooks across 3 of this provider''s published API definitions: clickup-api-v2-reference-openapi.json, clickup-webhooks-openapi.yml, clickup-api-v2-reference-openapi.json. Each path carries the servers of the definition it was published in.'
+  description: 'Operations tagged Webhooks across 2 of this provider''s published API definitions: clickup-api-v2-reference-openapi.json, clickup-webhooks-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://api.clickup.com/api
   description: ClickUp
@@ -786,53 +786,6 @@ paths:
       description: ClickUp API v2 Production Server
 components:
   schemas:
-    UpdateWebhookRequest:
-      type: object
-      description: Request body for updating an existing webhook subscription.
-      properties:
-        endpoint:
-          type: string
-          format: uri
-          description: The updated endpoint URL.
-        events:
-          type: array
-          items:
-            type: string
-          description: Updated array of event names to subscribe to.
-        status:
-          type: string
-          enum:
-          - active
-          - inactive
-          description: Set the webhook status to active or inactive.
-    CreateWebhookRequest:
-      type: object
-      required:
-      - endpoint
-      - events
-      description: Request body for creating a new webhook subscription.
-      properties:
-        endpoint:
-          type: string
-          format: uri
-          description: The URL to send webhook event payloads to.
-        events:
-          type: array
-          items:
-            type: string
-          description: Array of event names to subscribe to. Use '*' to subscribe to all events.
-        task_id:
-          type: string
-          description: Optional task ID to scope webhook events to a specific task.
-        list_id:
-          type: integer
-          description: Optional list ID to scope webhook events to a specific list.
-        folder_id:
-          type: integer
-          description: Optional folder ID to scope webhook events to a specific folder.
-        space_id:
-          type: integer
-          description: Optional space ID to scope webhook events to a specific space.
     Webhook:
       type: object
       description: A webhook subscription object.
@@ -917,14 +870,54 @@ components:
         secret:
           type: string
           description: The shared secret for HMAC-SHA256 signature verification. Only returned when the webhook is first created.
+    UpdateWebhookRequest:
+      type: object
+      description: Request body for updating an existing webhook subscription.
+      properties:
+        endpoint:
+          type: string
+          format: uri
+          description: The updated endpoint URL.
+        events:
+          type: array
+          items:
+            type: string
+          description: Updated array of event names to subscribe to.
+        status:
+          type: string
+          enum:
+          - active
+          - inactive
+          description: Set the webhook status to active or inactive.
+    CreateWebhookRequest:
+      type: object
+      required:
+      - endpoint
+      - events
+      description: Request body for creating a new webhook subscription.
+      properties:
+        endpoint:
+          type: string
+          format: uri
+          description: The URL to send webhook event payloads to.
+        events:
+          type: array
+          items:
+            type: string
+          description: Array of event names to subscribe to. Use '*' to subscribe to all events.
+        task_id:
+          type: string
+          description: Optional task ID to scope webhook events to a specific task.
+        list_id:
+          type: integer
+          description: Optional list ID to scope webhook events to a specific list.
+        folder_id:
+          type: integer
+          description: Optional folder ID to scope webhook events to a specific folder.
+        space_id:
+          type: integer
+          description: Optional space ID to scope webhook events to a specific space.
   parameters:
-    teamId:
-      name: team_id
-      in: path
-      required: true
-      description: The unique identifier of the Workspace (team).
-      schema:
-        type: integer
     webhookId:
       name: webhook_id
       in: path
@@ -932,6 +925,13 @@ components:
       description: The unique identifier of the webhook.
       schema:
         type: string
+    teamId:
+      name: team_id
+      in: path
+      required: true
+      description: The unique identifier of the Workspace (team).
+      schema:
+        type: integer
   securitySchemes:
     Authorization_Token:
       name: Authorization
@@ -952,4 +952,3 @@ externalDocs:
 x-refined-from:
 - clickup-api-v2-reference-openapi.json
 - clickup-webhooks-openapi.yml
-- clickup-api-v2-reference-openapi.json
