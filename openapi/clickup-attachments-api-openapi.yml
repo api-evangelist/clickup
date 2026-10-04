@@ -265,31 +265,18 @@ paths:
       description: ClickUp
 components:
   schemas:
-    AttachmentsPublicApiErrorResponse:
-      type: object
-      properties:
-        status:
-          description: The HTTP Status code for the error
-          type: integer
-        message:
-          description: The message describing the error
-          type: string
-          example: Generic error message
-        trace_id:
-          description: Unique trace ID for tracking the request. Used for troubleshooting errors
-          type:
-          - integer
-          - 'null'
-          example: 123456789
-        timestamp:
-          description: The time of the error (Unix epoch milliseconds timestamp).
-          type: integer
-          example: 1671534256138
-      required:
-      - status
-      - message
-      - trace_id
-      - timestamp
+    AttachmentsPublicApiAttachmentsControllerGetParentEntityAttachmentsEntityTypePath:
+      type: string
+      enum:
+      - attachments
+      - custom_fields
+    AttachmentsPublicApiAttachmentsControllerPostEntityAttachmentEntityTypePath:
+      type: string
+      enum:
+      - attachments
+      - custom_fields
+    AttachmentsPublicApiAttachmentsControllerGetParentEntityAttachmentsWorkspaceIdPath:
+      type: integer
     AttachmentsPaginatedResponse:
       type: object
       properties:
@@ -298,7 +285,18 @@ components:
           type: string
       required:
       - next_cursor
-    AttachmentsPublicApiAttachmentsControllerGetParentEntityAttachmentsWorkspaceIdPath:
+    AttachmentsPublicApiAttachmentsControllerGetParentEntityAttachmentsLimitQuery:
+      type: integer
+      default: 50
+      maximum: 100
+      minimum: 1
+    AttachmentsPublicPostAttachmentBodyParamsDto:
+      type: object
+      properties:
+        filename:
+          description: Override the filename of the attachment
+          type: string
+    AttachmentsPublicApiAttachmentsControllerPostEntityAttachmentWorkspaceIdPath:
       type: integer
     AttachmentsAttachment:
       type: object
@@ -387,27 +385,31 @@ components:
       - title
       - url
       - user_id
-    AttachmentsPublicApiAttachmentsControllerPostEntityAttachmentEntityTypePath:
-      type: string
-      enum:
-      - attachments
-      - custom_fields
-    AttachmentsPublicPostAttachmentBodyParamsDto:
+    AttachmentsPublicApiErrorResponse:
       type: object
       properties:
-        filename:
-          description: Override the filename of the attachment
+        status:
+          description: The HTTP Status code for the error
+          type: integer
+        message:
+          description: The message describing the error
           type: string
-    AttachmentsPublicApiAttachmentsControllerGetParentEntityAttachmentsEntityTypePath:
-      type: string
-      enum:
-      - attachments
-      - custom_fields
-    AttachmentsPublicApiAttachmentsControllerGetParentEntityAttachmentsLimitQuery:
-      type: integer
-      default: 50
-      maximum: 100
-      minimum: 1
+          example: Generic error message
+        trace_id:
+          description: Unique trace ID for tracking the request. Used for troubleshooting errors
+          type:
+          - integer
+          - 'null'
+          example: 123456789
+        timestamp:
+          description: The time of the error (Unix epoch milliseconds timestamp).
+          type: integer
+          example: 1671534256138
+      required:
+      - status
+      - message
+      - trace_id
+      - timestamp
     AttachmentsPublicApiAttachmentsControllerGetParentEntityAttachments200Response:
       allOf:
       - $ref: '#/components/schemas/AttachmentsPaginatedResponse'
@@ -418,8 +420,6 @@ components:
             type: array
             items:
               $ref: '#/components/schemas/AttachmentsAttachment'
-    AttachmentsPublicApiAttachmentsControllerPostEntityAttachmentWorkspaceIdPath:
-      type: integer
   securitySchemes:
     Authorization_Token:
       name: Authorization

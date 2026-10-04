@@ -5789,18 +5789,112 @@ paths:
       description: ClickUp API v2 Production Server
 components:
   schemas:
+    TaskPublicApiTaskControllerMoveTaskWorkspaceIdPath:
+      type: integer
+    TaskUpsertTimeEstimateResponse:
+      type: object
+      properties:
+        total_time_estimate:
+          description: The total time estimate across all assignees after the update, in milliseconds
+          type: integer
+          example: 14400000
+        updated_estimates:
+          description: A map of assignee user IDs to their updated time estimates in milliseconds. Only includes assignees whose estimates were modified by this request.
+          type: object
+          example:
+            '300001': 5400000
+            '300002': 9000000
+          additionalProperties:
+            type: integer
+      required:
+      - total_time_estimate
+      - updated_estimates
+    TaskTimeEstimateResponse:
+      type: object
+      properties:
+        total_time_estimate:
+          description: The total time estimate across all assignees in milliseconds
+          type: integer
+          example: 10800000
+        assignee_estimates:
+          description: A map of assignee user IDs to their respective time estimates in milliseconds. The key "unassigned" represents time not assigned to any specific user.
+          type: object
+          example:
+            '300001': 3600000
+            '300002': 7200000
+            unassigned: 0
+          additionalProperties:
+            type: integer
+      required:
+      - total_time_estimate
+      - assignee_estimates
+    TaskMoveTaskResultRto:
+      type: object
+      properties:
+        task_id:
+          description: The ID of the task.
+          type: string
+          example: '123'
+        new_list_id:
+          description: The ID of the newlist.
+          type: string
+          example: '123'
+      required:
+      - task_id
+      - new_list_id
+    TaskMoveTaskBodyParamsDto:
+      type: object
+      properties:
+        move_custom_fields:
+          description: Add Custom Fields from the current List to the new List.
+          type: boolean
+        custom_fields_to_move:
+          description: An array of Custom Fields IDs to move. This parameter is not required to move all Custom Fields to the new List.
+          type: array
+          items:
+            type: string
+        status_mappings:
+          description: "Map the current List statuses to the statuses in the new List. You only need to include the ID of the task's current status and the ID of it's new status.\n \n**Note:** This parameter is required if the task's current status is not available in the new List."
+          type: array
+          items:
+            $ref: '#/components/schemas/TaskSingleStatusMappingDto'
+    TaskSingleStatusMappingDto:
+      type: object
+      properties:
+        source_status_id:
+          description: The ID of a status from the task's current List.
+          type: string
+        destination_status_id:
+          description: The ID of the respective status in the new List.
+          type: string
+      required:
+      - source_status_id
+      - destination_status_id
     TaskPublicApiTaskControllerReplaceTimeEstimatesByUserRequest:
       type: array
       items:
         $ref: '#/components/schemas/TaskTimeEstimateItemDto'
-    TaskPublicApiTaskControllerUpdateTimeEstimatesByUser200Response:
-      description: Time estimates successfully updated
+    TaskTimeEstimateItemDto:
       type: object
       properties:
-        data:
-          $ref: '#/components/schemas/TaskUpsertTimeEstimateResponse'
+        assignee:
+          description: The user ID of the assignee, or `unassigned` for time estimates that are not assigned to anyone.
+          example: 300001
+          oneOf:
+          - type: integer
+            description: Add an unassigned time estimate.
+          - type: string
+            enum:
+            - unassigned
+            description: The user ID of the task assignee.
+        time:
+          description: The time estimate in milliseconds. Must be a non-negative integer.
+          type: integer
+          example: 3600000
+          minimum: 0
       required:
-      - data
+      - assignee
+      - time
     TaskPublicApiErrorResponse:
       type: object
       properties:
@@ -5826,110 +5920,6 @@ components:
       - message
       - trace_id
       - timestamp
-    TaskUpsertTimeEstimateResponse:
-      type: object
-      properties:
-        total_time_estimate:
-          description: The total time estimate across all assignees after the update, in milliseconds
-          type: integer
-          example: 14400000
-        updated_estimates:
-          description: A map of assignee user IDs to their updated time estimates in milliseconds. Only includes assignees whose estimates were modified by this request.
-          type: object
-          example:
-            '300001': 5400000
-            '300002': 9000000
-          additionalProperties:
-            type: integer
-      required:
-      - total_time_estimate
-      - updated_estimates
-    TaskSingleStatusMappingDto:
-      type: object
-      properties:
-        source_status_id:
-          description: The ID of a status from the task's current List.
-          type: string
-        destination_status_id:
-          description: The ID of the respective status in the new List.
-          type: string
-      required:
-      - source_status_id
-      - destination_status_id
-    TaskPublicApiTaskControllerUpdateTimeEstimatesByUserRequest:
-      type: array
-      items:
-        $ref: '#/components/schemas/TaskTimeEstimateItemDto'
-    TaskMoveTaskBodyParamsDto:
-      type: object
-      properties:
-        move_custom_fields:
-          description: Add Custom Fields from the current List to the new List.
-          type: boolean
-        custom_fields_to_move:
-          description: An array of Custom Fields IDs to move. This parameter is not required to move all Custom Fields to the new List.
-          type: array
-          items:
-            type: string
-        status_mappings:
-          description: "Map the current List statuses to the statuses in the new List. You only need to include the ID of the task's current status and the ID of it's new status.\n \n**Note:** This parameter is required if the task's current status is not available in the new List."
-          type: array
-          items:
-            $ref: '#/components/schemas/TaskSingleStatusMappingDto'
-    TaskMoveTaskResultRto:
-      type: object
-      properties:
-        task_id:
-          description: The ID of the task.
-          type: string
-          example: '123'
-        new_list_id:
-          description: The ID of the newlist.
-          type: string
-          example: '123'
-      required:
-      - task_id
-      - new_list_id
-    TaskTimeEstimateItemDto:
-      type: object
-      properties:
-        assignee:
-          description: The user ID of the assignee, or `unassigned` for time estimates that are not assigned to anyone.
-          example: 300001
-          oneOf:
-          - type: integer
-            description: Add an unassigned time estimate.
-          - type: string
-            enum:
-            - unassigned
-            description: The user ID of the task assignee.
-        time:
-          description: The time estimate in milliseconds. Must be a non-negative integer.
-          type: integer
-          example: 3600000
-          minimum: 0
-      required:
-      - assignee
-      - time
-    TaskTimeEstimateResponse:
-      type: object
-      properties:
-        total_time_estimate:
-          description: The total time estimate across all assignees in milliseconds
-          type: integer
-          example: 10800000
-        assignee_estimates:
-          description: A map of assignee user IDs to their respective time estimates in milliseconds. The key "unassigned" represents time not assigned to any specific user.
-          type: object
-          example:
-            '300001': 3600000
-            '300002': 7200000
-            unassigned: 0
-          additionalProperties:
-            type: integer
-      required:
-      - total_time_estimate
-      - assignee_estimates
     TaskPublicApiTaskControllerMoveTask200Response:
       description: Successfully updated the task home list
       type: object
@@ -5938,8 +5928,14 @@ components:
           $ref: '#/components/schemas/TaskMoveTaskResultRto'
       required:
       - data
-    TaskPublicApiTaskControllerMoveTaskWorkspaceIdPath:
-      type: integer
+    TaskPublicApiTaskControllerUpdateTimeEstimatesByUser200Response:
+      description: Time estimates successfully updated
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/TaskUpsertTimeEstimateResponse'
+      required:
+      - data
     TaskPublicApiTaskControllerReplaceTimeEstimatesByUser200Response:
       description: Time estimates successfully replaced
       type: object
@@ -5948,82 +5944,50 @@ components:
           $ref: '#/components/schemas/TaskTimeEstimateResponse'
       required:
       - data
-    CreateTaskRequest:
+    TaskPublicApiTaskControllerUpdateTimeEstimatesByUserRequest:
+      type: array
+      items:
+        $ref: '#/components/schemas/TaskTimeEstimateItemDto'
+    Tag:
       type: object
-      required:
-      - name
-      description: Request body for creating a new task.
+      description: A task tag.
       properties:
         name:
           type: string
-          description: The name of the task.
-        description:
+          description: The name of the tag.
+        tag_fg:
           type: string
-          description: The task description in rich text format.
-        markdown_description:
+          description: Foreground color of the tag.
+        tag_bg:
           type: string
-          description: The task description in Markdown format.
-        assignees:
-          type: array
-          items:
-            type: integer
-          description: Array of user IDs to assign to the task.
-        tags:
-          type: array
-          items:
-            type: string
-          description: Array of tag names to apply to the task.
+          description: Background color of the tag.
+        creator:
+          type: integer
+          description: The user ID of the tag creator.
+    Status:
+      type: object
+      description: A task status object.
+      properties:
+        id:
+          type: string
+          description: The status ID.
         status:
           type: string
-          description: The status of the task.
-        priority:
-          type: integer
-          minimum: 1
-          maximum: 4
-          nullable: true
-          description: Task priority. 1 is Urgent, 2 is High, 3 is Normal, 4 is Low.
-        due_date:
-          type: integer
-          format: int64
-          description: Due date as Unix timestamp in milliseconds.
-        due_date_time:
-          type: boolean
-          description: Whether the due date includes a time component.
-        time_estimate:
-          type: integer
-          description: Time estimate in milliseconds.
-        start_date:
-          type: integer
-          format: int64
-          description: Start date as Unix timestamp in milliseconds.
-        start_date_time:
-          type: boolean
-          description: Whether the start date includes a time component.
-        notify_all:
-          type: boolean
-          description: Notify all assignees and watchers of task creation.
-        parent:
+          description: The status name.
+        color:
           type: string
-          nullable: true
-          description: The task ID of the parent task to create this as a subtask.
-        links_to:
+          description: The hex color code of the status.
+        orderindex:
+          type: integer
+          description: The order index of the status.
+        type:
           type: string
-          nullable: true
-          description: The task ID to link this task to.
-        check_required_custom_fields:
-          type: boolean
-          description: Whether to validate required custom fields.
-        custom_fields:
-          type: array
-          items:
-            type: object
-            properties:
-              id:
-                type: string
-                description: The custom field ID.
-              value:
-                description: The value to set for the custom field.
-          description: Custom field values to set on the task.
+          enum:
+          - open
+          - custom
+          - closed
+          - done
+          description: The status type.
     Priority:
       type: object
       nullable: true
@@ -6046,66 +6010,6 @@ components:
         orderindex:
           type: string
           description: The order index of the priority.
-    UpdateTaskRequest:
-      type: object
-      description: Request body for updating an existing task. All fields are optional.
-      properties:
-        name:
-          type: string
-          description: The updated name of the task.
-        description:
-          type: string
-          description: The updated description in rich text format.
-        markdown_description:
-          type: string
-          description: The updated description in Markdown format.
-        assignees:
-          type: object
-          properties:
-            add:
-              type: array
-              items:
-                type: integer
-              description: Array of user IDs to add as assignees.
-            rem:
-              type: array
-              items:
-                type: integer
-              description: Array of user IDs to remove from assignees.
-          description: Assignee modifications.
-        status:
-          type: string
-          description: The updated status of the task.
-        priority:
-          type: integer
-          minimum: 1
-          maximum: 4
-          nullable: true
-          description: Updated task priority. 1 is Urgent, 2 is High, 3 is Normal, 4 is Low.
-        due_date:
-          type: integer
-          format: int64
-          description: Updated due date as Unix timestamp in milliseconds.
-        due_date_time:
-          type: boolean
-          description: Whether the due date includes a time component.
-        time_estimate:
-          type: integer
-          description: Updated time estimate in milliseconds.
-        start_date:
-          type: integer
-          format: int64
-          description: Updated start date as Unix timestamp in milliseconds.
-        start_date_time:
-          type: boolean
-          description: Whether the start date includes a time component.
-        parent:
-          type: string
-          nullable: true
-          description: The task ID of the parent task. Set to null to remove parent.
-        archived:
-          type: boolean
-          description: Whether to archive or unarchive the task.
     Task:
       type: object
       description: A task object representing a unit of work in ClickUp.
@@ -6269,6 +6173,107 @@ components:
               type: string
               description: The space ID.
           description: The space the task belongs to.
+    CreateTaskRequest:
+      type: object
+      required:
+      - name
+      description: Request body for creating a new task.
+      properties:
+        name:
+          type: string
+          description: The name of the task.
+        description:
+          type: string
+          description: The task description in rich text format.
+        markdown_description:
+          type: string
+          description: The task description in Markdown format.
+        assignees:
+          type: array
+          items:
+            type: integer
+          description: Array of user IDs to assign to the task.
+        tags:
+          type: array
+          items:
+            type: string
+          description: Array of tag names to apply to the task.
+        status:
+          type: string
+          description: The status of the task.
+        priority:
+          type: integer
+          minimum: 1
+          maximum: 4
+          nullable: true
+          description: Task priority. 1 is Urgent, 2 is High, 3 is Normal, 4 is Low.
+        due_date:
+          type: integer
+          format: int64
+          description: Due date as Unix timestamp in milliseconds.
+        due_date_time:
+          type: boolean
+          description: Whether the due date includes a time component.
+        time_estimate:
+          type: integer
+          description: Time estimate in milliseconds.
+        start_date:
+          type: integer
+          format: int64
+          description: Start date as Unix timestamp in milliseconds.
+        start_date_time:
+          type: boolean
+          description: Whether the start date includes a time component.
+        notify_all:
+          type: boolean
+          description: Notify all assignees and watchers of task creation.
+        parent:
+          type: string
+          nullable: true
+          description: The task ID of the parent task to create this as a subtask.
+        links_to:
+          type: string
+          nullable: true
+          description: The task ID to link this task to.
+        check_required_custom_fields:
+          type: boolean
+          description: Whether to validate required custom fields.
+        custom_fields:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+                description: The custom field ID.
+              value:
+                description: The value to set for the custom field.
+          description: Custom field values to set on the task.
+    User:
+      type: object
+      description: A ClickUp user object.
+      properties:
+        id:
+          type: integer
+          description: The unique identifier of the user.
+        username:
+          type: string
+          description: The username of the user.
+        email:
+          type: string
+          format: email
+          description: The email address of the user.
+        color:
+          type: string
+          description: The hex color code associated with the user.
+        profilePicture:
+          type: string
+          format: uri
+          nullable: true
+          description: URL of the user's profile picture.
+        initials:
+          type: string
+          description: The initials of the user.
     CustomField:
       type: object
       description: A custom field value on a task.
@@ -6296,79 +6301,67 @@ components:
         required:
           type: boolean
           description: Whether the custom field is required.
-    User:
+    UpdateTaskRequest:
       type: object
-      description: A ClickUp user object.
-      properties:
-        id:
-          type: integer
-          description: The unique identifier of the user.
-        username:
-          type: string
-          description: The username of the user.
-        email:
-          type: string
-          format: email
-          description: The email address of the user.
-        color:
-          type: string
-          description: The hex color code associated with the user.
-        profilePicture:
-          type: string
-          format: uri
-          nullable: true
-          description: URL of the user's profile picture.
-        initials:
-          type: string
-          description: The initials of the user.
-    Tag:
-      type: object
-      description: A task tag.
+      description: Request body for updating an existing task. All fields are optional.
       properties:
         name:
           type: string
-          description: The name of the tag.
-        tag_fg:
+          description: The updated name of the task.
+        description:
           type: string
-          description: Foreground color of the tag.
-        tag_bg:
+          description: The updated description in rich text format.
+        markdown_description:
           type: string
-          description: Background color of the tag.
-        creator:
-          type: integer
-          description: The user ID of the tag creator.
-    Status:
-      type: object
-      description: A task status object.
-      properties:
-        id:
-          type: string
-          description: The status ID.
+          description: The updated description in Markdown format.
+        assignees:
+          type: object
+          properties:
+            add:
+              type: array
+              items:
+                type: integer
+              description: Array of user IDs to add as assignees.
+            rem:
+              type: array
+              items:
+                type: integer
+              description: Array of user IDs to remove from assignees.
+          description: Assignee modifications.
         status:
           type: string
-          description: The status name.
-        color:
-          type: string
-          description: The hex color code of the status.
-        orderindex:
+          description: The updated status of the task.
+        priority:
           type: integer
-          description: The order index of the status.
-        type:
+          minimum: 1
+          maximum: 4
+          nullable: true
+          description: Updated task priority. 1 is Urgent, 2 is High, 3 is Normal, 4 is Low.
+        due_date:
+          type: integer
+          format: int64
+          description: Updated due date as Unix timestamp in milliseconds.
+        due_date_time:
+          type: boolean
+          description: Whether the due date includes a time component.
+        time_estimate:
+          type: integer
+          description: Updated time estimate in milliseconds.
+        start_date:
+          type: integer
+          format: int64
+          description: Updated start date as Unix timestamp in milliseconds.
+        start_date_time:
+          type: boolean
+          description: Whether the start date includes a time component.
+        parent:
           type: string
-          enum:
-          - open
-          - custom
-          - closed
-          - done
-          description: The status type.
+          nullable: true
+          description: The task ID of the parent task. Set to null to remove parent.
+        archived:
+          type: boolean
+          description: Whether to archive or unarchive the task.
   parameters:
-    taskId:
-      name: task_id
-      in: path
-      required: true
-      description: The unique identifier of the task.
-      schema:
-        type: string
     teamId:
       name: team_id
       in: path
@@ -6383,6 +6376,13 @@ components:
       description: The unique identifier of the list.
       schema:
         type: integer
+    taskId:
+      name: task_id
+      in: path
+      required: true
+      description: The unique identifier of the task.
+      schema:
+        type: string
   securitySchemes:
     Authorization_Token:
       name: Authorization

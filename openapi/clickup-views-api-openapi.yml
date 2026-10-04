@@ -3115,6 +3115,42 @@ paths:
     - url: https://api.clickup.com/api/v2
       description: ClickUp API v2 Production Server
 components:
+  parameters:
+    teamId:
+      name: team_id
+      in: path
+      required: true
+      description: The unique identifier of the Workspace (team).
+      schema:
+        type: integer
+    folderId:
+      name: folder_id
+      in: path
+      required: true
+      description: The unique identifier of the Folder.
+      schema:
+        type: integer
+    viewId:
+      name: view_id
+      in: path
+      required: true
+      description: The unique identifier of the View.
+      schema:
+        type: string
+    listId:
+      name: list_id
+      in: path
+      required: true
+      description: The unique identifier of the List.
+      schema:
+        type: integer
+    spaceId:
+      name: space_id
+      in: path
+      required: true
+      description: The unique identifier of the Space.
+      schema:
+        type: integer
   schemas:
     UpdateViewRequest:
       type: object
@@ -3336,42 +3372,6 @@ components:
         orderindex:
           type: number
           description: The order index of the view.
-  parameters:
-    spaceId:
-      name: space_id
-      in: path
-      required: true
-      description: The unique identifier of the Space.
-      schema:
-        type: integer
-    teamId:
-      name: team_id
-      in: path
-      required: true
-      description: The unique identifier of the Workspace (team).
-      schema:
-        type: integer
-    folderId:
-      name: folder_id
-      in: path
-      required: true
-      description: The unique identifier of the Folder.
-      schema:
-        type: integer
-    viewId:
-      name: view_id
-      in: path
-      required: true
-      description: The unique identifier of the View.
-      schema:
-        type: string
-    listId:
-      name: list_id
-      in: path
-      required: true
-      description: The unique identifier of the List.
-      schema:
-        type: integer
   securitySchemes:
     Authorization_Token:
       name: Authorization

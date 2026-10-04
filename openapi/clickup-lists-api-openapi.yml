@@ -1863,28 +1863,6 @@ paths:
     - url: https://api.clickup.com/api/v2
       description: ClickUp API v2 Production Server
 components:
-  parameters:
-    spaceId:
-      name: space_id
-      in: path
-      required: true
-      description: The unique identifier of the Space.
-      schema:
-        type: integer
-    folderId:
-      name: folder_id
-      in: path
-      required: true
-      description: The unique identifier of the Folder.
-      schema:
-        type: integer
-    listId:
-      name: list_id
-      in: path
-      required: true
-      description: The unique identifier of the List.
-      schema:
-        type: integer
   schemas:
     List:
       type: object
@@ -2003,6 +1981,31 @@ components:
         permission_level:
           type: string
           description: The permission level of the List.
+    Member:
+      type: object
+      description: A member with access to a List.
+      properties:
+        id:
+          type: integer
+          description: The user ID.
+        username:
+          type: string
+          description: The username.
+        email:
+          type: string
+          format: email
+          description: The email address.
+        color:
+          type: string
+          description: The user color.
+        profilePicture:
+          type: string
+          format: uri
+          nullable: true
+          description: URL of the profile picture.
+        initials:
+          type: string
+          description: The user initials.
     CreateListRequest:
       type: object
       required:
@@ -2033,31 +2036,6 @@ components:
         status:
           type: string
           description: The status to set on the List.
-    Member:
-      type: object
-      description: A member with access to a List.
-      properties:
-        id:
-          type: integer
-          description: The user ID.
-        username:
-          type: string
-          description: The username.
-        email:
-          type: string
-          format: email
-          description: The email address.
-        color:
-          type: string
-          description: The user color.
-        profilePicture:
-          type: string
-          format: uri
-          nullable: true
-          description: URL of the profile picture.
-        initials:
-          type: string
-          description: The user initials.
     UpdateListRequest:
       type: object
       description: Request body for updating an existing List.
@@ -2087,6 +2065,28 @@ components:
         unset_status:
           type: boolean
           description: Set to true to clear the List status.
+  parameters:
+    folderId:
+      name: folder_id
+      in: path
+      required: true
+      description: The unique identifier of the Folder.
+      schema:
+        type: integer
+    listId:
+      name: list_id
+      in: path
+      required: true
+      description: The unique identifier of the List.
+      schema:
+        type: integer
+    spaceId:
+      name: space_id
+      in: path
+      required: true
+      description: The unique identifier of the Space.
+      schema:
+        type: integer
   securitySchemes:
     Authorization_Token:
       name: Authorization

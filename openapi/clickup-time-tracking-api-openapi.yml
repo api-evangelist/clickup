@@ -2579,85 +2579,22 @@ paths:
     - url: https://api.clickup.com/api/v2
       description: ClickUp API v2 Production Server
 components:
+  parameters:
+    teamId:
+      name: team_id
+      in: path
+      required: true
+      description: The unique identifier of the Workspace (team).
+      schema:
+        type: integer
+    timerId:
+      name: timer_id
+      in: path
+      required: true
+      description: The unique identifier of the time entry.
+      schema:
+        type: string
   schemas:
-    CreateTimeEntryRequest:
-      type: object
-      required:
-      - start
-      - duration
-      description: Request body for creating a manual time entry.
-      properties:
-        tid:
-          type: string
-          description: The task ID to associate with the time entry.
-        description:
-          type: string
-          description: Description of the time entry.
-        start:
-          type: integer
-          format: int64
-          description: Start time as Unix timestamp in milliseconds.
-        stop:
-          type: integer
-          format: int64
-          description: Stop time as Unix timestamp in milliseconds. If omitted, duration is used to calculate the end time.
-        duration:
-          type: integer
-          description: Duration in milliseconds.
-        assignee:
-          type: integer
-          description: User ID to assign the time entry to.
-        billable:
-          type: boolean
-          description: Whether the time entry is billable.
-        tags:
-          type: array
-          items:
-            type: object
-            properties:
-              name:
-                type: string
-                description: The tag name.
-          description: Tags to associate with the time entry.
-    UpdateTimeEntryRequest:
-      type: object
-      description: Request body for updating an existing time entry.
-      properties:
-        tid:
-          type: string
-          description: Updated task ID.
-        description:
-          type: string
-          description: Updated description.
-        start:
-          type: integer
-          format: int64
-          description: Updated start time.
-        end:
-          type: integer
-          format: int64
-          description: Updated end time.
-        duration:
-          type: integer
-          description: Updated duration in milliseconds.
-        billable:
-          type: boolean
-          description: Updated billable status.
-        tag_action:
-          type: string
-          enum:
-          - add
-          - remove
-          description: Whether to add or remove tags.
-        tags:
-          type: array
-          items:
-            type: object
-            properties:
-              name:
-                type: string
-                description: The tag name.
-          description: Tags to add or remove.
     TimeEntry:
       type: object
       description: A time entry recording tracked time on a task.
@@ -2786,21 +2723,84 @@ components:
           items:
             type: object
           description: Tags from the associated task.
-  parameters:
-    timerId:
-      name: timer_id
-      in: path
-      required: true
-      description: The unique identifier of the time entry.
-      schema:
-        type: string
-    teamId:
-      name: team_id
-      in: path
-      required: true
-      description: The unique identifier of the Workspace (team).
-      schema:
-        type: integer
+    UpdateTimeEntryRequest:
+      type: object
+      description: Request body for updating an existing time entry.
+      properties:
+        tid:
+          type: string
+          description: Updated task ID.
+        description:
+          type: string
+          description: Updated description.
+        start:
+          type: integer
+          format: int64
+          description: Updated start time.
+        end:
+          type: integer
+          format: int64
+          description: Updated end time.
+        duration:
+          type: integer
+          description: Updated duration in milliseconds.
+        billable:
+          type: boolean
+          description: Updated billable status.
+        tag_action:
+          type: string
+          enum:
+          - add
+          - remove
+          description: Whether to add or remove tags.
+        tags:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+                description: The tag name.
+          description: Tags to add or remove.
+    CreateTimeEntryRequest:
+      type: object
+      required:
+      - start
+      - duration
+      description: Request body for creating a manual time entry.
+      properties:
+        tid:
+          type: string
+          description: The task ID to associate with the time entry.
+        description:
+          type: string
+          description: Description of the time entry.
+        start:
+          type: integer
+          format: int64
+          description: Start time as Unix timestamp in milliseconds.
+        stop:
+          type: integer
+          format: int64
+          description: Stop time as Unix timestamp in milliseconds. If omitted, duration is used to calculate the end time.
+        duration:
+          type: integer
+          description: Duration in milliseconds.
+        assignee:
+          type: integer
+          description: User ID to assign the time entry to.
+        billable:
+          type: boolean
+          description: Whether the time entry is billable.
+        tags:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+                description: The tag name.
+          description: Tags to associate with the time entry.
   securitySchemes:
     Authorization_Token:
       name: Authorization

@@ -785,7 +785,50 @@ paths:
     - url: https://api.clickup.com/api/v2
       description: ClickUp API v2 Production Server
 components:
+  parameters:
+    teamId:
+      name: team_id
+      in: path
+      required: true
+      description: The unique identifier of the Workspace (team).
+      schema:
+        type: integer
+    webhookId:
+      name: webhook_id
+      in: path
+      required: true
+      description: The unique identifier of the webhook.
+      schema:
+        type: string
   schemas:
+    CreateWebhookRequest:
+      type: object
+      required:
+      - endpoint
+      - events
+      description: Request body for creating a new webhook subscription.
+      properties:
+        endpoint:
+          type: string
+          format: uri
+          description: The URL to send webhook event payloads to.
+        events:
+          type: array
+          items:
+            type: string
+          description: Array of event names to subscribe to. Use '*' to subscribe to all events.
+        task_id:
+          type: string
+          description: Optional task ID to scope webhook events to a specific task.
+        list_id:
+          type: integer
+          description: Optional list ID to scope webhook events to a specific list.
+        folder_id:
+          type: integer
+          description: Optional folder ID to scope webhook events to a specific folder.
+        space_id:
+          type: integer
+          description: Optional space ID to scope webhook events to a specific space.
     Webhook:
       type: object
       description: A webhook subscription object.
@@ -889,49 +932,6 @@ components:
           - active
           - inactive
           description: Set the webhook status to active or inactive.
-    CreateWebhookRequest:
-      type: object
-      required:
-      - endpoint
-      - events
-      description: Request body for creating a new webhook subscription.
-      properties:
-        endpoint:
-          type: string
-          format: uri
-          description: The URL to send webhook event payloads to.
-        events:
-          type: array
-          items:
-            type: string
-          description: Array of event names to subscribe to. Use '*' to subscribe to all events.
-        task_id:
-          type: string
-          description: Optional task ID to scope webhook events to a specific task.
-        list_id:
-          type: integer
-          description: Optional list ID to scope webhook events to a specific list.
-        folder_id:
-          type: integer
-          description: Optional folder ID to scope webhook events to a specific folder.
-        space_id:
-          type: integer
-          description: Optional space ID to scope webhook events to a specific space.
-  parameters:
-    webhookId:
-      name: webhook_id
-      in: path
-      required: true
-      description: The unique identifier of the webhook.
-      schema:
-        type: string
-    teamId:
-      name: team_id
-      in: path
-      required: true
-      description: The unique identifier of the Workspace (team).
-      schema:
-        type: integer
   securitySchemes:
     Authorization_Token:
       name: Authorization

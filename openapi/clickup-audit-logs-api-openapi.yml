@@ -88,6 +88,17 @@ components:
     AutoAuditlogWorkspaceAuditLogPublicControllerQueryAuditLogWorkspaceIdPath:
       description: The ID of the Workspace.
       type: number
+    AutoAuditlogAuditLogPaginationRequest:
+      type: object
+      properties:
+        pageRows:
+          description: The number of rows to return.
+          type: number
+        pageTimestamp:
+          description: The timestamp to index on. This should be the timestamp of the last row on the previous page. If you are requesting the first page, this should be the current timestamp.
+          type: number
+        pageDirection:
+          description: Pagination direction. This should be set to `before` for most use cases. Options include `before` and `after`.
     AutoAuditlogAuditEventFilterRequest:
       type: object
       properties:
@@ -188,17 +199,6 @@ components:
         endTime:
           description: The end time to begin paginating your logs.
           type: number
-    AutoAuditlogAuditLogPaginationRequest:
-      type: object
-      properties:
-        pageRows:
-          description: The number of rows to return.
-          type: number
-        pageTimestamp:
-          description: The timestamp to index on. This should be the timestamp of the last row on the previous page. If you are requesting the first page, this should be the current timestamp.
-          type: number
-        pageDirection:
-          description: Pagination direction. This should be set to `before` for most use cases. Options include `before` and `after`.
   securitySchemes:
     authHeader:
       in: header

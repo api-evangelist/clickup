@@ -108,6 +108,14 @@ paths:
         '404':
           description: Team not found
 components:
+  parameters:
+    teamId:
+      name: team_id
+      in: path
+      required: true
+      description: The unique identifier of the Workspace (team).
+      schema:
+        type: integer
   schemas:
     Team:
       type: object
@@ -198,14 +206,6 @@ components:
               type: string
               description: The inviter initials.
           description: The user who invited this member.
-  parameters:
-    teamId:
-      name: team_id
-      in: path
-      required: true
-      description: The unique identifier of the Workspace (team).
-      schema:
-        type: integer
   securitySchemes:
     bearerAuth:
       type: http

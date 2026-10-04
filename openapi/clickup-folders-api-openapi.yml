@@ -1300,29 +1300,7 @@ paths:
     - url: https://api.clickup.com/api/v2
       description: ClickUp API v2 Production Server
 components:
-  parameters:
-    spaceId:
-      name: space_id
-      in: path
-      required: true
-      description: The unique identifier of the Space.
-      schema:
-        type: integer
-    folderId:
-      name: folder_id
-      in: path
-      required: true
-      description: The unique identifier of the Folder.
-      schema:
-        type: integer
   schemas:
-    UpdateFolderRequest:
-      type: object
-      description: Request body for updating an existing Folder.
-      properties:
-        name:
-          type: string
-          description: The updated name of the Folder.
     Folder:
       type: object
       description: A Folder object representing an organizational container within a Space.
@@ -1445,6 +1423,28 @@ components:
         name:
           type: string
           description: The name of the Folder.
+    UpdateFolderRequest:
+      type: object
+      description: Request body for updating an existing Folder.
+      properties:
+        name:
+          type: string
+          description: The updated name of the Folder.
+  parameters:
+    folderId:
+      name: folder_id
+      in: path
+      required: true
+      description: The unique identifier of the Folder.
+      schema:
+        type: integer
+    spaceId:
+      name: space_id
+      in: path
+      required: true
+      description: The unique identifier of the Space.
+      schema:
+        type: integer
   securitySchemes:
     Authorization_Token:
       name: Authorization

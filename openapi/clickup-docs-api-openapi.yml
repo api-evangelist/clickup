@@ -342,22 +342,6 @@ paths:
       x-is-workspace-endpoint: true
 components:
   schemas:
-    PublicDocsGetDocPagesPublicContentFormatQuery:
-      type: string
-      default: text/md
-      enum:
-      - text/md
-      - text/plain
-    PublicDocsCreatePagePublicWorkspaceIdPath:
-      type: number
-    PublicDocsSearchDocsPublicArchivedQuery:
-      type: boolean
-      default: false
-    PublicDocsSearchDocsPublicLimitQuery:
-      type: number
-      default: 50
-      maximum: 100
-      minimum: 10
     PublicDocsParentDto:
       type: object
       properties:
@@ -369,66 +353,9 @@ components:
       required:
       - id
       - type
-    PublicDocsPublicEditPageOptionsDto:
-      type: object
-      properties:
-        name:
-          description: The updated name of the page.
-          type: string
-          default: ''
-        sub_title:
-          description: The updateds ubtitle of the page.
-          type: string
-        content:
-          default: ''
-          description: The updated content of the page.
-          type: string
-        content_edit_mode:
-          description: The strategy for updating content on the page. For example, `replace`, `append`, or `prepend`.
-          type: string
-          default: replace
-          enum:
-          - replace
-          - append
-          - prepend
-        content_format:
-          description: The format the page content is in. For example, `text/md` for markdown or `text/plain` for plain text.
-          type: string
-          default: text/md
-          enum:
-          - text/md
-          - text/plain
-    PublicDocsCreateDocPublicWorkspaceIdPath:
+    PublicDocsGetDocPageListingPublicMaxPageDepthQuery:
       type: number
-    PublicDocsAvatarDto:
-      type: object
-      properties:
-        color:
-          type: string
-        value:
-          type: string
-        source:
-          type: string
-    PublicDocsGetPagePublicWorkspaceIdPath:
-      type: number
-    PublicDocsGetDocPagesPublicWorkspaceIdPath:
-      type: number
-    PublicDocsSearchDocsPublicParentTypeQuery:
-      type: string
-      enum:
-      - '4'
-      - '5'
-      - '6'
-      - '7'
-      - '12'
-      - SPACE
-      - FOLDER
-      - LIST
-      - EVERYTHING
-      - WORKSPACE
-    PublicDocsSearchDocsPublicDeletedQuery:
-      type: boolean
-      default: false
+      default: -1
     PublicDocsDocCoreDto:
       type: object
       properties:
@@ -476,6 +403,20 @@ components:
       - creator
       - deleted
       - archived
+    PublicDocsSearchDocsPublicCreatorQuery:
+      type: number
+    PublicDocsAvatarDto:
+      type: object
+      properties:
+        color:
+          type: string
+        value:
+          type: string
+        source:
+          type: string
+    PublicDocsGetDocPagesPublicMaxPageDepthQuery:
+      type: number
+      default: -1
     PublicDocsPresentationDetailsDto:
       type: object
       properties:
@@ -519,8 +460,22 @@ components:
           type: boolean
         sub_pages_style:
           type: string
-    PublicDocsSearchDocsPublicWorkspaceIdPath:
-      type: number
+    PublicDocsGetPagePublicContentFormatQuery:
+      type: string
+      default: text/md
+      enum:
+      - text/md
+      - text/plain
+    PublicDocsPositionDto:
+      type: object
+      properties:
+        x:
+          type: number
+        y:
+          type: number
+      required:
+      - x
+      - y
     PublicDocsPageCoverDto:
       type: object
       properties:
@@ -530,18 +485,17 @@ components:
           type: string
         position:
           $ref: '#/components/schemas/PublicDocsPositionDto'
-    PublicDocsGetDocPageListingPublic200Response:
-      type: array
-      items:
-        $ref: '#/components/schemas/PublicDocsPageV3ReferenceDto'
-    PublicDocsGetPagePublicContentFormatQuery:
-      type: string
-      default: text/md
-      enum:
-      - text/md
-      - text/plain
     PublicDocsEditPagePublicWorkspaceIdPath:
       type: number
+    PublicDocsSearchDocsPublicLimitQuery:
+      type: number
+      default: 50
+      maximum: 100
+      minimum: 10
+    PublicDocsGetDocPagesPublic200Response:
+      type: array
+      items:
+        $ref: '#/components/schemas/PublicDocsPageV3Dto'
     PublicDocsCreateDocOptionsDto:
       type: object
       properties:
@@ -575,68 +529,41 @@ components:
           description: Create a new page when creating the Doc.
           type: boolean
           default: true
-    PublicDocsPageV3ReferenceDto:
-      type: object
-      properties:
-        id:
-          type: string
-        doc_id:
-          type: string
-        parent_page_id:
-          type: string
-        workspace_id:
-          type: number
-        name:
-          type: string
-        pages:
-          type: array
-          items:
-            $ref: '#/components/schemas/PublicDocsPageV3ReferenceDto'
-      example:
-      - id: 8cht190-271
-        doc_id: 8cht190-831
-        workspace_id: 9011234080
-        name: Fantastic Marketing doc
-      - id: 8cht190-311
-        doc_id: 8cht190-831
-        workspace_id: 9011234080
-        name: Another doc
-        pages:
-        - id: 8cht190-331
-          doc_id: 8cht190-831
-          parent_page_id: 8cht190-311
-          workspace_id: 9011234080
-          name: sub page
-          pages:
-          - id: 8cht190-351
-            doc_id: 8cht190-831
-            parent_page_id: 8cht190-331
-            workspace_id: 9011234080
-            name: 2nd sub page
-      required:
-      - id
-      - doc_id
-      - workspace_id
-      - name
-    PublicDocsSearchDocsPublicCreatorQuery:
+    PublicDocsGetDocPagesPublicContentFormatQuery:
+      type: string
+      default: text/md
+      enum:
+      - text/md
+      - text/plain
+    PublicDocsGetDocPageListingPublicWorkspaceIdPath:
       type: number
-    PublicDocsPublicCreatePageOptionsDto:
+    PublicDocsGetDocPagesPublicWorkspaceIdPath:
+      type: number
+    PublicDocsSearchDocsPublicArchivedQuery:
+      type: boolean
+      default: false
+    PublicDocsPublicEditPageOptionsDto:
       type: object
       properties:
-        parent_page_id:
-          description: The ID of the parent page. If this is a root page in the Doc, `parent_page_id` will not be returned.
-          type: string
         name:
-          description: The name of the new page.
+          description: The updated name of the page.
           type: string
           default: ''
         sub_title:
-          description: The subtitle of the new page.
+          description: The updateds ubtitle of the page.
           type: string
         content:
           default: ''
-          description: The content of the new page.
+          description: The updated content of the page.
           type: string
+        content_edit_mode:
+          description: The strategy for updating content on the page. For example, `replace`, `append`, or `prepend`.
+          type: string
+          default: replace
+          enum:
+          - replace
+          - append
+          - prepend
         content_format:
           description: The format the page content is in. For example, `text/md` for markdown or `text/plain` for plain text.
           type: string
@@ -644,84 +571,6 @@ components:
           enum:
           - text/md
           - text/plain
-    PublicDocsDocDto:
-      type: object
-      properties:
-        id:
-          type: string
-        date_created:
-          type: number
-        date_updated:
-          type: number
-        name:
-          type: string
-        type:
-          type: number
-          enum:
-          - 1
-          - 2
-        parent:
-          $ref: '#/components/schemas/PublicDocsParentDto'
-        public:
-          type: boolean
-        workspace_id:
-          type: number
-        archived:
-          type: boolean
-        archived_by:
-          type: number
-        creator:
-          type: number
-        date_archived:
-          type: number
-        date_deleted:
-          type: number
-        deleted:
-          type: boolean
-        deleted_by:
-          type: number
-        page_defaults:
-          $ref: '#/components/schemas/PublicDocsPresentationDetailsDto'
-      required:
-      - id
-      - date_created
-      - name
-      - type
-      - parent
-      - public
-      - workspace_id
-      - creator
-    PublicDocsGetDocPagesPublic200Response:
-      type: array
-      items:
-        $ref: '#/components/schemas/PublicDocsPageV3Dto'
-    PublicDocsGetDocPagesPublicMaxPageDepthQuery:
-      type: number
-      default: -1
-    PublicDocsPositionDto:
-      type: object
-      properties:
-        x:
-          type: number
-        y:
-          type: number
-      required:
-      - x
-      - y
-    PublicDocsDocsSearchResultDto:
-      type: object
-      properties:
-        docs:
-          type: array
-          items:
-            $ref: '#/components/schemas/PublicDocsDocCoreDto'
-        next_cursor:
-          type: string
-      required:
-      - docs
-    PublicDocsGetDocPageListingPublicMaxPageDepthQuery:
-      type: number
-      default: -1
     PublicDocsPageV3Dto:
       type: object
       properties:
@@ -794,10 +643,161 @@ components:
       - content
       - creator_id
       - authors
-    PublicDocsGetDocPageListingPublicWorkspaceIdPath:
+    PublicDocsGetDocPageListingPublic200Response:
+      type: array
+      items:
+        $ref: '#/components/schemas/PublicDocsPageV3ReferenceDto'
+    PublicDocsPageV3ReferenceDto:
+      type: object
+      properties:
+        id:
+          type: string
+        doc_id:
+          type: string
+        parent_page_id:
+          type: string
+        workspace_id:
+          type: number
+        name:
+          type: string
+        pages:
+          type: array
+          items:
+            $ref: '#/components/schemas/PublicDocsPageV3ReferenceDto'
+      example:
+      - id: 8cht190-271
+        doc_id: 8cht190-831
+        workspace_id: 9011234080
+        name: Fantastic Marketing doc
+      - id: 8cht190-311
+        doc_id: 8cht190-831
+        workspace_id: 9011234080
+        name: Another doc
+        pages:
+        - id: 8cht190-331
+          doc_id: 8cht190-831
+          parent_page_id: 8cht190-311
+          workspace_id: 9011234080
+          name: sub page
+          pages:
+          - id: 8cht190-351
+            doc_id: 8cht190-831
+            parent_page_id: 8cht190-331
+            workspace_id: 9011234080
+            name: 2nd sub page
+      required:
+      - id
+      - doc_id
+      - workspace_id
+      - name
+    PublicDocsCreateDocPublicWorkspaceIdPath:
+      type: number
+    PublicDocsSearchDocsPublicDeletedQuery:
+      type: boolean
+      default: false
+    PublicDocsCreatePagePublicWorkspaceIdPath:
+      type: number
+    PublicDocsGetPagePublicWorkspaceIdPath:
+      type: number
+    PublicDocsSearchDocsPublicWorkspaceIdPath:
       type: number
     PublicDocsGetDocPublicWorkspaceIdPath:
       type: number
+    PublicDocsPublicCreatePageOptionsDto:
+      type: object
+      properties:
+        parent_page_id:
+          description: The ID of the parent page. If this is a root page in the Doc, `parent_page_id` will not be returned.
+          type: string
+        name:
+          description: The name of the new page.
+          type: string
+          default: ''
+        sub_title:
+          description: The subtitle of the new page.
+          type: string
+        content:
+          default: ''
+          description: The content of the new page.
+          type: string
+        content_format:
+          description: The format the page content is in. For example, `text/md` for markdown or `text/plain` for plain text.
+          type: string
+          default: text/md
+          enum:
+          - text/md
+          - text/plain
+    PublicDocsDocDto:
+      type: object
+      properties:
+        id:
+          type: string
+        date_created:
+          type: number
+        date_updated:
+          type: number
+        name:
+          type: string
+        type:
+          type: number
+          enum:
+          - 1
+          - 2
+        parent:
+          $ref: '#/components/schemas/PublicDocsParentDto'
+        public:
+          type: boolean
+        workspace_id:
+          type: number
+        archived:
+          type: boolean
+        archived_by:
+          type: number
+        creator:
+          type: number
+        date_archived:
+          type: number
+        date_deleted:
+          type: number
+        deleted:
+          type: boolean
+        deleted_by:
+          type: number
+        page_defaults:
+          $ref: '#/components/schemas/PublicDocsPresentationDetailsDto'
+      required:
+      - id
+      - date_created
+      - name
+      - type
+      - parent
+      - public
+      - workspace_id
+      - creator
+    PublicDocsSearchDocsPublicParentTypeQuery:
+      type: string
+      enum:
+      - '4'
+      - '5'
+      - '6'
+      - '7'
+      - '12'
+      - SPACE
+      - FOLDER
+      - LIST
+      - EVERYTHING
+      - WORKSPACE
+    PublicDocsDocsSearchResultDto:
+      type: object
+      properties:
+        docs:
+          type: array
+          items:
+            $ref: '#/components/schemas/PublicDocsDocCoreDto'
+        next_cursor:
+          type: string
+      required:
+      - docs
   securitySchemes:
     authHeader:
       in: header

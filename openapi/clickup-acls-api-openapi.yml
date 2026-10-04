@@ -51,54 +51,6 @@ paths:
       x-is-workspace-endpoint: true
 components:
   schemas:
-    UserAclEntry:
-      type: object
-      properties:
-        kind:
-          description: The type of ID. Options are `user` or `group`.
-          type: string
-          enum:
-          - user
-          - group
-        id:
-          description: The ID of the user or user group (Team) you wish to give, remove, or edit permissions.
-          type: string
-        permission_level:
-          description: The permission level you wish to give to user or user group (Team). `1`=read, `3` = comment, `4`= edit, `5`= create, and `null`= remove access.
-          type: number
-          enum:
-          - 1
-          - 3
-          - 4
-          - 5
-        from_group_id:
-          description: If the user ACL entry was expanded from a group, this is the group's ID
-          type: string
-        from_parent_type:
-          $ref: '#/components/schemas/ObjectType'
-        from_parent_id:
-          description: If set, this ACL entry was expanded from a parent with this id.  Will be undefined if parent is not accessible.
-          type: string
-        calculated:
-          description: If set, this ACL entry was calculated from the user's attributes (e.g. the user is the owner of the object)
-          type: boolean
-      required:
-      - kind
-      - id
-    UserPatchAclApiRequest:
-      type: object
-      properties:
-        private:
-          description: The privacy of an object or location.
-          type: boolean
-        entries:
-          description: The user or user group (Team) you wish to give, remove, or edit permissions.
-          type: array
-          items:
-            $ref: '#/components/schemas/UserAclEntry'
-    UserAclPublicControllerPublicPatchAclWorkspaceIdPath:
-      description: The ID of the Workspace.
-      type: number
     ObjectType:
       description: Any object that can be shared in a Workspace. For example, `customField`, `dashboard`, `folder`, `goal`, `goalFolder`, `list`, `space`, `task`, and `view`.
       type: string
@@ -169,6 +121,54 @@ components:
       - workscheduleWorkweekSchedule
       - workspace
       - workspaceDescendantsSet
+    UserAclEntry:
+      type: object
+      properties:
+        kind:
+          description: The type of ID. Options are `user` or `group`.
+          type: string
+          enum:
+          - user
+          - group
+        id:
+          description: The ID of the user or user group (Team) you wish to give, remove, or edit permissions.
+          type: string
+        permission_level:
+          description: The permission level you wish to give to user or user group (Team). `1`=read, `3` = comment, `4`= edit, `5`= create, and `null`= remove access.
+          type: number
+          enum:
+          - 1
+          - 3
+          - 4
+          - 5
+        from_group_id:
+          description: If the user ACL entry was expanded from a group, this is the group's ID
+          type: string
+        from_parent_type:
+          $ref: '#/components/schemas/ObjectType'
+        from_parent_id:
+          description: If set, this ACL entry was expanded from a parent with this id.  Will be undefined if parent is not accessible.
+          type: string
+        calculated:
+          description: If set, this ACL entry was calculated from the user's attributes (e.g. the user is the owner of the object)
+          type: boolean
+      required:
+      - kind
+      - id
+    UserPatchAclApiRequest:
+      type: object
+      properties:
+        private:
+          description: The privacy of an object or location.
+          type: boolean
+        entries:
+          description: The user or user group (Team) you wish to give, remove, or edit permissions.
+          type: array
+          items:
+            $ref: '#/components/schemas/UserAclEntry'
+    UserAclPublicControllerPublicPatchAclWorkspaceIdPath:
+      description: The ID of the Workspace.
+      type: number
   securitySchemes:
     authHeader:
       in: header
