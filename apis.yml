@@ -523,6 +523,8 @@ apis:
   humanURL: https://developer.clickup.com/docs/tasks
   baseURL: https://api.clickup.com
   tags:
+  - ACL
+  tags_raw:
   - Acls
   properties:
   - type: OpenAPI
@@ -565,6 +567,8 @@ apis:
   humanURL: https://developer.clickup.com/docs/tasks
   baseURL: https://api.clickup.com
   tags:
+  - Audit Logs
+  tags_raw:
   - Auditlogs
   properties:
   - type: OpenAPI
@@ -789,6 +793,8 @@ apis:
   humanURL: https://developer.clickup.com/docs/tasks
   baseURL: https://api.clickup.com
   tags:
+  - User
+  tags_raw:
   - Users
   properties:
   - type: OpenAPI
@@ -803,6 +809,8 @@ apis:
   humanURL: https://developer.clickup.com/docs/tasks
   baseURL: https://api.clickup.com
   tags:
+  - Workspace
+  tags_raw:
   - Workspaces
   properties:
   - type: OpenAPI
@@ -812,6 +820,9 @@ apis:
   - type: Documentation
     url: https://developer.clickup.com/docs
 common:
+- type: CapabilityMap
+  url: capabilities/clickup-capability-edges.yml
+  name: Clickup Business Capability Map
 - type: Overlay
   url: overlays/clickup-api-v2-reference-overlay.yaml
 - type: Overlay
