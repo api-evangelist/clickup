@@ -1,0 +1,66 @@
+slug: clickup
+provider: Clickup
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Software & Technology
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 5
+edges:
+- tag: Tasks
+  spec_file: clickup-tasks-api-openapi.yml
+  capability_id: BC-900.30
+  capability_id_l1: BC-900
+  capability_name: Project Management
+  confidence: 0.85
+  evidence: POST /v2/list/{list_id}/task  CreateTask  Create Task; GET /v2/task/{task_id}/time_in_status  Get
+    Task's Time in Status; PATCH .../time_estimates_by_user  Update task time estimates by user
+  reason: Full task lifecycle — create, update, move, merge, time-in-status and per-user time estimates
+    — is the core of project execution, planning and tracking in a work-management platform.
+- tag: Goals
+  spec_file: clickup-goals-api-openapi.yml
+  capability_id: BC-100.20
+  capability_id_l1: BC-100
+  capability_name: Strategy Execution Management
+  confidence: 0.8
+  evidence: 'POST /v2/goal/{goal_id}/key_result  CreateKeyResult  Create Key Result; schemas: Goal, KeyResult,
+    UpdateGoalRequest'
+  reason: Goals paired with Key Results is the OKR construct, which the candidate list places explicitly
+    under Strategy Execution Management ('objectives, OKRs, balanced scorecards'). Some ambiguity remains
+    as to whether team-level goals constitute enterprise strategy execution.
+- tag: Task Relationships
+  spec_file: clickup-task-relationships-api-openapi.yml
+  capability_id: BC-900.30
+  capability_id_l1: BC-900
+  capability_name: Project Management
+  confidence: 0.78
+  evidence: POST /v2/task/{task_id}/dependency  AddDependency  Add Dependency; POST /v2/task/{task_id}/link/{links_to}  Add
+    Task Link
+  reason: Creation and removal of task dependencies and links is classic project planning/scheduling dependency
+    management within project execution.
+- tag: Privacy and access
+  spec_file: clickup-privacy-and-access-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.72
+  evidence: PATCH /api/v3/workspaces/{workspace_id}/{object_type}/{object_id}/acls  publicPatchAcl  Update
+    privacy and access of an object or location; schemas UserAclEntry, UserPatchAclApiRequest
+  reason: The operation edits access control lists granting users access to objects — authorisation/entitlement
+    administration, which is Identity & Access Management. Single operation, so moderate confidence.
+- tag: Task Checklists
+  spec_file: clickup-task-checklists-api-openapi.yml
+  capability_id: BC-900.30
+  capability_id_l1: BC-900
+  capability_name: Project Management
+  confidence: 0.72
+  evidence: POST /v2/task/{task_id}/checklist  CreateChecklist  Create Checklist; POST /v2/checklist/{checklist_id}/checklist_item  Create
+    Checklist Item
+  reason: Checklists and checklist items decompose work inside tasks — day-to-day project execution and
+    tracking in a work-management platform.
