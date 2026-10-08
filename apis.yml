@@ -820,6 +820,8 @@ apis:
   - type: Documentation
     url: https://developer.clickup.com/docs
 common:
+- type: FinOps
+  url: finops/clickup-finops.yml
 - type: CapabilityMap
   url: capabilities/clickup-capability-edges.yml
   name: Clickup Business Capability Map
