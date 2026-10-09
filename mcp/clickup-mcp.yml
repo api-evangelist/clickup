@@ -98,3 +98,20 @@ rate_limits:
     MCP rate limits depend on whether the Workspace has the Everything AI add-on. With the add-on, MCP
     limits match the Public API limits for the plan. Documented at
     https://developer.clickup.com/docs/connect-an-ai-assistant-to-clickups-mcp-server
+rfc9728:
+  endpoint: https://mcp.clickup.com/mcp
+  metadata_url: https://mcp.clickup.com/.well-known/oauth-protected-resource/mcp
+  discovered_via: WWW-Authenticate resource_metadata on an anonymous POST initialize
+  fetched: '2026-09-25'
+  http_status: 200
+  content_type: application/json
+  document:
+    resource: https://mcp.clickup.com/mcp
+    authorization_servers:
+    - https://mcp.clickup.com
+    scopes_supported:
+    - read
+    - write
+    bearer_methods_supported:
+    - header
+    resource_name: ClickUp MCP Server
