@@ -6,6 +6,7 @@ source:
 - https://composio.dev/toolkits/clickup
 checked:
 - https://composio.dev/toolkits/clickup
+- https://github.com/marketplace?type=apps
 - https://hightouch.com/docs/destinations/clickup
 - https://monid.ai/tools/clickup
 - https://n8n.io/integrations/clickup/
@@ -1269,6 +1270,23 @@ edges:
       - upsert
   detected_by: sweep-cdp.py
   first_seen: '2026-10-14'
+- partner_name: GitHub Marketplace (apps)
+  partner: github
+  partner_match: aggregator
+  type: marketplace
+  marketplace: github-apps
+  channel: partner-built
+  relationship: platform-app
+  direction: third-party
+  evidence: https://github.com/marketplace/clickup
+  listing_count: 1
+  apps:
+  - ClickUp
+  publisher_name: ClickUp
+  badges:
+  - Verified domain
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
 templates:
 - title: Create ClickUp tasks from Google Calendar events
   url: https://zapier.com/apps/clickup/integrations/google-calendar/20064/create-clickup-tasks-from-google-calendar-events
