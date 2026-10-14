@@ -296,7 +296,6 @@
   arazzo: null
 - slug: clickup-fathom
   label: Fathom
-  partner: fathom
   partner_name: Fathom
   category: AI Meeting Assistants
   type: marketplace
@@ -304,7 +303,7 @@
   channel: ipaas-usage
   evidence: https://zapier.com/apps/clickup/integrations/fathom
   source: edge
-  status: pending-generation
+  status: pending-partner-spec
   arazzo: null
 - slug: clickup-trello
   label: Trello
@@ -332,7 +331,6 @@
   arazzo: null
 - slug: clickup-microsoft-to-do
   label: Microsoft To Do
-  partner: microsoft-to-do
   partner_name: Microsoft To Do
   category: Microsoft
   type: marketplace
@@ -340,11 +338,10 @@
   channel: ipaas-usage
   evidence: https://zapier.com/apps/clickup/integrations/microsoft-todo
   source: edge
-  status: pending-generation
+  status: pending-partner-spec
   arazzo: null
 - slug: clickup-microsoft-excel
   label: Microsoft Excel
-  partner: microsoft-excel
   partner_name: Microsoft Excel
   category: Microsoft
   type: marketplace
@@ -352,7 +349,7 @@
   channel: ipaas-usage
   evidence: https://zapier.com/apps/clickup/integrations/excel
   source: edge
-  status: pending-generation
+  status: pending-partner-spec
   arazzo: null
 - slug: clickup-clickfunnels-classic
   label: ClickFunnels Classic
@@ -401,4 +398,16 @@
   evidence: https://zapier.com/apps/clickup/integrations/jotform
   source: edge
   status: pending-generation
+  arazzo: null
+- slug: clickup-hightouch
+  label: Hightouch
+  partner: hightouch
+  partner_name: Hightouch
+  type: coverage
+  marketplace: coverage
+  channel: partner-built
+  evidence: https://hightouch.com/docs/destinations/clickup
+  source: edge
+  relationship: connector-coverage
+  status: not-a-workflow
   arazzo: null
