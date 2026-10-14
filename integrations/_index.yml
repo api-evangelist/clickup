@@ -399,6 +399,18 @@
   source: edge
   status: pending-generation
   arazzo: null
+- slug: clickup-github-marketplace-apps
+  label: GitHub Marketplace (apps)
+  partner: github
+  partner_name: GitHub Marketplace (apps)
+  type: marketplace
+  marketplace: github-apps
+  channel: partner-built
+  evidence: https://github.com/marketplace/clickup
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
 - slug: clickup-hightouch
   label: Hightouch
   partner: hightouch
@@ -411,14 +423,27 @@
   relationship: connector-coverage
   status: not-a-workflow
   arazzo: null
-- slug: clickup-github-marketplace-apps
-  label: GitHub Marketplace (apps)
-  partner: github
-  partner_name: GitHub Marketplace (apps)
+- slug: clickup-crowdstrike-own
+  label: CrowdStrike (own)
+  partner: crowdstrike
+  partner_name: CrowdStrike (own)
   type: marketplace
-  marketplace: github-apps
+  marketplace: own
   channel: partner-built
-  evidence: https://github.com/marketplace/clickup
+  evidence: https://marketplace.crowdstrike.com/listings/clickup/
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: clickup-okta-own
+  label: Okta (own)
+  partner: okta
+  partner_name: Okta (own)
+  category: Single Sign-On
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://www.okta.com/integrations/clickup/
   source: edge
   relationship: platform-app
   status: not-a-workflow
