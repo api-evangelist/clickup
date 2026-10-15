@@ -471,7 +471,7 @@
     app_slug: clickup
     beta: false
     builder: unknown (not in the directory record)
-  status: pending-generation
+  status: not-a-workflow
   arazzo: null
 - slug: clickup-n8n
   label: n8n
@@ -496,7 +496,7 @@
     node_path: ClickUp
     trigger: true
     builder: n8n (built-in node)
-  status: pending-generation
+  status: not-a-workflow
   arazzo: null
 - slug: clickup-pipedream
   label: Pipedream
@@ -522,5 +522,5 @@
     actions: true
     sources: true
     builder: Pipedream repo (component)
-  status: pending-generation
+  status: not-a-workflow
   arazzo: null
