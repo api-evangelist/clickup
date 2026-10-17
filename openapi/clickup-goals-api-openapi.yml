@@ -2090,6 +2090,76 @@ components:
           items:
             $ref: '#/components/schemas/Goal'
           description: Goals within the folder.
+    CreateKeyResultRequest:
+      type: object
+      required:
+      - name
+      - type
+      description: Request body for creating a new Key Result.
+      properties:
+        name:
+          type: string
+          description: The name of the Key Result.
+        owners:
+          type: array
+          items:
+            type: integer
+          description: User IDs to set as owners.
+        type:
+          type: string
+          enum:
+          - number
+          - currency
+          - boolean
+          - percentage
+          - automatic
+          description: The type of the Key Result target.
+        steps_start:
+          type: number
+          description: The starting value.
+        steps_end:
+          type: number
+          description: The target end value.
+        unit:
+          type: string
+          description: The unit of measurement for currency type.
+        task_ids:
+          type: array
+          items:
+            type: string
+          description: Task IDs to link for automatic tracking.
+        list_ids:
+          type: array
+          items:
+            type: string
+          description: List IDs to link for automatic tracking.
+    UpdateGoalRequest:
+      type: object
+      description: Request body for updating an existing Goal.
+      properties:
+        name:
+          type: string
+          description: The updated name of the Goal.
+        due_date:
+          type: integer
+          format: int64
+          description: Updated due date as Unix timestamp in milliseconds.
+        description:
+          type: string
+          description: The updated description.
+        rem_owners:
+          type: array
+          items:
+            type: integer
+          description: User IDs to remove as owners.
+        add_owners:
+          type: array
+          items:
+            type: integer
+          description: User IDs to add as owners.
+        color:
+          type: string
+          description: The updated hex color code.
     Goal:
       type: object
       description: A Goal object representing an objective with trackable key results.
@@ -2168,33 +2238,6 @@ components:
           type: string
           format: uri
           description: The URL to the Goal in the ClickUp web application.
-    UpdateGoalRequest:
-      type: object
-      description: Request body for updating an existing Goal.
-      properties:
-        name:
-          type: string
-          description: The updated name of the Goal.
-        due_date:
-          type: integer
-          format: int64
-          description: Updated due date as Unix timestamp in milliseconds.
-        description:
-          type: string
-          description: The updated description.
-        rem_owners:
-          type: array
-          items:
-            type: integer
-          description: User IDs to remove as owners.
-        add_owners:
-          type: array
-          items:
-            type: integer
-          description: User IDs to add as owners.
-        color:
-          type: string
-          description: The updated hex color code.
     KeyResult:
       type: object
       description: A Key Result (target) within a Goal.
@@ -2264,59 +2307,6 @@ components:
         last_action:
           type: object
           description: Details of the last action performed on the Key Result.
-    UpdateKeyResultRequest:
-      type: object
-      description: Request body for updating an existing Key Result.
-      properties:
-        steps_current:
-          type: number
-          description: The current progress value.
-        note:
-          type: string
-          description: A note to add with the update.
-    CreateKeyResultRequest:
-      type: object
-      required:
-      - name
-      - type
-      description: Request body for creating a new Key Result.
-      properties:
-        name:
-          type: string
-          description: The name of the Key Result.
-        owners:
-          type: array
-          items:
-            type: integer
-          description: User IDs to set as owners.
-        type:
-          type: string
-          enum:
-          - number
-          - currency
-          - boolean
-          - percentage
-          - automatic
-          description: The type of the Key Result target.
-        steps_start:
-          type: number
-          description: The starting value.
-        steps_end:
-          type: number
-          description: The target end value.
-        unit:
-          type: string
-          description: The unit of measurement for currency type.
-        task_ids:
-          type: array
-          items:
-            type: string
-          description: Task IDs to link for automatic tracking.
-        list_ids:
-          type: array
-          items:
-            type: string
-          description: List IDs to link for automatic tracking.
     CreateGoalRequest:
       type: object
       required:
@@ -2345,14 +2335,17 @@ components:
         color:
           type: string
           description: The hex color code of the Goal.
+    UpdateKeyResultRequest:
+      type: object
+      description: Request body for updating an existing Key Result.
+      properties:
+        steps_current:
+          type: number
+          description: The current progress value.
+        note:
+          type: string
+          description: A note to add with the update.
   parameters:
-    teamId:
-      name: team_id
-      in: path
-      required: true
-      description: The unique identifier of the Workspace (team).
-      schema:
-        type: integer
     goalId:
       name: goal_id
       in: path
@@ -2367,6 +2360,13 @@ components:
       description: The unique identifier of the Key Result.
       schema:
         type: string
+    teamId:
+      name: team_id
+      in: path
+      required: true
+      description: The unique identifier of the Workspace (team).
+      schema:
+        type: integer
   securitySchemes:
     Authorization_Token:
       name: Authorization

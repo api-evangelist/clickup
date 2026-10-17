@@ -951,6 +951,13 @@ paths:
       description: ClickUp API v2 Production Server
 components:
   parameters:
+    taskId:
+      name: task_id
+      in: path
+      required: true
+      description: The unique identifier of the task.
+      schema:
+        type: string
     fieldId:
       name: field_id
       in: path
@@ -965,13 +972,6 @@ components:
       description: The unique identifier of the list.
       schema:
         type: integer
-    taskId:
-      name: task_id
-      in: path
-      required: true
-      description: The unique identifier of the task.
-      schema:
-        type: string
   schemas:
     CustomFieldDefinition:
       type: object

@@ -923,62 +923,7 @@ paths:
       x-is-workspace-endpoint: true
 components:
   schemas:
-    ChatSimpleUser:
-      type: object
-      properties:
-        email:
-          description: Email of the user.
-          type: string
-        id:
-          description: ID of the user.
-          type: string
-        initials:
-          description: Initials of the user.
-          type: string
-        name:
-          description: Name of the user.
-          type: string
-        username:
-          description: Userame of the user.
-          type: string
-      required:
-      - email
-      - id
-    ChatCreateDirectMessageChatChannel:
-      type: object
-      properties:
-        user_ids:
-          description: The unique user IDs of participants in the direct message Chat, up to 15. A Self DM is created when no user IDs are provided
-          type: array
-          items:
-            type: string
-          maxItems: 15
-          uniqueItems: true
-    CommentChatPostDataPatch:
-      type: object
-      properties:
-        subtype:
-          description: The subtype of the chat post.
-          allOf:
-          - $ref: '#/components/schemas/CommentChatPostSubtypePatch'
-        title:
-          description: The title of the chat post.
-          type: string
-          maxLength: 255
-    CommentCreateChatReaction:
-      type: object
-      properties:
-        reaction:
-          description: The name of the emoji to use for the reaction.
-          type: string
-      required:
-      - reaction
-    ChatPublicApiChatChannelsControllerGetChatChannelMembersLimitQuery:
-      type: integer
-      default: 50
-      maximum: 100
-      minimum: 1
-    CommentCreateChatMessage:
+    CommentPatchChatMessage:
       type: object
       properties:
         assignee:
@@ -987,41 +932,11 @@ components:
         group_assignee:
           description: The possible group assignee of the message.
           type: string
-        triaged_action:
-          description: The triaged action applied to the message.
-          type: number
-          enum:
-          - 1
-          - 2
-        triaged_object_id:
-          description: The message triaged action object id.
-          type: string
-        triaged_object_type:
-          description: The message triaged action object type.
-          type: number
-        type:
-          description: The type of message.
-          type: string
-          enum:
-          - message
-          - post
         content:
-          description: 'The full content of the message to be created. Note: Some code examples may display additional backslashes.'
+          description: The full content of the message to be created
           format: RichText
           maxLength: 40000
           type: string
-        reactions:
-          description: The reactions to the message that exist at creation time
-          type: array
-          items:
-            $ref: '#/components/schemas/ChatReaction'
-          maxItems: 10
-        followers:
-          description: The ids of the followers of the message
-          type: array
-          items:
-            type: string
-          maxItems: 10
         content_format:
           description: 'The format of the Chat Message content (Default: text/md)'
           type: string
@@ -1032,201 +947,15 @@ components:
         post_data:
           description: The data of the post message.
           allOf:
-          - $ref: '#/components/schemas/CommentChatPostDataCreate'
-      required:
-      - type
-      - content
-    ChatPublicApiChatChannelsControllerCreateChatChannel201Response:
-      description: The new Channel.
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/ChatChannel'
-      required:
-      - data
-    ChatRoomVisibility:
-      description: The visibility of the room
-      type: string
-      enum:
-      - PUBLIC
-      - PRIVATE
-    ChatPublicApiChatChannelsControllerGetChatChannelFollowersLimitQuery:
+          - $ref: '#/components/schemas/CommentChatPostDataPatch'
+        resolved:
+          description: The resolved status of the message.
+          type: boolean
+    CommentPublicApiChatMessagesControllerGetChatMessageTaggedUsersLimitQuery:
       type: integer
       default: 50
       maximum: 100
       minimum: 1
-    ChatRoomParentDTO:
-      type: object
-      properties:
-        id:
-          type: string
-        type:
-          type: number
-      required:
-      - id
-      - type
-    ChatRoomType:
-      description: The type of the room
-      type: string
-      enum:
-      - CHANNEL
-      - DM
-      - GROUP_DM
-    CommentPublicApiChatMessagesControllerGetChatMessagesContentFormatQuery:
-      type: string
-      default: text/md
-      enum:
-      - text/md
-      - text/plain
-    ChatPublicApiChatChannelsControllerCreateChatChannelWorkspaceIdPath:
-      type: integer
-    ChatPublicApiChatChannelsControllerCreateDirectMessageChatChannel201Response:
-      description: The new Direct Message.
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/ChatChannel'
-      required:
-      - data
-    ChatPublicApiChatChannelsControllerGetChatChannelFollowers200Response:
-      allOf:
-      - $ref: '#/components/schemas/ChatPaginatedResponse'
-      - type: object
-        description: The list of Channel followers.
-        properties:
-          data:
-            type: array
-            items:
-              $ref: '#/components/schemas/ChatSimpleUser'
-    CommentChatPostDataCreate:
-      type: object
-      properties:
-        title:
-          description: The title of the chat post.
-          type: string
-          maxLength: 255
-        subtype:
-          description: The subtype of the chat post.
-          allOf:
-          - $ref: '#/components/schemas/CommentChatPostSubtypeCreate'
-      required:
-      - title
-      - subtype
-    ChatPublicApiChatChannelsControllerCreateLocationChatChannelWorkspaceIdPath:
-      type: integer
-    CommentPublicApiChatMessagesControllerGetChatMessageRepliesContentFormatQuery:
-      type: string
-      default: text/md
-      enum:
-      - text/md
-      - text/plain
-    CommentPublicApiChatMessagesControllerDeleteChatReactionWorkspaceIdPath:
-      type: integer
-    ChatPublicApiChatChannelsControllerCreateLocationChatChannel201Response:
-      description: The new Channel.
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/ChatChannel'
-      required:
-      - data
-    CommentPublicApiChatMessagesControllerGetChatMessageReplies200Response:
-      allOf:
-      - $ref: '#/components/schemas/CommentPaginatedResponse'
-      - type: object
-        description: The list of replies to a message, most recent first.
-        properties:
-          data:
-            type: array
-            items:
-              $ref: '#/components/schemas/ReplyMessage'
-    CommentPublicApiChatMessagesControllerDeleteChatMessageWorkspaceIdPath:
-      type: integer
-    ChatPublicApiErrorResponse:
-      type: object
-      properties:
-        status:
-          description: The HTTP Status code for the error
-          type: integer
-        message:
-          description: The message describing the error
-          type: string
-          example: Generic error message
-        trace_id:
-          description: Unique trace ID for tracking the request. Used for troubleshooting errors
-          type:
-          - integer
-          - 'null'
-          example: 123456789
-        timestamp:
-          description: The time of the error (Unix epoch milliseconds timestamp).
-          type: integer
-          example: 1671534256138
-      required:
-      - status
-      - message
-      - trace_id
-      - timestamp
-    ChatPublicApiChatChannelsControllerUpdateChatChannelWorkspaceIdPath:
-      type: integer
-    ChatLastReadAtData:
-      type: object
-      properties:
-        parent_id:
-          type: string
-        parent_type:
-          $ref: '#/components/schemas/ObjectType'
-        root_parent_id:
-          type: string
-        root_parent_type:
-          $ref: '#/components/schemas/ObjectType'
-        date:
-          description: When the user last read comments to this object, set in the past to mark comments as unread. Should be a timestamp in milliseconds.
-          type: number
-        _version_vector:
-          allOf:
-          - $ref: '#/components/schemas/ChatCommentVersionVector'
-          deprecated: true
-        version:
-          description: The version of the object when the last read at object was last updated.
-          type: number
-        has_unread:
-          description: Whether the user has unread comments on this object. (Optional)
-          type: boolean
-        num_unread:
-          description: How many unread comments there are on this object. (Optional)
-          type: number
-        latest_comment_at:
-          description: The date of the latest comment on this object. (Optional)
-          type: number
-        badge_count:
-          description: The badge count for this object. (Optional)
-          type: number
-        thread_count:
-          description: The number of unread threads on this object. (Optional)
-          type: number
-        mention_count:
-          description: The number of mentions on this object. (Optional)
-          type: number
-        last_updated_at:
-          description: The date of the last update to this object. (Optional)
-          type: number
-      required:
-      - parent_id
-      - parent_type
-      - root_parent_id
-      - root_parent_type
-      - date
-      - _version_vector
-    ChatPublicApiChatChannelsControllerGetChatChannelsChannelTypesQuery: {}
-    CommentPaginatedResponse:
-      type: object
-      properties:
-        next_cursor:
-          description: The next cursor to use for pagination.
-          type: string
-      required:
-      - next_cursor
     ChatPublicApiChatChannelsControllerCreateChatChannel200Response:
       description: The existing Channel that is matching the creation request.
       type: object
@@ -1235,14 +964,137 @@ components:
           $ref: '#/components/schemas/ChatChannel'
       required:
       - data
-    ChatPublicApiChatChannelsControllerUpdateChatChannel200Response:
-      description: The Channel was successfully updated.
+    ChatPublicApiChatChannelsControllerGetChatChannelMembersWorkspaceIdPath:
+      type: integer
+    ChatReaction:
+      type: object
+      properties:
+        date:
+          description: The date & time the reaction was created (Unix epoch milliseconds timestamp).
+          type: number
+        reaction:
+          description: The reaction to the message.
+          type: string
+        user_id:
+          description: The ID of the user who created the reaction.
+          type: string
+      required:
+      - date
+      - reaction
+      - user_id
+    CommentPublicApiChatMessagesControllerGetChatMessageReactions200Response:
+      allOf:
+      - $ref: '#/components/schemas/CommentPaginatedResponse'
+      - type: object
+        description: The list of message reactions.
+        properties:
+          data:
+            type: array
+            items:
+              $ref: '#/components/schemas/ChatReaction'
+    ChatPublicApiChatChannelsControllerGetChatChannelsIncludeClosedQuery:
+      type: boolean
+      default: false
+    ChatChannel:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          description: The full Description of the Channel.
+          type: string
+          format: RichText
+        topic:
+          type: string
+        type:
+          $ref: '#/components/schemas/ChatRoomType'
+        visibility:
+          $ref: '#/components/schemas/ChatRoomVisibility'
+        parent:
+          description: Parent information
+          allOf:
+          - $ref: '#/components/schemas/ChatRoomParentDTO'
+        creator:
+          description: ID of the user who created this room
+          type: string
+        created_at:
+          description: Timestamp of when this room was created
+          type: string
+        updated_at:
+          description: Timestamp of the last update in this room - Deprecated in favor of latest_comment_at
+          type: string
+          deprecated: true
+        workspace_id:
+          description: Workspace ID of the chat room
+          type: string
+        archived:
+          type: boolean
+        latest_comment_at:
+          description: Timestamp of the last comment in this room. Optional in the case of a new room with no comments yet
+          type: string
+        is_canonical_channel:
+          description: Is this the canonical channel for the parent location?
+          type: boolean
+        is_hidden:
+          description: Has the user hidden this room from their sidebar? Currently only an option for DM/Group DM.
+          type: boolean
+        default_view:
+          description: Data about the default view that the room should open in
+          allOf:
+          - $ref: '#/components/schemas/ChatDefaultViewDTO'
+        channel_type:
+          $ref: '#/components/schemas/ChatSubcategoryType'
+        counts:
+          description: Counts relevant to the user requesting the chat room
+          allOf:
+          - $ref: '#/components/schemas/ChatLastReadAtData'
+        chat_room_category:
+          description: The category of the chat room, e.g. a welcome channel, (in the future, maybe) a ClickBot channel, etc.
+          type: string
+          enum:
+          - WELCOME_CHANNEL
+        canvas_id:
+          description: The id of the canvas owned by the chat room, if any
+          type: string
+        links:
+          description: The links to elements of the Channel.
+          allOf:
+          - $ref: '#/components/schemas/ChatChannelLinks'
+      required:
+      - id
+      - name
+      - type
+      - visibility
+      - parent
+      - creator
+      - created_at
+      - updated_at
+      - workspace_id
+      - archived
+      - links
+    ChatPublicApiChatChannelsControllerCreateLocationChatChannel200Response:
+      description: The existing Channel that is matching the creation request.
       type: object
       properties:
         data:
           $ref: '#/components/schemas/ChatChannel'
       required:
       - data
+    ChatDefaultViewDTO:
+      type: object
+      properties:
+        type:
+          type: number
+        view_id:
+          type: string
+        standard:
+          type: boolean
+      required:
+      - type
+      - view_id
+      - standard
     ChatMessage:
       type: object
       properties:
@@ -1328,14 +1180,93 @@ components:
       - user_id
       - links
       - replies_count
-    ChatPublicApiChatChannelsControllerCreateLocationChatChannel200Response:
-      description: The existing Channel that is matching the creation request.
+    ChatPublicApiChatChannelsControllerCreateChatChannelWorkspaceIdPath:
+      type: integer
+    ChatPublicApiChatChannelsControllerGetChatChannelsChannelTypesQuery: {}
+    CommentPublicApiChatMessagesControllerGetChatMessageTaggedUsersWorkspaceIdPath:
+      type: integer
+    CommentPublicApiChatMessagesControllerDeleteChatMessageWorkspaceIdPath:
+      type: integer
+    ChatPublicApiChatChannelsControllerGetChatChannelsWithMessageSinceQuery:
+      type: number
+    CommentPublicApiChatMessagesControllerGetChatMessagesContentFormatQuery:
+      type: string
+      default: text/md
+      enum:
+      - text/md
+      - text/plain
+    CommentPublicApiChatMessagesControllerGetChatMessages200Response:
+      allOf:
+      - $ref: '#/components/schemas/CommentPaginatedResponse'
+      - type: object
+        description: The list of top level messages in the Channel, most recent first.
+        properties:
+          data:
+            type: array
+            items:
+              $ref: '#/components/schemas/ChatMessage'
+    ChatCommentVector:
+      type: object
+      properties:
+        master_id:
+          type: number
+        version:
+          type: number
+        deleted:
+          type: boolean
+      required:
+      - master_id
+      - version
+      - deleted
+    ChatPublicApiChatChannelsControllerGetChatChannelFollowersLimitQuery:
+      type: integer
+      default: 50
+      maximum: 100
+      minimum: 1
+    ChatCommentVersionVector:
+      type: object
+      properties:
+        object_id:
+          type: string
+        object_type:
+          type: string
+        vector:
+          type: array
+          items:
+            $ref: '#/components/schemas/ChatCommentVector'
+        workspace_id:
+          type: number
+      required:
+      - object_id
+      - object_type
+      - vector
+      - workspace_id
+    CommentPublicApiChatMessagesControllerGetChatMessageReplies200Response:
+      allOf:
+      - $ref: '#/components/schemas/CommentPaginatedResponse'
+      - type: object
+        description: The list of replies to a message, most recent first.
+        properties:
+          data:
+            type: array
+            items:
+              $ref: '#/components/schemas/ReplyMessage'
+    ChatPublicApiChatChannelsControllerCreateChatChannel201Response:
+      description: The new Channel.
       type: object
       properties:
         data:
           $ref: '#/components/schemas/ChatChannel'
       required:
       - data
+    ChatRoomVisibility:
+      description: The visibility of the room
+      type: string
+      enum:
+      - PUBLIC
+      - PRIVATE
+    ChatPublicApiChatChannelsControllerGetChatChannelsWorkspaceIdPath:
+      type: integer
     ChatCreateChatChannel:
       type: object
       properties:
@@ -1363,28 +1294,296 @@ components:
           - PRIVATE
       required:
       - name
+    ChatPublicApiChatChannelsControllerCreateDirectMessageChatChannelWorkspaceIdPath:
+      type: integer
+    CommentCreateChatMessage:
+      type: object
+      properties:
+        assignee:
+          description: The possible assignee of the message.
+          type: string
+        group_assignee:
+          description: The possible group assignee of the message.
+          type: string
+        triaged_action:
+          description: The triaged action applied to the message.
+          type: number
+          enum:
+          - 1
+          - 2
+        triaged_object_id:
+          description: The message triaged action object id.
+          type: string
+        triaged_object_type:
+          description: The message triaged action object type.
+          type: number
+        type:
+          description: The type of message.
+          type: string
+          enum:
+          - message
+          - post
+        content:
+          description: 'The full content of the message to be created. Note: Some code examples may display additional backslashes.'
+          format: RichText
+          maxLength: 40000
+          type: string
+        reactions:
+          description: The reactions to the message that exist at creation time
+          type: array
+          items:
+            $ref: '#/components/schemas/ChatReaction'
+          maxItems: 10
+        followers:
+          description: The ids of the followers of the message
+          type: array
+          items:
+            type: string
+          maxItems: 10
+        content_format:
+          description: 'The format of the Chat Message content (Default: text/md)'
+          type: string
+          default: text/md
+          enum:
+          - text/md
+          - text/plain
+        post_data:
+          description: The data of the post message.
+          allOf:
+          - $ref: '#/components/schemas/CommentChatPostDataCreate'
+      required:
+      - type
+      - content
+    ChatPaginatedResponse:
+      type: object
+      properties:
+        next_cursor:
+          description: The next cursor to use for pagination.
+          type: string
+      required:
+      - next_cursor
     CommentPublicApiChatMessagesControllerGetChatMessageReactionsWorkspaceIdPath:
       type: integer
-    ChatSubcategoryType:
-      description: Type of channel (chat, project, etc.) aka subcategory_type
-      type: number
-      enum:
-      - 1
-      - 2
-      - 3
-      - 4
-    ChatPublicApiChatChannelsControllerGetChatChannelFollowersWorkspaceIdPath:
+    CommentPublicApiChatMessagesControllerPatchChatMessageWorkspaceIdPath:
       type: integer
-    ChatPublicApiChatChannelsControllerGetChatChannelMembers200Response:
+    CommentPublicApiChatMessagesControllerGetChatMessageReactionsLimitQuery:
+      type: integer
+      default: 50
+      maximum: 100
+      minimum: 1
+    ChatPublicApiChatChannelsControllerCreateDirectMessageChatChannel200Response:
+      description: The existing Direct Message that is matching the creation request.
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/ChatChannel'
+      required:
+      - data
+    CommentPublicApiChatMessagesControllerGetChatMessagesWorkspaceIdPath:
+      type: integer
+    ChatPublicApiChatChannelsControllerGetChatChannelFollowers200Response:
       allOf:
       - $ref: '#/components/schemas/ChatPaginatedResponse'
       - type: object
-        description: The list of Channel members.
+        description: The list of Channel followers.
         properties:
           data:
             type: array
             items:
               $ref: '#/components/schemas/ChatSimpleUser'
+    CommentCreateReplyMessageResponse:
+      type: object
+      properties:
+        post_data:
+          description: The data of the post message.
+          allOf:
+          - $ref: '#/components/schemas/CommentChatPostDataCreate'
+        assignee:
+          description: The possible assignee of the message.
+          type: string
+        assigned_by:
+          description: The user who assigned the message.
+          type: string
+        content:
+          description: The full content of the message.
+          format: RichText
+          type: string
+        date:
+          description: The date & time the message was created (Unix epoch milliseconds timestamp).
+          type: number
+        date_assigned:
+          description: The date & time the message was assigned (Unix epoch milliseconds timestamp).
+          type: number
+        date_resolved:
+          description: The date & time the message was resolved (Unix epoch milliseconds timestamp).
+          type: number
+        date_updated:
+          description: The date & time the message was updated (Unix epoch milliseconds timestamp).
+          type: number
+        group_assignee:
+          description: The possible group assignee of the message.
+          type: string
+        id:
+          description: The ID of the message.
+          type: string
+        parent_channel:
+          description: The ID of the chat this message belongs to.
+          type: string
+        parent_message:
+          description: The ID of the message this message is a reply to.
+          type: string
+        resolved:
+          description: The resolved status of the message.
+          type: boolean
+        resolved_by:
+          description: The user who resolved the message.
+          type: string
+        triaged_action:
+          description: The triaged action applied to the message.
+          type: number
+          enum:
+          - 1
+          - 2
+        triaged_object_id:
+          description: The message triaged action object id.
+          type: string
+        triaged_object_type:
+          description: The message triaged action object type.
+          type: number
+        type:
+          description: The type of message.
+          type: string
+          enum:
+          - message
+          - post
+        user_id:
+          description: The ID of the user who created the message.
+          type: string
+        links:
+          description: The links to elements of the message.
+          allOf:
+          - $ref: '#/components/schemas/CommentReplyMessageLinks2'
+      required:
+      - content
+      - date
+      - id
+      - parent_channel
+      - parent_message
+      - resolved
+      - type
+      - user_id
+      - links
+    CommentCreateChatMessageResponse:
+      type: object
+      properties:
+        post_data:
+          description: The data of the post message.
+          allOf:
+          - $ref: '#/components/schemas/CommentChatPostDataCreate'
+        assignee:
+          description: The possible assignee of the message.
+          type: string
+        assigned_by:
+          description: The user who assigned the message.
+          type: string
+        content:
+          description: The full content of the message.
+          format: RichText
+          type: string
+        date:
+          description: The date & time the message was created (Unix epoch milliseconds timestamp).
+          type: number
+        date_assigned:
+          description: The date & time the message was assigned (Unix epoch milliseconds timestamp).
+          type: number
+        date_resolved:
+          description: The date & time the message was resolved (Unix epoch milliseconds timestamp).
+          type: number
+        date_updated:
+          description: The date & time the message was updated (Unix epoch milliseconds timestamp).
+          type: number
+        group_assignee:
+          description: The possible group assignee of the message.
+          type: string
+        id:
+          description: The ID of the message.
+          type: string
+        parent_channel:
+          description: The ID of the chat this message belongs to.
+          type: string
+        parent_message:
+          description: The ID of the message this message is a reply to.
+          type: string
+        resolved:
+          description: The resolved status of the message.
+          type: boolean
+        resolved_by:
+          description: The user who resolved the message.
+          type: string
+        triaged_action:
+          description: The triaged action applied to the message.
+          type: number
+          enum:
+          - 1
+          - 2
+        triaged_object_id:
+          description: The message triaged action object id.
+          type: string
+        triaged_object_type:
+          description: The message triaged action object type.
+          type: number
+        type:
+          description: The type of message.
+          type: string
+          enum:
+          - message
+          - post
+        user_id:
+          description: The ID of the user who created the message.
+          type: string
+        links:
+          description: The links to elements of the message.
+          allOf:
+          - $ref: '#/components/schemas/CommentChatMessageLinks2'
+        replies_count:
+          description: The number of replies to the message.
+          type: number
+      required:
+      - content
+      - date
+      - id
+      - parent_channel
+      - resolved
+      - type
+      - user_id
+      - links
+      - replies_count
+    ChatPublicApiChatChannelsControllerGetChatChannelsLimitQuery:
+      type: integer
+      default: 50
+      maximum: 100
+      minimum: 1
+    ChatPublicApiChatChannelsControllerCreateLocationChatChannel201Response:
+      description: The new Channel.
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/ChatChannel'
+      required:
+      - data
+    ChatPublicApiChatChannelsControllerCreateDirectMessageChatChannel201Response:
+      description: The new Direct Message.
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/ChatChannel'
+      required:
+      - data
+    ChatPublicApiChatChannelsControllerGetChatChannelsIsFollowerQuery:
+      type: boolean
+      default: false
+    CommentPublicApiChatMessagesControllerDeleteChatReactionWorkspaceIdPath:
+      type: integer
     ObjectType:
       description: Any object that can be shared in a Workspace. For example, `customField`, `dashboard`, `folder`, `goal`, `goalFolder`, `list`, `space`, `task`, and `view`.
       type: string
@@ -1455,82 +1654,136 @@ components:
       - workscheduleWorkweekSchedule
       - workspace
       - workspaceDescendantsSet
-    CommentPublicApiChatMessagesControllerPatchChatMessageWorkspaceIdPath:
-      type: integer
-    CommentPublicApiChatMessagesControllerCreateChatReactionWorkspaceIdPath:
-      type: integer
     CommentPublicApiChatMessagesControllerCreateReplyMessageWorkspaceIdPath:
       type: integer
-    ChatPublicApiChatChannelsControllerGetChatChannelsIsFollowerQuery:
-      type: boolean
-      default: false
-    CommentReplyMessageLinks2:
+    CommentPublicApiErrorResponse:
       type: object
       properties:
-        reactions:
-          description: The link to the reactions of this message.
+        status:
+          description: The HTTP Status code for the error
+          type: integer
+        message:
+          description: The message describing the error
           type: string
-        tagged_users:
-          description: The link to the tagged users of this message.
-          type: string
+          example: Generic error message
+        trace_id:
+          description: Unique trace ID for tracking the request. Used for troubleshooting errors
+          type:
+          - integer
+          - 'null'
+          example: 123456789
+        timestamp:
+          description: The time of the error (Unix epoch milliseconds timestamp).
+          type: integer
+          example: 1671534256138
       required:
-      - reactions
-      - tagged_users
-    CommentChatPostSubtypeCreate:
+      - status
+      - message
+      - trace_id
+      - timestamp
+    ChatChannelLinks:
       type: object
       properties:
-        id:
-          description: The subtype ID of the chat post. You can retrieve the available subtypes for your Workspace using the [Get Post Subtype IDs](https://developer.clickup.com/reference/getsubtypes) endpoint.
+        members:
+          description: The link to the members of the Channel.
+          type: string
+        followers:
+          description: The link to the followers of the Channel.
           type: string
       required:
-      - id
-    CommentPublicApiChatMessagesControllerGetChatMessageRepliesLimitQuery:
-      type: integer
-      default: 50
-      maximum: 100
-      minimum: 1
-    ChatReaction:
+      - members
+      - followers
+    ChatCreateLocationChatChannel:
       type: object
       properties:
-        date:
-          description: The date & time the reaction was created (Unix epoch milliseconds timestamp).
-          type: number
-        reaction:
-          description: The reaction to the message.
+        description:
+          description: The description for the Chat being created.
           type: string
-        user_id:
-          description: The ID of the user who created the reaction.
+        topic:
+          description: The topic of the Chat being created.
           type: string
+        user_ids:
+          description: Optionally specify unique user IDs, up to 100.
+          type: array
+          items:
+            type: string
+          maxItems: 100
+          uniqueItems: true
+        visibility:
+          description: The visibility of the Chat being created. If not specified, the Chat is PUBLIC.
+          type: string
+          enum:
+          - PUBLIC
+          - PRIVATE
+        location:
+          description: 'The location of the chat: space, folder, or list'
+          allOf:
+          - $ref: '#/components/schemas/ChatChannelLocation'
       required:
-      - date
-      - reaction
-      - user_id
-    ChatPublicApiChatChannelsControllerGetChatChannel200Response:
-      description: The requested Channel.
+      - location
+    ChatCreateDirectMessageChatChannel:
+      type: object
+      properties:
+        user_ids:
+          description: The unique user IDs of participants in the direct message Chat, up to 15. A Self DM is created when no user IDs are provided
+          type: array
+          items:
+            type: string
+          maxItems: 15
+          uniqueItems: true
+    ChatPublicApiChatChannelsControllerUpdateChatChannel200Response:
+      description: The Channel was successfully updated.
       type: object
       properties:
         data:
           $ref: '#/components/schemas/ChatChannel'
       required:
       - data
-    CommentChatMessageLinks2:
+    ChatPublicApiChatChannelsControllerGetChatChannelWorkspaceIdPath:
+      type: integer
+    ChatSubcategoryType:
+      description: Type of channel (chat, project, etc.) aka subcategory_type
+      type: number
+      enum:
+      - 1
+      - 2
+      - 3
+      - 4
+    CommentPublicApiChatMessagesControllerGetChatMessageRepliesContentFormatQuery:
+      type: string
+      default: text/md
+      enum:
+      - text/md
+      - text/plain
+    CommentChatPostDataPatch:
       type: object
       properties:
-        reactions:
-          description: The link to the reactions of this message.
+        subtype:
+          description: The subtype of the chat post.
+          allOf:
+          - $ref: '#/components/schemas/CommentChatPostSubtypePatch'
+        title:
+          description: The title of the chat post.
           type: string
-        replies:
-          description: The link to the replies of this message.
-          type: string
-        tagged_users:
-          description: The link to the tagged users of this message.
+          maxLength: 255
+    CommentChatPostSubtypePatch:
+      type: object
+      properties:
+        id:
+          description: The subtype ID of the chat post.
           type: string
       required:
-      - reactions
-      - replies
-      - tagged_users
-    ChatPublicApiChatChannelsControllerGetChatChannelsWorkspaceIdPath:
-      type: integer
+      - id
+    ChatRoomParentDTO:
+      type: object
+      properties:
+        id:
+          type: string
+        type:
+          type: number
+      required:
+      - id
+      - type
     ReplyMessage:
       type: object
       properties:
@@ -1613,47 +1866,252 @@ components:
       - type
       - user_id
       - links
-    CommentPatchChatMessage:
+    ChatPublicApiChatChannelsControllerGetChatChannelFollowersWorkspaceIdPath:
+      type: integer
+    ChatPublicApiChatChannelsControllerGetChatChannels200Response:
+      allOf:
+      - $ref: '#/components/schemas/ChatPaginatedResponse'
+      - type: object
+        description: The list of Channels.
+        properties:
+          data:
+            type: array
+            items:
+              $ref: '#/components/schemas/ChatChannel'
+    CommentPublicApiChatMessagesControllerGetChatMessageRepliesWorkspaceIdPath:
+      type: integer
+    CommentCreateChatReaction:
       type: object
       properties:
-        assignee:
-          description: The possible assignee of the message.
+        reaction:
+          description: The name of the emoji to use for the reaction.
           type: string
-        group_assignee:
-          description: The possible group assignee of the message.
+      required:
+      - reaction
+    ChatPublicApiErrorResponse:
+      type: object
+      properties:
+        status:
+          description: The HTTP Status code for the error
+          type: integer
+        message:
+          description: The message describing the error
           type: string
-        content:
-          description: The full content of the message to be created
-          format: RichText
-          maxLength: 40000
+          example: Generic error message
+        trace_id:
+          description: Unique trace ID for tracking the request. Used for troubleshooting errors
+          type:
+          - integer
+          - 'null'
+          example: 123456789
+        timestamp:
+          description: The time of the error (Unix epoch milliseconds timestamp).
+          type: integer
+          example: 1671534256138
+      required:
+      - status
+      - message
+      - trace_id
+      - timestamp
+    CommentPublicApiChatMessagesControllerGetChatMessageTaggedUsers200Response:
+      allOf:
+      - $ref: '#/components/schemas/CommentPaginatedResponse'
+      - type: object
+        description: The list of message tagged users.
+        properties:
+          data:
+            type: array
+            items:
+              $ref: '#/components/schemas/CommentSimpleUser'
+    CommentChatMessageLinks2:
+      type: object
+      properties:
+        reactions:
+          description: The link to the reactions of this message.
           type: string
-        content_format:
-          description: 'The format of the Chat Message content (Default: text/md)'
+        replies:
+          description: The link to the replies of this message.
           type: string
-          default: text/md
-          enum:
-          - text/md
-          - text/plain
-        post_data:
-          description: The data of the post message.
+        tagged_users:
+          description: The link to the tagged users of this message.
+          type: string
+      required:
+      - reactions
+      - replies
+      - tagged_users
+    ChatRoomType:
+      description: The type of the room
+      type: string
+      enum:
+      - CHANNEL
+      - DM
+      - GROUP_DM
+    ChatPublicApiChatChannelsControllerGetChatChannel200Response:
+      description: The requested Channel.
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/ChatChannel'
+      required:
+      - data
+    ChatPublicApiChatChannelsControllerUpdateChatChannelWorkspaceIdPath:
+      type: integer
+    CommentPublicApiChatMessagesControllerCreateChatReactionWorkspaceIdPath:
+      type: integer
+    CommentChatPostDataCreate:
+      type: object
+      properties:
+        title:
+          description: The title of the chat post.
+          type: string
+          maxLength: 255
+        subtype:
+          description: The subtype of the chat post.
           allOf:
-          - $ref: '#/components/schemas/CommentChatPostDataPatch'
-        resolved:
-          description: The resolved status of the message.
+          - $ref: '#/components/schemas/CommentChatPostSubtypeCreate'
+      required:
+      - title
+      - subtype
+    CommentReplyMessageLinks2:
+      type: object
+      properties:
+        reactions:
+          description: The link to the reactions of this message.
+          type: string
+        tagged_users:
+          description: The link to the tagged users of this message.
+          type: string
+      required:
+      - reactions
+      - tagged_users
+    ChatPublicApiChatChannelsControllerGetChatChannelMembersLimitQuery:
+      type: integer
+      default: 50
+      maximum: 100
+      minimum: 1
+    CommentPaginatedResponse:
+      type: object
+      properties:
+        next_cursor:
+          description: The next cursor to use for pagination.
+          type: string
+      required:
+      - next_cursor
+    CommentSimpleUser:
+      type: object
+      properties:
+        email:
+          description: Email of the user.
+          type: string
+        id:
+          description: ID of the user.
+          type: string
+        initials:
+          description: Initials of the user.
+          type: string
+        name:
+          description: Name of the user.
+          type: string
+        username:
+          description: Userame of the user.
+          type: string
+      required:
+      - email
+      - id
+    CommentPublicApiChatMessagesControllerGetChatMessagesLimitQuery:
+      type: integer
+      default: 50
+      maximum: 100
+      minimum: 1
+    ChatSimpleUser:
+      type: object
+      properties:
+        email:
+          description: Email of the user.
+          type: string
+        id:
+          description: ID of the user.
+          type: string
+        initials:
+          description: Initials of the user.
+          type: string
+        name:
+          description: Name of the user.
+          type: string
+        username:
+          description: Userame of the user.
+          type: string
+      required:
+      - email
+      - id
+    ChatLastReadAtData:
+      type: object
+      properties:
+        parent_id:
+          type: string
+        parent_type:
+          $ref: '#/components/schemas/ObjectType'
+        root_parent_id:
+          type: string
+        root_parent_type:
+          $ref: '#/components/schemas/ObjectType'
+        date:
+          description: When the user last read comments to this object, set in the past to mark comments as unread. Should be a timestamp in milliseconds.
+          type: number
+        _version_vector:
+          allOf:
+          - $ref: '#/components/schemas/ChatCommentVersionVector'
+          deprecated: true
+        version:
+          description: The version of the object when the last read at object was last updated.
+          type: number
+        has_unread:
+          description: Whether the user has unread comments on this object. (Optional)
           type: boolean
+        num_unread:
+          description: How many unread comments there are on this object. (Optional)
+          type: number
+        latest_comment_at:
+          description: The date of the latest comment on this object. (Optional)
+          type: number
+        badge_count:
+          description: The badge count for this object. (Optional)
+          type: number
+        thread_count:
+          description: The number of unread threads on this object. (Optional)
+          type: number
+        mention_count:
+          description: The number of mentions on this object. (Optional)
+          type: number
+        last_updated_at:
+          description: The date of the last update to this object. (Optional)
+          type: number
+      required:
+      - parent_id
+      - parent_type
+      - root_parent_id
+      - root_parent_type
+      - date
+      - _version_vector
     ChatTextFormat:
       type: string
       enum:
       - text/md
       - text/plain
-    CommentChatPostSubtypePatch:
+    ChatPostData:
       type: object
       properties:
-        id:
-          description: The subtype ID of the chat post.
+        subtype:
+          description: The subtype of the chat post.
+          allOf:
+          - $ref: '#/components/schemas/ChatPostSubtype'
+        title:
+          description: The title of the chat post.
           type: string
+          maxLength: 255
       required:
-      - id
+      - subtype
+      - title
     CommentPatchChatMessageResponse:
       type: object
       properties:
@@ -1764,277 +2222,29 @@ components:
       - user_id
       - replies_count
       - links
-    CommentPublicApiChatMessagesControllerGetChatMessageTaggedUsers200Response:
-      allOf:
-      - $ref: '#/components/schemas/CommentPaginatedResponse'
-      - type: object
-        description: The list of message tagged users.
-        properties:
-          data:
-            type: array
-            items:
-              $ref: '#/components/schemas/CommentSimpleUser'
-    ChatPublicApiChatChannelsControllerGetChatChannelsLimitQuery:
+    CommentPublicApiChatMessagesControllerGetChatMessageRepliesLimitQuery:
       type: integer
       default: 50
       maximum: 100
       minimum: 1
-    ChatChannelLinks:
-      type: object
-      properties:
-        members:
-          description: The link to the members of the Channel.
-          type: string
-        followers:
-          description: The link to the followers of the Channel.
-          type: string
-      required:
-      - members
-      - followers
-    ChatPublicApiChatChannelsControllerGetChatChannelWorkspaceIdPath:
+    CommentPublicApiChatMessagesControllerCreateChatMessageWorkspaceIdPath:
       type: integer
-    CommentPublicApiErrorResponse:
+    ChatChannelLocation:
       type: object
       properties:
-        status:
-          description: The HTTP Status code for the error
-          type: integer
-        message:
-          description: The message describing the error
-          type: string
-          example: Generic error message
-        trace_id:
-          description: Unique trace ID for tracking the request. Used for troubleshooting errors
-          type:
-          - integer
-          - 'null'
-          example: 123456789
-        timestamp:
-          description: The time of the error (Unix epoch milliseconds timestamp).
-          type: integer
-          example: 1671534256138
-      required:
-      - status
-      - message
-      - trace_id
-      - timestamp
-    ChatPublicApiChatChannelsControllerCreateDirectMessageChatChannel200Response:
-      description: The existing Direct Message that is matching the creation request.
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/ChatChannel'
-      required:
-      - data
-    ChatPublicApiChatChannelsControllerGetChatChannels200Response:
-      allOf:
-      - $ref: '#/components/schemas/ChatPaginatedResponse'
-      - type: object
-        description: The list of Channels.
-        properties:
-          data:
-            type: array
-            items:
-              $ref: '#/components/schemas/ChatChannel'
-    CommentPublicApiChatMessagesControllerGetChatMessagesLimitQuery:
-      type: integer
-      default: 50
-      maximum: 100
-      minimum: 1
-    CommentCreateReplyMessageResponse:
-      type: object
-      properties:
-        post_data:
-          description: The data of the post message.
-          allOf:
-          - $ref: '#/components/schemas/CommentChatPostDataCreate'
-        assignee:
-          description: The possible assignee of the message.
-          type: string
-        assigned_by:
-          description: The user who assigned the message.
-          type: string
-        content:
-          description: The full content of the message.
-          format: RichText
-          type: string
-        date:
-          description: The date & time the message was created (Unix epoch milliseconds timestamp).
-          type: number
-        date_assigned:
-          description: The date & time the message was assigned (Unix epoch milliseconds timestamp).
-          type: number
-        date_resolved:
-          description: The date & time the message was resolved (Unix epoch milliseconds timestamp).
-          type: number
-        date_updated:
-          description: The date & time the message was updated (Unix epoch milliseconds timestamp).
-          type: number
-        group_assignee:
-          description: The possible group assignee of the message.
-          type: string
         id:
-          description: The ID of the message.
+          description: The ID of the hierarchy entity where the chat is to be located
           type: string
-        parent_channel:
-          description: The ID of the chat this message belongs to.
-          type: string
-        parent_message:
-          description: The ID of the message this message is a reply to.
-          type: string
-        resolved:
-          description: The resolved status of the message.
-          type: boolean
-        resolved_by:
-          description: The user who resolved the message.
-          type: string
-        triaged_action:
-          description: The triaged action applied to the message.
-          type: number
-          enum:
-          - 1
-          - 2
-        triaged_object_id:
-          description: The message triaged action object id.
-          type: string
-        triaged_object_type:
-          description: The message triaged action object type.
-          type: number
         type:
-          description: The type of message.
+          description: The type of the location. Must be a space, folder, or list.
           type: string
           enum:
-          - message
-          - post
-        user_id:
-          description: The ID of the user who created the message.
-          type: string
-        links:
-          description: The links to elements of the message.
-          allOf:
-          - $ref: '#/components/schemas/CommentReplyMessageLinks2'
+          - folder
+          - list
+          - space
       required:
-      - content
-      - date
       - id
-      - parent_channel
-      - parent_message
-      - resolved
       - type
-      - user_id
-      - links
-    CommentPublicApiChatMessagesControllerGetChatMessages200Response:
-      allOf:
-      - $ref: '#/components/schemas/CommentPaginatedResponse'
-      - type: object
-        description: The list of top level messages in the Channel, most recent first.
-        properties:
-          data:
-            type: array
-            items:
-              $ref: '#/components/schemas/ChatMessage'
-    CommentPublicApiChatMessagesControllerGetChatMessageTaggedUsersWorkspaceIdPath:
-      type: integer
-    ChatDefaultViewDTO:
-      type: object
-      properties:
-        type:
-          type: number
-        view_id:
-          type: string
-        standard:
-          type: boolean
-      required:
-      - type
-      - view_id
-      - standard
-    ChatPublicApiChatChannelsControllerGetChatChannelMembersWorkspaceIdPath:
-      type: integer
-    CommentCreateChatMessageResponse:
-      type: object
-      properties:
-        post_data:
-          description: The data of the post message.
-          allOf:
-          - $ref: '#/components/schemas/CommentChatPostDataCreate'
-        assignee:
-          description: The possible assignee of the message.
-          type: string
-        assigned_by:
-          description: The user who assigned the message.
-          type: string
-        content:
-          description: The full content of the message.
-          format: RichText
-          type: string
-        date:
-          description: The date & time the message was created (Unix epoch milliseconds timestamp).
-          type: number
-        date_assigned:
-          description: The date & time the message was assigned (Unix epoch milliseconds timestamp).
-          type: number
-        date_resolved:
-          description: The date & time the message was resolved (Unix epoch milliseconds timestamp).
-          type: number
-        date_updated:
-          description: The date & time the message was updated (Unix epoch milliseconds timestamp).
-          type: number
-        group_assignee:
-          description: The possible group assignee of the message.
-          type: string
-        id:
-          description: The ID of the message.
-          type: string
-        parent_channel:
-          description: The ID of the chat this message belongs to.
-          type: string
-        parent_message:
-          description: The ID of the message this message is a reply to.
-          type: string
-        resolved:
-          description: The resolved status of the message.
-          type: boolean
-        resolved_by:
-          description: The user who resolved the message.
-          type: string
-        triaged_action:
-          description: The triaged action applied to the message.
-          type: number
-          enum:
-          - 1
-          - 2
-        triaged_object_id:
-          description: The message triaged action object id.
-          type: string
-        triaged_object_type:
-          description: The message triaged action object type.
-          type: number
-        type:
-          description: The type of message.
-          type: string
-          enum:
-          - message
-          - post
-        user_id:
-          description: The ID of the user who created the message.
-          type: string
-        links:
-          description: The links to elements of the message.
-          allOf:
-          - $ref: '#/components/schemas/CommentChatMessageLinks2'
-        replies_count:
-          description: The number of replies to the message.
-          type: number
-      required:
-      - content
-      - date
-      - id
-      - parent_channel
-      - resolved
-      - type
-      - user_id
-      - links
-      - replies_count
     ChatPostSubtype:
       type: object
       properties:
@@ -2047,123 +2257,26 @@ components:
       required:
       - id
       - name
-    CommentPublicApiChatMessagesControllerGetChatMessageTaggedUsersLimitQuery:
+    ChatPublicApiChatChannelsControllerCreateLocationChatChannelWorkspaceIdPath:
       type: integer
-      default: 50
-      maximum: 100
-      minimum: 1
-    CommentPublicApiChatMessagesControllerGetChatMessageReactionsLimitQuery:
-      type: integer
-      default: 50
-      maximum: 100
-      minimum: 1
-    ChatChannel:
+    CommentChatPostSubtypeCreate:
       type: object
       properties:
         id:
+          description: The subtype ID of the chat post. You can retrieve the available subtypes for your Workspace using the [Get Post Subtype IDs](https://developer.clickup.com/reference/getsubtypes) endpoint.
           type: string
-        name:
-          type: string
-        description:
-          description: The full Description of the Channel.
-          type: string
-          format: RichText
-        topic:
-          type: string
-        type:
-          $ref: '#/components/schemas/ChatRoomType'
-        visibility:
-          $ref: '#/components/schemas/ChatRoomVisibility'
-        parent:
-          description: Parent information
-          allOf:
-          - $ref: '#/components/schemas/ChatRoomParentDTO'
-        creator:
-          description: ID of the user who created this room
-          type: string
-        created_at:
-          description: Timestamp of when this room was created
-          type: string
-        updated_at:
-          description: Timestamp of the last update in this room - Deprecated in favor of latest_comment_at
-          type: string
-          deprecated: true
-        workspace_id:
-          description: Workspace ID of the chat room
-          type: string
-        archived:
-          type: boolean
-        latest_comment_at:
-          description: Timestamp of the last comment in this room. Optional in the case of a new room with no comments yet
-          type: string
-        is_canonical_channel:
-          description: Is this the canonical channel for the parent location?
-          type: boolean
-        is_hidden:
-          description: Has the user hidden this room from their sidebar? Currently only an option for DM/Group DM.
-          type: boolean
-        default_view:
-          description: Data about the default view that the room should open in
-          allOf:
-          - $ref: '#/components/schemas/ChatDefaultViewDTO'
-        channel_type:
-          $ref: '#/components/schemas/ChatSubcategoryType'
-        counts:
-          description: Counts relevant to the user requesting the chat room
-          allOf:
-          - $ref: '#/components/schemas/ChatLastReadAtData'
-        chat_room_category:
-          description: The category of the chat room, e.g. a welcome channel, (in the future, maybe) a ClickBot channel, etc.
-          type: string
-          enum:
-          - WELCOME_CHANNEL
-        canvas_id:
-          description: The id of the canvas owned by the chat room, if any
-          type: string
-        links:
-          description: The links to elements of the Channel.
-          allOf:
-          - $ref: '#/components/schemas/ChatChannelLinks'
       required:
       - id
-      - name
-      - type
-      - visibility
-      - parent
-      - creator
-      - created_at
-      - updated_at
-      - workspace_id
-      - archived
-      - links
-    ChatCreateLocationChatChannel:
-      type: object
-      properties:
-        description:
-          description: The description for the Chat being created.
-          type: string
-        topic:
-          description: The topic of the Chat being created.
-          type: string
-        user_ids:
-          description: Optionally specify unique user IDs, up to 100.
-          type: array
-          items:
-            type: string
-          maxItems: 100
-          uniqueItems: true
-        visibility:
-          description: The visibility of the Chat being created. If not specified, the Chat is PUBLIC.
-          type: string
-          enum:
-          - PUBLIC
-          - PRIVATE
-        location:
-          description: 'The location of the chat: space, folder, or list'
-          allOf:
-          - $ref: '#/components/schemas/ChatChannelLocation'
-      required:
-      - location
+    ChatPublicApiChatChannelsControllerGetChatChannelMembers200Response:
+      allOf:
+      - $ref: '#/components/schemas/ChatPaginatedResponse'
+      - type: object
+        description: The list of Channel members.
+        properties:
+          data:
+            type: array
+            items:
+              $ref: '#/components/schemas/ChatSimpleUser'
     ChatUpdateChatChannel:
       type: object
       properties:
@@ -2193,121 +2306,8 @@ components:
           enum:
           - PUBLIC
           - PRIVATE
-    ChatCommentVector:
-      type: object
-      properties:
-        master_id:
-          type: number
-        version:
-          type: number
-        deleted:
-          type: boolean
-      required:
-      - master_id
-      - version
-      - deleted
-    CommentPublicApiChatMessagesControllerGetChatMessagesWorkspaceIdPath:
-      type: integer
-    ChatChannelLocation:
-      type: object
-      properties:
-        id:
-          description: The ID of the hierarchy entity where the chat is to be located
-          type: string
-        type:
-          description: The type of the location. Must be a space, folder, or list.
-          type: string
-          enum:
-          - folder
-          - list
-          - space
-      required:
-      - id
-      - type
-    ChatPublicApiChatChannelsControllerCreateDirectMessageChatChannelWorkspaceIdPath:
-      type: integer
-    CommentPublicApiChatMessagesControllerGetChatMessageRepliesWorkspaceIdPath:
-      type: integer
     ChatPublicApiChatChannelsControllerDeleteChatChannelWorkspaceIdPath:
       type: integer
-    ChatCommentVersionVector:
-      type: object
-      properties:
-        object_id:
-          type: string
-        object_type:
-          type: string
-        vector:
-          type: array
-          items:
-            $ref: '#/components/schemas/ChatCommentVector'
-        workspace_id:
-          type: number
-      required:
-      - object_id
-      - object_type
-      - vector
-      - workspace_id
-    ChatPublicApiChatChannelsControllerGetChatChannelsIncludeClosedQuery:
-      type: boolean
-      default: false
-    ChatPostData:
-      type: object
-      properties:
-        subtype:
-          description: The subtype of the chat post.
-          allOf:
-          - $ref: '#/components/schemas/ChatPostSubtype'
-        title:
-          description: The title of the chat post.
-          type: string
-          maxLength: 255
-      required:
-      - subtype
-      - title
-    CommentPublicApiChatMessagesControllerCreateChatMessageWorkspaceIdPath:
-      type: integer
-    CommentPublicApiChatMessagesControllerGetChatMessageReactions200Response:
-      allOf:
-      - $ref: '#/components/schemas/CommentPaginatedResponse'
-      - type: object
-        description: The list of message reactions.
-        properties:
-          data:
-            type: array
-            items:
-              $ref: '#/components/schemas/ChatReaction'
-    ChatPublicApiChatChannelsControllerGetChatChannelsWithMessageSinceQuery:
-      type: number
-    CommentSimpleUser:
-      type: object
-      properties:
-        email:
-          description: Email of the user.
-          type: string
-        id:
-          description: ID of the user.
-          type: string
-        initials:
-          description: Initials of the user.
-          type: string
-        name:
-          description: Name of the user.
-          type: string
-        username:
-          description: Userame of the user.
-          type: string
-      required:
-      - email
-      - id
-    ChatPaginatedResponse:
-      type: object
-      properties:
-        next_cursor:
-          description: The next cursor to use for pagination.
-          type: string
-      required:
-      - next_cursor
   securitySchemes:
     authHeader:
       in: header

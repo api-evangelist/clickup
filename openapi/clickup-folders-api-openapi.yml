@@ -1301,6 +1301,15 @@ paths:
       description: ClickUp API v2 Production Server
 components:
   schemas:
+    CreateFolderRequest:
+      type: object
+      required:
+      - name
+      description: Request body for creating a new Folder.
+      properties:
+        name:
+          type: string
+          description: The name of the Folder.
     Folder:
       type: object
       description: A Folder object representing an organizational container within a Space.
@@ -1414,15 +1423,6 @@ components:
         permission_level:
           type: string
           description: The permission level of the Folder.
-    CreateFolderRequest:
-      type: object
-      required:
-      - name
-      description: Request body for creating a new Folder.
-      properties:
-        name:
-          type: string
-          description: The name of the Folder.
     UpdateFolderRequest:
       type: object
       description: Request body for updating an existing Folder.

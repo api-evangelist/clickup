@@ -1863,7 +1863,58 @@ paths:
     - url: https://api.clickup.com/api/v2
       description: ClickUp API v2 Production Server
 components:
+  parameters:
+    listId:
+      name: list_id
+      in: path
+      required: true
+      description: The unique identifier of the List.
+      schema:
+        type: integer
+    folderId:
+      name: folder_id
+      in: path
+      required: true
+      description: The unique identifier of the Folder.
+      schema:
+        type: integer
+    spaceId:
+      name: space_id
+      in: path
+      required: true
+      description: The unique identifier of the Space.
+      schema:
+        type: integer
   schemas:
+    UpdateListRequest:
+      type: object
+      description: Request body for updating an existing List.
+      properties:
+        name:
+          type: string
+          description: The updated name of the List.
+        content:
+          type: string
+          description: The updated content description.
+        due_date:
+          type: integer
+          format: int64
+          description: Updated due date as Unix timestamp in milliseconds.
+        due_date_time:
+          type: boolean
+          description: Whether the due date includes a time component.
+        priority:
+          type: integer
+          minimum: 1
+          maximum: 4
+          description: Updated priority level.
+        assignee:
+          type: integer
+          nullable: true
+          description: User ID to assign, or null to unassign.
+        unset_status:
+          type: boolean
+          description: Set to true to clear the List status.
     List:
       type: object
       description: A List object representing a container for tasks within a Space or Folder.
@@ -2036,57 +2087,6 @@ components:
         status:
           type: string
           description: The status to set on the List.
-    UpdateListRequest:
-      type: object
-      description: Request body for updating an existing List.
-      properties:
-        name:
-          type: string
-          description: The updated name of the List.
-        content:
-          type: string
-          description: The updated content description.
-        due_date:
-          type: integer
-          format: int64
-          description: Updated due date as Unix timestamp in milliseconds.
-        due_date_time:
-          type: boolean
-          description: Whether the due date includes a time component.
-        priority:
-          type: integer
-          minimum: 1
-          maximum: 4
-          description: Updated priority level.
-        assignee:
-          type: integer
-          nullable: true
-          description: User ID to assign, or null to unassign.
-        unset_status:
-          type: boolean
-          description: Set to true to clear the List status.
-  parameters:
-    folderId:
-      name: folder_id
-      in: path
-      required: true
-      description: The unique identifier of the Folder.
-      schema:
-        type: integer
-    listId:
-      name: list_id
-      in: path
-      required: true
-      description: The unique identifier of the List.
-      schema:
-        type: integer
-    spaceId:
-      name: space_id
-      in: path
-      required: true
-      description: The unique identifier of the Space.
-      schema:
-        type: integer
   securitySchemes:
     Authorization_Token:
       name: Authorization

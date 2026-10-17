@@ -1367,13 +1367,6 @@ components:
       description: The unique identifier of the comment.
       schema:
         type: integer
-    viewId:
-      name: view_id
-      in: path
-      required: true
-      description: The unique identifier of the view.
-      schema:
-        type: string
     listId:
       name: list_id
       in: path
@@ -1381,6 +1374,13 @@ components:
       description: The unique identifier of the list.
       schema:
         type: integer
+    viewId:
+      name: view_id
+      in: path
+      required: true
+      description: The unique identifier of the view.
+      schema:
+        type: string
     taskId:
       name: task_id
       in: path
@@ -1389,21 +1389,6 @@ components:
       schema:
         type: string
   schemas:
-    CreateCommentRequest:
-      type: object
-      required:
-      - comment_text
-      description: Request body for creating a new comment.
-      properties:
-        comment_text:
-          type: string
-          description: The plain text content of the comment.
-        assignee:
-          type: integer
-          description: User ID to assign for follow-up.
-        notify_all:
-          type: boolean
-          description: Notify all members who have access to the resource.
     UpdateCommentRequest:
       type: object
       description: Request body for updating an existing comment.
@@ -1486,6 +1471,21 @@ components:
         date:
           type: string
           description: Unix timestamp when the comment was created.
+    CreateCommentRequest:
+      type: object
+      required:
+      - comment_text
+      description: Request body for creating a new comment.
+      properties:
+        comment_text:
+          type: string
+          description: The plain text content of the comment.
+        assignee:
+          type: integer
+          description: User ID to assign for follow-up.
+        notify_all:
+          type: boolean
+          description: Notify all members who have access to the resource.
     CommentPublicApiCommentsControllerGetSubtypesCommentTypePath:
       type: string
       enum:

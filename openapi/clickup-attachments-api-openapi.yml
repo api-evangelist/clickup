@@ -265,39 +265,6 @@ paths:
       description: ClickUp
 components:
   schemas:
-    AttachmentsPublicApiAttachmentsControllerGetParentEntityAttachmentsEntityTypePath:
-      type: string
-      enum:
-      - attachments
-      - custom_fields
-    AttachmentsPublicApiAttachmentsControllerPostEntityAttachmentEntityTypePath:
-      type: string
-      enum:
-      - attachments
-      - custom_fields
-    AttachmentsPublicApiAttachmentsControllerGetParentEntityAttachmentsWorkspaceIdPath:
-      type: integer
-    AttachmentsPaginatedResponse:
-      type: object
-      properties:
-        next_cursor:
-          description: The next cursor to use for pagination.
-          type: string
-      required:
-      - next_cursor
-    AttachmentsPublicApiAttachmentsControllerGetParentEntityAttachmentsLimitQuery:
-      type: integer
-      default: 50
-      maximum: 100
-      minimum: 1
-    AttachmentsPublicPostAttachmentBodyParamsDto:
-      type: object
-      properties:
-        filename:
-          description: Override the filename of the attachment
-          type: string
-    AttachmentsPublicApiAttachmentsControllerPostEntityAttachmentWorkspaceIdPath:
-      type: integer
     AttachmentsAttachment:
       type: object
       properties:
@@ -385,6 +352,31 @@ components:
       - title
       - url
       - user_id
+    AttachmentsPublicApiAttachmentsControllerPostEntityAttachmentEntityTypePath:
+      type: string
+      enum:
+      - attachments
+      - custom_fields
+    AttachmentsPublicApiAttachmentsControllerGetParentEntityAttachments200Response:
+      allOf:
+      - $ref: '#/components/schemas/AttachmentsPaginatedResponse'
+      - type: object
+        description: The list of attachments for {entityId}.
+        properties:
+          data:
+            type: array
+            items:
+              $ref: '#/components/schemas/AttachmentsAttachment'
+    AttachmentsPaginatedResponse:
+      type: object
+      properties:
+        next_cursor:
+          description: The next cursor to use for pagination.
+          type: string
+      required:
+      - next_cursor
+    AttachmentsPublicApiAttachmentsControllerPostEntityAttachmentWorkspaceIdPath:
+      type: integer
     AttachmentsPublicApiErrorResponse:
       type: object
       properties:
@@ -410,16 +402,24 @@ components:
       - message
       - trace_id
       - timestamp
-    AttachmentsPublicApiAttachmentsControllerGetParentEntityAttachments200Response:
-      allOf:
-      - $ref: '#/components/schemas/AttachmentsPaginatedResponse'
-      - type: object
-        description: The list of attachments for {entityId}.
-        properties:
-          data:
-            type: array
-            items:
-              $ref: '#/components/schemas/AttachmentsAttachment'
+    AttachmentsPublicApiAttachmentsControllerGetParentEntityAttachmentsEntityTypePath:
+      type: string
+      enum:
+      - attachments
+      - custom_fields
+    AttachmentsPublicApiAttachmentsControllerGetParentEntityAttachmentsWorkspaceIdPath:
+      type: integer
+    AttachmentsPublicPostAttachmentBodyParamsDto:
+      type: object
+      properties:
+        filename:
+          description: Override the filename of the attachment
+          type: string
+    AttachmentsPublicApiAttachmentsControllerGetParentEntityAttachmentsLimitQuery:
+      type: integer
+      default: 50
+      maximum: 100
+      minimum: 1
   securitySchemes:
     Authorization_Token:
       name: Authorization
