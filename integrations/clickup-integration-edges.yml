@@ -6,6 +6,7 @@ source:
 - https://composio.dev/toolkits/clickup
 checked:
 - crowdstrike/integrations/crowdstrike-integration-edges.yml
+- google-workspace/integrations/google-workspace-integration-edges.yml
 - https://composio.dev/toolkits/clickup
 - https://connectors.airbyte.com/files/registries/v0/cloud_registry.json
 - https://connectors.airbyte.com/files/registries/v0/oss_registry.json
@@ -20,7 +21,10 @@ checked:
 - https://n8n.io/integrations/clickup/
 - https://zapier.com/api/v4/apps/
 - https://zapier.com/apps/clickup/integrations
+- microsoft-teams/integrations/microsoft-teams-integration-edges.yml
 - okta/integrations/okta-integration-edges.yml
+- slack/integrations/slack-integration-edges.yml
+- zoom/integrations/zoom-integration-edges.yml
 summary: null
 marketplace_apps:
 - marketplace: zapier
@@ -1544,6 +1548,76 @@ edges:
     builder: 'community (Meltano Hub variant maintainers: airbyte, autoidm)'
   detected_by: sweep-data-integration.py
   first_seen: '2026-10-18'
+- partner_name: Google Workspace (own)
+  partner: google-workspace
+  partner_match: mirror
+  mirror_match: domain
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: own
+  evidence: https://workspace.google.com/marketplace/app/clickup/897450447475
+  mirror_of: google-workspace/integrations/google-workspace-integration-edges.yml
+  apps:
+  - ClickUp
+  listing_count: 1
+  detected: '2026-10-18'
+  detected_by: mirror-platform-listings.py
+  category: Google Workspace app
+- partner_name: Microsoft Teams (own)
+  partner: microsoft-teams
+  partner_match: mirror
+  mirror_match: domain
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: own
+  evidence: https://appsource.microsoft.com/en-us/product/office/WA200000666
+  mirror_of: microsoft-teams/integrations/microsoft-teams-integration-edges.yml
+  apps:
+  - ClickUp
+  listing_count: 1
+  detected: '2026-10-18'
+  detected_by: mirror-platform-listings.py
+  category: Microsoft Teams app
+  publisher_verified:
+  - Microsoft 365 Certified
+- partner_name: Slack (own)
+  partner: slack
+  partner_match: mirror
+  mirror_match: domain
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: own
+  evidence: https://slack.com/marketplace/A3G4A68V9-clickup
+  mirror_of: slack/integrations/slack-integration-edges.yml
+  apps:
+  - ClickUp
+  listing_count: 1
+  detected: '2026-10-18'
+  detected_by: mirror-platform-listings.py
+  category: Slack app
+- partner_name: Zoom (own)
+  partner: zoom
+  partner_match: mirror
+  mirror_match: domain
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: own
+  evidence: https://marketplace.zoom.us/apps/9SsjZAWBTymt7P_rIz52gg
+  mirror_of: zoom/integrations/zoom-integration-edges.yml
+  apps:
+  - ClickUp
+  listing_count: 1
+  detected: '2026-10-18'
+  detected_by: mirror-platform-listings.py
+  category: Zoom app
 templates:
 - title: Create ClickUp tasks from Google Calendar events
   url: https://zapier.com/apps/clickup/integrations/google-calendar/20064/create-clickup-tasks-from-google-calendar-events
