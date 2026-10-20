@@ -13,9 +13,11 @@ checked:
 - https://fivetran.com/docs-sitemap.xml
 - https://fivetran.com/docs/connectors/partner-built-program
 - https://github.com/PipedreamHQ/pipedream/tree/94800dd6de6640b942c65ea7ee655f71ac56d438/components/
+- https://github.com/PipedreamHQ/pipedream/tree/d5872355ef27b4efa769f05352f2820c299a456e/components/
 - https://github.com/marketplace?type=apps
 - https://github.com/meltano/hub
 - https://github.com/n8n-io/n8n/tree/860f1273ebd73fabbd668cbec2c49ed9b48a286d/packages/nodes-base/nodes/
+- https://github.com/n8n-io/n8n/tree/f73dc337f8dc61a4fd44aebe41c55faafe4f53a4/packages/nodes-base/nodes/
 - https://hightouch.com/docs/destinations/clickup
 - https://monid.ai/tools/clickup
 - https://n8n.io/integrations/clickup/
@@ -24,6 +26,7 @@ checked:
 - microsoft-teams/integrations/microsoft-teams-integration-edges.yml
 - okta/integrations/okta-integration-edges.yml
 - slack/integrations/slack-integration-edges.yml
+- zendesk/integrations/zendesk-integration-edges.yml
 - zoom/integrations/zoom-integration-edges.yml
 summary: null
 marketplace_apps:
@@ -1301,165 +1304,6 @@ edges:
       - upsert
   detected_by: sweep-cdp.py
   first_seen: '2026-10-14'
-- partner_name: CrowdStrike (own)
-  partner: crowdstrike
-  partner_match: mirror
-  mirror_match: domain
-  type: marketplace
-  relationship: platform-app
-  direction: third-party
-  channel: partner-built
-  marketplace: own
-  evidence: https://marketplace.crowdstrike.com/listings/clickup/
-  mirror_of: crowdstrike/integrations/crowdstrike-integration-edges.yml
-  apps:
-  - "ClickUp</title>\n    <meta name=\"keywords\" content=\"ClickUp\"/>\n    <meta name=\"description\" content=\"\
-    ClickUp is on a mission to maximize human productivity.\"/>\n    <meta name=\"template\" content=\"crowdstrike-marketplace-partner-details-page\"\
-    />\n    <meta name=\"MobileOptimized\" content=\"width\"/>\n    <meta name=\"HandheldFriendly\" content=\"true\"\
-    />\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"/>\n    <meta http-equiv=\"\
-    x-ua-compatible\" content=\"ie=edge\"/>\n    \n    <meta property=\"twitter:card\" content=\"summary\"/>\n \
-    \   <meta name=\"robots\" content=\"index, follow\"/>\n    \n    <meta name=\"content-page-ref\" content=\"\
-    bAV1NaGYBbsXe2-ZwxFTQYqiKsyA0ZafMyEAD4X8eg_Pw-QxChJfO8fhs3D9a0mTCwLLfLysKJt5ytnbNgpjLc5A09Mt2Ftb2wBe3qjNq2DUxPHUqivsv1n-v85clZFc\"\
-    />\n<script defer=\"defer\" type=\"text/javascript\" src=\"/.rum/@adobe/helix-rum-js@%5E2/dist/micro.js\"></script>\n\
-    <link rel=\"canonical\" href=\"https://marketplace.crowdstrike.com/listings/clickup/\"/>\n    \n    \n\n   \
-    \ \n<meta name=\"og:type\" content=\"website\"/>\n<meta name=\"twitter:title\" content=\"ClickUp\"/>\n<meta\
-    \ name=\"og:site_name\" content=\"CrowdStrike MarketPlace\"/>\n<meta name=\"keywords\" content=\"crowdstrike\
-    \ store, crowdstrike marketplace, crowdstrike app store, security apps, cybersecurity apps, cybersecurity marketplace,\
-    \ threat intelligence apps, crowdstrike falcon app, buy crowdstrike\"/>\n<meta name=\"twitter:description\"\
-    \ content=\"ClickUp is on a mission to maximize human productivity.\"/>\n<meta name=\"og:title\" content=\"\
-    ClickUp\"/>\n<meta name=\"og:locale\" content=\"en-US\"/>\n<meta name=\"og:url\" content=\"https://marketplace.crowdstrike.com/listings/clickup/\"\
-    />\n<meta name=\"og:updated_time\" content=\"2026-05-20T16:10:20\"/>\n<meta name=\"og:description\" content=\"\
-    ClickUp is on a mission to maximize human productivity.\"/>\n\n    \n\n\n\n<!-- FPID Cookie setting from the\
-    \ FPID js SDK -->\n\n    <script type=\"text/javascript\" src=\"https://ms.crowdstrike.com/js/fpid.js\" async\
-    \ data-cfasync=\"false\"></script>\n\n\n\n<!-- OneTrust Cookies Consent Notice start for default -->\n\n   \
-    \ \n        \n            <script type=\"text/javascript\" src=\"https://cdn.cookielaw.org/consent/bee15b7c-b632-450e-9003-9c8b60b3b978/OtAutoBlock.js\"\
-    \ data-cfasync=\"false\"></script>\n        \n    \n    <script src=\"https://cdn.cookielaw.org/scripttemplates/otSDKStub.js\"\
-    \ data-document-language=\"true\" type=\"text/javascript\" charset=\"UTF-8\" data-domain-script=\"bee15b7c-b632-450e-9003-9c8b60b3b978\"\
-    \ data-cfasync=\"false\">\n        </script>\n        <script type=\"text/javascript\" data-cfasync=\"false\"\
-    >\n            function OptanonWrapper() { }\n        </script>\n    \n\n<!-- OneTrust Cookies Consent Notice\
-    \ end for default -->\n\n\n\n\n    <script type=\"text/javascript\" data-cfasync=\"false\">\n    !function(e,a,n,t){var\
-    \ i=e.head;if(i){\n    if (a) return;\n    var o=e.createElement(\"style\");\n    o.id=\"alloy-prehiding\",o.innerText=n,i.appendChild(o),setTimeout(function(){o.parentNode&&o.parentNode.removeChild(o)},t)}}\n\
-    \    (document, document.location.href.indexOf(\"adobe_authoring_enabled\") !== -1, \"[data-target-location='true']\
-    \ { opacity: 0 !important}\", 3000);\n</script>\n    <script type=\"text/javascript\" src=\"//assets.adobedtm.com/d72cd986aea0/6c9104833b6e/launch-bacc530d480b.min.js\"\
-    \ async></script>\n\n\n<!-- Initialize Analytics JS -->\n\n    \n    \n<script src=\"/etc.clientlibs/crowdstrike/clientlibs/crowdstrike-analytics.lc-3df1fb70f480ba5b88ae47192b16ecff-lc.min.js\"\
-    ></script>\n\n\n\n\n\n<!-- load base css -->\n\n    \n<link rel=\"stylesheet\" href=\"/etc.clientlibs/crowdstrike/clientlibs/crowdstrike-grid.lc-d75b4ada966a12a0acc4f4483174f716-lc.min.css\"\
-    \ type=\"text/css\">\n<link rel=\"stylesheet\" href=\"/etc.clientlibs/crowdstrike/clientlibs/crowdstrike-base.lc-d8e9a44764866640e709abbb8b7e48f7-lc.min.css\"\
-    \ type=\"text/css\">\n\n\n\n\n<!-- Initialize Language Direction -->\n\n    \n<script src=\"/etc.clientlibs/crowdstrike/clientlibs/crowdstrike-language.lc-7085071ea35e3fe3f74984b851ee0b98-lc.min.js\"\
-    ></script>\n\n\n\n\n<!-- TODO - Determine how we can preload this -->\n\n    \n<link rel=\"stylesheet\" href=\"\
-    /etc.clientlibs/crowdstrike/clientlibs/crowdstrike-fonts.lc-6948ecef49b977e56a92fb1f07f1dd27-lc.min.css\" type=\"\
-    text/css\">\n\n\n\n\n\n\n\n\n    \n    \n    \n\n    \n\n    \n    \n<script src=\"/etc.clientlibs/crowdstrike/clientlibs/crowdstrike-dependencies.lc-39968705ebaffa8af8c834134a4525b2-lc.min.js\"\
-    ></script>\n\n\n\n    \n    \n<link rel=\"stylesheet\" href=\"/etc.clientlibs/crowdstrike/clientlibs/crowdstrike-dependencies.lc-2929dd9d69a653da2cf8fe429017e6b6-lc.min.css\"\
-    \ type=\"text/css\">\n<link rel=\"stylesheet\" href=\"/etc.clientlibs/crowdstrike/clientlibs/crowdstrike-common.lc-22f682a39a55d93265e974d2f289ec2e-lc.min.css\"\
-    \ type=\"text/css\">\n<link rel=\"stylesheet\" href=\"/etc.clientlibs/crowdstrike/clientlibs/crowdstrike-header.lc-f918a7f1f53a3b70145333e063afdff9-lc.min.css\"\
-    \ type=\"text/css\">\n<link rel=\"stylesheet\" href=\"/etc.clientlibs/crowdstrike/clientlibs/crowdstrike-addsearch.lc-5bd1b6d5b026bc6b7b5cbf7559f4c0b1-lc.min.css\"\
-    \ type=\"text/css\">\n<link rel=\"stylesheet\" href=\"/etc.clientlibs/crowdstrike/clientlibs/crowdstrike-dotcom.lc-36c31b4c04f3f8ba9f17f5b7c61954c6-lc.min.css\"\
-    \ type=\"text/css\">\n<link rel=\"stylesheet\" href=\"/etc.clientlibs/crowdstrike/clientlibs/crowdstrike-event.lc-b383a52a1a03473aa6f81df00cb25068-lc.min.css\"\
-    \ type=\"text/css\">\n\n\n\n    \n\n    \n    <link rel=\"icon\" href=\"/content/dam/crowdstrike/marketplace/en-us/images/favicon.png\"\
-    />\n    <!-- Custom SEO Scripts -->\n\n    \n        <script>\n    window.Userback = window.Userback"
-  listing_count: 1
-  detected: '2026-10-14'
-  detected_by: mirror-platform-listings.py
-- partner_name: Okta (own)
-  partner: okta
-  partner_match: mirror
-  mirror_match: domain
-  type: marketplace
-  relationship: platform-app
-  direction: third-party
-  channel: partner-built
-  marketplace: own
-  evidence: https://www.okta.com/integrations/clickup/
-  mirror_of: okta/integrations/okta-integration-edges.yml
-  apps:
-  - ClickUp
-  listing_count: 1
-  detected: '2026-10-14'
-  detected_by: mirror-platform-listings.py
-  category: Single Sign-On
-  badges:
-  - OKTA_VERIFIED
-  features:
-  - CREATE
-  - DEACTIVATE
-  - GROUP_PUSH
-  - SAML
-  - UPDATE
-- partner_name: Zapier
-  partner: zapier
-  partner_match: aggregator
-  type: marketplace
-  marketplace: zapier-directory
-  channel: ipaas-listing
-  relationship: ipaas-bridge
-  direction: third-party
-  evidence: https://zapier.com/apps/clickup/integrations
-  category: null
-  contract_reference:
-    register: Zapier app directory (zapier.com/api/v4/apps)
-    spec_file: null
-    role: ipaas-connector:zapier
-    registered_name: ClickUp
-    matched_domain: clickup.com
-    matched_by: domain
-    detected_by: sweep-workflow-automation.py
-    detected: '2026-10-15'
-    signal_note: one edge per (provider, platform); actions, triggers and usage counts are context, never read
-    app_slug: clickup
-    beta: false
-    builder: unknown (not in the directory record)
-  detected_by: sweep-workflow-automation.py
-  first_seen: '2026-10-15'
-- partner_name: n8n
-  partner: n8n
-  partner_match: aggregator
-  type: marketplace
-  marketplace: n8n-nodes-base
-  channel: open-source-node
-  relationship: ipaas-bridge
-  direction: third-party
-  evidence: https://github.com/n8n-io/n8n/tree/860f1273ebd73fabbd668cbec2c49ed9b48a286d/packages/nodes-base/nodes/ClickUp
-  category: null
-  contract_reference:
-    register: n8n built-in nodes (n8n-io/n8n packages/nodes-base)
-    spec_file: null
-    role: ipaas-connector:n8n-nodes-base
-    registered_name: ClickUp
-    matched_domain: clickup.com
-    matched_by: domain
-    detected_by: sweep-workflow-automation.py
-    detected: '2026-10-15'
-    signal_note: one edge per (provider, platform); actions, triggers and usage counts are context, never read
-    node_path: ClickUp
-    trigger: true
-    builder: n8n (built-in node)
-  detected_by: sweep-workflow-automation.py
-  first_seen: '2026-10-15'
-- partner_name: Pipedream
-  partner: pipedream
-  partner_match: aggregator
-  type: marketplace
-  marketplace: pipedream-components
-  channel: open-source-node
-  relationship: ipaas-bridge
-  direction: third-party
-  evidence: https://github.com/PipedreamHQ/pipedream/tree/94800dd6de6640b942c65ea7ee655f71ac56d438/components/clickup
-  category: null
-  contract_reference:
-    register: Pipedream components (PipedreamHQ/pipedream components/)
-    spec_file: null
-    role: ipaas-connector:pipedream
-    registered_name: clickup
-    matched_domain: clickup.com
-    matched_by: domain
-    detected_by: sweep-workflow-automation.py
-    detected: '2026-10-15'
-    signal_note: one edge per (provider, platform); actions, triggers and usage counts are context, never read
-    app_slug: clickup
-    actions: true
-    sources: true
-    builder: Pipedream repo (component)
-  detected_by: sweep-workflow-automation.py
-  first_seen: '2026-10-15'
 - partner_name: Airbyte
   partner: airbyte
   partner_match: aggregator
@@ -1548,6 +1392,140 @@ edges:
     builder: 'community (Meltano Hub variant maintainers: airbyte, autoidm)'
   detected_by: sweep-data-integration.py
   first_seen: '2026-10-18'
+- partner_name: Zapier
+  partner: zapier
+  partner_match: aggregator
+  type: marketplace
+  marketplace: zapier-directory
+  channel: ipaas-listing
+  relationship: ipaas-bridge
+  direction: third-party
+  evidence: https://zapier.com/apps/clickup/integrations
+  category: null
+  contract_reference:
+    register: Zapier app directory (zapier.com/api/v4/apps)
+    spec_file: null
+    role: ipaas-connector:zapier
+    registered_name: ClickUp
+    matched_domain: clickup.com
+    matched_by: domain
+    detected_by: sweep-workflow-automation.py
+    detected: '2026-10-15'
+    signal_note: one edge per (provider, platform); actions, triggers and usage counts are context, never read
+    app_slug: clickup
+    beta: false
+    builder: unknown (not in the directory record)
+  detected_by: sweep-workflow-automation.py
+  first_seen: '2026-10-15'
+- partner_name: n8n
+  partner: n8n
+  partner_match: aggregator
+  type: marketplace
+  marketplace: n8n-nodes-base
+  channel: open-source-node
+  relationship: ipaas-bridge
+  direction: third-party
+  evidence: https://github.com/n8n-io/n8n/tree/f73dc337f8dc61a4fd44aebe41c55faafe4f53a4/packages/nodes-base/nodes/ClickUp
+  category: null
+  contract_reference:
+    register: n8n built-in nodes (n8n-io/n8n packages/nodes-base)
+    spec_file: null
+    role: ipaas-connector:n8n-nodes-base
+    registered_name: ClickUp
+    matched_domain: clickup.com
+    matched_by: domain
+    detected_by: sweep-workflow-automation.py
+    detected: '2026-10-15'
+    signal_note: one edge per (provider, platform); actions, triggers and usage counts are context, never read
+    node_path: ClickUp
+    trigger: true
+    builder: n8n (built-in node)
+  detected_by: sweep-workflow-automation.py
+  first_seen: '2026-10-15'
+- partner_name: Pipedream
+  partner: pipedream
+  partner_match: aggregator
+  type: marketplace
+  marketplace: pipedream-components
+  channel: open-source-node
+  relationship: ipaas-bridge
+  direction: third-party
+  evidence: https://github.com/PipedreamHQ/pipedream/tree/d5872355ef27b4efa769f05352f2820c299a456e/components/clickup
+  category: null
+  contract_reference:
+    register: Pipedream components (PipedreamHQ/pipedream components/)
+    spec_file: null
+    role: ipaas-connector:pipedream
+    registered_name: clickup
+    matched_domain: clickup.com
+    matched_by: domain
+    detected_by: sweep-workflow-automation.py
+    detected: '2026-10-15'
+    signal_note: one edge per (provider, platform); actions, triggers and usage counts are context, never read
+    app_slug: clickup
+    actions: true
+    sources: true
+    builder: Pipedream repo (component)
+  detected_by: sweep-workflow-automation.py
+  first_seen: '2026-10-15'
+- partner_name: CrowdStrike (own)
+  partner: crowdstrike
+  partner_match: mirror
+  mirror_match: domain
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: own
+  evidence: https://marketplace.crowdstrike.com/listings/clickup/
+  mirror_of: crowdstrike/integrations/crowdstrike-integration-edges.yml
+  apps:
+  - "ClickUp</title>\n    <meta name=\"keywords\" content=\"ClickUp\"/>\n    <meta name=\"description\" content=\"\
+    ClickUp is on a mission to maximize human productivity.\"/>\n    <meta name=\"template\" content=\"crowdstrike-marketplace-partner-details-page\"\
+    />\n    <meta name=\"MobileOptimized\" content=\"width\"/>\n    <meta name=\"HandheldFriendly\" content=\"true\"\
+    />\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"/>\n    <meta http-equiv=\"\
+    x-ua-compatible\" content=\"ie=edge\"/>\n    \n    <meta property=\"twitter:card\" content=\"summary\"/>\n \
+    \   <meta name=\"robots\" content=\"index, follow\"/>\n    \n    <meta name=\"content-page-ref\" content=\"\
+    bAV1NaGYBbsXe2-ZwxFTQYqiKsyA0ZafMyEAD4X8eg_Pw-QxChJfO8fhs3D9a0mTCwLLfLysKJt5ytnbNgpjLc5A09Mt2Ftb2wBe3qjNq2DUxPHUqivsv1n-v85clZFc\"\
+    />\n<script defer=\"defer\" type=\"text/javascript\" src=\"/.rum/@adobe/helix-rum-js@%5E2/dist/micro.js\"></script>\n\
+    <link rel=\"canonical\" href=\"https://marketplace.crowdstrike.com/listings/clickup/\"/>\n    \n    \n\n   \
+    \ \n<meta name=\"og:type\" content=\"website\"/>\n<meta name=\"twitter:title\" content=\"ClickUp\"/>\n<meta\
+    \ name=\"og:site_name\" content=\"CrowdStrike MarketPlace\"/>\n<meta name=\"keywords\" content=\"crowdstrike\
+    \ store, crowdstrike marketplace, crowdstrike app store, security apps, cybersecurity apps, cybersecurity marketplace,\
+    \ threat intelligence apps, crowdstrike falcon app, buy crowdstrike\"/>\n<meta name=\"twitter:description\"\
+    \ content=\"ClickUp is on a mission to maximize human productivity.\"/>\n<meta name=\"og:title\" content=\"\
+    ClickUp\"/>\n<meta name=\"og:locale\" content=\"en-US\"/>\n<meta name=\"og:url\" content=\"https://marketplace.crowdstrike.com/listings/clickup/\"\
+    />\n<meta name=\"og:updated_time\" content=\"2026-05-20T16:10:20\"/>\n<meta name=\"og:description\" content=\"\
+    ClickUp is on a mission to maximize human productivity.\"/>\n\n    \n\n\n\n<!-- FPID Cookie setting from the\
+    \ FPID js SDK -->\n\n    <script type=\"text/javascript\" src=\"https://ms.crowdstrike.com/js/fpid.js\" async\
+    \ data-cfasync=\"false\"></script>\n\n\n\n<!-- OneTrust Cookies Consent Notice start for default -->\n\n   \
+    \ \n        \n            <script type=\"text/javascript\" src=\"https://cdn.cookielaw.org/consent/bee15b7c-b632-450e-9003-9c8b60b3b978/OtAutoBlock.js\"\
+    \ data-cfasync=\"false\"></script>\n        \n    \n    <script src=\"https://cdn.cookielaw.org/scripttemplates/otSDKStub.js\"\
+    \ data-document-language=\"true\" type=\"text/javascript\" charset=\"UTF-8\" data-domain-script=\"bee15b7c-b632-450e-9003-9c8b60b3b978\"\
+    \ data-cfasync=\"false\">\n        </script>\n        <script type=\"text/javascript\" data-cfasync=\"false\"\
+    >\n            function OptanonWrapper() { }\n        </script>\n    \n\n<!-- OneTrust Cookies Consent Notice\
+    \ end for default -->\n\n\n\n\n    <script type=\"text/javascript\" data-cfasync=\"false\">\n    !function(e,a,n,t){var\
+    \ i=e.head;if(i){\n    if (a) return;\n    var o=e.createElement(\"style\");\n    o.id=\"alloy-prehiding\",o.innerText=n,i.appendChild(o),setTimeout(function(){o.parentNode&&o.parentNode.removeChild(o)},t)}}\n\
+    \    (document, document.location.href.indexOf(\"adobe_authoring_enabled\") !== -1, \"[data-target-location='true']\
+    \ { opacity: 0 !important}\", 3000);\n</script>\n    <script type=\"text/javascript\" src=\"//assets.adobedtm.com/d72cd986aea0/6c9104833b6e/launch-bacc530d480b.min.js\"\
+    \ async></script>\n\n\n<!-- Initialize Analytics JS -->\n\n    \n    \n<script src=\"/etc.clientlibs/crowdstrike/clientlibs/crowdstrike-analytics.lc-3df1fb70f480ba5b88ae47192b16ecff-lc.min.js\"\
+    ></script>\n\n\n\n\n\n<!-- load base css -->\n\n    \n<link rel=\"stylesheet\" href=\"/etc.clientlibs/crowdstrike/clientlibs/crowdstrike-grid.lc-d75b4ada966a12a0acc4f4483174f716-lc.min.css\"\
+    \ type=\"text/css\">\n<link rel=\"stylesheet\" href=\"/etc.clientlibs/crowdstrike/clientlibs/crowdstrike-base.lc-d8e9a44764866640e709abbb8b7e48f7-lc.min.css\"\
+    \ type=\"text/css\">\n\n\n\n\n<!-- Initialize Language Direction -->\n\n    \n<script src=\"/etc.clientlibs/crowdstrike/clientlibs/crowdstrike-language.lc-7085071ea35e3fe3f74984b851ee0b98-lc.min.js\"\
+    ></script>\n\n\n\n\n<!-- TODO - Determine how we can preload this -->\n\n    \n<link rel=\"stylesheet\" href=\"\
+    /etc.clientlibs/crowdstrike/clientlibs/crowdstrike-fonts.lc-6948ecef49b977e56a92fb1f07f1dd27-lc.min.css\" type=\"\
+    text/css\">\n\n\n\n\n\n\n\n\n    \n    \n    \n\n    \n\n    \n    \n<script src=\"/etc.clientlibs/crowdstrike/clientlibs/crowdstrike-dependencies.lc-39968705ebaffa8af8c834134a4525b2-lc.min.js\"\
+    ></script>\n\n\n\n    \n    \n<link rel=\"stylesheet\" href=\"/etc.clientlibs/crowdstrike/clientlibs/crowdstrike-dependencies.lc-2929dd9d69a653da2cf8fe429017e6b6-lc.min.css\"\
+    \ type=\"text/css\">\n<link rel=\"stylesheet\" href=\"/etc.clientlibs/crowdstrike/clientlibs/crowdstrike-common.lc-22f682a39a55d93265e974d2f289ec2e-lc.min.css\"\
+    \ type=\"text/css\">\n<link rel=\"stylesheet\" href=\"/etc.clientlibs/crowdstrike/clientlibs/crowdstrike-header.lc-f918a7f1f53a3b70145333e063afdff9-lc.min.css\"\
+    \ type=\"text/css\">\n<link rel=\"stylesheet\" href=\"/etc.clientlibs/crowdstrike/clientlibs/crowdstrike-addsearch.lc-5bd1b6d5b026bc6b7b5cbf7559f4c0b1-lc.min.css\"\
+    \ type=\"text/css\">\n<link rel=\"stylesheet\" href=\"/etc.clientlibs/crowdstrike/clientlibs/crowdstrike-dotcom.lc-36c31b4c04f3f8ba9f17f5b7c61954c6-lc.min.css\"\
+    \ type=\"text/css\">\n<link rel=\"stylesheet\" href=\"/etc.clientlibs/crowdstrike/clientlibs/crowdstrike-event.lc-b383a52a1a03473aa6f81df00cb25068-lc.min.css\"\
+    \ type=\"text/css\">\n\n\n\n    \n\n    \n    <link rel=\"icon\" href=\"/content/dam/crowdstrike/marketplace/en-us/images/favicon.png\"\
+    />\n    <!-- Custom SEO Scripts -->\n\n    \n        <script>\n    window.Userback = window.Userback"
+  listing_count: 1
+  detected: '2026-10-14'
+  detected_by: mirror-platform-listings.py
 - partner_name: Google Workspace (own)
   partner: google-workspace
   partner_match: mirror
@@ -1584,6 +1562,31 @@ edges:
   category: Microsoft Teams app
   publisher_verified:
   - Microsoft 365 Certified
+- partner_name: Okta (own)
+  partner: okta
+  partner_match: mirror
+  mirror_match: domain
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: own
+  evidence: https://www.okta.com/integrations/clickup/
+  mirror_of: okta/integrations/okta-integration-edges.yml
+  apps:
+  - ClickUp
+  listing_count: 1
+  detected: '2026-10-14'
+  detected_by: mirror-platform-listings.py
+  category: Single Sign-On
+  badges:
+  - OKTA_VERIFIED
+  features:
+  - CREATE
+  - DEACTIVATE
+  - GROUP_PUSH
+  - SAML
+  - UPDATE
 - partner_name: Slack (own)
   partner: slack
   partner_match: mirror
@@ -1601,6 +1604,23 @@ edges:
   detected: '2026-10-18'
   detected_by: mirror-platform-listings.py
   category: Slack app
+- partner_name: Zendesk (own)
+  partner: zendesk
+  partner_match: mirror
+  mirror_match: domain
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: own
+  evidence: https://www.zendesk.com/marketplace/apps/support/232924/clickup/
+  mirror_of: zendesk/integrations/zendesk-integration-edges.yml
+  apps:
+  - ClickUp
+  listing_count: 1
+  detected: '2026-10-20'
+  detected_by: mirror-platform-listings.py
+  category: Product and Project Management
 - partner_name: Zoom (own)
   partner: zoom
   partner_match: mirror
