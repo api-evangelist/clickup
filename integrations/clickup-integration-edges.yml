@@ -35,6 +35,7 @@ checked:
 - https://www.sequoiacap.com/our-companies/
 - https://www.sequoiacap.com/sitemap.xml
 - hubspot/integrations/hubspot-integration-edges.yml
+- miro/integrations/miro-integration-edges.yml
 summary: null
 marketplace_apps:
 - marketplace: zapier
@@ -1113,6 +1114,23 @@ edges:
   detected: '2026-10-21'
   detected_by: mirror-platform-listings.py
   category: PROJECT_MANAGEMENT
+- partner_name: Miro (own)
+  partner: miro
+  partner_match: mirror
+  mirror_match: domain
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: own
+  evidence: https://miro.com/marketplace/clickup/
+  mirror_of: miro/integrations/miro-integration-edges.yml
+  apps:
+  - ClickUp (Legacy)
+  listing_count: 1
+  detected: '2026-10-22'
+  detected_by: mirror-platform-listings.py
+  category: Miro app
 templates:
 - title: Create ClickUp tasks from Google Calendar events
   url: https://zapier.com/apps/clickup/integrations/google-calendar/20064/create-clickup-tasks-from-google-calendar-events
