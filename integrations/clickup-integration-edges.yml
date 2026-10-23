@@ -45,6 +45,7 @@ checked:
 - https://api.apis.guru/v2/list.json
 - https://api.apis.guru/v2/providers.json
 - https://dir.texas.gov/resource-library-item/tx-ramp-certified-cloud-products
+- intercom/integrations/intercom-integration-edges.yml
 summary: null
 marketplace_apps:
 - marketplace: zapier
@@ -935,6 +936,168 @@ edges:
     sector: Enterprise;Growth
   detected_by: sweep-vc-portfolios.py
   first_seen: '2026-10-21'
+- partner_name: Raycast
+  partner: raycast
+  partner_match: domain
+  partner_url: https://www.raycast.com
+  partner_domain: raycast.com
+  type: marketplace
+  marketplace: raycast-store
+  channel: connector-listing
+  relationship: connector-coverage
+  evidence: https://www.raycast.com/aparandeh/manage-clickup-tasks
+  app: ClickUp - Tasks & Docs Explorer
+  category: Raycast Store extension (community wrapper)
+  listing_count: 1
+  contract_reference:
+    register: Raycast Store (raycast/extensions monorepo + store_listings JSON)
+    spec_file: null
+    role: raycast-community-wrapper
+    builder: community
+    authors:
+    - aparandeh
+    matched_domain: clickup.com
+    matched_by: domain
+    monorepo_commit: 84f9ac51336a8c69f70974a75bc067c0feae3658
+    listings:
+    - title: ClickUp - Tasks & Docs Explorer
+      store_url: https://www.raycast.com/aparandeh/manage-clickup-tasks
+      installs: 9559
+      categories:
+      - AI Extensions
+      source: https://github.com/raycast/extensions/tree/84f9ac51336a8c69f70974a75bc067c0feae3658/extensions/clickup/
+      author: aparandeh
+      ai_tools: true
+    categories:
+    - AI Extensions
+    identity_note: the extension's own source calls a host on the product's domain AND its title / package name
+      passes partner_link's name check; built by Raycast community developers, not the vendor
+    signal_note: 'coverage: Raycast''s store reaches the product through community-built extensions; one edge per
+      (product, store); install / listing counts are context, never counted'
+    detected_by: sweep-raycast-store-extensions.py
+    detected: '2026-10-22'
+  detected_by: sweep-raycast-store-extensions.py
+  first_seen: '2026-10-22'
+  direction: partner-built
+- partner_name: Obsidian
+  partner: obsidian
+  partner_match: aggregator
+  type: marketplace
+  marketplace: obsidian-community-plugins
+  channel: community-plugin
+  relationship: connector-listing
+  direction: third-party
+  evidence: https://github.com/hokim-m/click-up-x-obsidian
+  app: ClickUp sync
+  listing_count: 1
+  category: Obsidian community plugin
+  partner_url: https://obsidian.md/plugins
+  contract_reference:
+    register: Obsidian community-plugins.json (obsidianmd/obsidian-releases@793b5211) + plugin repo README / manifest
+      / source
+    spec_file: null
+    role: obsidian-community-plugin:community
+    registered_name: hokim-m
+    register_id: https://github.com/hokim-m/click-up-x-obsidian
+    matched_domain: clickup.com
+    matched_by: domain+name-in-listing
+    matched_where: source
+    matched_host: api.clickup.com
+    builder: community
+    plugins:
+    - click-up-sync
+    downloads_context: 3803
+    signal_note: 'ONE edge per provider: a community plugin names the provider in its name/description AND carries
+      the provider''s domain or API host in its README or source. Builder is a named community author (not the provider).
+      Plugin and download counts are context, never counted.'
+    detected_by: sweep-obsidian-community-plugins.py
+    detected: '2026-10-22'
+  detected_by: sweep-obsidian-community-plugins.py
+  first_seen: '2026-10-22'
+- partner_name: APIs.guru OpenAPI Directory
+  partner: apis-guru
+  partner_match: register
+  type: register
+  channel: standard-directory
+  relationship: standard-participant
+  direction: third-party
+  evidence: https://apis.guru/
+  category: API definition directory listing (OpenAPI)
+  contract_reference:
+    register: APIs.guru OpenAPI Directory
+    spec_file: null
+    standard: APIs.guru OpenAPI Directory
+    role: listed-in-directory
+    directory_provider: clickup.com
+    matched_domain: clickup.com
+    matched_by: domain
+    apis_listed: 1
+    version_count: 1
+    first_added: '2023-03-04'
+    last_updated: '2023-03-06'
+    origin_publisher_hosted: false
+    origin_hosts:
+    - jsapi.apiary.io
+    categories: []
+    own_openapi_files: 34
+    listings:
+    - key: clickup.com
+      title: clickup20
+      preferred: 1.0.0
+      versions: 1
+      swagger_url: https://api.apis.guru/v2/specs/clickup.com/1.0.0/openapi.json
+      origin_url: https://jsapi.apiary.io/apis/clickup20.source
+      openapi_version: 3.0.0
+    signal_note: 'participation only: a community directory listing (APIs.guru collects definitions; the provider
+      did not file them). Signals: version_count, apis_listed, origin_publisher_hosted.'
+    detected_by: sweep-openapi-directory-apis-guru.py
+    detected: '2026-10-22'
+  detected_by: sweep-openapi-directory-apis-guru.py
+  first_seen: '2026-10-22'
+- partner_name: TX-RAMP
+  partner: null
+  partner_match: register
+  partner_tier: Level 2
+  type: contract
+  channel: regulator-register
+  relationship: standard-participant
+  direction: partner-built
+  evidence: https://dir.texas.gov/resource-library-item/tx-ramp-certified-cloud-products
+  category: Texas state cloud security certification (TX-RAMP)
+  contract_reference:
+    register: TX-RAMP Certified Cloud Products (Texas DIR)
+    standard: TX-RAMP
+    spec_file: null
+    role: tx-ramp-certified
+    register_file: https://dir.texas.gov/sites/default/files/2026-10/Copy%20of%20TX-RAMP%20Certified%20Cloud%20Products_1.xlsx
+    registrations:
+    - certification_id: TX1114753
+      product: ClickUp
+      registered_vendor: Clickup
+      certification_level: Level 2
+      cloud_categories:
+      - SaaS
+      certification_path: TX-RAMP Fast Track
+      expires: '2027-08-08'
+      lapsed: false
+      matched_domain: clickup.com
+      matched_by: domain
+    identity: wikidata Q123524232 'ClickUp' P856 https://clickup.com/
+    identity_source: wikidata P856 (labelled provenance step; Kin 2026-10-15 decision 1)
+    signal_note: 'certified_products = one entry per cloud category (SaaS / PaaS / IaaS) the vendor holds a TX-RAMP
+      certification in, never per product; products are context, never counted. certification_level = the highest
+      level in that category; lapsed: true when every product in the category is past its expiry date. partner_tier
+      = the highest CURRENT level'
+    certified_products:
+    - product: SaaS
+      product_type: SaaS
+      standard: TX-RAMP
+      certification_level: Level 2
+      lapsed: false
+    detected_by: sweep-tx-ramp-certified-cloud.py
+    detected: '2026-10-22'
+  detected_by: sweep-tx-ramp-certified-cloud.py
+  first_seen: '2026-10-22'
 - partner_name: CrowdStrike (own)
   partner: crowdstrike
   partner_match: mirror
@@ -1140,168 +1303,23 @@ edges:
   detected: '2026-10-22'
   detected_by: mirror-platform-listings.py
   category: Miro app
-- partner_name: Raycast
-  partner: raycast
-  partner_match: domain
-  partner_url: https://www.raycast.com
-  partner_domain: raycast.com
+- partner_name: Intercom (own)
+  partner: intercom
+  partner_match: mirror
+  mirror_match: domain
   type: marketplace
-  marketplace: raycast-store
-  channel: connector-listing
-  relationship: connector-coverage
-  evidence: https://www.raycast.com/aparandeh/manage-clickup-tasks
-  app: ClickUp - Tasks & Docs Explorer
-  category: Raycast Store extension (community wrapper)
-  listing_count: 1
-  contract_reference:
-    register: Raycast Store (raycast/extensions monorepo + store_listings JSON)
-    spec_file: null
-    role: raycast-community-wrapper
-    builder: community
-    authors:
-    - aparandeh
-    matched_domain: clickup.com
-    matched_by: domain
-    monorepo_commit: 84f9ac51336a8c69f70974a75bc067c0feae3658
-    listings:
-    - title: ClickUp - Tasks & Docs Explorer
-      store_url: https://www.raycast.com/aparandeh/manage-clickup-tasks
-      installs: 9559
-      categories:
-      - AI Extensions
-      source: https://github.com/raycast/extensions/tree/84f9ac51336a8c69f70974a75bc067c0feae3658/extensions/clickup/
-      author: aparandeh
-      ai_tools: true
-    categories:
-    - AI Extensions
-    identity_note: the extension's own source calls a host on the product's domain AND its title / package name
-      passes partner_link's name check; built by Raycast community developers, not the vendor
-    signal_note: 'coverage: Raycast''s store reaches the product through community-built extensions; one edge per
-      (product, store); install / listing counts are context, never counted'
-    detected_by: sweep-raycast-store-extensions.py
-    detected: '2026-10-22'
-  detected_by: sweep-raycast-store-extensions.py
-  first_seen: '2026-10-22'
-  direction: partner-built
-- partner_name: Obsidian
-  partner: obsidian
-  partner_match: aggregator
-  type: marketplace
-  marketplace: obsidian-community-plugins
-  channel: community-plugin
-  relationship: connector-listing
+  relationship: platform-app
   direction: third-party
-  evidence: https://github.com/hokim-m/click-up-x-obsidian
-  app: ClickUp sync
+  channel: partner-built
+  marketplace: own
+  evidence: https://www.intercom.com/app-store/?app_package_code=clickup
+  mirror_of: intercom/integrations/intercom-integration-edges.yml
+  apps:
+  - ClickUp
   listing_count: 1
-  category: Obsidian community plugin
-  partner_url: https://obsidian.md/plugins
-  contract_reference:
-    register: Obsidian community-plugins.json (obsidianmd/obsidian-releases@793b5211) + plugin repo README / manifest
-      / source
-    spec_file: null
-    role: obsidian-community-plugin:community
-    registered_name: hokim-m
-    register_id: https://github.com/hokim-m/click-up-x-obsidian
-    matched_domain: clickup.com
-    matched_by: domain+name-in-listing
-    matched_where: source
-    matched_host: api.clickup.com
-    builder: community
-    plugins:
-    - click-up-sync
-    downloads_context: 3803
-    signal_note: 'ONE edge per provider: a community plugin names the provider in its name/description AND carries
-      the provider''s domain or API host in its README or source. Builder is a named community author (not the provider).
-      Plugin and download counts are context, never counted.'
-    detected_by: sweep-obsidian-community-plugins.py
-    detected: '2026-10-22'
-  detected_by: sweep-obsidian-community-plugins.py
-  first_seen: '2026-10-22'
-- partner_name: APIs.guru OpenAPI Directory
-  partner: apis-guru
-  partner_match: register
-  type: register
-  channel: standard-directory
-  relationship: standard-participant
-  direction: third-party
-  evidence: https://apis.guru/
-  category: API definition directory listing (OpenAPI)
-  contract_reference:
-    register: APIs.guru OpenAPI Directory
-    spec_file: null
-    standard: APIs.guru OpenAPI Directory
-    role: listed-in-directory
-    directory_provider: clickup.com
-    matched_domain: clickup.com
-    matched_by: domain
-    apis_listed: 1
-    version_count: 1
-    first_added: '2023-03-04'
-    last_updated: '2023-03-06'
-    origin_publisher_hosted: false
-    origin_hosts:
-    - jsapi.apiary.io
-    categories: []
-    own_openapi_files: 34
-    listings:
-    - key: clickup.com
-      title: clickup20
-      preferred: 1.0.0
-      versions: 1
-      swagger_url: https://api.apis.guru/v2/specs/clickup.com/1.0.0/openapi.json
-      origin_url: https://jsapi.apiary.io/apis/clickup20.source
-      openapi_version: 3.0.0
-    signal_note: 'participation only: a community directory listing (APIs.guru collects definitions; the provider
-      did not file them). Signals: version_count, apis_listed, origin_publisher_hosted.'
-    detected_by: sweep-openapi-directory-apis-guru.py
-    detected: '2026-10-22'
-  detected_by: sweep-openapi-directory-apis-guru.py
-  first_seen: '2026-10-22'
-- partner_name: TX-RAMP
-  partner: null
-  partner_match: register
-  partner_tier: Level 2
-  type: contract
-  channel: regulator-register
-  relationship: standard-participant
-  direction: partner-built
-  evidence: https://dir.texas.gov/resource-library-item/tx-ramp-certified-cloud-products
-  category: Texas state cloud security certification (TX-RAMP)
-  contract_reference:
-    register: TX-RAMP Certified Cloud Products (Texas DIR)
-    standard: TX-RAMP
-    spec_file: null
-    role: tx-ramp-certified
-    register_file: https://dir.texas.gov/sites/default/files/2026-10/Copy%20of%20TX-RAMP%20Certified%20Cloud%20Products_1.xlsx
-    registrations:
-    - certification_id: TX1114753
-      product: ClickUp
-      registered_vendor: Clickup
-      certification_level: Level 2
-      cloud_categories:
-      - SaaS
-      certification_path: TX-RAMP Fast Track
-      expires: '2027-08-08'
-      lapsed: false
-      matched_domain: clickup.com
-      matched_by: domain
-    identity: wikidata Q123524232 'ClickUp' P856 https://clickup.com/
-    identity_source: wikidata P856 (labelled provenance step; Kin 2026-10-15 decision 1)
-    signal_note: 'certified_products = one entry per cloud category (SaaS / PaaS / IaaS) the vendor holds a TX-RAMP
-      certification in, never per product; products are context, never counted. certification_level = the highest
-      level in that category; lapsed: true when every product in the category is past its expiry date. partner_tier
-      = the highest CURRENT level'
-    certified_products:
-    - product: SaaS
-      product_type: SaaS
-      standard: TX-RAMP
-      certification_level: Level 2
-      lapsed: false
-    detected_by: sweep-tx-ramp-certified-cloud.py
-    detected: '2026-10-22'
-  detected_by: sweep-tx-ramp-certified-cloud.py
-  first_seen: '2026-10-22'
+  detected: '2026-10-23'
+  detected_by: mirror-platform-listings.py
+  category: Issue tracking & Ticketing
 templates:
 - title: Create ClickUp tasks from Google Calendar events
   url: https://zapier.com/apps/clickup/integrations/google-calendar/20064/create-clickup-tasks-from-google-calendar-events
