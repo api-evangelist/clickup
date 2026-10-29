@@ -1,4 +1,4 @@
-# clickup (clickup)
+# Clickup
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -64,269 +64,306 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Work with tasks using the ClickUp API.
+ClickUp is a work management platform — tasks, Lists, Folders, Spaces, Docs, Chat, Goals, time tracking, dashboards and automations in one Workspace. It ships a public REST API in two concurrent versions: v2 (138 operations, the broad surface) and v3 (35 operations, Chat, Docs, attachments, audit logs and ACLs), both published as first-party OpenAPI documents and advertised through an RFC 9727 api-catalog at developer.clickup.com. Authentication is a single Authorization header carrying either a personal token or an OAuth 2.0 access token authorized per Workspace; there are no OAuth scopes. Webhooks are HMAC-SHA256 signed. ClickUp also runs a remote MCP server at mcp.clickup.com with its own OAuth authorization server, PKCE and dynamic client registration, exposing 48 documented tools. Rate limits are per token and set by the Workspace plan. There is no sandbox, no idempotency mechanism and no published deprecation policy.
+
+**Areas:** Project Management · Work Management · Productivity · Collaboration · Task · Documents · Chat · Time Tracking · MCP
+
+## Clickup on APIs.io
+
+Everything profiled for Clickup is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/clickup/](https://apis.io/providers/clickup/)** — or go straight to one of the APIs or properties below.
+
+### APIs (34)
+
+- [clickup Authorization API](https://apis.io/apis/clickup/clickup-authorization-api/) — Operations for retrieving authenticated user information.
+- [clickup Comments API](https://apis.io/apis/clickup/clickup-comments-api/) — Operations for managing comments on tasks, views, and lists.
+- [clickup Custom Fields API](https://apis.io/apis/clickup/clickup-custom-fields-api/) — Operations for retrieving custom field definitions and setting custom field values on tasks.
+- [clickup Folders API](https://apis.io/apis/clickup/clickup-folders-api/) — Operations for managing Folders within ClickUp Spaces.
+- [clickup Goals API](https://apis.io/apis/clickup/clickup-goals-api/) — Operations for managing Goals and Key Results within a ClickUp Workspace.
+- [clickup Lists API](https://apis.io/apis/clickup/clickup-lists-api/) — Operations for managing Lists within ClickUp Spaces and Folders.
+- [clickup Spaces API](https://apis.io/apis/clickup/clickup-spaces-api/) — Operations for managing Spaces within a ClickUp Workspace.
+- [clickup Tasks API](https://apis.io/apis/clickup/clickup-tasks-api/) — Operations for creating, retrieving, updating, and deleting tasks within ClickUp lists and workspaces.
+- [clickup Teams API](https://apis.io/apis/clickup/clickup-teams-api/) — Operations for retrieving Workspace (team) information and membership.
+- [clickup Time Tracking API](https://apis.io/apis/clickup/clickup-time-tracking-api/) — Operations for managing time entries and timers within a ClickUp Workspace.
+- [clickup Views API](https://apis.io/apis/clickup/clickup-views-api/) — Operations for managing views at various levels of the ClickUp hierarchy.
+- [clickup Webhooks API](https://apis.io/apis/clickup/clickup-webhooks-api/) — Operations for creating, retrieving, updating, and deleting webhook subscriptions.
+- [Clickup O Auth API](https://apis.io/apis/clickup/clickup-oauth-api/) — Operations for OAuth 2.0 authentication and token management.
+- [Clickup Acls API](https://apis.io/apis/clickup/clickup-acls-api/) — Acls API
+- [Clickup Attachments API](https://apis.io/apis/clickup/clickup-attachments-api/) — The Attachments API from Clickup — 2 operation(s) for attachments.
+- [Clickup Audit Logs API](https://apis.io/apis/clickup/clickup-audit-logs-api/) — The Audit Logs API from Clickup — 1 operation(s) for audit logs.
+- [Clickup Auditlogs API](https://apis.io/apis/clickup/clickup-auditlogs-api/) — Auditlogs API
+- [Clickup Chat API](https://apis.io/apis/clickup/clickup-chat-api/) — Chat API
+- [Clickup Chat (Experimental) API](https://apis.io/apis/clickup/clickup-chat-experimental-api/) — The Chat (Experimental) API from Clickup — 1 operation(s) for chat (experimental).
+- [Clickup Custom Task Types API](https://apis.io/apis/clickup/clickup-custom-task-types-api/) — The Custom Task Types API from Clickup — 1 operation(s) for custom task types.
+- [Clickup Docs API](https://apis.io/apis/clickup/clickup-docs-api/) — Docs API
+- [Clickup Guests API](https://apis.io/apis/clickup/clickup-guests-api/) — The Guests API from Clickup — 5 operation(s) for guests.
+- [Clickup Members API](https://apis.io/apis/clickup/clickup-members-api/) — The Members API from Clickup — 2 operation(s) for members.
+- [Clickup Privacy and access API](https://apis.io/apis/clickup/clickup-privacy-and-access-api/) — The Privacy and access API from Clickup — 1 operation(s) for privacy and access.
+- [Clickup Roles API](https://apis.io/apis/clickup/clickup-roles-api/) — The Roles API from Clickup — 1 operation(s) for roles.
+- [Clickup Shared Hierarchy API](https://apis.io/apis/clickup/clickup-shared-hierarchy-api/) — The Shared Hierarchy API from Clickup — 1 operation(s) for shared hierarchy.
+- [Clickup Tags API](https://apis.io/apis/clickup/clickup-tags-api/) — The Tags API from Clickup — 3 operation(s) for tags.
+- [Clickup Task Checklists API](https://apis.io/apis/clickup/clickup-task-checklists-api/) — The Task Checklists API from Clickup — 4 operation(s) for task checklists.
+- [Clickup Task Relationships API](https://apis.io/apis/clickup/clickup-task-relationships-api/) — The Task Relationships API from Clickup — 2 operation(s) for task relationships.
+- [Clickup Templates API](https://apis.io/apis/clickup/clickup-templates-api/) — The Templates API from Clickup — 3 operation(s) for templates.
+- [Clickup Time Tracking (Legacy) API](https://apis.io/apis/clickup/clickup-time-tracking-legacy-api/) — The Time Tracking (Legacy) API from Clickup — 2 operation(s) for time tracking (legacy).
+- [Clickup User Groups API](https://apis.io/apis/clickup/clickup-user-groups-api/) — The User Groups API from Clickup — 3 operation(s) for user groups.
+- [Clickup Users API](https://apis.io/apis/clickup/clickup-users-api/) — The Users API from Clickup — 2 operation(s) for users.
+- [Clickup Workspaces API](https://apis.io/apis/clickup/clickup-workspaces-api/) — The Workspaces API from Clickup — 3 operation(s) for workspaces.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/clickup/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/clickup/refs/heads/main/apis.yml)
+### Published properties
 
-## Timestamps
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-- **Modified:** 2026-05-19
+#### AsyncAPI (1)
+
+Event-driven and webhook contracts.
+
+- [ClickUp Webhooks Events](https://apis.io/asyncapis/clickup/clickup-webhooks-asyncapi/)
+
+#### Event channels (1)
+
+Individual events and webhooks the provider emits.
+
+- [/webhook](https://apis.io/channels/clickup/webhook/)
+
+#### GraphQL (1)
+
+GraphQL schemas.
+
+- [Moved to /providers/clickup/](https://apis.io/graphqls/clickup/clickup-graphql/)
+
+#### MCP servers (1)
+
+Model Context Protocol servers that expose the API to agents.
+
+- [clickup](https://apis.io/servers/clickup/clickup/)
+
+#### Agentic access (1)
+
+Which operations an agent can call, which act, and which need a human in the loop.
+
+- [Clickup Agentic Access](https://apis.io/agentic-access/clickup/clickup-agentic-access/)
+
+#### JSON Schema (41)
+
+The data models the API reads and writes.
+
+- [AuthorizedUser](https://apis.io/schemas/clickup/clickup-authorizeduser/)
+- [Comment](https://apis.io/schemas/clickup/clickup-comment/)
+- [CreateCommentRequest](https://apis.io/schemas/clickup/clickup-createcommentrequest/)
+- [CreateFolderRequest](https://apis.io/schemas/clickup/clickup-createfolderrequest/)
+- [CreateGoalRequest](https://apis.io/schemas/clickup/clickup-creategoalrequest/)
+- [CreateKeyResultRequest](https://apis.io/schemas/clickup/clickup-createkeyresultrequest/)
+- [CreateListRequest](https://apis.io/schemas/clickup/clickup-createlistrequest/)
+- [CreateSpaceRequest](https://apis.io/schemas/clickup/clickup-createspacerequest/)
+- [CreateTaskRequest](https://apis.io/schemas/clickup/clickup-createtaskrequest/)
+- [CreateTimeEntryRequest](https://apis.io/schemas/clickup/clickup-createtimeentryrequest/)
+- [CreateWebhookRequest](https://apis.io/schemas/clickup/clickup-createwebhookrequest/)
+- [CustomField](https://apis.io/schemas/clickup/clickup-customfield/)
+- [CustomFieldDefinition](https://apis.io/schemas/clickup/clickup-customfielddefinition/)
+- [Folder](https://apis.io/schemas/clickup/clickup-folder/)
+- [Goal](https://apis.io/schemas/clickup/clickup-goal/)
+- [GoalFolder](https://apis.io/schemas/clickup/clickup-goalfolder/)
+- [KeyResult](https://apis.io/schemas/clickup/clickup-keyresult/)
+- [List](https://apis.io/schemas/clickup/clickup-list/)
+- [Member](https://apis.io/schemas/clickup/clickup-member/)
+- [Priority](https://apis.io/schemas/clickup/clickup-priority/)
+- [Space](https://apis.io/schemas/clickup/clickup-space/)
+- [Status](https://apis.io/schemas/clickup/clickup-status/)
+- [Tag](https://apis.io/schemas/clickup/clickup-tag/)
+- [ClickUp Task](https://apis.io/schemas/clickup/clickup-task/)
+- [Team](https://apis.io/schemas/clickup/clickup-team/)
+- …and 16 more published on APIs.io
+
+#### JSON Structure (1)
+
+Data models expressed in JSON Structure.
+
+- [Clickup Structure](https://apis.io/json-structure/clickup/clickup-structure/)
+
+#### JSON-LD (1)
+
+Linked-data contexts for the provider's vocabulary.
+
+- [Clickup Context](https://apis.io/jsonld/clickup/clickup-context/)
+
+#### Vocabulary (1)
 
-## APIs
+The provider's domain terms, defined.
 
-### ClickUp Tasks API
+- [Clickup Domain Vocabulary](https://apis.io/vocabularies/clickup/clickup-vocabulary/)
 
-The ClickUp Tasks API allows developers to create, read, update, and delete tasks within ClickUp workspaces. Tasks are the core unit of work in ClickUp and can include custom fields, assignees, due dates, tags, priorities, and attachments. The API supports filtering tasks by list, space, or project, and enables bulk operations for managing large numbers of tasks programmatically.
+#### Collections (25)
 
-- **Human URL:** [https://developer.clickup.com/docs/tasks](https://developer.clickup.com/docs/tasks)
-- **Base URL:** `https://api.clickup.com`
+Postman and Open Collection request collections.
 
-#### Tags
-
-- Collaboration
-- Productivity
-- Project Management
-- Tasks
-
-#### Properties
-
-- [Documentation](https://developer.clickup.com/docs/tasks)
-- [OpenAPI](openapi/clickup-tasks-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/clickup-tasks.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/clickup-tasks.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### ClickUp Spaces API
-
-The ClickUp Spaces API provides endpoints for managing Spaces, which are the top-level organizational containers within a ClickUp Workspace. Spaces contain Folders and Lists that organize tasks into logical groupings. Developers can create, update, and delete Spaces, as well as retrieve Space details and configure Space-level settings such as enabled features and statuses.
-
-- **Human URL:** [https://developer.clickup.com/reference/get-spaces](https://developer.clickup.com/reference/get-spaces)
-- **Base URL:** `https://api.clickup.com`
-
-#### Tags
-
-- Organization
-- Project Management
-- Workspaces
-
-#### Properties
-
-- [Documentation](https://developer.clickup.com/reference/get-spaces)
-- [OpenAPI](openapi/clickup-spaces-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/clickup-spaces.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/clickup-spaces.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### ClickUp Lists API
-
-The ClickUp Lists API enables developers to manage Lists, which are containers that hold tasks within a Space or Folder. Lists define the workflow statuses available to tasks and serve as the primary grouping mechanism for related work items. The API supports creating, updating, and deleting Lists, as well as retrieving List details and the tasks they contain.
-
-- **Human URL:** [https://developer.clickup.com/reference/get-lists](https://developer.clickup.com/reference/get-lists)
-- **Base URL:** `https://api.clickup.com`
-
-#### Tags
-
-- Lists
-- Project Management
-- Task Organization
-
-#### Properties
-
-- [Documentation](https://developer.clickup.com/reference/get-lists)
-- [OpenAPI](openapi/clickup-lists-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/clickup-lists.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/clickup-lists.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### ClickUp Folders API
-
-The ClickUp Folders API provides endpoints for managing Folders, which are optional organizational containers that sit between Spaces and Lists in the ClickUp hierarchy. Folders group related Lists together and can be used to organize projects or workstreams within a Space. Developers can create, update, delete, and retrieve Folders and their associated Lists.
-
-- **Human URL:** [https://developer.clickup.com/reference/get-folders](https://developer.clickup.com/reference/get-folders)
-- **Base URL:** `https://api.clickup.com`
-
-#### Tags
-
-- Folders
-- Organization
-- Project Management
-
-#### Properties
-
-- [Documentation](https://developer.clickup.com/reference/get-folders)
-- [OpenAPI](openapi/clickup-folders-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/clickup-folders.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/clickup-folders.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### ClickUp Goals API
-
-The ClickUp Goals API allows developers to create and manage goals within a Workspace. Goals can track progress toward objectives using targets based on numbers, currency, percentages, or task completion. The API supports creating goals, adding key results and targets, updating progress, and retrieving goal details. This is useful for building OKR tracking and reporting integrations.
-
-- **Human URL:** [https://developer.clickup.com/reference/get-goals](https://developer.clickup.com/reference/get-goals)
-- **Base URL:** `https://api.clickup.com`
-
-#### Tags
-
-- Goals
-- OKR
-- Project Management
-- Tracking
-
-#### Properties
-
-- [Documentation](https://developer.clickup.com/reference/get-goals)
-- [OpenAPI](openapi/clickup-goals-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/clickup-goals.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/clickup-goals.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### ClickUp Comments API
-
-The ClickUp Comments API provides endpoints for creating and retrieving comments on tasks, views, and lists. Comments support rich text formatting, mentions, and attachments. Developers can use this API to build integrations that synchronize discussions between ClickUp and other collaboration tools, or to programmatically add status updates and notes to tasks.
-
-- **Human URL:** [https://developer.clickup.com/reference/get-task-comments](https://developer.clickup.com/reference/get-task-comments)
-- **Base URL:** `https://api.clickup.com`
-
-#### Tags
-
-- Collaboration
-- Comments
-- Project Management
-
-#### Properties
-
-- [Documentation](https://developer.clickup.com/reference/get-task-comments)
-- [OpenAPI](openapi/clickup-comments-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/clickup-comments.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/clickup-comments.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### ClickUp Teams (Workspaces) API
-
-The ClickUp Teams API provides access to Workspace-level information and membership. In the ClickUp API, Teams correspond to Workspaces, which are the top-level organizational unit. The API allows developers to retrieve a list of Workspaces the authenticated user belongs to, along with member details and roles. This is typically the starting point for navigating the ClickUp hierarchy.
-
-- **Human URL:** [https://developer.clickup.com/reference/get-teams](https://developer.clickup.com/reference/get-teams)
-- **Base URL:** `https://api.clickup.com`
-
-#### Tags
-
-- Project Management
-- Teams
-- Users
-- Workspaces
-
-#### Properties
-
-- [Documentation](https://developer.clickup.com/reference/get-teams)
-- [OpenAPI](openapi/clickup-teams-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/clickup-teams.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/clickup-teams.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### ClickUp Webhooks API
-
-The ClickUp Webhooks API enables developers to subscribe to real-time events within a Workspace. When subscribed events occur, ClickUp sends HTTP POST requests to a specified endpoint URL with event details. Webhooks support events for tasks, lists, folders, spaces, and goals. Each webhook payload is signed with a shared secret for verification, ensuring the event originated from ClickUp.
-
-- **Human URL:** [https://developer.clickup.com/docs/webhooks](https://developer.clickup.com/docs/webhooks)
-- **Base URL:** `https://api.clickup.com`
-
-#### Tags
-
-- Events
-- Project Management
-- Real-Time
-- Webhooks
-
-#### Properties
-
-- [Documentation](https://developer.clickup.com/docs/webhooks)
-- [OpenAPI](openapi/clickup-webhooks-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/clickup-webhooks.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/clickup-webhooks.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [AsyncAPI](asyncapi/clickup-webhooks-asyncapi.yml) — [AsyncAPI Specification](https://www.asyncapi.com/docs/reference/specification/latest)
-
-### ClickUp Custom Fields API
-
-The ClickUp Custom Fields API allows developers to retrieve available custom fields for a list and set or update custom field values on tasks. Custom fields extend the default task data model with user-defined attributes such as dropdowns, labels, numbers, dates, and relationships. This API is essential for integrations that need to read or write structured metadata beyond the standard task fields.
-
-- **Human URL:** [https://developer.clickup.com/reference/get-accessible-custom-fields](https://developer.clickup.com/reference/get-accessible-custom-fields)
-- **Base URL:** `https://api.clickup.com`
-
-#### Tags
-
-- Custom Fields
-- Metadata
-- Project Management
-
-#### Properties
-
-- [Documentation](https://developer.clickup.com/reference/get-accessible-custom-fields)
-- [OpenAPI](openapi/clickup-custom-fields-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/clickup-custom-fields.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/clickup-custom-fields.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### ClickUp Time Tracking API
-
-The ClickUp Time Tracking API provides endpoints for recording and retrieving time entries associated with tasks. Developers can create manual time entries, start and stop timers, and query time entries within date ranges and across team members. This API supports building time reporting dashboards, invoicing integrations, and productivity analysis tools.
-
-- **Human URL:** [https://developer.clickup.com/reference/get-time-entries-within-a-date-range](https://developer.clickup.com/reference/get-time-entries-within-a-date-range)
-- **Base URL:** `https://api.clickup.com`
-
-#### Tags
-
-- Productivity
-- Project Management
-- Reporting
-- Time Tracking
-
-#### Properties
-
-- [Documentation](https://developer.clickup.com/reference/get-time-entries-within-a-date-range)
-- [OpenAPI](openapi/clickup-time-tracking-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/clickup-time-tracking.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/clickup-time-tracking.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### ClickUp Views API
-
-The ClickUp Views API enables developers to create and manage views at the team, space, folder, and list levels. Views define how tasks are displayed and filtered, supporting formats such as list, board, calendar, gantt, and table. The API allows programmatic creation of saved views with specific filters, groupings, and sort configurations.
-
-- **Human URL:** [https://developer.clickup.com/reference/get-views](https://developer.clickup.com/reference/get-views)
-- **Base URL:** `https://api.clickup.com`
-
-#### Tags
-
-- Dashboards
-- Project Management
-- Views
-
-#### Properties
-
-- [Documentation](https://developer.clickup.com/reference/get-views)
-- [OpenAPI](openapi/clickup-views-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/clickup-views.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/clickup-views.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### ClickUp OAuth API
-
-The ClickUp OAuth API implements the authorization code grant type, allowing third-party applications to authenticate users and access their ClickUp Workspaces. Workspace owners or admins can create OAuth apps, and users authorize access by granting permissions to specific Workspaces. The API provides endpoints for obtaining authorization codes, exchanging them for access tokens, and retrieving the authenticated user's information.
-
-- **Human URL:** [https://developer.clickup.com/docs/authentication](https://developer.clickup.com/docs/authentication)
-- **Base URL:** `https://api.clickup.com`
-
-#### Tags
-
-- Authentication
-- Authorization
-- OAuth
-- Project Management
-
-#### Properties
-
-- [Documentation](https://developer.clickup.com/docs/authentication)
-- [OpenAPI](openapi/clickup-oauth-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/clickup-oauth.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/clickup-oauth.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-## Common Properties
-
-- [GitHub Organization](https://github.com/clickup)
-- [LinkedIn](https://www.linkedin.com/company/clickup-app)
-- [JSON-LD](json-ld/clickup-context.jsonld) — [JSON-LD](https://www.w3.org/TR/json-ld11/)
-- [JSON Schema](json-schema/clickup-task-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/clickup-webhook-payload-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [Features](undefined)
-- [L L Ms Txt](https://developer.clickup.com/llms.txt)
+- [ClickUp Comments Authorization API](https://apis.io/collections/clickup/open-clickup-authorization-api/)
+- [ClickUp Comments API](https://apis.io/collections/clickup/open-clickup-comments/)
+- [ClickUp Authorization Comments API](https://apis.io/collections/clickup/open-clickup-comments-api/)
+- [ClickUp Custom Fields API](https://apis.io/collections/clickup/open-clickup-custom-fields/)
+- [ClickUp Comments Authorization Custom Fields API](https://apis.io/collections/clickup/open-clickup-custom-fields-api/)
+- [ClickUp Folders API](https://apis.io/collections/clickup/open-clickup-folders/)
+- [ClickUp Comments Authorization Folders API](https://apis.io/collections/clickup/open-clickup-folders-api/)
+- [ClickUp Goals API](https://apis.io/collections/clickup/open-clickup-goals/)
+- [ClickUp Comments Authorization Goals API](https://apis.io/collections/clickup/open-clickup-goals-api/)
+- [ClickUp Lists API](https://apis.io/collections/clickup/open-clickup-lists/)
+- [ClickUp Comments Authorization Lists API](https://apis.io/collections/clickup/open-clickup-lists-api/)
+- [ClickUp OAuth API](https://apis.io/collections/clickup/open-clickup-oauth/)
+- [ClickUp Comments Authorization OAuth API](https://apis.io/collections/clickup/open-clickup-oauth-api/)
+- [ClickUp Spaces API](https://apis.io/collections/clickup/open-clickup-spaces/)
+- [ClickUp Comments Authorization Spaces API](https://apis.io/collections/clickup/open-clickup-spaces-api/)
+- [ClickUp Tasks API](https://apis.io/collections/clickup/open-clickup-tasks/)
+- [ClickUp Comments Authorization Tasks API](https://apis.io/collections/clickup/open-clickup-tasks-api/)
+- [ClickUp Teams (Workspaces) API](https://apis.io/collections/clickup/open-clickup-teams/)
+- [ClickUp Comments Authorization Teams API](https://apis.io/collections/clickup/open-clickup-teams-api/)
+- [ClickUp Time Tracking API](https://apis.io/collections/clickup/open-clickup-time-tracking/)
+- [ClickUp Comments Authorization Time Tracking API](https://apis.io/collections/clickup/open-clickup-time-tracking-api/)
+- [ClickUp Views API](https://apis.io/collections/clickup/open-clickup-views/)
+- [ClickUp Comments Authorization Views API](https://apis.io/collections/clickup/open-clickup-views-api/)
+- [ClickUp Webhooks API](https://apis.io/collections/clickup/open-clickup-webhooks/)
+- [ClickUp Comments Authorization Webhooks API](https://apis.io/collections/clickup/open-clickup-webhooks-api/)
+
+#### Overlays (36)
+
+OpenAPI overlays, including conversational phrasing for each operation.
+
+- [Clickup Acls Api Phrasing Overlay](https://apis.io/overlays/clickup/clickup-acls-api-phrasing-overlay/)
+- [Clickup Api V2 Reference Overlay](https://apis.io/overlays/clickup/clickup-api-v2-reference-overlay/)
+- [Clickup Attachments Api Phrasing Overlay](https://apis.io/overlays/clickup/clickup-attachments-api-phrasing-overlay/)
+- [Clickup Audit Logs Api Phrasing Overlay](https://apis.io/overlays/clickup/clickup-audit-logs-api-phrasing-overlay/)
+- [Clickup Auditlogs Api Phrasing Overlay](https://apis.io/overlays/clickup/clickup-auditlogs-api-phrasing-overlay/)
+- [Clickup Authorization Api Phrasing Overlay](https://apis.io/overlays/clickup/clickup-authorization-api-phrasing-overlay/)
+- [Clickup Chat Api Phrasing Overlay](https://apis.io/overlays/clickup/clickup-chat-api-phrasing-overlay/)
+- [Clickup Chat Experimental Api Phrasing Overlay](https://apis.io/overlays/clickup/clickup-chat-experimental-api-phrasing-overlay/)
+- [Clickup Comments Api Phrasing Overlay](https://apis.io/overlays/clickup/clickup-comments-api-phrasing-overlay/)
+- [Clickup Custom Fields Api Phrasing Overlay](https://apis.io/overlays/clickup/clickup-custom-fields-api-phrasing-overlay/)
+- [Clickup Custom Task Types Api Phrasing Overlay](https://apis.io/overlays/clickup/clickup-custom-task-types-api-phrasing-overlay/)
+- [Clickup Docs Api Phrasing Overlay](https://apis.io/overlays/clickup/clickup-docs-api-phrasing-overlay/)
+- [Clickup Folders Api Phrasing Overlay](https://apis.io/overlays/clickup/clickup-folders-api-phrasing-overlay/)
+- [Clickup Goals Api Phrasing Overlay](https://apis.io/overlays/clickup/clickup-goals-api-phrasing-overlay/)
+- [Clickup Guests Api Phrasing Overlay](https://apis.io/overlays/clickup/clickup-guests-api-phrasing-overlay/)
+- [Clickup Lists Api Phrasing Overlay](https://apis.io/overlays/clickup/clickup-lists-api-phrasing-overlay/)
+- [Clickup Members Api Phrasing Overlay](https://apis.io/overlays/clickup/clickup-members-api-phrasing-overlay/)
+- [Clickup Oauth Api Phrasing Overlay](https://apis.io/overlays/clickup/clickup-oauth-api-phrasing-overlay/)
+- [Clickup Privacy And Access Api Phrasing Overlay](https://apis.io/overlays/clickup/clickup-privacy-and-access-api-phrasing-overlay/)
+- [Clickup Public Api V3 Overlay](https://apis.io/overlays/clickup/clickup-public-api-v3-overlay/)
+- [Clickup Roles Api Phrasing Overlay](https://apis.io/overlays/clickup/clickup-roles-api-phrasing-overlay/)
+- [Clickup Shared Hierarchy Api Phrasing Overlay](https://apis.io/overlays/clickup/clickup-shared-hierarchy-api-phrasing-overlay/)
+- [Clickup Spaces Api Phrasing Overlay](https://apis.io/overlays/clickup/clickup-spaces-api-phrasing-overlay/)
+- [Clickup Tags Api Phrasing Overlay](https://apis.io/overlays/clickup/clickup-tags-api-phrasing-overlay/)
+- [Clickup Task Checklists Api Phrasing Overlay](https://apis.io/overlays/clickup/clickup-task-checklists-api-phrasing-overlay/)
+- …and 11 more published on APIs.io
+
+#### Governance rules (2)
+
+Spectral rulesets for the provider's contracts.
+
+- [Clickup — asyncapi rules](https://apis.io/rules/clickup/clickup-asyncapi-spectral-rules/)
+- [Clickup — jsonschema rules](https://apis.io/rules/clickup/clickup-jsonschema-spectral-rules/)
+
+#### Security (4)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Clickup Authentication](https://apis.io/security/clickup/clickup-authentication/)
+- [Clickup Domain Security](https://apis.io/security/clickup/clickup-domain-security/)
+- [Clickup Trust Center](https://apis.io/security/clickup/clickup-trust-center/)
+- [Clickup Vulnerability Disclosure](https://apis.io/security/clickup/clickup-vulnerability-disclosure/)
+
+#### OAuth scopes (1)
+
+The permissions the API asks for.
+
+- [Clickup Scopes](https://apis.io/scopes/clickup/clickup-scopes/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Clickup Plans Pricing](https://apis.io/plans/clickup/clickup-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Clickup Rate Limits](https://apis.io/rate-limits/clickup/clickup-rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Clickup Finops](https://apis.io/finops/clickup/clickup-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://www.clickup.com/)
+- [Documentation](https://developer.clickup.com/docs)
+- [Getting started](https://developer.clickup.com/docs/authentication)
+- [API reference](https://developer.clickup.com/reference)
+- [Pricing](https://clickup.com/pricing)
+- [Sign up](https://app.clickup.com/signup)
+- [Support](https://help.clickup.com/hc/en-us)
+- [Changelog](https://clickup.canny.io/changelog)
+- [Blog](https://clickup.com/blog)
+- [Security](https://clickup.com/security)
+- [Compliance](https://security.clickup.com/)
+- [Terms of service](https://clickup.com/terms)
+- [Privacy policy](https://clickup.com/terms/privacy)
+- [GitHub](https://github.com/clickup)
+- [Status](https://status.clickup.com/)
+
+## API Evangelist rating
+
+**Kin Score 70.9** — exemplar · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 80.0 |
+| Contract quality | 63.7 |
+| Contract governance | 31.8 |
+| Operational transparency | 85.5 |
+| Developer ergonomics | 62.5 |
+| Access clarity | 78.9 |
+
+**Agent readiness 57.0** — agent-ready (gated down from agent-native)
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | verified |
+| Auth Clarity | served (partial credit) |
+| Idempotency | — |
+| Error Semantics | verified |
+| OpenAPI Examples | verified |
+| Rate Limit Signal | documented (partial credit) |
+| Event Surface Described | derived (partial credit) |
+| Agent Skills | derived (partial credit) |
+| Well Known Catalog | yes |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | served (partial credit) |
+| Protected Resource Metadata | verified |
+| Dynamic Client Registration | yes |
+| Agentic Commerce | — |
+| Pagination Ratio | — |
+| Operation Distinctiveness | — |
+
+**Regulatory alignment 45.1** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/clickup/](https://apis.io/providers/clickup/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Clickup: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/clickup/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
