@@ -1,0 +1,125 @@
+# Pricing transcribed from the provider's own page — see provenance. Numbers are quoted, not derived.
+generated: '2026-10-28'
+method: searched
+source: https://clickup.com/pricing
+sources:
+- https://clickup.com/pricing
+provenance:
+  tool: engine/economics/harvest_pricing.py
+  run: 20261028T120612
+  grounding: every price_text was found verbatim in the fetched page text
+audience: business-product
+pricing_basis: per-seat
+delivery:
+  delivery: managed
+  method: page
+  read: '2026-10-28'
+  managed_tier: Core
+published: true
+note: 'Regular (monthly) prices also shown: Core $12, Business $25, MAX $120. Enterprise is Contact Sales.'
+plan_count: 6
+currency: USD
+plans:
+- name: Free Forever
+  price_text: $ 0
+  price: 0
+  currency: USD
+  period: month
+  unit: user
+  included_quota: 500 credits / workspace, 60 MB Storage, Unlimited Tasks & Subtasks
+- name: Core
+  price_text: $ 9
+  price: 9
+  currency: USD
+  period: month
+  unit: user / mo · billed yearly
+  included_quota: 1K credits / user / mo · pooled, 1K Automations / mo
+- name: Business
+  price_text: $ 17
+  price: 17
+  currency: USD
+  period: month
+  unit: user / mo · billed yearly
+  included_quota: 1.5K credits / user / mo · pooled, 10K Automations / mo
+- name: Enterprise
+  price_text: Custom
+  period: none
+  unit: user
+  included_quota: 3K credits / user / mo · pooled, 1M Automations / mo
+- name: MAX
+  price_text: $ 100
+  price: 100
+  currency: USD
+  period: month
+  unit: user / mo · billed yearly
+  included_quota: 10K credits / user / mo · pooled
+- name: AI Super Credits
+  price_text: $10 per 10K credits
+  price: 10
+  currency: USD
+  period: per-use
+  unit: 10K credits
+rate_limit_statements:
+- API Calls 100/minute 100/minute 100/minute 10,000/minute 10,000/minute
+- MCP calls / day 100 300 1,000 25,000 No daily cap
+- Automation Actions 100 actions / workspace / month 1,000 actions / workspace / month 10,000 actions
+  / workspace / month 1M actions / workspace / month 1M actions / workspace / month
+x-canonical:
+  generated: '2026-11-01'
+  vocabulary: engine/economics/plans-canonical.yml
+  models:
+  - free
+  - hybrid
+  - seat
+  units:
+  - credit
+  - seat
+  plans:
+  - name: Free Forever
+    access: other
+    model: free
+    model_how: derived
+    units:
+    - seat
+    periods:
+    - month
+  - name: Core
+    access: other
+    model: seat
+    model_how: derived
+    units:
+    - seat
+    periods:
+    - month
+  - name: Business
+    access: other
+    model: seat
+    model_how: derived
+    units:
+    - seat
+    periods:
+    - month
+  - name: Enterprise
+    access: other
+    model: unstated
+    model_how: derived
+    units:
+    - seat
+    periods:
+    - none
+  - name: MAX
+    access: other
+    model: seat
+    model_how: derived
+    units:
+    - seat
+    periods:
+    - month
+  - name: AI Super Credits
+    access: other
+    model: hybrid
+    model_how: derived
+    units:
+    - credit
+    periods:
+    - other

@@ -1,0 +1,989 @@
+name: Clickup
+aid: clickup
+deliveryModel:
+  model: unknown
+  open_source: false
+  commercial: false
+  callable_host: true
+  label: Delivery model not determined — needs a product licence on record
+  confidence: low
+  source:
+  - openapi
+  generated: '2026-08-28'
+  method: derived
+specificationVersion: '0.23'
+accessModel:
+  pricing: freemium
+  onboarding: self-serve
+  trial: false
+  try_now: true
+  public: false
+  label: Freemium · Self-serve signup
+  confidence: medium
+  source:
+  - plans
+  - authentication
+  - security
+  generated: '2026-09-03'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/clickup.png
+url: https://raw.githubusercontent.com/api-evangelist/clickup/refs/heads/main/apis.yml
+modified: '2026-09-17'
+x-docs-platform: readme
+x-docs-platform-confidence: high
+x-docs-platform-checked: 2026-09-24
+apis:
+- aid: clickup:clickup-authorization-api
+  name: clickup Authorization API
+  description: Operations for retrieving authenticated user information.
+  humanURL: https://developer.clickup.com/docs/tasks
+  baseURL: https://api.clickup.com
+  tags:
+  - Authorization
+  properties:
+  - type: OpenAPI
+    url: openapi/clickup-authorization-api-openapi.yml
+  - type: Documentation
+    url: https://developer.clickup.com/docs/tasks
+  - type: Documentation
+    url: https://developer.clickup.com/reference/get-spaces
+  - type: Documentation
+    url: https://developer.clickup.com/reference/get-lists
+  - type: Documentation
+    url: https://developer.clickup.com/reference/get-folders
+  - type: Documentation
+    url: https://developer.clickup.com/reference/get-goals
+  - type: Documentation
+    url: https://developer.clickup.com/reference/get-task-comments
+  - type: Documentation
+    url: https://developer.clickup.com/reference/get-teams
+  - type: Documentation
+    url: https://developer.clickup.com/docs/webhooks
+  - type: AsyncAPI
+    url: asyncapi/clickup-webhooks-asyncapi.yml
+  - type: Documentation
+    url: https://developer.clickup.com/reference/get-accessible-custom-fields
+  - type: Documentation
+    url: https://developer.clickup.com/reference/get-time-entries-within-a-date-range
+  - type: Documentation
+    url: https://developer.clickup.com/reference/get-views
+  - type: Documentation
+    url: https://developer.clickup.com/docs/authentication
+- aid: clickup:clickup-comments-api
+  name: clickup Comments API
+  description: Operations for managing comments on tasks, views, and lists.
+  humanURL: https://developer.clickup.com/docs/tasks
+  baseURL: https://api.clickup.com
+  tags:
+  - Comments
+  properties:
+  - type: OpenAPI
+    url: openapi/clickup-comments-api-openapi.yml
+  - type: Documentation
+    url: https://developer.clickup.com/docs/tasks
+  - type: Documentation
+    url: https://developer.clickup.com/reference/get-spaces
+  - type: Documentation
+    url: https://developer.clickup.com/reference/get-lists
+  - type: Documentation
+    url: https://developer.clickup.com/reference/get-folders
+  - type: Documentation
+    url: https://developer.clickup.com/reference/get-goals
+  - type: Documentation
+    url: https://developer.clickup.com/reference/get-task-comments
+  - type: Documentation
+    url: https://developer.clickup.com/reference/get-teams
+  - type: Documentation
+    url: https://developer.clickup.com/docs/webhooks
+  - type: AsyncAPI
+    url: asyncapi/clickup-webhooks-asyncapi.yml
+  - type: Documentation
+    url: https://developer.clickup.com/reference/get-accessible-custom-fields
+  - type: Documentation
+    url: https://developer.clickup.com/reference/get-time-entries-within-a-date-range
+  - type: Documentation
+    url: https://developer.clickup.com/reference/get-views
+  - type: Documentation
+    url: https://developer.clickup.com/docs/authentication
+- aid: clickup:clickup-custom-fields-api
+  name: clickup Custom Fields API
+  description: >-
+    Operations for retrieving custom field definitions and setting custom field values on tasks.
+  humanURL: https://developer.clickup.com/docs/tasks
+  baseURL: https://api.clickup.com
+  tags:
+  - Custom Fields
+  properties:
+  - type: OpenAPI
+    url: openapi/clickup-custom-fields-api-openapi.yml
+  - type: Documentation
+    url: https://developer.clickup.com/docs/tasks
+  - type: Documentation
+    url: https://developer.clickup.com/reference/get-spaces
+  - type: Documentation
+    url: https://developer.clickup.com/reference/get-lists
+  - type: Documentation
+    url: https://developer.clickup.com/reference/get-folders
+  - type: Documentation
+    url: https://developer.clickup.com/reference/get-goals
+  - type: Documentation
+    url: https://developer.clickup.com/reference/get-task-comments
+  - type: Documentation
+    url: https://developer.clickup.com/reference/get-teams
+  - type: Documentation
+    url: https://developer.clickup.com/docs/webhooks
+  - type: AsyncAPI
+    url: asyncapi/clickup-webhooks-asyncapi.yml
+  - type: Documentation
+    url: https://developer.clickup.com/reference/get-accessible-custom-fields
+  - type: Documentation
+    url: https://developer.clickup.com/reference/get-time-entries-within-a-date-range
+  - type: Documentation
+    url: https://developer.clickup.com/reference/get-views
+  - type: Documentation
+    url: https://developer.clickup.com/docs/authentication
+- aid: clickup:clickup-folders-api
+  name: clickup Folders API
+  description: Operations for managing Folders within ClickUp Spaces.
+  humanURL: https://developer.clickup.com/docs/tasks
+  baseURL: https://api.clickup.com
+  tags:
+  - Folders
+  properties:
+  - type: OpenAPI
+    url: openapi/clickup-folders-api-openapi.yml
+  - type: Documentation
+    url: https://developer.clickup.com/docs/tasks
+  - type: Documentation
+    url: https://developer.clickup.com/reference/get-spaces
+  - type: Documentation
+    url: https://developer.clickup.com/reference/get-lists
+  - type: Documentation
+    url: https://developer.clickup.com/reference/get-folders
+  - type: Documentation
+    url: https://developer.clickup.com/reference/get-goals
+  - type: Documentation
+    url: https://developer.clickup.com/reference/get-task-comments
+  - type: Documentation
+    url: https://developer.clickup.com/reference/get-teams
+  - type: Documentation
+    url: https://developer.clickup.com/docs/webhooks
+  - type: AsyncAPI
+    url: asyncapi/clickup-webhooks-asyncapi.yml
+  - type: Documentation
+    url: https://developer.clickup.com/reference/get-accessible-custom-fields
+  - type: Documentation
+    url: https://developer.clickup.com/reference/get-time-entries-within-a-date-range
+  - type: Documentation
+    url: https://developer.clickup.com/reference/get-views
+  - type: Documentation
+    url: https://developer.clickup.com/docs/authentication
+- aid: clickup:clickup-goals-api
+  name: clickup Goals API
+  description: Operations for managing Goals and Key Results within a ClickUp Workspace.
+  humanURL: https://developer.clickup.com/docs/tasks
+  baseURL: https://api.clickup.com
+  tags:
+  - Goals
+  properties:
+  - type: OpenAPI
+    url: openapi/clickup-goals-api-openapi.yml
+  - type: Documentation
+    url: https://developer.clickup.com/docs/tasks
+  - type: Documentation
+    url: https://developer.clickup.com/reference/get-spaces
+  - type: Documentation
+    url: https://developer.clickup.com/reference/get-lists
+  - type: Documentation
+    url: https://developer.clickup.com/reference/get-folders
+  - type: Documentation
+    url: https://developer.clickup.com/reference/get-goals
+  - type: Documentation
+    url: https://developer.clickup.com/reference/get-task-comments
+  - type: Documentation
+    url: https://developer.clickup.com/reference/get-teams
+  - type: Documentation
+    url: https://developer.clickup.com/docs/webhooks
+  - type: AsyncAPI
+    url: asyncapi/clickup-webhooks-asyncapi.yml
+  - type: Documentation
+    url: https://developer.clickup.com/reference/get-accessible-custom-fields
+  - type: Documentation
+    url: https://developer.clickup.com/reference/get-time-entries-within-a-date-range
+  - type: Documentation
+    url: https://developer.clickup.com/reference/get-views
+  - type: Documentation
+    url: https://developer.clickup.com/docs/authentication
+- aid: clickup:clickup-lists-api
+  name: clickup Lists API
+  description: Operations for managing Lists within ClickUp Spaces and Folders.
+  humanURL: https://developer.clickup.com/docs/tasks
+  baseURL: https://api.clickup.com
+  tags:
+  - List
+  tags_raw:
+  - Lists
+  properties:
+  - type: OpenAPI
+    url: openapi/clickup-lists-api-openapi.yml
+  - type: Documentation
+    url: https://developer.clickup.com/docs/tasks
+  - type: Documentation
+    url: https://developer.clickup.com/reference/get-spaces
+  - type: Documentation
+    url: https://developer.clickup.com/reference/get-lists
+  - type: Documentation
+    url: https://developer.clickup.com/reference/get-folders
+  - type: Documentation
+    url: https://developer.clickup.com/reference/get-goals
+  - type: Documentation
+    url: https://developer.clickup.com/reference/get-task-comments
+  - type: Documentation
+    url: https://developer.clickup.com/reference/get-teams
+  - type: Documentation
+    url: https://developer.clickup.com/docs/webhooks
+  - type: AsyncAPI
+    url: asyncapi/clickup-webhooks-asyncapi.yml
+  - type: Documentation
+    url: https://developer.clickup.com/reference/get-accessible-custom-fields
+  - type: Documentation
+    url: https://developer.clickup.com/reference/get-time-entries-within-a-date-range
+  - type: Documentation
+    url: https://developer.clickup.com/reference/get-views
+  - type: Documentation
+    url: https://developer.clickup.com/docs/authentication
+- aid: clickup:clickup-spaces-api
+  name: clickup Spaces API
+  description: Operations for managing Spaces within a ClickUp Workspace.
+  humanURL: https://developer.clickup.com/docs/tasks
+  baseURL: https://api.clickup.com
+  tags:
+  - Spaces
+  - Space
+  tags_raw:
+  - Spaces
+  - Space
+  properties:
+  - type: OpenAPI
+    url: openapi/clickup-spaces-api-openapi.yml
+  - type: Documentation
+    url: https://developer.clickup.com/docs/tasks
+  - type: Documentation
+    url: https://developer.clickup.com/reference/get-spaces
+  - type: Documentation
+    url: https://developer.clickup.com/reference/get-lists
+  - type: Documentation
+    url: https://developer.clickup.com/reference/get-folders
+  - type: Documentation
+    url: https://developer.clickup.com/reference/get-goals
+  - type: Documentation
+    url: https://developer.clickup.com/reference/get-task-comments
+  - type: Documentation
+    url: https://developer.clickup.com/reference/get-teams
+  - type: Documentation
+    url: https://developer.clickup.com/docs/webhooks
+  - type: AsyncAPI
+    url: asyncapi/clickup-webhooks-asyncapi.yml
+  - type: Documentation
+    url: https://developer.clickup.com/reference/get-accessible-custom-fields
+  - type: Documentation
+    url: https://developer.clickup.com/reference/get-time-entries-within-a-date-range
+  - type: Documentation
+    url: https://developer.clickup.com/reference/get-views
+  - type: Documentation
+    url: https://developer.clickup.com/docs/authentication
+- aid: clickup:clickup-tasks-api
+  name: clickup Tasks API
+  description: >-
+    Operations for creating, retrieving, updating, and deleting tasks within ClickUp lists and workspaces.
+  humanURL: https://developer.clickup.com/docs/tasks
+  baseURL: https://api.clickup.com
+  tags:
+  - Task
+  tags_raw:
+  - Tasks
+  properties:
+  - type: OpenAPI
+    url: openapi/clickup-tasks-api-openapi.yml
+  - type: Documentation
+    url: https://developer.clickup.com/docs/tasks
+  - type: Documentation
+    url: https://developer.clickup.com/reference/get-spaces
+  - type: Documentation
+    url: https://developer.clickup.com/reference/get-lists
+  - type: Documentation
+    url: https://developer.clickup.com/reference/get-folders
+  - type: Documentation
+    url: https://developer.clickup.com/reference/get-goals
+  - type: Documentation
+    url: https://developer.clickup.com/reference/get-task-comments
+  - type: Documentation
+    url: https://developer.clickup.com/reference/get-teams
+  - type: Documentation
+    url: https://developer.clickup.com/docs/webhooks
+  - type: AsyncAPI
+    url: asyncapi/clickup-webhooks-asyncapi.yml
+  - type: Documentation
+    url: https://developer.clickup.com/reference/get-accessible-custom-fields
+  - type: Documentation
+    url: https://developer.clickup.com/reference/get-time-entries-within-a-date-range
+  - type: Documentation
+    url: https://developer.clickup.com/reference/get-views
+  - type: Documentation
+    url: https://developer.clickup.com/docs/authentication
+- aid: clickup:clickup-teams-api
+  name: clickup Teams API
+  description: Operations for retrieving Workspace (team) information and membership.
+  humanURL: https://developer.clickup.com/docs/tasks
+  baseURL: https://api.clickup.com
+  tags:
+  - Team
+  tags_raw:
+  - Teams
+  properties:
+  - type: OpenAPI
+    url: openapi/clickup-teams-api-openapi.yml
+  - type: Documentation
+    url: https://developer.clickup.com/docs/tasks
+  - type: Documentation
+    url: https://developer.clickup.com/reference/get-spaces
+  - type: Documentation
+    url: https://developer.clickup.com/reference/get-lists
+  - type: Documentation
+    url: https://developer.clickup.com/reference/get-folders
+  - type: Documentation
+    url: https://developer.clickup.com/reference/get-goals
+  - type: Documentation
+    url: https://developer.clickup.com/reference/get-task-comments
+  - type: Documentation
+    url: https://developer.clickup.com/reference/get-teams
+  - type: Documentation
+    url: https://developer.clickup.com/docs/webhooks
+  - type: AsyncAPI
+    url: asyncapi/clickup-webhooks-asyncapi.yml
+  - type: Documentation
+    url: https://developer.clickup.com/reference/get-accessible-custom-fields
+  - type: Documentation
+    url: https://developer.clickup.com/reference/get-time-entries-within-a-date-range
+  - type: Documentation
+    url: https://developer.clickup.com/reference/get-views
+  - type: Documentation
+    url: https://developer.clickup.com/docs/authentication
+- aid: clickup:clickup-time-tracking-api
+  name: clickup Time Tracking API
+  description: Operations for managing time entries and timers within a ClickUp Workspace.
+  humanURL: https://developer.clickup.com/docs/tasks
+  baseURL: https://api.clickup.com
+  tags:
+  - Time Tracking
+  properties:
+  - type: OpenAPI
+    url: openapi/clickup-time-tracking-api-openapi.yml
+  - type: Documentation
+    url: https://developer.clickup.com/docs/tasks
+  - type: Documentation
+    url: https://developer.clickup.com/reference/get-spaces
+  - type: Documentation
+    url: https://developer.clickup.com/reference/get-lists
+  - type: Documentation
+    url: https://developer.clickup.com/reference/get-folders
+  - type: Documentation
+    url: https://developer.clickup.com/reference/get-goals
+  - type: Documentation
+    url: https://developer.clickup.com/reference/get-task-comments
+  - type: Documentation
+    url: https://developer.clickup.com/reference/get-teams
+  - type: Documentation
+    url: https://developer.clickup.com/docs/webhooks
+  - type: AsyncAPI
+    url: asyncapi/clickup-webhooks-asyncapi.yml
+  - type: Documentation
+    url: https://developer.clickup.com/reference/get-accessible-custom-fields
+  - type: Documentation
+    url: https://developer.clickup.com/reference/get-time-entries-within-a-date-range
+  - type: Documentation
+    url: https://developer.clickup.com/reference/get-views
+  - type: Documentation
+    url: https://developer.clickup.com/docs/authentication
+- aid: clickup:clickup-views-api
+  name: clickup Views API
+  description: Operations for managing views at various levels of the ClickUp hierarchy.
+  humanURL: https://developer.clickup.com/docs/tasks
+  baseURL: https://api.clickup.com
+  tags:
+  - Views
+  properties:
+  - type: OpenAPI
+    url: openapi/clickup-views-api-openapi.yml
+  - type: Documentation
+    url: https://developer.clickup.com/docs/tasks
+  - type: Documentation
+    url: https://developer.clickup.com/reference/get-spaces
+  - type: Documentation
+    url: https://developer.clickup.com/reference/get-lists
+  - type: Documentation
+    url: https://developer.clickup.com/reference/get-folders
+  - type: Documentation
+    url: https://developer.clickup.com/reference/get-goals
+  - type: Documentation
+    url: https://developer.clickup.com/reference/get-task-comments
+  - type: Documentation
+    url: https://developer.clickup.com/reference/get-teams
+  - type: Documentation
+    url: https://developer.clickup.com/docs/webhooks
+  - type: AsyncAPI
+    url: asyncapi/clickup-webhooks-asyncapi.yml
+  - type: Documentation
+    url: https://developer.clickup.com/reference/get-accessible-custom-fields
+  - type: Documentation
+    url: https://developer.clickup.com/reference/get-time-entries-within-a-date-range
+  - type: Documentation
+    url: https://developer.clickup.com/reference/get-views
+  - type: Documentation
+    url: https://developer.clickup.com/docs/authentication
+- aid: clickup:clickup-webhooks-api
+  name: clickup Webhooks API
+  description: Operations for creating, retrieving, updating, and deleting webhook subscriptions.
+  humanURL: https://developer.clickup.com/docs/tasks
+  baseURL: https://api.clickup.com
+  tags:
+  - Webhook
+  tags_raw:
+  - Webhooks
+  properties:
+  - type: OpenAPI
+    url: openapi/clickup-webhooks-api-openapi.yml
+  - type: Documentation
+    url: https://developer.clickup.com/docs/tasks
+  - type: Documentation
+    url: https://developer.clickup.com/reference/get-spaces
+  - type: Documentation
+    url: https://developer.clickup.com/reference/get-lists
+  - type: Documentation
+    url: https://developer.clickup.com/reference/get-folders
+  - type: Documentation
+    url: https://developer.clickup.com/reference/get-goals
+  - type: Documentation
+    url: https://developer.clickup.com/reference/get-task-comments
+  - type: Documentation
+    url: https://developer.clickup.com/reference/get-teams
+  - type: Documentation
+    url: https://developer.clickup.com/docs/webhooks
+  - type: AsyncAPI
+    url: asyncapi/clickup-webhooks-asyncapi.yml
+  - type: Documentation
+    url: https://developer.clickup.com/reference/get-accessible-custom-fields
+  - type: Documentation
+    url: https://developer.clickup.com/reference/get-time-entries-within-a-date-range
+  - type: Documentation
+    url: https://developer.clickup.com/reference/get-views
+  - type: Documentation
+    url: https://developer.clickup.com/docs/authentication
+- aid: clickup:clickup-oauth-api
+  name: Clickup O Auth API
+  description: Operations for OAuth 2.0 authentication and token management.
+  humanURL: https://developer.clickup.com/docs/tasks
+  baseURL: https://api.clickup.com
+  tags:
+  - OAuth
+  - Authentication
+  tags_raw:
+  - OAuth
+  - Authentication
+  properties:
+  - type: OpenAPI
+    url: openapi/clickup-oauth-api-openapi.yml
+  - type: Documentation
+    url: https://developer.clickup.com/docs/tasks
+  - type: Documentation
+    url: https://developer.clickup.com/reference/get-spaces
+  - type: Documentation
+    url: https://developer.clickup.com/reference/get-lists
+  - type: Documentation
+    url: https://developer.clickup.com/reference/get-folders
+  - type: Documentation
+    url: https://developer.clickup.com/reference/get-goals
+  - type: Documentation
+    url: https://developer.clickup.com/reference/get-task-comments
+  - type: Documentation
+    url: https://developer.clickup.com/reference/get-teams
+  - type: Documentation
+    url: https://developer.clickup.com/docs/webhooks
+  - type: AsyncAPI
+    url: asyncapi/clickup-webhooks-asyncapi.yml
+  - type: Documentation
+    url: https://developer.clickup.com/reference/get-accessible-custom-fields
+  - type: Documentation
+    url: https://developer.clickup.com/reference/get-time-entries-within-a-date-range
+  - type: Documentation
+    url: https://developer.clickup.com/reference/get-views
+  - type: Documentation
+    url: https://developer.clickup.com/docs/authentication
+- aid: clickup:clickup-acls-api
+  name: Clickup Acls API
+  description: Acls API
+  humanURL: https://developer.clickup.com/docs/tasks
+  baseURL: https://api.clickup.com
+  tags:
+  - ACL
+  tags_raw:
+  - Acls
+  properties:
+  - type: OpenAPI
+    url: openapi/clickup-acls-api-openapi.yml
+  - type: APIReference
+    url: https://developer.clickup.com/reference
+  - type: Documentation
+    url: https://developer.clickup.com/docs
+- aid: clickup:clickup-attachments-api
+  name: Clickup Attachments API
+  description: The Attachments API from Clickup — 2 operation(s) for attachments.
+  humanURL: https://developer.clickup.com/docs/tasks
+  baseURL: https://api.clickup.com
+  tags:
+  - Attachments
+  properties:
+  - type: OpenAPI
+    url: openapi/clickup-attachments-api-openapi.yml
+  - type: APIReference
+    url: https://developer.clickup.com/reference
+  - type: Documentation
+    url: https://developer.clickup.com/docs
+- aid: clickup:clickup-audit-logs-api
+  name: Clickup Audit Logs API
+  description: The Audit Logs API from Clickup — 1 operation(s) for audit logs.
+  humanURL: https://developer.clickup.com/docs/tasks
+  baseURL: https://api.clickup.com
+  tags:
+  - Audit Logs
+  properties:
+  - type: OpenAPI
+    url: openapi/clickup-audit-logs-api-openapi.yml
+  - type: APIReference
+    url: https://developer.clickup.com/reference
+  - type: Documentation
+    url: https://developer.clickup.com/docs
+- aid: clickup:clickup-auditlogs-api
+  name: Clickup Auditlogs API
+  description: Auditlogs API
+  humanURL: https://developer.clickup.com/docs/tasks
+  baseURL: https://api.clickup.com
+  tags:
+  - Audit Logs
+  tags_raw:
+  - Auditlogs
+  properties:
+  - type: OpenAPI
+    url: openapi/clickup-auditlogs-api-openapi.yml
+  - type: APIReference
+    url: https://developer.clickup.com/reference
+  - type: Documentation
+    url: https://developer.clickup.com/docs
+- aid: clickup:clickup-chat-api
+  name: Clickup Chat API
+  description: Chat API
+  humanURL: https://developer.clickup.com/docs/tasks
+  baseURL: https://api.clickup.com
+  tags:
+  - Chat
+  properties:
+  - type: OpenAPI
+    url: openapi/clickup-chat-api-openapi.yml
+  - type: APIReference
+    url: https://developer.clickup.com/reference
+  - type: Documentation
+    url: https://developer.clickup.com/docs
+- aid: clickup:clickup-chat-experimental-api
+  name: Clickup Chat (Experimental) API
+  description: The Chat (Experimental) API from Clickup — 1 operation(s) for chat (experimental).
+  humanURL: https://developer.clickup.com/docs/tasks
+  baseURL: https://api.clickup.com
+  tags:
+  - Chat (Experimental)
+  properties:
+  - type: OpenAPI
+    url: openapi/clickup-chat-experimental-api-openapi.yml
+  - type: APIReference
+    url: https://developer.clickup.com/reference
+  - type: Documentation
+    url: https://developer.clickup.com/docs
+- aid: clickup:clickup-custom-task-types-api
+  name: Clickup Custom Task Types API
+  description: The Custom Task Types API from Clickup — 1 operation(s) for custom task types.
+  humanURL: https://developer.clickup.com/docs/tasks
+  baseURL: https://api.clickup.com
+  tags:
+  - Custom Task Types
+  properties:
+  - type: OpenAPI
+    url: openapi/clickup-custom-task-types-api-openapi.yml
+  - type: APIReference
+    url: https://developer.clickup.com/reference
+  - type: Documentation
+    url: https://developer.clickup.com/docs
+- aid: clickup:clickup-docs-api
+  name: Clickup Docs API
+  description: Docs API
+  humanURL: https://developer.clickup.com/docs/tasks
+  baseURL: https://api.clickup.com
+  tags:
+  - Docs
+  properties:
+  - type: OpenAPI
+    url: openapi/clickup-docs-api-openapi.yml
+  - type: APIReference
+    url: https://developer.clickup.com/reference
+  - type: Documentation
+    url: https://developer.clickup.com/docs
+- aid: clickup:clickup-guests-api
+  name: Clickup Guests API
+  description: The Guests API from Clickup — 5 operation(s) for guests.
+  humanURL: https://developer.clickup.com/docs/tasks
+  baseURL: https://api.clickup.com
+  tags:
+  - Guests
+  properties:
+  - type: OpenAPI
+    url: openapi/clickup-guests-api-openapi.yml
+  - type: APIReference
+    url: https://developer.clickup.com/reference
+  - type: Documentation
+    url: https://developer.clickup.com/docs
+- aid: clickup:clickup-members-api
+  name: Clickup Members API
+  description: The Members API from Clickup — 2 operation(s) for members.
+  humanURL: https://developer.clickup.com/docs/tasks
+  baseURL: https://api.clickup.com
+  tags:
+  - Members
+  properties:
+  - type: OpenAPI
+    url: openapi/clickup-members-api-openapi.yml
+  - type: APIReference
+    url: https://developer.clickup.com/reference
+  - type: Documentation
+    url: https://developer.clickup.com/docs
+- aid: clickup:clickup-privacy-and-access-api
+  name: Clickup Privacy and access API
+  description: The Privacy and access API from Clickup — 1 operation(s) for privacy and access.
+  humanURL: https://developer.clickup.com/docs/tasks
+  baseURL: https://api.clickup.com
+  tags:
+  - Privacy and access
+  properties:
+  - type: OpenAPI
+    url: openapi/clickup-privacy-and-access-api-openapi.yml
+  - type: APIReference
+    url: https://developer.clickup.com/reference
+  - type: Documentation
+    url: https://developer.clickup.com/docs
+- aid: clickup:clickup-roles-api
+  name: Clickup Roles API
+  description: The Roles API from Clickup — 1 operation(s) for roles.
+  humanURL: https://developer.clickup.com/docs/tasks
+  baseURL: https://api.clickup.com
+  tags:
+  - Roles
+  properties:
+  - type: OpenAPI
+    url: openapi/clickup-roles-api-openapi.yml
+  - type: APIReference
+    url: https://developer.clickup.com/reference
+  - type: Documentation
+    url: https://developer.clickup.com/docs
+- aid: clickup:clickup-shared-hierarchy-api
+  name: Clickup Shared Hierarchy API
+  description: The Shared Hierarchy API from Clickup — 1 operation(s) for shared hierarchy.
+  humanURL: https://developer.clickup.com/docs/tasks
+  baseURL: https://api.clickup.com
+  tags:
+  - Shared Hierarchy
+  properties:
+  - type: OpenAPI
+    url: openapi/clickup-shared-hierarchy-api-openapi.yml
+  - type: APIReference
+    url: https://developer.clickup.com/reference
+  - type: Documentation
+    url: https://developer.clickup.com/docs
+- aid: clickup:clickup-tags-api
+  name: Clickup Tags API
+  description: The Tags API from Clickup — 3 operation(s) for tags.
+  humanURL: https://developer.clickup.com/docs/tasks
+  baseURL: https://api.clickup.com
+  tags:
+  - Tags
+  properties:
+  - type: OpenAPI
+    url: openapi/clickup-tags-api-openapi.yml
+  - type: APIReference
+    url: https://developer.clickup.com/reference
+  - type: Documentation
+    url: https://developer.clickup.com/docs
+- aid: clickup:clickup-task-checklists-api
+  name: Clickup Task Checklists API
+  description: The Task Checklists API from Clickup — 4 operation(s) for task checklists.
+  humanURL: https://developer.clickup.com/docs/tasks
+  baseURL: https://api.clickup.com
+  tags:
+  - Task Checklists
+  properties:
+  - type: OpenAPI
+    url: openapi/clickup-task-checklists-api-openapi.yml
+  - type: APIReference
+    url: https://developer.clickup.com/reference
+  - type: Documentation
+    url: https://developer.clickup.com/docs
+- aid: clickup:clickup-task-relationships-api
+  name: Clickup Task Relationships API
+  description: The Task Relationships API from Clickup — 2 operation(s) for task relationships.
+  humanURL: https://developer.clickup.com/docs/tasks
+  baseURL: https://api.clickup.com
+  tags:
+  - Task Relationships
+  properties:
+  - type: OpenAPI
+    url: openapi/clickup-task-relationships-api-openapi.yml
+  - type: APIReference
+    url: https://developer.clickup.com/reference
+  - type: Documentation
+    url: https://developer.clickup.com/docs
+- aid: clickup:clickup-templates-api
+  name: Clickup Templates API
+  description: The Templates API from Clickup — 3 operation(s) for templates.
+  humanURL: https://developer.clickup.com/docs/tasks
+  baseURL: https://api.clickup.com
+  tags:
+  - Templates
+  properties:
+  - type: OpenAPI
+    url: openapi/clickup-templates-api-openapi.yml
+  - type: APIReference
+    url: https://developer.clickup.com/reference
+  - type: Documentation
+    url: https://developer.clickup.com/docs
+- aid: clickup:clickup-time-tracking-legacy-api
+  name: Clickup Time Tracking (Legacy) API
+  description: The Time Tracking (Legacy) API from Clickup — 2 operation(s) for time tracking (legacy).
+  humanURL: https://developer.clickup.com/docs/tasks
+  baseURL: https://api.clickup.com
+  tags:
+  - Time Tracking (Legacy)
+  properties:
+  - type: OpenAPI
+    url: openapi/clickup-time-tracking-legacy-api-openapi.yml
+  - type: APIReference
+    url: https://developer.clickup.com/reference
+  - type: Documentation
+    url: https://developer.clickup.com/docs
+- aid: clickup:clickup-user-groups-api
+  name: Clickup User Groups API
+  description: The User Groups API from Clickup — 3 operation(s) for user groups.
+  humanURL: https://developer.clickup.com/docs/tasks
+  baseURL: https://api.clickup.com
+  tags:
+  - User Groups
+  properties:
+  - type: OpenAPI
+    url: openapi/clickup-user-groups-api-openapi.yml
+  - type: APIReference
+    url: https://developer.clickup.com/reference
+  - type: Documentation
+    url: https://developer.clickup.com/docs
+- aid: clickup:clickup-users-api
+  name: Clickup Users API
+  description: The Users API from Clickup — 2 operation(s) for users.
+  humanURL: https://developer.clickup.com/docs/tasks
+  baseURL: https://api.clickup.com
+  tags:
+  - User
+  tags_raw:
+  - Users
+  properties:
+  - type: OpenAPI
+    url: openapi/clickup-users-api-openapi.yml
+  - type: APIReference
+    url: https://developer.clickup.com/reference
+  - type: Documentation
+    url: https://developer.clickup.com/docs
+- aid: clickup:clickup-workspaces-api
+  name: Clickup Workspaces API
+  description: The Workspaces API from Clickup — 3 operation(s) for workspaces.
+  humanURL: https://developer.clickup.com/docs/tasks
+  baseURL: https://api.clickup.com
+  tags:
+  - Workspace
+  tags_raw:
+  - Workspaces
+  properties:
+  - type: OpenAPI
+    url: openapi/clickup-workspaces-api-openapi.yml
+  - type: APIReference
+    url: https://developer.clickup.com/reference
+  - type: Documentation
+    url: https://developer.clickup.com/docs
+common:
+- type: FinOps
+  url: finops/clickup-finops.yml
+- type: CapabilityMap
+  url: capabilities/clickup-capability-edges.yml
+  name: Clickup Business Capability Map
+- type: Overlay
+  url: overlays/clickup-api-v2-reference-overlay.yaml
+- type: Overlay
+  url: overlays/clickup-public-api-v3-overlay.yaml
+- type: VulnerabilityDisclosure
+  url: security/clickup-vulnerability-disclosure.yml
+- type: Website
+  url: https://www.clickup.com/
+- type: AgenticAccess
+  url: agentic-access/clickup-agentic-access.yml
+- type: TrustCenter
+  url: security/clickup-trust-center.yml
+- type: DomainSecurity
+  url: security/clickup-domain-security.yml
+- type: Authentication
+  url: authentication/clickup-authentication.yml
+- type: GitHubOrganization
+  url: https://github.com/clickup
+- type: LinkedIn
+  url: https://www.linkedin.com/company/clickup-app
+- type: JSONLD
+  url: json-ld/clickup-context.jsonld
+- type: JSONSchema
+  url: json-schema/clickup-task-schema.json
+- type: JSONSchema
+  url: json-schema/clickup-webhook-payload-schema.json
+- type: Features
+  data:
+  - 'Free plan: 60MB storage, unlimited tasks/members'
+  - Unlimited at $7/user/mo annual with unlimited everything
+  - Business at $12/user/mo with dashboards, automations (5K/mo), Google SSO
+  - 'Enterprise: SAML/SCIM, MSA/HIPAA, 250K automations/mo, data residency'
+  - 'REST API v2: 100/min Free, 1000/min Unlimited/Business, 10K/min Enterprise'
+  - Webhooks for task, list, space, doc events
+  - OAuth 2.0 and personal API tokens
+  - Custom Fields API
+  - Goals, Portfolios, Time Tracking APIs
+  - Docs, Whiteboards, Forms
+  - ClickUp Chat (Business+)
+  - ClickUp AI for content and automation (per-user add-on)
+  - Sprint management with story points
+  - Mind maps and Gantt charts
+  - 1,000+ integrations
+  - Custom branding and audit log on Enterprise
+  sources:
+  - https://clickup.com/pricing
+  updated: '2026-05-04'
+- type: LlmsText
+  url: https://developer.clickup.com/llms.txt
+- url: https://clickup.com/blog
+  type: Blog
+- type: DeveloperPortal
+  url: https://developer.clickup.com/
+- type: Documentation
+  url: https://developer.clickup.com/docs
+- type: APIReference
+  url: https://developer.clickup.com/reference
+- type: GettingStarted
+  url: https://developer.clickup.com/docs/authentication
+- type: Support
+  url: https://help.clickup.com/hc/en-us
+- type: Pricing
+  url: https://clickup.com/pricing
+- type: SignUp
+  url: https://app.clickup.com/signup
+- type: TermsOfService
+  url: https://clickup.com/terms
+- type: PrivacyPolicy
+  url: https://clickup.com/terms/privacy
+- type: Roadmap
+  url: https://feedback.clickup.com/
+- type: StatusPage
+  url: https://status.clickup.com/
+- type: ChangeLog
+  name: Product changelog (no API-specific changelog is published)
+  url: https://clickup.canny.io/changelog
+- type: ChangeLog
+  url: changelog/clickup-changelog.yml
+- type: Security
+  url: https://clickup.com/security
+- type: Compliance
+  name: 'Trust center: SOC 2, ISO 27001/27017/27018, PCI DSS, GDPR'
+  url: https://security.clickup.com/
+- type: Conformance
+  url: conformance/clickup-conformance.yml
+- type: WellKnown
+  url: well-known/clickup-well-known.yml
+- type: APICatalog
+  name: RFC 9727 linkset served at developer.clickup.com
+  url: well-known/clickup-api-catalog.json
+- type: SecurityTxt
+  url: well-known/clickup-security.txt
+- type: Packages
+  name: No first-party SDK exists; community packages only
+  url: packages/clickup-packages.yml
+- type: MCPServer
+  url: mcp/clickup-mcp.yml
+- type: ToolCrosswalk
+  url: mcp/clickup-tool-crosswalk.yml
+- type: LLMsTxt
+  url: llms/clickup-llms.txt
+- type: ErrorCatalog
+  url: errors/clickup-problem-types.yml
+- type: ErrorCatalog
+  name: Documented OAUTH_* error-code registry
+  url: errors/clickup-error-codes.yml
+- type: Lifecycle
+  url: lifecycle/clickup-lifecycle.yml
+- type: OAuthScopes
+  url: scopes/clickup-scopes.yml
+- type: Conventions
+  url: conventions/clickup-conventions.yml
+- type: DataModel
+  url: data-model/clickup-data-model.yml
+- type: Console
+  name: Interactive Try It console; no sandbox or test mode is published
+  url: https://developer.clickup.com/docs/trytheapi
+- type: Console
+  name: 'Sandbox posture: none published'
+  url: sandbox/clickup-sandbox.yml
+- type: RateLimits
+  url: rate-limits/clickup-rate-limits.yml
+- type: Plans
+  url: plans/clickup-plans-pricing.yml
+- type: AgentSkill
+  url: skills/_index.yml
+- type: Webhooks
+  url: https://developer.clickup.com/docs/webhooks
+- type: Postman
+  url: https://www.postman.com/clickup-api/clickup-public-api/collection/rekuqnj/clickup-api-v2-reference
+description: 'ClickUp is a work management platform — tasks, Lists, Folders, Spaces, Docs, Chat, Goals, time tracking, dashboards and automations in one Workspace. It ships a public REST API in two concurrent versions: v2 (138 operations, the broad surface) and v3 (35 operations, Chat, Docs, attachments, audit logs and ACLs), both published as first-party OpenAPI documents and advertised through an RFC 9727 api-catalog at developer.clickup.com. Authentication is a single Authorization header carrying either a personal token or an OAuth 2.0 access token authorized per Workspace; there are no OAuth scopes. Webhooks are HMAC-SHA256 signed. ClickUp also runs a remote MCP server at mcp.clickup.com with its own OAuth authorization server, PKCE and dynamic client registration, exposing 48 documented tools. Rate limits are per token and set by the Workspace plan. There is no sandbox, no idempotency mechanism and no published deprecation policy.'
+tags:
+- Project Management
+- Work Management
+- Productivity
+- Collaboration
+- Task
+- Documents
+- Chat
+- Time Tracking
+- MCP
+tags_raw:
+- Project Management
+- Work Management
+- Productivity
+- Collaboration
+- Tasks
+- Documents
+- Chat
+- Time Tracking
+- MCP
+maintainers:
+- FN: Kin Lane
+  email: info@apievangelist.com
+created: '2026-05-03'
+x-enrichment:
+  date: '2026-09-17'
+  status: enriched
+  artifacts_added: 28
+  pass: local-v3
